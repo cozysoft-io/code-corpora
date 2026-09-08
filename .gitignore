@@ -1,0 +1,9 @@
+# Independent checkouts are fetched from selected-*.toml, never tracked here.
+/training/
+/test/
+/grammars/
+/servers/
+
+# Local build products and migration backups.
+/.corpus/
+__pycache__/

@@ -1,0 +1,905 @@
+#!/usr/bin/env python3
+"""Select, pin, fetch, and verify the code analysis corpus.
+
+selected-repos.toml records repository choices and immutable Git pins.
+corpus-lock.toml caches measurements of those pins. Checkouts are flat within
+training/, test/, grammars/, and servers/. The default corpus directory is this repository, independent
+of the current working directory. Python 3.11+ and Git are required.
+
+clone fetches missing checkouts at the selected SHA; existing checkouts
+and pins are never reset. status checks pins without requiring a clean tree.
+verify additionally checks tree cleanliness and the dependencies needed for
+heuristic-jump's language-server measurements.
+"""
+
+from __future__ import annotations
+
+import argparse
+import configparser
+import json
+import os
+import re
+import subprocess
+import sys
+import tempfile
+import tomllib
+from concurrent.futures import ThreadPoolExecutor
+from dataclasses import dataclass, field
+from datetime import date
+from pathlib import Path
+
+REPO = Path(__file__).resolve().parent
+SELECTION = REPO / "selected-repos.toml"
+LOCK = REPO / "corpus-lock.toml"
+SOURCES = REPO / "zed-sources.toml"
+
+SPLITS = ("training", "test")
+
+# How a checkout is made. Recorded in the lock because it is part of what the
+# working tree *is*: skipping the LFS smudge leaves pointer files where a
+# smudging clone would leave assets, and a rebuild that disagreed with the
+# original about that would be a different corpus at the same SHA.
+CLONE_STYLE = "depth 1, single branch, no tags, LFS smudge skipped"
+
+# Files a position can be sampled from, per language. `.h` belongs to both C
+# and C++ and is counted for both, which is the same ambiguity the handlers
+# will have to live with.
+EXTENSIONS = {
+    "c": (".c", ".h"),
+    "cpp": (".cpp", ".cc", ".cxx", ".c++", ".hpp", ".hh", ".hxx", ".h", ".ipp", ".inl"),
+    "csharp": (".cs",),
+    "dart": (".dart",),
+    "elixir": (".ex", ".exs"),
+    "go": (".go",),
+    "java": (".java",),
+    "javascript": (".js", ".mjs", ".cjs", ".jsx"),
+    "kotlin": (".kt", ".kts"),
+    "lua": (".lua",),
+    "php": (".php",),
+    "python": (".py", ".pyi"),
+    "ruby": (".rb", ".rake", ".gemspec"),
+    "rust": (".rs",),
+    "swift": (".swift",),
+    "typescript": (".ts", ".tsx", ".mts", ".cts"),
+    "zig": (".zig",),
+}
+
+# Languages whose server is unusable without a compile database, and which are
+# therefore checked for having one at all rather than only for its contents.
+#
+# **Absent is not better than stale.** clangd with a stale database and clangd
+# with no database do the same thing -- fall back to a default command line and
+# answer every query from the open file's AST -- and only one of those states
+# was detectable until this list existed. A build directory deleted and not
+# regenerated is the easiest way to reach the undetectable one.
+NEEDS_COMPILE_DATABASE = ("c", "cpp")
+
+def die(message: str) -> None:
+    print(f"corpus: {message}", file=sys.stderr)
+    raise SystemExit(2)
+
+
+class GitError(Exception):
+    pass
+
+
+def git(*arguments: str, cwd: Path) -> str:
+    result = subprocess.run(
+        ("git", *arguments),
+        cwd=cwd,
+        capture_output=True,
+        text=True,
+        check=False,
+        env=git_environment(),
+    )
+    if result.returncode != 0:
+        raise GitError(f"git {' '.join(arguments)} in {cwd}: {result.stderr.strip()}")
+    return result.stdout
+
+
+def git_environment() -> dict[str, str]:
+    environment = dict(os.environ)
+    # A repository whose large files live in LFS would otherwise pull gigabytes
+    # of assets no language server reads. The pointer files are what the index
+    # has, so the tree stays clean either way.
+    environment["GIT_LFS_SKIP_SMUDGE"] = "1"
+    environment["GIT_TERMINAL_PROMPT"] = "0"
+    return environment
+
+
+# --------------------------------------------------------------------------
+# The selection and measurement cache
+
+
+@dataclass
+class Selection:
+    root: Path
+    criteria: dict
+    repos: list[dict]
+    reserves: list[dict]
+    considered: list[dict]
+
+
+
+def load_selection(directory: Path | None = None) -> Selection:
+    if not SELECTION.exists():
+        die(f"{SELECTION} does not exist")
+    document = tomllib.loads(SELECTION.read_text())
+    for section in ("repo", "reserve", "considered"):
+        for repo in document.get(section, []):
+            if not re.fullmatch(r"[0-9a-f]{40}", repo.get("sha", "")):
+                die(f"{section} {repo.get('name')}: missing or invalid SHA")
+    for repo in document["repo"]:
+        if any(not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.-]*", repo[field])
+               for field in ("split", "language", "name")):
+            die(f"invalid checkout path: {key_of(repo)}")
+        if not repo["url"].startswith(("https://", "file://")):
+            die(f"unsupported repository URL: {repo['url']}")
+        if repo["split"] not in SPLITS:
+            die(f"{repo['name']}: split {repo['split']!r} is not one of {SPLITS}")
+        if repo["language"] not in EXTENSIONS:
+            die(f"{repo['name']}: no extension set for language {repo['language']!r}")
+    names = [(repo["split"], repo["name"]) for repo in document["repo"]]
+    duplicates = {name for name in names if names.count(name) > 1}
+    if duplicates:
+        die(f"duplicate entries: {sorted(duplicates)}")
+    return Selection(
+        root=(directory if directory is not None else SELECTION.parent / document["corpus_root"]).expanduser().resolve(),
+        criteria=document["criteria"],
+        repos=document["repo"],
+        reserves=document.get("reserve", []),
+        considered=document.get("considered", []),
+    )
+
+
+def key_of(repo: dict) -> tuple[str, str, str]:
+    return (repo["split"], repo["language"], repo["name"])
+
+
+def load_lock() -> dict[tuple[str, str, str], dict]:
+    if not LOCK.exists():
+        return {}
+    document = tomllib.loads(LOCK.read_text())
+    entries = {}
+    for entry in document.get("repo", []):
+        key = key_of(entry)
+        if key in entries or not re.fullmatch(r"[0-9a-f]{40}", entry["sha"]):
+            die(f"duplicate checkout or invalid pin: {key}")
+        entries[key] = entry
+    return entries
+
+
+def validate_measurements(selection: Selection, lock: dict) -> None:
+    for repo in selection.repos:
+        pin = lock.get(key_of(repo))
+        if pin is not None and any(pin[field] != repo[field] for field in ("sha", "url")):
+            die(f"{'/'.join(key_of(repo))}: selection SHA/URL disagrees with {LOCK}; "
+                "a repository is never bumped")
+
+
+def toml_string(value: str) -> str:
+    return json.dumps(value, ensure_ascii=False)
+
+
+def toml_value(value) -> str:
+    if isinstance(value, bool):
+        return str(value).lower()
+    if isinstance(value, int):
+        return str(value)
+    if isinstance(value, list):
+        return f"[{', '.join(toml_value(item) for item in value)}]"
+    return toml_string(str(value))
+
+
+def emit_table(name: str, entry: dict) -> list[str]:
+    return [f"[[{name}]]"] + [f"{key} = {toml_value(value)}" for key, value in entry.items()]
+
+
+LOCK_HEADER = """\
+# Measurements of selected pins. Generated by `./corpus clone`; do not edit by hand.
+#
+# This file plus `selected-repos.toml` is the whole corpus. Running
+# `./corpus clone` against them rebuilds every checkout at the commit
+# selected there, which is why the corpus directory itself is derived output
+# rather than something that has to be backed up.
+#
+# `sha` copies the selection when first measured and is never
+# bumped afterwards: a newer commit is a different corpus and invalidates every
+# position and truth file that references it. Replacing a repository means
+# adding a new entry, not editing this one.
+#
+# The counts are what the pinned tree measured when it was pinned, and they are
+# an integrity check as much as a description -- a rebuilt checkout that counts
+# differently at the same SHA means the clone style changed underneath it.
+# `lines` counts every line of primary-language source in tracked files, blanks
+# included, with no exclusion for vendored or generated directories: those files
+# are in the checkout, so the walk that enumerates positions will find them.
+"""
+
+
+def write_lock(selection: Selection, entries: dict[tuple[str, str, str], dict]) -> None:
+    order = [key_of(repo) for repo in selection.repos]
+    order += [key for key in entries if key not in order]
+    lines = [LOCK_HEADER.rstrip("\n"), ""]
+    for key in order:
+        entry = entries.get(key)
+        if entry is None:
+            continue
+        lines += emit_table("repo", entry) + [""]
+    LOCK.write_text("\n".join(lines).rstrip("\n") + "\n")
+
+
+# --------------------------------------------------------------------------
+# Measurement
+
+
+@dataclass
+class Measurement:
+    files: int = 0
+    lines: int = 0
+    lines_nonblank: int = 0
+    files_tracked: int = 0
+
+
+def measure(checkout: Path, language: str) -> Measurement:
+    extensions = EXTENSIONS[language]
+    tracked = git("ls-files", "-z", cwd=checkout).split("\0")
+    result = Measurement()
+    for relative in tracked:
+        if not relative:
+            continue
+        result.files_tracked += 1
+        if not relative.endswith(extensions):
+            continue
+        path = checkout / relative
+        try:
+            data = path.read_bytes()
+        except OSError as error:
+            print(f"corpus: unreadable {path}: {error}", file=sys.stderr)
+            continue
+        result.files += 1
+        result.lines += data.count(b"\n") + (
+            1 if data and not data.endswith(b"\n") else 0
+        )
+        result.lines_nonblank += sum(1 for line in data.split(b"\n") if line.strip())
+    return result
+
+
+# --------------------------------------------------------------------------
+# Clone and verify
+
+
+@dataclass
+class Result:
+    repo: dict
+    entry: dict | None = None
+    action: str = ""
+    problems: list[str] = field(default_factory=list)
+
+
+def checkout_path(root: Path, repo: dict) -> Path:
+    return root / repo.get("set", repo.get("split", "")) / repo["name"]
+
+
+def build_path(root: Path, repo: dict) -> Path:
+    """Where a resolver puts out-of-tree artifacts, beside the checkouts.
+
+    Beside rather than inside: nine of the ten C/C++ repositories do not
+    gitignore `compile_commands.json`, so generating it in place would make
+    every one of them fail the dirty check above.
+    """
+    return root / ".corpus" / "build" / repo["split"] / repo["name"]
+
+
+def clone_at_pin(url: str, sha: str, staging: Path) -> None:
+    """Rebuild a pinned checkout.
+
+    A shallow fetch of one commit is what makes rebuilding cheap, and GitHub
+    serves arbitrary SHAs that way. A host that does not falls back to fetching
+    the history and checking the commit out of it, which is slower and still
+    correct; a commit that has been garbage-collected upstream fails here, and
+    that is the one loss no pin can protect against.
+    """
+    staging.mkdir(parents=True)
+    git("init", "-q", cwd=staging)
+    git("remote", "add", "origin", url, cwd=staging)
+    environment = git_environment()
+    shallow = subprocess.run(
+        ("git", "fetch", "--depth", "1", "--no-tags", "origin", sha),
+        cwd=staging,
+        capture_output=True,
+        text=True,
+        check=False,
+        env=environment,
+    )
+    if shallow.returncode != 0:
+        full = subprocess.run(
+            ("git", "fetch", "--no-tags", "origin"),
+            cwd=staging,
+            capture_output=True,
+            text=True,
+            check=False,
+            env=environment,
+        )
+        if full.returncode != 0:
+            raise GitError(f"fetch {url} at {sha[:12]}: {full.stderr.strip()}")
+    git("checkout", "-q", "--detach", sha, cwd=staging)
+
+
+def clone_one(root: Path, repo: dict, pin: dict | None) -> Result:
+    result = Result(repo=repo)
+    destination = checkout_path(root, repo)
+    if pin is not None and any(pin[field] != repo[field] for field in ("sha", "url")):
+        result.problems.append("selection SHA/URL disagrees with the recorded measurement; a repository is never bumped")
+        return result
+
+    if not destination.exists():
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        # Each invocation owns only its unique staging directory. A failed or
+        # concurrent clone must not delete another invocation's work.
+        with tempfile.TemporaryDirectory(prefix=f".{destination.name}-", dir=destination.parent) as temporary:
+            staging = Path(temporary) / "checkout"
+            try:
+                clone_at_pin(repo["url"], repo["sha"], staging)
+                result.action = "rebuilt" if pin is not None else "cloned"
+                if destination.exists():
+                    raise GitError(f"destination appeared during clone: {destination}")
+                staging.rename(destination)
+            except (GitError, OSError) as error:
+                result.problems.append(str(error))
+                return result
+    else:
+        result.action = "present"
+
+    if not (destination / ".git").exists():
+        result.problems.append(f"existing directory is not a checkout: {destination}")
+        return result
+
+    try:
+        head = git("rev-parse", "HEAD", cwd=destination).strip()
+    except GitError as error:
+        result.problems.append(str(error))
+        return result
+
+    if repo["sha"] != head:
+        result.problems.append(
+            f"HEAD {head[:12]} does not match the selection SHA {repo['sha'][:12]}; "
+            "a repository is never bumped -- record this entry under "
+            "[[considered]] and add a new one"
+        )
+        return result
+    if pin is not None:
+        result.entry = pin
+        return result
+    try:
+        branch = git("rev-parse", "--abbrev-ref", "HEAD", cwd=destination).strip()
+        dirty = git("status", "--porcelain", cwd=destination).strip()
+    except GitError as error:
+        result.problems.append(str(error))
+        return result
+    if dirty:
+        result.problems.append(
+            f"working tree is not clean ({len(dirty.splitlines())} entries)"
+        )
+        return result
+
+    counted = measure(destination, repo["language"])
+
+    result.entry = {
+        "name": repo["name"],
+        "language": repo["language"],
+        "split": repo["split"],
+        "url": repo["url"],
+        "sha": head,
+        "branch": branch,
+        "lines": counted.lines,
+        "lines_nonblank": counted.lines_nonblank,
+        "source_files": counted.files,
+        "tracked_files": counted.files_tracked,
+        "clone": CLONE_STYLE,
+        "added": date.today().isoformat(),
+    }
+    return result
+
+
+def verify_one(root: Path, repo: dict, pin: dict) -> list[str]:
+    destination = checkout_path(root, repo)
+    label = f"{repo['split']}/{repo['name']}"
+    if repo.get("retired"):
+        # Retired entries stay in the selection so it grows rather than changes
+        # (`data-collection.md` section 1), and nothing collects them. Verifying
+        # what they need would report a permanent failure, which makes the exit
+        # code useless to `harness/collect-matrix`, which gates on it.
+        return []
+    if not (destination / ".git").exists():
+        return [f"{label}: missing checkout at {destination}"]
+    try:
+        head = git("rev-parse", "HEAD", cwd=destination).strip()
+        dirty = git("status", "--porcelain", cwd=destination).strip()
+    except GitError as error:
+        return [f"{label}: {error}"]
+    problems = []
+    if head != pin["sha"]:
+        problems.append(f"{label}: HEAD {head[:12]} != pinned {pin['sha'][:12]}")
+    if dirty:
+        entries = dirty.splitlines()
+        for line in entries[:5]:
+            problems.append(f"{label}: dirty: {line}")
+        if len(entries) > 5:
+            problems.append(f"{label}: dirty: and {len(entries) - 5} more")
+    problems += verify_compile_database(root, repo, label)
+    problems += verify_dependencies(root, repo, label)
+    return problems
+
+
+def verify_dependencies(root: Path, repo: dict, label: str) -> list[str]:
+    """Whether the artifact this language's server actually needs is in place.
+
+    **The precondition for the truth being true**, not bookkeeping. Every one of
+    these failed silently at least once while the held-out corpus was being
+    built, and not one of them produced an error at collection time — they
+    produced a server that started, reported itself ready, and answered worse.
+    `data-collection.md` §1: an unresolved repository poisons the truth file in
+    a biased way, because an unresolved import is indistinguishable from a
+    definition that is not there.
+
+    Checked here rather than only in `harness/collect-matrix` so that there is
+    one implementation of the question. `collect-matrix` runs this before it
+    starts.
+    """
+    language, name = repo["language"], repo["name"]
+    build = build_path(root, repo)
+    checkout = checkout_path(root, repo)
+
+    if language == "python":
+        interpreter = build / "venv" / "bin" / "python"
+        if not interpreter.exists():
+            return [f"{label}: no virtualenv at {interpreter}"]
+        ok, _ = run_quiet([str(interpreter), "-c", "import sys"])
+        # A venv survives the corpus moving only because `bin/python` is a
+        # symlink to the system interpreter; the scripts beside it are not, and
+        # `servers/python/pylsp-venv` was left unrunnable by exactly that.
+        return [] if ok else [f"{label}: {interpreter} does not run"]
+
+    if language in ("javascript", "typescript"):
+        modules = checkout / "node_modules"
+        if not modules.is_dir() or not any(modules.iterdir()):
+            return [f"{label}: no node_modules in {checkout}"]
+        return []
+
+    if language == "rust":
+        # rust-analyzer runs `cargo metadata` before it answers anything, and
+        # that needs the dependency *sources*, not a lockfile naming them.
+        # Held-out `helix` spent its entire readiness budget and timed out;
+        # `cargo metadata --offline` said `no matching package named
+        # smartstring found`.
+        ok, output = run_quiet(
+            ["cargo", "metadata", "--format-version", "1", "--offline", "--no-deps"],
+            cwd=checkout,
+        )
+        if ok:
+            return []
+        first = next((l for l in output.splitlines() if l.startswith("error")), "")
+        return [f"{label}: cargo cannot resolve offline ({first}); run ../heuristic-jump/harness/resolve-dependencies"]
+
+    # c and cpp are covered by the compile-database check above; go resolves
+    # from the shared module cache, which has nothing repository-local to look
+    # at.
+    return []
+
+
+def run_quiet(command, cwd=None) -> tuple[bool, str]:
+    try:
+        done = subprocess.run(
+            command, cwd=cwd, capture_output=True, text=True, timeout=300, check=False
+        )
+    except (OSError, subprocess.SubprocessError) as error:
+        return False, str(error)
+    return done.returncode == 0, (done.stdout or "") + (done.stderr or "")
+
+
+def verify_compile_database(root: Path, repo: dict, label: str) -> list[str]:
+    """A `compile_commands.json` must name files that are actually there.
+
+    **This is a "the corpus moved" check, and it earned its place the hard way.**
+    The database holds absolute paths, written by cmake at the location the
+    corpus had when `../heuristic-jump/harness/resolve-dependencies` ran. Move the corpus and every
+    entry points at nothing -- and clangd does not complain. It falls back to a
+    default command line with no include paths and no defines, answers every
+    query from the open file's AST alone, and resolves noticeably *less*. In a
+    truth file that is indistinguishable from a definition that does not exist,
+    which is the exact confusion `data-collection.md` section 1 is about.
+
+    It happened: the corpus moved one directory level, all 1,349 C entries went
+    stale, and a re-collection wrote 3,785 `resolved` answers back as `none`
+    across five repositories. Nothing caught it. The probe rate that is supposed
+    to catch it read 9-14 out of 16 -- above the warning threshold, because
+    same-file references still resolve from the AST -- and the threshold's real
+    signal is the *range across a language's repositories*, which says nothing
+    when every repository is broken the same way.
+
+    So it is checked mechanically rather than statistically: the paths either
+    exist or they do not, and re-running `../heuristic-jump/harness/resolve-dependencies` after
+    deleting the stale build directory is the fix.
+    """
+    database = build_path(root, repo) / "compile_commands.json"
+    if not database.exists():
+        if repo["language"] in NEEDS_COMPILE_DATABASE:
+            return [
+                f"{label}: no compile database at {database} -- clangd would answer "
+                f"every query from the open file's AST alone; run "
+                f"../heuristic-jump/harness/resolve-dependencies"
+            ]
+        return []
+    try:
+        entries = json.loads(database.read_text())
+    except (OSError, json.JSONDecodeError) as error:
+        return [f"{label}: unreadable compile database: {error}"]
+    # **Generated sources are absent, not stale, and the difference is where
+    # they point.** cmake lists sources it would create during a build and the
+    # corpus only ever configures, so those never exist: drogon's
+    # `examples/HelloView.cc` under the build directory, libevent's
+    # `test/regress.gen.c` under the checkout. Either way the path is somewhere
+    # this repository *is*.
+    #
+    # What this is looking for is a database describing a layout that is gone --
+    # after the corpus moved between machines, or between splits -- and those
+    # paths are under neither. Checking the root rather than the count is what
+    # tells the two apart; a share-of-entries threshold would have called
+    # libevent's single generated file stale and drogon's twenty-four fine.
+    here = (checkout_path(root, repo), build_path(root, repo))
+    missing = [
+        entry["file"]
+        for entry in entries
+        if not Path(entry["file"]).exists()
+        and not any(place in Path(entry["file"]).parents for place in here)
+    ]
+    if not missing:
+        return []
+    return [
+        f"{label}: compile database names {len(missing)} of {len(entries)} files "
+        f"that do not exist, starting with {missing[0]} -- delete "
+        f"{database.parent} and re-run ../heuristic-jump/harness/resolve-dependencies"
+    ]
+
+
+# --------------------------------------------------------------------------
+# Commands
+
+
+def selected(selection: Selection, arguments) -> list[dict]:
+    repos = [repo for repo in selection.repos if not repo.get("retired")]
+    if arguments.language:
+        repos = [repo for repo in repos if repo["language"] == arguments.language]
+    if arguments.split:
+        repos = [repo for repo in repos if repo["split"] == arguments.split]
+    if arguments.repo:
+        repos = [repo for repo in repos if repo["name"] in arguments.repo]
+    if not repos:
+        die("no repositories match that filter")
+    return repos
+
+
+def command_clone(arguments) -> int:
+    if getattr(arguments, "set", "repos") != "repos":
+        return command_sources_checkout(arguments)
+    selection = load_selection(arguments.directory)
+    wanted = selected(selection, arguments)
+    lock = load_lock()
+    validate_measurements(selection, lock)
+    selection.root.mkdir(parents=True, exist_ok=True)
+
+    low, high = selection.criteria["size_lines"]
+    failures = 0
+    out_of_band = []
+
+    with ThreadPoolExecutor(max_workers=arguments.jobs) as pool:
+        results = list(
+            pool.map(lambda repo: clone_one(selection.root, repo, lock.get(key_of(repo))), wanted)
+        )
+
+    for result in results:
+        repo = result.repo
+        label = f"{repo['split']}/{repo['name']}"
+        if result.problems:
+            failures += 1
+            for problem in result.problems:
+                print(f"FAIL {label}: {problem}")
+            continue
+        entry = result.entry
+        band = ""
+        if not low <= entry["lines"] <= high:
+            if repo.get("band_exception"):
+                band = "  band exception"
+            else:
+                band = "  OUT OF BAND"
+                out_of_band.append((label, entry["lines"]))
+        print(
+            f"{result.action:8} {label:36} {entry['sha'][:12]} "
+            f"{entry['lines']:>8} lines{band}"
+        )
+        lock[key_of(repo)] = entry
+
+    stale = [key for key in lock if key not in {key_of(repo) for repo in selection.repos}]
+    for split, language, name in stale:
+        # An entry the selection no longer names was rejected before it was ever
+        # a corpus member. One that really was in the corpus is retired in place
+        # instead -- the selection keeps it, carrying `retired = true`.
+        print(f"dropping {split}/{language}/{name}: no longer selected")
+        del lock[(split, language, name)]
+
+    if lock != load_lock():
+        write_lock(selection, lock)
+
+    if out_of_band:
+        print()
+        print(f"{len(out_of_band)} repositories measured outside {low}-{high} lines:")
+        for label, lines in out_of_band:
+            print(f"  {label}: {lines}")
+        print("Promote the named reserve in selected-repos.toml, or record")
+        print("a band_exception with a reason -- an out-of-band repository kept by")
+        print("default is the tolerance the criteria refuse to grant silently.")
+
+    if failures:
+        print(f"\n{failures} repositories failed", file=sys.stderr)
+        return 1
+    return 0
+
+
+def command_verify(arguments) -> int:
+    if getattr(arguments, "set", "repos") != "repos":
+        return command_sources_checkout(arguments)
+    selection = load_selection(arguments.directory)
+    wanted = selected(selection, arguments)
+    lock = load_lock()
+    validate_measurements(selection, lock)
+    problems: list[str] = []
+    checked = 0
+    for repo in wanted:
+        checked += 1
+        problems += verify_one(selection.root, repo, repo)
+    for problem in problems:
+        print(f"FAIL {problem}")
+    print(f"verified {checked} checkouts, {len(problems)} problems")
+    return 1 if problems else 0
+
+
+def command_status(arguments) -> int:
+    if getattr(arguments, "set", "repos") != "repos":
+        return command_sources_checkout(arguments)
+    selection = load_selection(arguments.directory)
+    lock = load_lock()
+    validate_measurements(selection, lock)
+    wanted = selected(selection, arguments)
+    problems = 0
+    for repo in wanted:
+        label = f"{repo['split']}/{repo['name']}"
+        pin = repo
+        destination = checkout_path(selection.root, repo)
+        problem = None
+        if pin is None:
+            problem = "not pinned"
+        elif not (destination / ".git").exists():
+            problem = "missing checkout"
+        else:
+            try:
+                head = git("rev-parse", "HEAD", cwd=destination).strip()
+                if head != pin["sha"]:
+                    problem = f"HEAD {head} != pinned {pin['sha']}"
+            except GitError as error:
+                problem = str(error)
+        if problem:
+            print(f"FAIL {label}: {problem}")
+            problems += 1
+        else:
+            print(f"{label}: pinned {pin['sha'][:12]}")
+    print(f"{len(wanted) - problems}/{len(wanted)} pinned repositories ready in {selection.root}")
+    return int(bool(problems))
+
+
+def source_selections(document: dict, kind: str) -> str:
+    """Derive flat checkout pins from the audited, pinned Zed snapshot."""
+    lines = ["# Generated by ./corpus sources --write from zed-sources.toml.",
+             "# URLs and SHAs used by ./corpus clone --set " + kind + ".", "",
+             "schema_version = 1", "snapshot_date = " + toml_string(document["snapshot_date"]), ""]
+    for entry in document[{"grammars": "grammar", "servers": "server"}[kind]]:
+        prefix, name = entry["path"].split("/", 1)
+        if prefix != kind:
+            die(f"invalid {kind} path: {entry['path']}")
+        repo = {"name": name, "url": entry["url"], "sha": entry["sha"]}
+        for key, value in entry.items():
+            if key not in ("name", "path", "url", "sha", "active"):
+                repo[key] = value
+        if "name" in entry:
+            repo["grammar"] = entry["name"]
+        lines += emit_table("repo", repo) + [""]
+    return "\n".join(lines)
+
+
+def load_sources(kind: str) -> list[dict]:
+    path = REPO / f"selected-{kind}.toml"
+    document = tomllib.loads(path.read_text())
+    repos = document["repo"]
+    names = set()
+    for entry in repos:
+        name = entry.get("name", "")
+        if (not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.-]*", name)
+                or not re.fullmatch(r"[0-9a-f]{40}", entry.get("sha", ""))
+                or not entry.get("url", "").startswith(("https://", "file://"))
+                or name in names):
+            die(f"invalid or duplicate pin in {path}: {name}")
+        names.add(name)
+    return [dict(entry, set=kind) for entry in repos]
+
+
+def command_sources(arguments) -> int:
+    document = tomllib.loads(SOURCES.read_text())
+    for kind in ("grammars", "servers"):
+        path = REPO / f"selected-{kind}.toml"
+        expected = source_selections(document, kind)
+        if arguments.write:
+            path.write_text(expected)
+        elif not path.exists() or tomllib.loads(path.read_text()) != tomllib.loads(expected):
+            die(f"{path.name} differs from the audited snapshot; run ./corpus sources --write")
+        print(f"{len(load_sources(kind))} {kind}: selected pins match the audited Zed snapshot")
+    return 0
+
+
+def command_sources_checkout(arguments) -> int:
+    if arguments.language or arguments.split:
+        die("--language and --split apply only to --set repos; use --repo for source checkouts")
+    repos = load_sources(arguments.set)
+    if arguments.repo:
+        unknown = set(arguments.repo) - {repo["name"] for repo in repos}
+        if unknown:
+            die(f"unknown repositories: {', '.join(sorted(unknown))}")
+        repos = [repo for repo in repos if repo["name"] in arguments.repo]
+    root = (arguments.directory or REPO).expanduser().resolve()
+
+    def check(repo):
+        if arguments.command == "clone":
+            return clone_one(root, repo, repo)
+        result = Result(repo=repo, action="pinned")
+        destination = checkout_path(root, repo)
+        if not (destination / ".git").exists():
+            result.problems.append("missing checkout")
+            return result
+        try:
+            head = git("rev-parse", "HEAD", cwd=destination).strip()
+            if head != repo["sha"]:
+                result.problems.append(f"HEAD {head} != selected {repo['sha']}")
+            if arguments.command == "verify":
+                dirty = git("status", "--porcelain", cwd=destination).strip()
+                if dirty:
+                    result.problems.append(f"dirty checkout: {dirty}")
+        except GitError as error:
+            result.problems.append(str(error))
+        return result
+
+    failures = 0
+    with ThreadPoolExecutor(max_workers=getattr(arguments, "jobs", 4)) as pool:
+        for result in pool.map(check, repos):
+            path = f"{arguments.set}/{result.repo['name']}"
+            if result.problems:
+                failures += 1
+                print(f"FAIL {path}: {'; '.join(result.problems)}")
+            else:
+                print(f"{result.action:8} {path} {result.repo['sha'][:12]}")
+    print(f"{len(repos) - failures}/{len(repos)} {arguments.set} ready in {root}")
+    return int(bool(failures))
+
+
+def source_modules() -> tuple[dict, list[dict]]:
+    """Only Zed references and the optional dataset are Git submodules."""
+    document = tomllib.loads(SOURCES.read_text())
+    config = configparser.ConfigParser(interpolation=None)
+    config.read(REPO / ".gitmodules")
+    paths = {"zed", "zed-extensions", "lsp-data"}
+    if set(config.sections()) != {f'submodule "{path}"' for path in paths}:
+        die(".gitmodules must contain only zed, zed-extensions, and lsp-data")
+    index = {}
+    for record in git("ls-files", "--stage", "-z", cwd=REPO).split("\0"):
+        if record.startswith("160000 "):
+            info, path = record.split("\t", 1)
+            mode, sha, stage = info.split()
+            if stage != "0":
+                die(f"unmerged submodule: {path}")
+            index[path] = sha
+    if set(index) != paths:
+        die("Git submodule pins must contain only zed, zed-extensions, and lsp-data")
+    references = {entry["path"]: entry for entry in document["reference"]}
+    if set(references) != paths - {"lsp-data"}:
+        die("Zed reference inventory must contain zed and zed-extensions")
+    modules = []
+    for path in sorted(paths):
+        section = config[f'submodule "{path}"']
+        if (section.get("path") != path or section.get("update") != "none"
+                or section.get("active") != "false"):
+            die(f"{path}: submodule must be inactive with update=none")
+        if path in references and any(references[path][key] != value for key, value in
+                                      (("sha", index[path]), ("url", section.get("url")))):
+            die(f"{path}: audited reference and Git pin disagree")
+        modules.append(dict(path=path, url=section["url"], sha=index[path],
+                            kind="data" if path == "lsp-data" else "reference"))
+    return document, modules
+
+
+def command_submodules(arguments) -> int:
+    document, modules = source_modules()
+    if arguments.check:
+        print("3 optional submodules: Git pins and inactive defaults agree")
+        return 0
+    if arguments.path:
+        requested = set(arguments.path)
+        unknown = requested - {entry["path"] for entry in modules}
+        if unknown:
+            die(f"unknown source submodules: {', '.join(sorted(unknown))}")
+        wanted = [entry for entry in modules if entry["path"] in requested]
+    else:
+        wanted = [entry for entry in modules
+                  if (arguments.references and entry["kind"] == "reference")
+                  or (arguments.data and entry["kind"] == "data")]
+    if not wanted:
+        print("All submodules are optional; select --references, --data, or --path.")
+        return 0
+    # An explicit opt-in overrides inactive/update=none for this invocation only.
+    # Git itself coordinates concurrent clones and config/index writes.
+    command = ["git"]
+    for entry in wanted:
+        command += ["-c", f"submodule.{entry['path']}.active=true"]
+    command += ["submodule", "update", "--init", "--checkout", "--jobs", str(arguments.jobs),
+                "--", *(entry["path"] for entry in wanted)]
+    return subprocess.run(command, cwd=REPO, env=git_environment(), check=False).returncode
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(prog="corpus", description=__doc__)
+    subparsers = parser.add_subparsers(dest="command", required=True)
+
+    def add_filters(target):
+        target.add_argument("directory", nargs="?", type=Path, help="checkout root (default: this corpus repository)")
+        target.add_argument("--set", choices=("repos", "grammars", "servers"), default="repos", help="which TOML selection to fetch or check")
+        target.add_argument("--repo", action="append", help="repository name; may be repeated")
+        target.add_argument("--language", help="restrict to one language")
+        target.add_argument("--split", choices=SPLITS, help="restrict to one split")
+
+    clone = subparsers.add_parser(
+        "clone",
+        help="clone at selected SHAs and cache measurements in the lock",
+    )
+    add_filters(clone)
+    clone.add_argument("--jobs", type=int, default=4, help="concurrent clones")
+    clone.set_defaults(run=command_clone)
+
+    verify = subparsers.add_parser(
+        "verify", help="every checkout is at its pin and its tree is clean"
+    )
+    add_filters(verify)
+    verify.set_defaults(run=command_verify)
+
+    status = subparsers.add_parser("status", help="what the corpus holds")
+    add_filters(status)
+    status.set_defaults(run=command_status)
+
+    submodules = subparsers.add_parser("submodules", help="initialize optional reference/data submodules")
+    submodules.add_argument("--data", action="store_true", help="initialize recorded LSP data")
+    submodules.add_argument("--references", action="store_true", help="initialize Zed and its extension registry")
+    submodules.add_argument("--path", action="append", help="initialize only this submodule path; may be repeated")
+    submodules.add_argument("--check", action="store_true", help="check inventory, Git pins, and clone defaults without fetching")
+    submodules.add_argument("--jobs", type=int, default=4, help="concurrent clones")
+    submodules.set_defaults(run=command_submodules)
+
+    sources = subparsers.add_parser("sources", help="derive selections from the audited Zed snapshot")
+    mode = sources.add_mutually_exclusive_group()
+    mode.add_argument("--write", action="store_true", help="regenerate selected-grammars.toml and selected-servers.toml")
+    mode.add_argument("--check", action="store_true", help="check generated selections offline (default)")
+    sources.set_defaults(run=command_sources)
+
+    arguments = parser.parse_args()
+    if getattr(arguments, "jobs", 1) < 1:
+        parser.error("--jobs must be positive")
+    return arguments.run(arguments)
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

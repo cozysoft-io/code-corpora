@@ -1,0 +1,4651 @@
+# Phase 1b's decision: which repositories the corpus is made of.
+# `heuristic-jump/design/data-collection.md` section 1.
+#
+# This file owns repository selection and immutable commit SHAs.
+# `./corpus clone` fetches these exact SHAs, even without a lockfile.
+# `corpus-lock.toml` caches measurements and checks them against these pins.
+# Selected and retired repository SHAs preserve the original corpus lock.
+# Reserves and considered candidates reuse a known corpus pin when available;
+# otherwise their SHA records upstream HEAD on 2026-09-08, not necessarily
+# the historical commit used for the estimates below.
+#
+# The two together are the whole corpus. Everything under the corpus root --
+# flat training/NAME and test/NAME checkouts -- rebuilds from them,
+# so the corpus directory is derived output rather than something that has to
+# survive. What it cannot rebuild is a commit that upstream has destroyed.
+#
+# Three properties of the selection are load-bearing, and all three are
+# expensive or impossible to fix later:
+#
+# * **The split moves one way only, and only deliberately.** Once a repository
+#   has been in the tuning corpus, moving it to held-out does not un-teach it
+#   (`heuristic-jump/design/high-level.md`'s development plan), so training -> held-out is
+#   corpus damage and stays forbidden.
+#
+#   Held-out -> training is the other direction and is sound: a repository that
+#   was never tuned against carries no contamination into the tuning set. It is
+#   still not free. It spends the held-out set, which is why it happens once,
+#   after the held-out set has been read, and together with selecting a
+#   replacement.
+#
+#   Done once so far, on 2026-08-10: all 35 held-out repositories were promoted
+#   after the first and only scored read of them, taking training from five per
+#   language to ten. The read is written up in that day's session; what it found
+#   was that five repositories per language is too few for a per-language number
+#   to mean much -- one repository supplied half of JavaScript's
+#   `explicitly_imported` stratum at 97% while three others scored zero -- and
+#   the fix for that is more repositories where the tuning happens.
+#
+# * **A repository is never bumped.** A newer commit is a different corpus. If
+#   one must be replaced, `retired = true` goes on the old entry and the new
+#   one is *added*; the selection grows rather than changes
+#   (`heuristic-jump/design/data-collection.md` section 1).
+#
+# * **`[[considered]]` is not decoration.** It is what makes selection bias
+#   auditable when a metric later looks suspiciously good and the question is
+#   whether the corpus earned it. Every candidate that was looked at and
+#   passed over is here with the reason, including the ones rejected for
+#   nothing more interesting than size.
+#
+# Line counts in `[[considered]]` are estimates from the GitHub API --
+# primary-language bytes over an average bytes-per-line -- taken on
+# 2026-08-02 during selection. They are what the reject decisions were made
+# against, and they are deliberately *not* refreshed: the estimate is the
+# evidence for a decision that was already made. Selected repositories carry
+# a measured count in corpus-lock.toml instead.
+#
+# Dependency resolution is **not** established here. Phase 1b is clone and
+# pin only; `design/data-collection.md` section 1 wants full resolution
+# verified by LSP probe, and there are no servers until phase 1c. Phase 1c
+# writes what each repository needed into a `dependencies` field on its
+# `[[repo]]` entry here, so that it
+# survives the corpus being rebuilt.
+
+corpus_root = "."
+
+# Languages, named by their LSP `languageId` so the corpus directory and
+# `shared::vocabulary::LanguageId` agree. TSX is not a separate directory --
+# `heuristic-jump/design/data-collection.md` treats TypeScript/TSX as one language and the
+# `.tsx` files live inside the typescript repositories.
+languages = ["c", "cpp", "csharp", "dart", "elixir", "go", "java", "javascript", "kotlin", "lua", "php", "python", "ruby", "rust", "swift", "typescript", "zig"]
+
+# Selection criteria, recorded so the manifest states what the repositories
+# were chosen *for* rather than only what was chosen.
+[criteria]
+size_lines = [20000, 200000]
+size_reason = "below 20k a whole-project search finishes instantly and the latency budgets are never exercised; above 200k server indexing dominates collection"
+popular = "actively maintained, real production code -- not tutorials, benchmark suites, or one-person experiments"
+varied = "different organisations, a mix of applications and libraries, different domains"
+handwritten = "not dominated by generated bindings"
+split = "ten tuning, five held out, per language -- five and five at selection time, until the 2026-08-10 promotion took every training set to ten; the ten languages added 2026-08-18 were selected at that shape directly"
+
+# --------------------------------------------------------------------------
+# Rust
+
+[[repo]]
+name = "ripgrep"
+url = "https://github.com/BurntSushi/ripgrep"
+sha = "435f59fc4b43af3ab32f34d53fa34978f393fe52"
+language = "rust"
+split = "training"
+domain = "CLI text search"
+
+[[repo]]
+name = "tantivy"
+url = "https://github.com/quickwit-oss/tantivy"
+sha = "3bb9a430dd88244723265e6fffcb78785cc998b0"
+language = "rust"
+split = "training"
+domain = "search engine library"
+
+[[repo]]
+name = "alacritty"
+url = "https://github.com/alacritty/alacritty"
+sha = "852e971cddfabe222d2d5bcda466e130f53af207"
+language = "rust"
+split = "training"
+domain = "GPU terminal emulator"
+
+[[repo]]
+name = "clap"
+url = "https://github.com/clap-rs/clap"
+sha = "ccc92c3b1171c00a6ef610bfa0018fa59c8510f9"
+language = "rust"
+split = "training"
+domain = "CLI argument parsing library"
+
+[[repo]]
+name = "typst"
+url = "https://github.com/typst/typst"
+sha = "32fd4cc3861e0ab99f4c42ca6bea281482ba9f51"
+language = "rust"
+split = "training"
+domain = "typesetting compiler"
+
+[[repo]]
+name = "helix"
+url = "https://github.com/helix-editor/helix"
+sha = "079a789e8cb08ead67f19e1971a1b7438b37354b"
+language = "rust"
+split = "training"
+domain = "modal text editor"
+
+[[repo]]
+name = "tokio"
+url = "https://github.com/tokio-rs/tokio"
+sha = "108d6d3dc038332af2af83957748333091e35b3f"
+language = "rust"
+split = "training"
+domain = "async runtime library"
+
+[[repo]]
+name = "egui"
+url = "https://github.com/emilk/egui"
+sha = "cb2b306f1157aebb7dc47a5809f58318aeaa0e59"
+language = "rust"
+split = "training"
+domain = "immediate-mode GUI library"
+
+[[repo]]
+name = "starship"
+url = "https://github.com/starship/starship"
+sha = "7946f2d9fbb02a5be76856ed27ddb85da10af3da"
+language = "rust"
+split = "training"
+domain = "shell prompt"
+
+[[repo]]
+name = "gitui"
+url = "https://github.com/gitui-org/gitui"
+sha = "d78d2647f59733cdba859f8c700ec07969917e24"
+language = "rust"
+split = "training"
+domain = "git terminal UI"
+
+# --------------------------------------------------------------------------
+# Go
+
+[[repo]]
+name = "caddy"
+url = "https://github.com/caddyserver/caddy"
+sha = "e096ca9503188f057c69a049f709fdade6077631"
+language = "go"
+split = "training"
+domain = "web server"
+
+[[repo]]
+name = "restic"
+url = "https://github.com/restic/restic"
+sha = "a80be1478a4c537f8396e0db2b05120aa78f11e0"
+language = "go"
+split = "training"
+domain = "backup tool"
+
+[[repo]]
+name = "esbuild"
+url = "https://github.com/evanw/esbuild"
+sha = "6ff1d8b0d8c134e867a397eef39702a223ebef9e"
+language = "go"
+split = "training"
+domain = "JavaScript bundler and compiler"
+
+[[repo]]
+name = "gin"
+url = "https://github.com/gin-gonic/gin"
+sha = "34dac209ffb6ef85cc78c5d217bbb7ad001d68fd"
+language = "go"
+split = "training"
+domain = "web framework library"
+
+[[repo]]
+name = "k9s"
+url = "https://github.com/derailed/k9s"
+sha = "b5d728c068b3584eb8530fb1f6cc51b13a67b39c"
+language = "go"
+split = "training"
+domain = "Kubernetes terminal UI"
+
+[[repo]]
+name = "syncthing"
+url = "https://github.com/syncthing/syncthing"
+sha = "13f38e9abf66f026f92da3a96edf17daf55e527f"
+language = "go"
+split = "training"
+domain = "file synchronization"
+
+
+[[repo]]
+name = "go-git"
+url = "https://github.com/go-git/go-git"
+sha = "cf4d91c78c3248aae6b65f86c5810166bfb334c2"
+language = "go"
+split = "training"
+domain = "version control library"
+
+
+[[repo]]
+name = "goreleaser"
+url = "https://github.com/goreleaser/goreleaser"
+sha = "02cfda7102906edff9dd067bcea516574fa68308"
+language = "go"
+split = "training"
+domain = "release automation"
+
+[[repo]]
+name = "micro"
+url = "https://github.com/zyedidia/micro"
+sha = "77de728b87a624f7cfef1a7db79ff383421780fe"
+language = "go"
+split = "training"
+domain = "terminal text editor"
+
+[[repo]]
+name = "pocketbase"
+url = "https://github.com/pocketbase/pocketbase"
+sha = "0a74d2f25d6decfc9bd0fc64656ec431f23bf610"
+language = "go"
+split = "training"
+domain = "backend application and database"
+
+# --------------------------------------------------------------------------
+# Python
+
+[[repo]]
+name = "fastapi"
+url = "https://github.com/fastapi/fastapi"
+sha = "95f8322ee1dcda7ceace7b1c4f6c9915b36d748f"
+language = "python"
+split = "training"
+domain = "web framework"
+
+[[repo]]
+name = "scrapy"
+url = "https://github.com/scrapy/scrapy"
+sha = "a499dc9511005e026860c5ce72296ba1ff3aae1b"
+language = "python"
+split = "training"
+domain = "web crawler"
+
+[[repo]]
+name = "pytest"
+url = "https://github.com/pytest-dev/pytest"
+sha = "c62ad48a67a755a075f2b96aa838856fee5f0d35"
+language = "python"
+split = "training"
+domain = "test framework"
+
+[[repo]]
+name = "rich"
+url = "https://github.com/Textualize/rich"
+sha = "9d8f9a372cc5916fd4781fec207ced7ddac2f08f"
+language = "python"
+split = "training"
+domain = "terminal rendering library"
+
+[[repo]]
+name = "black"
+url = "https://github.com/psf/black"
+sha = "5706d79984dacb40cc1a3b26c0a987269384f602"
+language = "python"
+split = "training"
+domain = "code formatter"
+
+[[repo]]
+name = "celery"
+url = "https://github.com/celery/celery"
+sha = "7c5d9a62d90c685bd0e1ae002d66ae40980b2847"
+language = "python"
+split = "training"
+domain = "distributed task queue"
+
+[[repo]]
+name = "poetry"
+url = "https://github.com/python-poetry/poetry"
+sha = "92b74dcfe348d0e01e14d40d6c1fa47a4ee04a54"
+language = "python"
+split = "training"
+domain = "packaging and dependency tool"
+
+[[repo]]
+name = "beets"
+url = "https://github.com/beetbox/beets"
+sha = "efc89702604237391a66e2a737cd272943544641"
+language = "python"
+split = "training"
+domain = "music library manager"
+
+[[repo]]
+name = "pydantic"
+url = "https://github.com/pydantic/pydantic"
+sha = "63f2722f6bfedf0c5b645b348a62ca0ce0b5358c"
+language = "python"
+split = "training"
+domain = "data validation library"
+
+# Band-marginal at ~202k estimated. `tornado` is the named reserve and
+# replaces it if the measured count lands over 200k.
+[[repo]]
+name = "networkx"
+url = "https://github.com/networkx/networkx"
+sha = "f884a12db34c39f2e6d81c5b3607caa4cbe8ea7d"
+language = "python"
+split = "training"
+domain = "graph algorithms"
+band_exception = "202,644 lines measured, 1.3% over. Kept: 0% vendored and no generated output, so the overshoot is entirely its own hand-written source, and the band exists to bound server indexing time rather than to be exact. Python otherwise has no numeric or scientific repository in the corpus."
+
+# --------------------------------------------------------------------------
+# JavaScript
+#
+# The held-out half is entirely libraries, which is a known weakness of this
+# language's row rather than an oversight: JavaScript-primary *applications*
+# in the 20k-200k band have largely migrated to TypeScript, and NodeBB was the
+# one found that had not. It is in the tuning half.
+
+[[repo]]
+name = "prettier"
+url = "https://github.com/prettier/prettier"
+sha = "315f28198200d7678dadd3fd5eece499b127ff2a"
+language = "javascript"
+split = "training"
+domain = "code formatter"
+
+[[repo]]
+name = "mongoose"
+url = "https://github.com/Automattic/mongoose"
+sha = "798f6c41fc66ad7ffc1b7d9d0a349c0c781bf2eb"
+language = "javascript"
+split = "training"
+domain = "MongoDB object modelling"
+
+[[repo]]
+name = "nodebb"
+url = "https://github.com/NodeBB/NodeBB"
+sha = "1b382606265654ec1a700bbfc7e108a715a2b61d"
+language = "javascript"
+split = "training"
+domain = "forum application"
+
+
+[[repo]]
+name = "videojs"
+url = "https://github.com/videojs/video.js"
+sha = "1ce2b219f450842455e120518bf669e1d5b2ae38"
+language = "javascript"
+split = "training"
+domain = "media player"
+
+[[repo]]
+name = "jsdom"
+url = "https://github.com/jsdom/jsdom"
+sha = "2ba228b7669ba208d38a3dd08a5bd6f5ef169e64"
+language = "javascript"
+split = "training"
+domain = "DOM implementation"
+
+[[repo]]
+name = "codemirror5"
+url = "https://github.com/codemirror/codemirror5"
+sha = "9b4f0603cb042286a7ac2262b98245493d0d7e4b"
+language = "javascript"
+split = "training"
+domain = "editor component"
+
+[[repo]]
+name = "jquery"
+url = "https://github.com/jquery/jquery"
+sha = "51eb576cca6ffce252dc152bf8e91d5230a0d887"
+language = "javascript"
+split = "training"
+domain = "DOM manipulation library"
+
+[[repo]]
+name = "leaflet"
+url = "https://github.com/Leaflet/Leaflet"
+sha = "c96f31a7a350a07cfbc852cf88e6ca69af5f5ec9"
+language = "javascript"
+split = "training"
+domain = "interactive maps"
+
+[[repo]]
+name = "axios"
+url = "https://github.com/axios/axios"
+sha = "c3f553c740ebf3dff5e22dae24e9caaafafddd2d"
+language = "javascript"
+split = "training"
+domain = "HTTP client"
+
+[[repo]]
+name = "mathjs"
+url = "https://github.com/josdejong/mathjs"
+sha = "751dfca67fb3cad855192dd89062481d26fb96cc"
+language = "javascript"
+split = "training"
+domain = "mathematics and utility library"
+
+# --------------------------------------------------------------------------
+# TypeScript / TSX
+
+[[repo]]
+name = "vite"
+url = "https://github.com/vitejs/vite"
+sha = "40a3999e66b5b51f45ec0ead60265f3b2184e780"
+language = "typescript"
+split = "training"
+domain = "build tool"
+
+[[repo]]
+name = "nest"
+url = "https://github.com/nestjs/nest"
+sha = "86d1e62e04ae2886e44522247f2cd29966e338ee"
+language = "typescript"
+split = "training"
+domain = "server framework"
+
+[[repo]]
+name = "material-ui"
+url = "https://github.com/mui/material-ui"
+sha = "6cca37e953d70fa314e67d897a98d4d52f3b8999"
+language = "typescript"
+split = "training"
+domain = "React component library (TSX)"
+band_exception = "207,131 lines measured, 3.6% over. Kept: 0% vendored, and a third of it is docs/data and docs/src -- hand-written TSX usage sites, which are exactly the convention-dense code the corpus is for. Dropping it would leave the TypeScript tuning half without a TSX component library."
+
+[[repo]]
+name = "rxjs"
+url = "https://github.com/ReactiveX/rxjs"
+sha = "5b46e6b1ad5e6ea3eab4e2463b33eb9af2cfaa9a"
+language = "typescript"
+split = "training"
+domain = "reactive streams library"
+
+[[repo]]
+name = "echarts"
+url = "https://github.com/apache/echarts"
+sha = "fac056850eb5414e697d1cd157bed0b60d249ca7"
+language = "typescript"
+split = "training"
+domain = "charting library"
+
+[[repo]]
+name = "vue-core"
+url = "https://github.com/vuejs/core"
+sha = "b5f8518379b77c3b62a7a9d2b52f6c76cda09bd5"
+language = "typescript"
+split = "training"
+domain = "web framework core"
+
+[[repo]]
+name = "puppeteer"
+url = "https://github.com/puppeteer/puppeteer"
+sha = "5dc2964de9fd5d22ee02d2f5c81284f4d6500431"
+language = "typescript"
+split = "training"
+domain = "browser automation"
+
+[[repo]]
+name = "react-router"
+url = "https://github.com/remix-run/react-router"
+sha = "246c1247a2c34f992ef50fec9040d1cbe1f4a5bb"
+language = "typescript"
+split = "training"
+domain = "routing (TS and TSX)"
+
+[[repo]]
+name = "mermaid"
+url = "https://github.com/mermaid-js/mermaid"
+sha = "19563d81ebbfd6cb7b97e285bafd986ed40df130"
+language = "typescript"
+split = "training"
+domain = "diagramming"
+
+[[repo]]
+name = "zod"
+url = "https://github.com/colinhacks/zod"
+sha = "912f0f51b0ced654d0069741e7160834dca742ee"
+language = "typescript"
+split = "training"
+domain = "schema validation, generics-heavy"
+
+# --------------------------------------------------------------------------
+# C
+#
+# The held-out half skews to autotools and meson, which is a phase 1c cost
+# rather than a selection flaw: `compile_commands.json` for those needs
+# `bear`, where the tuning half's cmake and make builds emit it natively.
+
+[[repo]]
+name = "zstd"
+url = "https://github.com/facebook/zstd"
+sha = "82d322c4973d9e2968d94047a40892bc6d9a9bdf"
+language = "c"
+split = "training"
+domain = "compression"
+
+[[repo]]
+name = "libuv"
+url = "https://github.com/libuv/libuv"
+sha = "c0bd247782f3a7fbb22499970c2c14ac05a46f26"
+language = "c"
+split = "training"
+domain = "async I/O library"
+
+
+[[repo]]
+name = "tmux"
+url = "https://github.com/tmux/tmux"
+sha = "31dccb6bc9521b0ea46307974d071ad7f09f0e9b"
+language = "c"
+split = "training"
+domain = "terminal multiplexer"
+
+[[repo]]
+name = "quickjs"
+url = "https://github.com/quickjs-ng/quickjs"
+sha = "10b99693cdc3f37cdf05114bc2d5225de495c4a3"
+language = "c"
+split = "training"
+domain = "JavaScript engine"
+
+[[repo]]
+name = "openssh"
+url = "https://github.com/openssh/openssh-portable"
+sha = "ec0485632885e0c533b35e5970e4b583781db83f"
+language = "c"
+split = "training"
+domain = "security and networking"
+
+[[repo]]
+name = "htop"
+url = "https://github.com/htop-dev/htop"
+sha = "7ba14f60e7e44eb14dfad0d279ba774bee1a62b2"
+language = "c"
+split = "training"
+domain = "system monitor"
+
+[[repo]]
+name = "lua"
+url = "https://github.com/lua/lua"
+sha = "7579fc9d7ed90240487251dfb69168f8e64e9294"
+language = "c"
+split = "training"
+domain = "language runtime"
+
+[[repo]]
+name = "sway"
+url = "https://github.com/swaywm/sway"
+sha = "5bc72dee4771a2d2d2648b8f69d30e0747f263f6"
+language = "c"
+split = "training"
+domain = "Wayland compositor"
+
+[[repo]]
+name = "memcached"
+url = "https://github.com/memcached/memcached"
+sha = "2d51e364799bc9698bd4b11728ea978cea12da6e"
+language = "c"
+split = "training"
+domain = "cache server"
+
+[[repo]]
+name = "libjpeg-turbo"
+url = "https://github.com/libjpeg-turbo/libjpeg-turbo"
+sha = "b47f048e2387a31842e6c09b89d55a1772ed06c9"
+language = "c"
+split = "training"
+domain = "image codec"
+
+# --------------------------------------------------------------------------
+# C++
+
+[[repo]]
+name = "imgui"
+url = "https://github.com/ocornut/imgui"
+sha = "9b7699f32597e7c7a799f22b1860ac586c2857b9"
+language = "cpp"
+split = "training"
+domain = "immediate-mode GUI library"
+
+
+[[repo]]
+name = "faiss"
+url = "https://github.com/facebookresearch/faiss"
+sha = "6187d940e329ae9d6073fe9d4c429a385707f606"
+language = "cpp"
+split = "training"
+domain = "vector search and machine learning"
+
+[[repo]]
+name = "drogon"
+url = "https://github.com/drogonframework/drogon"
+sha = "00b71f9918a58c4a06967da063bb840647a032db"
+language = "cpp"
+split = "training"
+domain = "web framework"
+
+[[repo]]
+name = "osrm-backend"
+url = "https://github.com/Project-OSRM/osrm-backend"
+sha = "9fd8ab928890506251d38f6a6ae88cff463a2a7b"
+language = "cpp"
+split = "training"
+domain = "routing engine"
+
+
+[[repo]]
+name = "googletest"
+url = "https://github.com/google/googletest"
+sha = "1b6f64d659944658a4c685b7bd9f04c1c3b8a39b"
+language = "cpp"
+split = "training"
+domain = "test framework"
+
+[[repo]]
+name = "libzmq"
+url = "https://github.com/zeromq/libzmq"
+sha = "46493370217ac135246617fa2f6ac819d8b61bfc"
+language = "cpp"
+split = "training"
+domain = "messaging library"
+
+[[repo]]
+name = "mumble"
+url = "https://github.com/mumble-voip/mumble"
+sha = "9ca3e17cecce6a719d66214f80ee96c5afa85613"
+language = "cpp"
+split = "training"
+domain = "VoIP desktop application (Qt)"
+# Retired 2026-08-10, never collected. Its CMakeLists needs Qt6 >= 6.2 found on
+# the system, so `../heuristic-jump/harness/resolve-dependencies` cannot produce a compile
+# database without Qt6 development packages installed machine-wide. Without one
+# clangd analyses nothing, which `./corpus verify` now refuses to collect
+# against -- correctly, since the alternative is four repositories reported as
+# C++. `catch2` is promoted from the reserves in its place.
+retired = true
+
+# Promoted from `[[reserve]]` on 2026-08-10, replacing the retired `mumble`.
+[[repo]]
+name = "catch2"
+url = "https://github.com/catchorg/Catch2"
+sha = "0aeb818520028ca05cc2539ed242402ef7a7ae41"
+language = "cpp"
+split = "training"
+domain = "test framework"
+
+[[repo]]
+name = "leveldb"
+url = "https://github.com/google/leveldb"
+sha = "7ee830d02b623e8ffe0b95d59a74db1e58da04c5"
+language = "cpp"
+split = "training"
+domain = "embedded key-value store"
+
+[[repo]]
+name = "re2"
+url = "https://github.com/google/re2"
+sha = "972a15cedd008d846f1a39b2e88ce48d7f166cbd"
+language = "cpp"
+split = "training"
+domain = "regular expression engine"
+
+[[repo]]
+name = "glm"
+url = "https://github.com/g-truc/glm"
+sha = "6f14f4792a0cde5d0cf2c910506724d61cb95834"
+language = "cpp"
+split = "training"
+domain = "3D mathematics for graphics"
+
+# --------------------------------------------------------------------------
+# Reserves
+#
+# Named replacements, so that a repository failing its measured band check --
+# or failing dependency resolution in phase 1c -- is a substitution somebody
+# already thought about rather than a fresh selection made under pressure.
+# Promoting one means moving it to a `[[repo]]` entry with the split of the
+# repository it replaces, and recording the replaced repository under
+# `[[considered]]` with the measurement that disqualified it.
+#
+# `measured` is present on a reserve that has been cloned and counted with the
+# same rule the corpus uses. The first round of reserves was mostly unmeasured
+# and mostly did not survive contact with measurement -- `nfpm` was under the
+# band, `taskflow` vendored Eigen and TBB into 667k lines, `fmt` carried a
+# bundled googletest larger than its own source -- which is why measuring a
+# reserve before naming it is now the practice rather than an afterthought.
+
+[[reserve]]
+name = "tornado"
+url = "https://github.com/tornadoweb/tornado"
+sha = "0096f2897c98facdcd9716009ee934a7381af5ef"
+language = "python"
+domain = "async web server"
+replaces = "networkx"
+
+[[reserve]]
+name = "less.js"
+url = "https://github.com/less/less.js"
+sha = "c303718bbd8f6cf31de6576738442c794da1d9b2"
+language = "javascript"
+domain = "CSS preprocessor"
+measured = 22627
+
+[[reserve]]
+name = "validator.js"
+url = "https://github.com/validatorjs/validator.js"
+sha = "cdb7dafc281d14125b924969bf3ee5bc482ec169"
+language = "javascript"
+domain = "string validation library"
+measured = 24265
+
+[[reserve]]
+name = "ember.js"
+url = "https://github.com/emberjs/ember.js"
+sha = "f1c718c482fb17db975b1306496bc8c0e8d06007"
+language = "javascript"
+domain = "web framework"
+measured = 108451
+
+[[reserve]]
+name = "chakra-ui"
+url = "https://github.com/chakra-ui/chakra-ui"
+sha = "c8ef4fb3146ecb82521a878eb6545b4c9598abd6"
+language = "typescript"
+domain = "React component library (TSX)"
+
+[[reserve]]
+name = "jest"
+url = "https://github.com/jestjs/jest"
+sha = "cceb1e69a22937f6e93c0c8444a4a263a7a4b96d"
+language = "typescript"
+domain = "test framework"
+
+[[reserve]]
+name = "nuxt"
+url = "https://github.com/nuxt/nuxt"
+sha = "bdbb150be675a2063134acd256122022d1db096b"
+language = "typescript"
+domain = "web framework"
+
+[[reserve]]
+name = "libevent"
+url = "https://github.com/libevent/libevent"
+sha = "c96ddc2727a4ed0ca744500efff7230316b4118d"
+language = "c"
+domain = "event notification library"
+measured = 100615
+
+[[reserve]]
+name = "libsodium"
+url = "https://github.com/jedisct1/libsodium"
+sha = "b81ab0783e084b92af870c464f2f56263632016c"
+language = "c"
+domain = "cryptography library"
+measured = 73223
+
+[[reserve]]
+name = "janet"
+url = "https://github.com/janet-lang/janet"
+sha = "4370ae8acc5f1141a241becb8b2a2badc75ac8fe"
+language = "c"
+domain = "language runtime"
+
+[[reserve]]
+name = "catch2"
+url = "https://github.com/catchorg/Catch2"
+sha = "0aeb818520028ca05cc2539ed242402ef7a7ae41"
+language = "cpp"
+domain = "test framework"
+measured = 74867
+
+[[reserve]]
+name = "bat"
+url = "https://github.com/sharkdp/bat"
+sha = "7323a7514f7601737640e7172be115127d6db08c"
+language = "rust"
+domain = "syntax-highlighting pager"
+
+[[reserve]]
+name = "iced"
+url = "https://github.com/iced-rs/iced"
+sha = "5ca4f19a128ad9dfb22d7c77b2ac715f65d4959b"
+language = "rust"
+domain = "GUI framework"
+
+[[reserve]]
+name = "fzf"
+url = "https://github.com/junegunn/fzf"
+sha = "dab626bd9e0ec17c801f7316a73f7e4a91c1260e"
+language = "go"
+domain = "fuzzy finder"
+measured = 31754
+
+# --------------------------------------------------------------------------
+# Considered and passed over
+#
+# Estimated line counts from the GitHub API on 2026-08-02, over primary-language
+# bytes. Frozen: these are the numbers the decisions were made against.
+
+[[considered]]
+name = "hyper"
+url = "https://github.com/hyperium/hyper"
+sha = "af432e993c92ea65e76fc590738334e74b5ccf34"
+language = "rust"
+est_lines = 34594
+reason = "in band, passed over for domain or organisation overlap with a selected repository"
+
+[[considered]]
+name = "zellij"
+url = "https://github.com/zellij-org/zellij"
+sha = "af38660c5884f50bb3726682fb92961326c4268f"
+language = "rust"
+est_lines = 384769
+reason = "over the band at ~384769 lines"
+
+[[considered]]
+name = "cargo"
+url = "https://github.com/rust-lang/cargo"
+sha = "e7506208ff1b7f01062e410c419f95628dfdb31b"
+language = "rust"
+est_lines = 351854
+reason = "over the band at ~351854 lines"
+
+[[considered]]
+name = "difftastic"
+url = "https://github.com/Wilfred/difftastic"
+sha = "274d0a8f57291477cfbfb27bace0d82395d15c97"
+language = "rust"
+est_lines = 19196
+reason = "under the band at ~19196 lines"
+
+[[considered]]
+name = "nushell"
+url = "https://github.com/nushell/nushell"
+sha = "b763fe41224facd5e9f8bb584cb1d62568d70a59"
+language = "rust"
+est_lines = 464999
+reason = "over the band at ~464999 lines"
+
+[[considered]]
+name = "lapce"
+url = "https://github.com/lapce/lapce"
+sha = "c9e4c33948033f10f003991a037d949a708eedf8"
+language = "rust"
+est_lines = 79051
+reason = "in band, passed over for domain or organisation overlap with a selected repository"
+
+[[considered]]
+name = "hugo"
+url = "https://github.com/gohugoio/hugo"
+sha = "ae07063fcc9a59c95838e83e7fdf12e326ebee7d"
+language = "go"
+est_lines = 214847
+reason = "over the band at ~214847 lines"
+
+[[considered]]
+name = "traefik"
+url = "https://github.com/traefik/traefik"
+sha = "d48621ce0b6fd221b20bdb6c22e652e7498e5db6"
+language = "go"
+est_lines = 241300
+reason = "over the band at ~241300 lines"
+
+[[considered]]
+name = "nats-server"
+url = "https://github.com/nats-io/nats-server"
+sha = "61b9774786c701f76a0eb5cb2ae917501995cc50"
+language = "go"
+est_lines = 453944
+reason = "over the band at ~453944 lines"
+
+[[considered]]
+name = "minio"
+url = "https://github.com/minio/minio"
+sha = "7aac2a2c5b7c882e68c1ce017d8256be2feea27f"
+language = "go"
+est_lines = 313764
+reason = "over the band at ~313764 lines"
+
+[[considered]]
+name = "prometheus"
+url = "https://github.com/prometheus/prometheus"
+sha = "78169fb57d69371b24863b0f26555631a754204c"
+language = "go"
+est_lines = 401299
+reason = "over the band at ~401299 lines"
+
+[[considered]]
+name = "etcd"
+url = "https://github.com/etcd-io/etcd"
+sha = "fd8581e0490e8cebd9abf4c771c228f989adb76c"
+language = "go"
+est_lines = 207658
+reason = "over the band at ~207658 lines"
+
+[[considered]]
+name = "django"
+url = "https://github.com/django/django"
+sha = "2b30f6255b5ef84afbd827993643d52ef2c0963a"
+language = "python"
+est_lines = 575387
+reason = "over the band at ~575387 lines"
+
+[[considered]]
+name = "scikit-learn"
+url = "https://github.com/scikit-learn/scikit-learn"
+sha = "2cc7893a2097be891426ca6a4d9ea2e14cf82b9c"
+language = "python"
+est_lines = 407077
+reason = "over the band at ~407077 lines"
+
+[[considered]]
+name = "mypy"
+url = "https://github.com/python/mypy"
+sha = "ae39cdb2fba8908eeff6ec8d6b88879c62495fcc"
+language = "python"
+est_lines = 214399
+reason = "over the band at ~214399 lines"
+
+[[considered]]
+name = "sqlalchemy"
+url = "https://github.com/sqlalchemy/sqlalchemy"
+sha = "c59306ff3246bdc17754857281d48d4491d091aa"
+language = "python"
+est_lines = 610383
+reason = "over the band at ~610383 lines"
+
+[[considered]]
+name = "textual"
+url = "https://github.com/Textualize/textual"
+sha = "06dbeef4bb70fb718236aa418ed658ef4667a126"
+language = "python"
+est_lines = 126018
+reason = "in band, passed over for domain or organisation overlap with a selected repository"
+
+[[considered]]
+name = "flask"
+url = "https://github.com/pallets/flask"
+sha = "d73fa1cdcbd8b1465c151db8924ba58b1dd14e35"
+language = "python"
+est_lines = 17127
+reason = "under the band at ~17127 lines"
+
+[[considered]]
+name = "eslint"
+url = "https://github.com/eslint/eslint"
+sha = "5997825635dc9c4e81434894607ef2e3887e0ea3"
+language = "javascript"
+est_lines = 341441
+reason = "over the band at ~341441 lines"
+
+[[considered]]
+name = "webpack"
+url = "https://github.com/webpack/webpack"
+sha = "dcb65b9c61eeb544762a70833ec00fb9228000e0"
+language = "javascript"
+est_lines = 353701
+reason = "over the band at ~353701 lines"
+
+[[considered]]
+name = "three.js"
+url = "https://github.com/mrdoob/three.js"
+sha = "cbd9aea9649ad533753b84528aeccf659d8fcf3c"
+language = "javascript"
+est_lines = 402345
+reason = "over the band at ~402345 lines"
+
+[[considered]]
+name = "babel"
+url = "https://github.com/babel/babel"
+sha = "12996b06d03c76c6834883daf0f8435de5fdb904"
+language = "javascript"
+est_lines = 37313
+reason = "only 23% of the repository is javascript; the nominal language is no longer the primary one"
+
+[[considered]]
+name = "Ghost"
+url = "https://github.com/TryGhost/Ghost"
+sha = "249a37827750eac49a4ac49b16a51b2ee3856155"
+language = "javascript"
+est_lines = 570895
+reason = "over the band at ~570895 lines"
+
+[[considered]]
+name = "ace"
+url = "https://github.com/ajaxorg/ace"
+sha = "2c1eddc392eb92cf222a4478f1893d2b2c354fb0"
+language = "javascript"
+est_lines = 397041
+reason = "over the band at ~397041 lines"
+
+[[considered]]
+name = "date-fns"
+url = "https://github.com/date-fns/date-fns"
+sha = "18cbd436f1428d0f45f89f710df65f62546c42f0"
+language = "javascript"
+est_lines = 2921
+reason = "only 3% of the repository is javascript; the nominal language is no longer the primary one"
+
+[[considered]]
+name = "vue"
+url = "https://github.com/vuejs/vue"
+sha = "9e88707940088cb1f4cd7dd210c9168a50dc347c"
+language = "javascript"
+est_lines = 1051
+reason = "only 1% of the repository is javascript; the nominal language is no longer the primary one"
+
+[[considered]]
+name = "uppy"
+url = "https://github.com/transloadit/uppy"
+sha = "0d0940b71b67f7f3447c04c0ebfcccc4c2f3d94a"
+language = "javascript"
+est_lines = 2345
+reason = "only 3% of the repository is javascript; the nominal language is no longer the primary one"
+
+[[considered]]
+name = "fabric.js"
+url = "https://github.com/fabricjs/fabric.js"
+sha = "2bd4992cabf4ec9609aa349ea09b723cadc94bef"
+language = "javascript"
+est_lines = 16616
+reason = "only 15% of the repository is javascript; the nominal language is no longer the primary one"
+
+[[considered]]
+name = "excalidraw"
+url = "https://github.com/excalidraw/excalidraw"
+sha = "854d00c31b7105290396fe34294fc2a0331ea469"
+language = "typescript"
+est_lines = 219476
+reason = "over the band at ~219476 lines"
+
+[[considered]]
+name = "playwright"
+url = "https://github.com/microsoft/playwright"
+sha = "fab00c007c6ce8ab94a58356daa194cb37cb2576"
+language = "typescript"
+est_lines = 362845
+reason = "over the band at ~362845 lines"
+
+[[considered]]
+name = "lexical"
+url = "https://github.com/facebook/lexical"
+sha = "ab09c2ab729fdb30843c8a5729e5bff95856459b"
+language = "typescript"
+est_lines = 258273
+reason = "over the band at ~258273 lines"
+
+[[considered]]
+name = "svelte"
+url = "https://github.com/sveltejs/svelte"
+sha = "5895c637b04dc8667020c8d326807c3f3a984472"
+language = "typescript"
+est_lines = 6909
+reason = "only 4% of the repository is typescript; the nominal language is no longer the primary one"
+
+[[considered]]
+name = "outline"
+url = "https://github.com/outline/outline"
+sha = "68b912825cf4a4b3694a08f32f866cff39234b45"
+language = "typescript"
+est_lines = 267568
+reason = "over the band at ~267568 lines"
+
+[[considered]]
+name = "typeorm"
+url = "https://github.com/typeorm/typeorm"
+sha = "ac41823b9e27e3a8079ce487c9772c5ef8f1e226"
+language = "typescript"
+est_lines = 321921
+reason = "over the band at ~321921 lines"
+
+[[considered]]
+name = "ant-design"
+url = "https://github.com/ant-design/ant-design"
+sha = "3bc029ad8f28bc03be737eeb0633b7bccfeb3038"
+language = "typescript"
+est_lines = 249294
+reason = "over the band at ~249294 lines"
+
+[[considered]]
+name = "tldraw"
+url = "https://github.com/tldraw/tldraw"
+sha = "e3b6f8377796b612369a0edf163677b13048dde3"
+language = "typescript"
+est_lines = 418460
+reason = "over the band at ~418460 lines"
+
+[[considered]]
+name = "trpc"
+url = "https://github.com/trpc/trpc"
+sha = "acff82332de8b4562d3e6975fa8d94ab1a6de5e0"
+language = "typescript"
+est_lines = 87384
+reason = "in band, passed over for domain or organisation overlap with a selected repository"
+
+[[considered]]
+name = "redis"
+url = "https://github.com/redis/redis"
+sha = "48cc562064dbb52ef3f9cc1a5aa32db6811f5871"
+language = "c"
+est_lines = 329311
+reason = "over the band at ~329311 lines"
+
+[[considered]]
+name = "curl"
+url = "https://github.com/curl/curl"
+sha = "b3e1bfcc46fff3f5a207b981ce32bb16770dcc76"
+language = "c"
+est_lines = 307580
+reason = "over the band at ~307580 lines"
+
+[[considered]]
+name = "libgit2"
+url = "https://github.com/libgit2/libgit2"
+sha = "0551dfd4ad989b6a3d5683c0d4cf326c6efef929"
+language = "c"
+est_lines = 295887
+reason = "over the band at ~295887 lines"
+
+[[considered]]
+name = "jq"
+url = "https://github.com/jqlang/jq"
+sha = "9d241e277204b83c4a7ddc7d733e5c72f99ef500"
+language = "c"
+est_lines = 18832
+reason = "under the band at ~18832 lines"
+
+[[considered]]
+name = "SDL"
+url = "https://github.com/libsdl-org/SDL"
+sha = "aa5bffa6d33da9a575f172c8af682075f4cccfe6"
+language = "c"
+est_lines = 1079173
+reason = "over the band at ~1079173 lines"
+
+[[considered]]
+name = "git"
+url = "https://github.com/git/git"
+sha = "b8242b093d9e941a34460d715e3ce616a34ac3fe"
+language = "c"
+est_lines = 431759
+reason = "only 49% of the repository is c; the nominal language is no longer the primary one"
+
+[[considered]]
+name = "micropython"
+url = "https://github.com/micropython/micropython"
+sha = "970468103d5ce776d092a1eb84e3bdf2ab5a3b0b"
+language = "c"
+est_lines = 698010
+reason = "over the band at ~698010 lines"
+
+[[considered]]
+name = "nginx"
+url = "https://github.com/nginx/nginx"
+sha = "5c812c034e6cb10368f9e98cf05b6d0a01f27f1f"
+language = "c"
+est_lines = 235669
+reason = "over the band at ~235669 lines"
+
+[[considered]]
+name = "FFmpeg"
+url = "https://github.com/FFmpeg/FFmpeg"
+sha = "08cd8df29d17b4302a105aab80a41b885dd42663"
+language = "c"
+est_lines = 2498982
+reason = "over the band at ~2498982 lines"
+
+[[considered]]
+name = "neovim"
+url = "https://github.com/neovim/neovim"
+sha = "493a4dd57127de50c76e6a627bff27c64d5adf91"
+language = "c"
+est_lines = 400200
+reason = "only 26% of the repository is c; the nominal language is no longer the primary one"
+
+[[considered]]
+name = "mpv"
+url = "https://github.com/mpv-player/mpv"
+sha = "7e4cb538a3f30d25920ad8e87ba6571540fb729f"
+language = "c"
+est_lines = 260813
+reason = "over the band at ~260813 lines"
+
+[[considered]]
+name = "llama.cpp"
+url = "https://github.com/ggml-org/llama.cpp"
+sha = "f3f1a8f2760f28325a5ec20c05b171e5b7c83a29"
+language = "cpp"
+est_lines = 625377
+reason = "over the band at ~625377 lines"
+
+[[considered]]
+name = "tesseract"
+url = "https://github.com/tesseract-ocr/tesseract"
+sha = "fb87a84b6e3384b424b2169c76de9031046861e9"
+language = "cpp"
+est_lines = 250321
+reason = "over the band at ~250321 lines"
+
+[[considered]]
+name = "solidity"
+url = "https://github.com/ethereum/solidity"
+sha = "deeab5a56779596b2113ecfe33caa191c9993db2"
+language = "cpp"
+est_lines = 255282
+reason = "over the band at ~255282 lines"
+
+[[considered]]
+name = "bitcoin"
+url = "https://github.com/bitcoin/bitcoin"
+sha = "59fd053dac83c989dcb18f6d92e0d17eb7ecb227"
+language = "cpp"
+est_lines = 489381
+reason = "over the band at ~489381 lines"
+
+[[considered]]
+name = "rocksdb"
+url = "https://github.com/facebook/rocksdb"
+sha = "37234200b57d8d0a6a5c41f2d9811bbd2e293544"
+language = "cpp"
+est_lines = 959356
+reason = "over the band at ~959356 lines"
+
+[[considered]]
+name = "assimp"
+url = "https://github.com/assimp/assimp"
+sha = "17ec36b247b3e59f83ce952afc47f9b362f78a14"
+language = "cpp"
+est_lines = 604656
+reason = "over the band at ~604656 lines"
+
+[[considered]]
+name = "abseil-cpp"
+url = "https://github.com/abseil/abseil-cpp"
+sha = "9d7ed847ae6a4f668d325dfc0937e279418b6a34"
+language = "cpp"
+est_lines = 339078
+reason = "over the band at ~339078 lines"
+
+[[considered]]
+name = "poco"
+url = "https://github.com/pocoproject/poco"
+sha = "361263b3e45f33799dbf66e45d15a27bdc91493b"
+language = "cpp"
+est_lines = 609697
+reason = "over the band at ~609697 lines"
+
+[[considered]]
+name = "qBittorrent"
+url = "https://github.com/qbittorrent/qBittorrent"
+sha = "56c9b81571a15df2d4b1a8c3d40fe6d35bf6eea5"
+language = "cpp"
+est_lines = 131891
+reason = "in band, passed over for domain or organisation overlap with a selected repository"
+
+[[considered]]
+name = "bgfx"
+url = "https://github.com/bkaradzic/bgfx"
+sha = "9b636df330c81e11c84595651a291b6c59fb7396"
+language = "cpp"
+est_lines = 107389
+reason = "only 40% of the repository is cpp; the nominal language is no longer the primary one"
+
+[[considered]]
+name = "ncnn"
+url = "https://github.com/Tencent/ncnn"
+sha = "3b7bdba7fc8aea8fd46779533eee027df77c639d"
+language = "cpp"
+est_lines = 740917
+reason = "over the band at ~740917 lines"
+
+[[considered]]
+name = "pip-tools"
+url = "https://github.com/jazzband/pip-tools"
+sha = "c58d5d945c0f20e9713e10f5fea2491a5c984f39"
+language = "python"
+est_lines = 14620
+reason = "under the band at ~14620 lines"
+
+[[considered]]
+name = "core"
+url = "https://github.com/home-assistant/core"
+sha = "368adbe0fbb47c3c6f16351ba82b16888c6ed493"
+language = "python"
+est_lines = 3481794
+reason = "over the band at ~3481794 lines"
+
+[[considered]]
+name = "numpy"
+url = "https://github.com/numpy/numpy"
+sha = "fb7b3f90089cbde3835430caa9d3e5193ff56701"
+language = "python"
+est_lines = 381333
+reason = "over the band at ~381333 lines"
+
+[[considered]]
+name = "pdf.js"
+url = "https://github.com/mozilla/pdf.js"
+sha = "248bdcc235555ecf21f0b99f619e09eb5135241a"
+language = "javascript"
+est_lines = 229688
+reason = "over the band at ~229688 lines"
+
+[[considered]]
+name = "ember.js"
+url = "https://github.com/emberjs/ember.js"
+sha = "f1c718c482fb17db975b1306496bc8c0e8d06007"
+language = "javascript"
+est_lines = 93607
+reason = "only 40% of the repository is javascript; the nominal language is no longer the primary one"
+
+[[considered]]
+name = "plotly.js"
+url = "https://github.com/plotly/plotly.js"
+sha = "174319ac1b8c58bc27c23d40f7d108ac4090e48d"
+language = "javascript"
+est_lines = 340243
+reason = "over the band at ~340243 lines"
+
+[[considered]]
+name = "parcel"
+url = "https://github.com/parcel-bundler/parcel"
+sha = "59484858a1a0bcbb71f74088956bb437a2db6505"
+language = "javascript"
+est_lines = 128388
+reason = "in band, passed over for domain or organisation overlap with a selected repository"
+
+[[considered]]
+name = "moment"
+url = "https://github.com/moment/moment"
+sha = "dae8d829d9d281efc7499111ac235fb6a2b65a99"
+language = "javascript"
+est_lines = 320433
+reason = "over the band at ~320433 lines"
+
+[[considered]]
+name = "strapi"
+url = "https://github.com/strapi/strapi"
+sha = "34cdf83507cbd85e2ae6637b24fb0bb2bbd1c2e6"
+language = "javascript"
+est_lines = 69146
+reason = "only 12% of the repository is javascript; the nominal language is no longer the primary one"
+
+[[considered]]
+name = "serverless"
+url = "https://github.com/serverless/serverless"
+sha = "ba115d94522255274b7a3d0662353849c6783c93"
+language = "javascript"
+est_lines = 209081
+reason = "over the band at ~209081 lines"
+
+[[considered]]
+name = "phaser"
+url = "https://github.com/photonstorm/phaser"
+sha = "02d8931b626d9764c133cbb3fbf99966c03c757c"
+language = "javascript"
+est_lines = 503344
+reason = "over the band at ~503344 lines"
+
+[[considered]]
+name = "mantine"
+url = "https://github.com/mantinedev/mantine"
+sha = "3862b09668c4523161a5b635666e0d68a3fe347b"
+language = "typescript"
+est_lines = 338193
+reason = "over the band at ~338193 lines"
+
+[[considered]]
+name = "pixijs"
+url = "https://github.com/pixijs/pixijs"
+sha = "1d90a20c62433ba68dff78466e06ee372a5a5232"
+language = "typescript"
+est_lines = 175022
+reason = "in band, passed over for domain or organisation overlap with a selected repository"
+
+[[considered]]
+name = "astro"
+url = "https://github.com/withastro/astro"
+sha = "e294953aa8aadd98d5be92e60a03037b05dbdfd4"
+language = "typescript"
+est_lines = 209700
+reason = "over the band at ~209700 lines"
+
+[[considered]]
+name = "query"
+url = "https://github.com/TanStack/query"
+sha = "50680b98c4dc5ac4d97f7762014fa83f09a41d9a"
+language = "typescript"
+est_lines = 134163
+reason = "in band, passed over for domain or organisation overlap with a selected repository"
+
+[[considered]]
+name = "prisma"
+url = "https://github.com/prisma/prisma"
+sha = "07580b3da8e9b4514116dcffbad1683fef52ddee"
+language = "typescript"
+est_lines = 599702
+reason = "over the band at ~599702 lines"
+
+[[considered]]
+name = "apollo-client"
+url = "https://github.com/apollographql/apollo-client"
+sha = "70e3a11d93c8ef8d64aa2a7d12b02b773a57c7ca"
+language = "typescript"
+est_lines = 258167
+reason = "over the band at ~258167 lines"
+
+[[considered]]
+name = "directus"
+url = "https://github.com/directus/directus"
+sha = "a5da59da94bb33c8d644df93a21403eca4c1a4e7"
+language = "typescript"
+est_lines = 333878
+reason = "over the band at ~333878 lines"
+
+[[considered]]
+name = "libarchive"
+url = "https://github.com/libarchive/libarchive"
+sha = "c4cfba676d2b86d6a2a7c508cd90a75c4dfaa1d9"
+language = "c"
+est_lines = 276092
+reason = "over the band at ~276092 lines"
+
+[[considered]]
+name = "weechat"
+url = "https://github.com/weechat/weechat"
+sha = "d48ed9a4bfb45f9ec8931b1be9b19f04f3b57a28"
+language = "c"
+est_lines = 367653
+reason = "over the band at ~367653 lines"
+
+[[considered]]
+name = "libvips"
+url = "https://github.com/libvips/libvips"
+sha = "22331a771c76407e2ac4616be86c82c55f3f9f16"
+language = "c"
+est_lines = 207437
+reason = "over the band at ~207437 lines"
+
+[[considered]]
+name = "brotli"
+url = "https://github.com/google/brotli"
+sha = "4508218e7fef90fa4273286f7a415065946f2c43"
+language = "c"
+est_lines = 77719
+reason = "only 11% of the repository is c; the nominal language is no longer the primary one"
+
+[[considered]]
+name = "kilo"
+url = "https://github.com/antirez/kilo"
+sha = "323d93b29bd89a2cb446de90c4ed4fea1764176e"
+language = "c"
+est_lines = 1485
+reason = "under the band at ~1485 lines"
+
+[[considered]]
+name = "wrk"
+url = "https://github.com/wg/wrk"
+sha = "a211dd5a7050b1f9e8a9870b95513060e72ac4a0"
+language = "c"
+est_lines = 7214
+reason = "under the band at ~7214 lines"
+
+[[considered]]
+name = "capnproto"
+url = "https://github.com/capnproto/capnproto"
+sha = "851c45bb39c34c3f20f9d9ebe9f34a7e39109b6f"
+language = "cpp"
+est_lines = 228423
+reason = "over the band at ~228423 lines"
+
+[[considered]]
+name = "libtorrent"
+url = "https://github.com/arvidn/libtorrent"
+sha = "37d1add171bac9393dff515dc66b86993cd3756c"
+language = "cpp"
+est_lines = 257705
+reason = "over the band at ~257705 lines"
+
+[[considered]]
+name = "box2d"
+url = "https://github.com/erincatto/box2d"
+sha = "dc67c40ba2ce1ad384b0c985dbc1b539cba9221b"
+language = "cpp"
+est_lines = 542
+reason = "only 1% of the repository is cpp; the nominal language is no longer the primary one"
+
+[[considered]]
+name = "simdjson"
+url = "https://github.com/simdjson/simdjson"
+sha = "f9c973a359ea7de2a4ae02ffec95bae85f68a6d7"
+language = "cpp"
+est_lines = 470436
+reason = "over the band at ~470436 lines"
+
+[[considered]]
+name = "pybind11"
+url = "https://github.com/pybind11/pybind11"
+sha = "414f055f1da5010ea31dd971133d41d499edb329"
+language = "cpp"
+est_lines = 0
+reason = "only 0% of the repository is cpp; the nominal language is no longer the primary one"
+
+# Cloned, measured, and rejected. These are the ones the GitHub estimate was
+# wrong about, and the reason it was wrong is the same every time: the estimate
+# counts a repository's bytes without asking whose code they are. A repository
+# that is three-quarters vendored third-party source is not the repository that
+# was selected -- uniform sampling would spend three-quarters of its positions
+# on code that belongs to somebody else's project and teaches none of this
+# one's conventions.
+
+[[considered]]
+name = "lazygit"
+url = "https://github.com/jesseduffield/lazygit"
+sha = "c07f4d381b90419583b7ce04f87379654d983ebc"
+language = "go"
+est_lines = 528506
+reason = "cloned and measured: 73% vendored (vendor/golang.org, vendor/github.com), leaving 138k of its own"
+
+[[considered]]
+name = "delve"
+url = "https://github.com/go-delve/delve"
+sha = "9843a2078bb4403e1d9b2f11c3e58247f203ec63"
+language = "go"
+est_lines = 478214
+reason = "cloned and measured: 74% vendored, leaving 117k of its own"
+
+[[considered]]
+name = "raylib"
+url = "https://github.com/raysan5/raylib"
+sha = "f25c8241f393a81368a99a8d2e6babbc208e7d4b"
+language = "c"
+est_lines = 461198
+reason = "cloned and measured: 65% vendored (src/external -- glfw, miniaudio, stb)"
+
+[[considered]]
+name = "mold"
+url = "https://github.com/rui314/mold"
+sha = "dad2695f3e62d0dd6024b0b795dc2f940907be12"
+language = "cpp"
+est_lines = 350618
+reason = "cloned and measured: 89% vendored (third-party/tbb, xxhash, zstd, zlib), leaving 37k of its own"
+
+[[considered]]
+name = "sfml"
+url = "https://github.com/SFML/SFML"
+sha = "2124d5fe87412ac1cf8e20de282502a75039efcf"
+language = "cpp"
+est_lines = 367011
+reason = "cloned and measured: 64% vendored (extlibs/headers -- OpenGL, vulkan, glad)"
+
+[[considered]]
+name = "lodash"
+url = "https://github.com/lodash/lodash"
+sha = "a666ba591064c8011988275790ad7d625279f09c"
+language = "javascript"
+est_lines = 119092
+reason = "cloned and measured: in band, but 38% vendored bundles and dist/lodash.js is a byte-identical duplicate of lodash.js -- 14% of the repository is a second copy of itself, and a position sampled there has its correct answer in a file nobody reads"
+
+[[considered]]
+name = "nfpm"
+url = "https://github.com/goreleaser/nfpm"
+sha = "a32b89262e05e2574d82493c9fae378f6b7f00b7"
+language = "go"
+est_lines = 15924
+reason = "measured as a reserve: under the band"
+
+[[considered]]
+name = "ghcli"
+url = "https://github.com/cli/cli"
+sha = "707514fdaea01d51886a99d2941bd8ad62d84234"
+language = "go"
+est_lines = 267008
+reason = "measured as a replacement candidate: over the band"
+
+[[considered]]
+name = "ollama"
+url = "https://github.com/ollama/ollama"
+sha = "9ef6c193411193b7b1b9a7a590e4c8092d30c112"
+language = "go"
+est_lines = 282630
+reason = "measured as a replacement candidate: over the band"
+
+[[considered]]
+name = "taskflow"
+url = "https://github.com/taskflow/taskflow"
+sha = "83f90a279aaab33fd4ce1deed00ca07819cbc8f8"
+language = "cpp"
+est_lines = 667097
+reason = "measured as a reserve: 3rd-party/eigen and 3rd-party/tbb are 68% of it"
+
+[[considered]]
+name = "fmt"
+url = "https://github.com/fmtlib/fmt"
+sha = "44f2c7ae018adca38ad266df471dc66b6a10ea6c"
+language = "cpp"
+est_lines = 69058
+reason = "measured as a reserve: test/gtest is a bundled googletest at 56% of the repository, and googletest is already in the corpus"
+
+[[considered]]
+name = "glfw"
+url = "https://github.com/glfw/glfw"
+sha = "92dcf4ce74f2e2554a98fea09be7c705c17daa5a"
+language = "c"
+est_lines = 95694
+reason = "measured as a replacement candidate: 45% vendored (deps/glad and friends)"
+
+[[considered]]
+name = "ramda"
+url = "https://github.com/ramda/ramda"
+sha = "803cab30f2e63cd102c6721c1da6c61e57e12429"
+language = "javascript"
+est_lines = 35920
+reason = "measured as a replacement candidate: ships dist/ in git, 30% of the repository duplicating source/"
+
+[[considered]]
+name = "serverless"
+url = "https://github.com/serverless/serverless"
+sha = "ba115d94522255274b7a3d0662353849c6783c93"
+language = "javascript"
+est_lines = 215847
+reason = "measured as a replacement candidate: over the band"
+
+[[considered]]
+name = "parcel"
+url = "https://github.com/parcel-bundler/parcel"
+sha = "59484858a1a0bcbb71f74088956bb437a2db6505"
+language = "javascript"
+est_lines = 171308
+reason = "in band and clean, but its .js carries Flow type annotations, which the JavaScript servers parse poorly -- a systematically biased truth file rather than an honest one"
+
+[[considered]]
+name = "express"
+url = "https://github.com/expressjs/express"
+sha = "bed501c695a61886399ee622875f3be933c716d8"
+language = "javascript"
+est_lines = 15128
+reason = "under the band"
+
+
+# --------------------------------------------------------------------------
+# The held-out set selected on 2026-08-10, after the previous one was promoted
+# into training. Five per language.
+#
+# Line counts are estimates from the GitHub API -- primary-language bytes over
+# 33.7 bytes per line, which is the median across nine already-pinned
+# repositories whose real counts the lock records (range 29.6 to 36.5). They are
+# what the decisions below were made against; `./corpus clone` writes the
+# real count into the lock.
+#
+# Sixteen came from `[[reserve]]` and `[[considered]]`, which between them could
+# only furnish five for TypeScript; the other nineteen were sourced and measured
+# for this purpose, and everything measured and not taken is in `[[considered]]`
+# below with its reason.
+# --------------------------------------------------------------------------
+
+[[repo]]
+name = "libevent"
+url = "https://github.com/libevent/libevent"
+sha = "c96ddc2727a4ed0ca744500efff7230316b4118d"
+language = "c"
+split = "test"
+domain = "event notification library"
+notes = "reserve"
+
+[[repo]]
+name = "libsodium"
+url = "https://github.com/jedisct1/libsodium"
+sha = "b81ab0783e084b92af870c464f2f56263632016c"
+language = "c"
+split = "test"
+domain = "cryptography library"
+notes = "reserve"
+
+[[repo]]
+name = "janet"
+url = "https://github.com/janet-lang/janet"
+sha = "4370ae8acc5f1141a241becb8b2a2badc75ac8fe"
+language = "c"
+split = "test"
+domain = "language runtime"
+notes = "reserve"
+
+[[repo]]
+name = "pcre2"
+url = "https://github.com/PCRE2Project/pcre2"
+sha = "907738c99186c3c96c9f08c10b2602cec781fc14"
+language = "c"
+split = "test"
+domain = "regular expression library"
+notes = "sourced 2026-08-10, ~96683 lines est, 85% C"
+
+[[repo]]
+name = "c-ares"
+url = "https://github.com/c-ares/c-ares"
+sha = "1ff6b69eb10f3a0eedeaef22d84af87e3a457832"
+language = "c"
+split = "test"
+domain = "asynchronous DNS library"
+notes = "sourced 2026-08-10, ~57914 lines est, 88% C"
+
+[[repo]]
+name = "ninja"
+url = "https://github.com/ninja-build/ninja"
+sha = "b51a1e37c2fb89bbefa600bd155e1ce13983f09d"
+language = "cpp"
+split = "test"
+domain = "build system"
+notes = "sourced 2026-08-10, ~28338 lines est, 84% C++; replaced qBittorrent"
+
+[[repo]]
+name = "json"
+url = "https://github.com/nlohmann/json"
+sha = "21af527e756435701f23e01aa8ea8dab6e050c90"
+language = "cpp"
+split = "test"
+domain = "JSON library"
+notes = "sourced 2026-08-10, ~146459 lines, 96% C++"
+
+[[repo]]
+name = "spdlog"
+url = "https://github.com/gabime/spdlog"
+sha = "f5f173a1a57d0e2e0115f2ed71ee7ea316516853"
+language = "cpp"
+split = "test"
+domain = "logging library"
+notes = "sourced 2026-08-10, ~33984 lines, 96% C++"
+
+[[repo]]
+name = "entt"
+url = "https://github.com/skypjack/entt"
+sha = "85c6bba014049b5de8fad49d25424df2f1f6a8c1"
+language = "cpp"
+split = "test"
+domain = "entity component system"
+notes = "sourced 2026-08-10, ~168212 lines, 99% C++"
+
+[[repo]]
+name = "yaml-cpp"
+url = "https://github.com/jbeder/yaml-cpp"
+sha = "2f64971599ed05b15e2945949e834e96b6288afb"
+language = "cpp"
+split = "test"
+domain = "YAML parser"
+notes = "sourced 2026-08-10, ~125368 lines, 91% C++"
+
+[[repo]]
+name = "fzf"
+url = "https://github.com/junegunn/fzf"
+sha = "dab626bd9e0ec17c801f7316a73f7e4a91c1260e"
+language = "go"
+split = "test"
+domain = "fuzzy finder"
+notes = "reserve"
+
+[[repo]]
+name = "zap"
+url = "https://github.com/uber-go/zap"
+sha = "018b91390e74732e9e40f8d356887b8d06461886"
+language = "go"
+split = "test"
+domain = "structured logging library"
+notes = "sourced 2026-08-10, ~22272 lines est, 99% Go"
+
+[[repo]]
+name = "testify"
+url = "https://github.com/stretchr/testify"
+sha = "001eb7946baf451879253643e4ce4b38eaa0d4a7"
+language = "go"
+split = "test"
+domain = "assertion and mocking library"
+notes = "sourced 2026-08-10, ~26486 lines est, 99% Go"
+
+[[repo]]
+name = "helm"
+url = "https://github.com/helm/helm"
+sha = "f3d68cdbea3076a0283cbd1e3ec44a409ad48a43"
+language = "go"
+split = "test"
+domain = "Kubernetes package manager"
+notes = "sourced 2026-08-10, ~93499 lines, 98% Go"
+
+[[repo]]
+name = "act"
+url = "https://github.com/nektos/act"
+sha = "4f411281417e88660bea1c1a1749aa71ae0bd60f"
+language = "go"
+split = "test"
+domain = "local CI runner"
+notes = "sourced 2026-08-10, ~23844 lines est, 81% Go"
+
+[[repo]]
+name = "less.js"
+url = "https://github.com/less/less.js"
+sha = "c303718bbd8f6cf31de6576738442c794da1d9b2"
+language = "javascript"
+split = "test"
+domain = "CSS preprocessor"
+notes = "reserve"
+
+[[repo]]
+name = "validator.js"
+url = "https://github.com/validatorjs/validator.js"
+sha = "cdb7dafc281d14125b924969bf3ee5bc482ec169"
+language = "javascript"
+split = "test"
+domain = "string validation library"
+notes = "reserve"
+
+[[repo]]
+name = "ember.js"
+url = "https://github.com/emberjs/ember.js"
+sha = "f1c718c482fb17db975b1306496bc8c0e8d06007"
+language = "javascript"
+split = "test"
+domain = "web framework"
+notes = "reserve"
+
+[[repo]]
+name = "parcel"
+url = "https://github.com/parcel-bundler/parcel"
+sha = "59484858a1a0bcbb71f74088956bb437a2db6505"
+language = "javascript"
+split = "test"
+domain = "bundler"
+notes = "considered"
+
+[[repo]]
+name = "Chart.js"
+url = "https://github.com/chartjs/Chart.js"
+sha = "cb02e1d207bd4c4c40b20c259017f85f26f1e30a"
+language = "javascript"
+split = "test"
+domain = "charting library"
+notes = "sourced 2026-08-10, ~36318 lines, 88% JavaScript"
+
+[[repo]]
+name = "tornado"
+url = "https://github.com/tornadoweb/tornado"
+sha = "0096f2897c98facdcd9716009ee934a7381af5ef"
+language = "python"
+split = "test"
+domain = "async web server"
+notes = "reserve"
+
+[[repo]]
+name = "textual"
+url = "https://github.com/Textualize/textual"
+sha = "06dbeef4bb70fb718236aa418ed658ef4667a126"
+language = "python"
+split = "test"
+domain = "terminal UI framework"
+notes = "considered"
+
+[[repo]]
+name = "jinja"
+url = "https://github.com/pallets/jinja"
+sha = "5ef70112a1ff19c05324ff889dd30405b1002044"
+language = "python"
+split = "test"
+domain = "template engine"
+notes = "sourced 2026-08-10, ~22648 lines, 99% Python"
+
+[[repo]]
+name = "sphinx"
+url = "https://github.com/sphinx-doc/sphinx"
+sha = "e44a40eb2f810558ccd9da1425421270ccb81351"
+language = "python"
+split = "test"
+domain = "documentation generator"
+notes = "sourced 2026-08-10, ~144794 lines, 72% Python"
+
+[[repo]]
+name = "hypothesis"
+url = "https://github.com/HypothesisWorks/hypothesis"
+sha = "0b818d6db2f57a1ca7ff6af6618318490be5c427"
+language = "python"
+split = "test"
+domain = "property-based testing"
+notes = "sourced 2026-08-10, ~108044 lines, 98% Python"
+
+[[repo]]
+name = "sqlx"
+url = "https://github.com/launchbadge/sqlx"
+sha = "1d674f51581598f55436451d5b4b73100cae0b56"
+language = "rust"
+split = "test"
+domain = "async SQL toolkit"
+notes = "sourced 2026-08-10, ~74876 lines est, 98% Rust"
+
+[[repo]]
+name = "iced"
+url = "https://github.com/iced-rs/iced"
+sha = "5ca4f19a128ad9dfb22d7c77b2ac715f65d4959b"
+language = "rust"
+split = "test"
+domain = "GUI framework"
+notes = "reserve"
+
+[[repo]]
+name = "hyper"
+url = "https://github.com/hyperium/hyper"
+sha = "af432e993c92ea65e76fc590738334e74b5ccf34"
+language = "rust"
+split = "test"
+domain = "HTTP library"
+notes = "considered"
+
+[[repo]]
+name = "lapce"
+url = "https://github.com/lapce/lapce"
+sha = "c9e4c33948033f10f003991a037d949a708eedf8"
+language = "rust"
+split = "test"
+domain = "code editor"
+notes = "considered"
+
+[[repo]]
+name = "zola"
+url = "https://github.com/getzola/zola"
+sha = "ceb15abf8373188b5eda0728fefa748fed96fb3f"
+language = "rust"
+split = "test"
+domain = "static site generator"
+notes = "sourced 2026-08-10, ~25035 lines, 97% Rust"
+
+[[repo]]
+name = "chakra-ui"
+url = "https://github.com/chakra-ui/chakra-ui"
+sha = "c8ef4fb3146ecb82521a878eb6545b4c9598abd6"
+language = "typescript"
+split = "test"
+domain = "React component library (TSX)"
+notes = "reserve"
+
+[[repo]]
+name = "jest"
+url = "https://github.com/jestjs/jest"
+sha = "cceb1e69a22937f6e93c0c8444a4a263a7a4b96d"
+language = "typescript"
+split = "test"
+domain = "test framework"
+notes = "reserve"
+
+[[repo]]
+name = "nuxt"
+url = "https://github.com/nuxt/nuxt"
+sha = "bdbb150be675a2063134acd256122022d1db096b"
+language = "typescript"
+split = "test"
+domain = "web framework"
+notes = "reserve"
+
+[[repo]]
+name = "trpc"
+url = "https://github.com/trpc/trpc"
+sha = "acff82332de8b4562d3e6975fa8d94ab1a6de5e0"
+language = "typescript"
+split = "test"
+domain = "typed RPC framework"
+notes = "considered"
+
+[[repo]]
+name = "pixijs"
+url = "https://github.com/pixijs/pixijs"
+sha = "1d90a20c62433ba68dff78466e06ee372a5a5232"
+language = "typescript"
+split = "test"
+domain = "2D rendering engine"
+notes = "considered"
+
+[[considered]]
+name = "curl"
+url = "https://github.com/curl/curl"
+sha = "b3e1bfcc46fff3f5a207b981ce32bb16770dcc76"
+language = "c"
+est_lines = 255976
+reason = "over the band at ~255976 lines"
+
+[[considered]]
+name = "mpv"
+url = "https://github.com/mpv-player/mpv"
+sha = "7e4cb538a3f30d25920ad8e87ba6571540fb729f"
+language = "c"
+est_lines = 216715
+reason = "over the band at ~216715 lines"
+
+[[considered]]
+name = "libgit2"
+url = "https://github.com/libgit2/libgit2"
+sha = "0551dfd4ad989b6a3d5683c0d4cf326c6efef929"
+language = "c"
+est_lines = 246650
+reason = "over the band at ~246650 lines"
+
+[[considered]]
+name = "libarchive"
+url = "https://github.com/libarchive/libarchive"
+sha = "c4cfba676d2b86d6a2a7c508cd90a75c4dfaa1d9"
+language = "c"
+est_lines = 229666
+reason = "over the band at ~229666 lines"
+
+[[considered]]
+name = "jq"
+url = "https://github.com/jqlang/jq"
+sha = "9d241e277204b83c4a7ddc7d733e5c72f99ef500"
+language = "c"
+est_lines = 15646
+reason = "under the band at ~15646 lines"
+
+[[considered]]
+name = "mosquitto"
+url = "https://github.com/eclipse-mosquitto/mosquitto"
+sha = "6aaba32614eb1160ddbfeafd616f9f67e7914a41"
+language = "c"
+est_lines = 81597
+reason = "in band, but only 55% of the repository is c; raylib was taken instead at 86%"
+
+[[considered]]
+name = "weechat"
+url = "https://github.com/weechat/weechat"
+sha = "d48ed9a4bfb45f9ec8931b1be9b19f04f3b57a28"
+language = "c"
+est_lines = 295056
+reason = "over the band at ~295056 lines"
+
+[[considered]]
+name = "freetype"
+url = "https://github.com/freetype/freetype"
+sha = "5c79d6cd1ac73d70a55f3d963fb568aa32f6d794"
+language = "c"
+est_lines = 226865
+reason = "over the band at ~226865 lines"
+
+[[considered]]
+name = "lvgl"
+url = "https://github.com/lvgl/lvgl"
+sha = "b6d1bb48834295f9c1086136bcb7b5f5c41b90ec"
+language = "c"
+est_lines = 947792
+reason = "over the band at ~947792 lines"
+
+[[considered]]
+name = "valkey"
+url = "https://github.com/valkey-io/valkey"
+sha = "e1126ce52381de5f5a54286f7a6f36babac55b3c"
+language = "c"
+est_lines = 248540
+reason = "over the band at ~248540 lines, and would overlap memcached's domain"
+
+[[considered]]
+name = "SDL"
+url = "https://github.com/libsdl-org/SDL"
+sha = "aa5bffa6d33da9a575f172c8af682075f4cccfe6"
+language = "c"
+est_lines = 892404
+reason = "over the band at ~892404 lines"
+
+[[considered]]
+name = "systemd"
+url = "https://github.com/systemd/systemd"
+sha = "3b2900f0508b4875a53e412bd02fd12b80eaf215"
+language = "c"
+est_lines = 1250870
+reason = "over the band at ~1250870 lines"
+
+[[considered]]
+name = "openssl"
+url = "https://github.com/openssl/openssl"
+sha = "5ce57ab932b70e030249190a4b5a02232c080eea"
+language = "c"
+est_lines = 925100
+reason = "over the band at ~925100 lines"
+
+[[considered]]
+name = "libheif"
+url = "https://github.com/strukturag/libheif"
+sha = "e0f961366c1de0291c8afdddbb1d5c94d9189342"
+language = "c"
+est_lines = 8415
+reason = "under the band at ~8415 lines"
+
+[[considered]]
+name = "ninja"
+url = "https://github.com/ninja-build/ninja"
+sha = "b51a1e37c2fb89bbefa600bd155e1ce13983f09d"
+language = "cpp"
+est_lines = 28338
+reason = "in band, passed over for domain or organisation overlap with a selected repository"
+
+[[considered]]
+name = "abseil-cpp"
+url = "https://github.com/abseil/abseil-cpp"
+sha = "9d7ed847ae6a4f668d325dfc0937e279418b6a34"
+language = "cpp"
+est_lines = 302915
+reason = "over the band at ~302915 lines"
+
+[[considered]]
+name = "simdjson"
+url = "https://github.com/simdjson/simdjson"
+sha = "f9c973a359ea7de2a4ae02ffec95bae85f68a6d7"
+language = "cpp"
+est_lines = 465849
+reason = "over the band at ~465849 lines"
+
+[[considered]]
+name = "k9s"
+url = "https://github.com/derailed/k9s"
+sha = "b5d728c068b3584eb8530fb1f6cc51b13a67b39c"
+language = "go"
+est_lines = 50797
+reason = "in band, passed over for domain or organisation overlap with a selected repository"
+
+[[considered]]
+name = "nats-server"
+url = "https://github.com/nats-io/nats-server"
+sha = "61b9774786c701f76a0eb5cb2ae917501995cc50"
+language = "go"
+est_lines = 378513
+reason = "over the band at ~378513 lines"
+
+[[considered]]
+name = "express"
+url = "https://github.com/expressjs/express"
+sha = "bed501c695a61886399ee622875f3be933c716d8"
+language = "javascript"
+est_lines = 14814
+reason = "under the band at ~14814 lines"
+
+[[considered]]
+name = "webpack"
+url = "https://github.com/webpack/webpack"
+sha = "dcb65b9c61eeb544762a70833ec00fb9228000e0"
+language = "javascript"
+est_lines = 378831
+reason = "over the band at ~378831 lines"
+
+[[considered]]
+name = "socket.io"
+url = "https://github.com/socketio/socket.io"
+sha = "82499617f2fe13af0236c6743d39439b09408aef"
+language = "javascript"
+est_lines = 13534
+reason = "under the band at ~13534 lines, and only 35% of the repository is javascript"
+
+[[considered]]
+name = "mypy"
+url = "https://github.com/python/mypy"
+sha = "ae39cdb2fba8908eeff6ec8d6b88879c62495fcc"
+language = "python"
+est_lines = 210224
+reason = "over the band at ~210224 lines"
+
+[[considered]]
+name = "requests"
+url = "https://github.com/psf/requests"
+sha = "dae7ef63b4df6eded86637f251fc4e3a06c3b479"
+language = "python"
+est_lines = 11575
+reason = "under the band at ~11575 lines"
+
+[[considered]]
+name = "flask"
+url = "https://github.com/pallets/flask"
+sha = "d73fa1cdcbd8b1465c151db8924ba58b1dd14e35"
+language = "python"
+est_lines = 16763
+reason = "under the band at ~16763 lines"
+
+[[considered]]
+name = "nushell"
+url = "https://github.com/nushell/nushell"
+sha = "b763fe41224facd5e9f8bb584cb1d62568d70a59"
+language = "rust"
+est_lines = 419853
+reason = "over the band at ~419853 lines"
+
+[[considered]]
+name = "caddy"
+url = "https://github.com/caddyserver/caddy"
+sha = "e096ca9503188f057c69a049f709fdade6077631"
+language = "go"
+est_lines = 90776
+reason = "in band, but already a training repository -- a repository cannot be in both splits"
+
+[[considered]]
+name = "restic"
+url = "https://github.com/restic/restic"
+sha = "a80be1478a4c537f8396e0db2b05120aa78f11e0"
+language = "go"
+est_lines = 70986
+reason = "in band, but already a training repository -- a repository cannot be in both splits"
+
+[[considered]]
+name = "delve"
+url = "https://github.com/go-delve/delve"
+sha = "9843a2078bb4403e1d9b2f11c3e58247f203ec63"
+language = "go"
+est_lines = 106939
+reason = "in band, but only 57% of the repository is go"
+
+[[considered]]
+name = "minio"
+url = "https://github.com/minio/minio"
+sha = "7aac2a2c5b7c882e68c1ce017d8256be2feea27f"
+language = "go"
+est_lines = 260694
+reason = "over the band at ~260694 lines"
+
+[[considered]]
+name = "ollama"
+url = "https://github.com/ollama/ollama"
+sha = "9ef6c193411193b7b1b9a7a590e4c8092d30c112"
+language = "go"
+est_lines = 263707
+reason = "over the band at ~263707 lines"
+
+[[considered]]
+name = "nginx"
+url = "https://github.com/nginx/nginx"
+sha = "5c812c034e6cb10368f9e98cf05b6d0a01f27f1f"
+language = "c"
+est_lines = 251011
+reason = "measured at 251011 lines on clone, over the band; the API estimate of ~196351 was low"
+
+[[considered]]
+name = "raylib"
+url = "https://github.com/raysan5/raylib"
+sha = "f25c8241f393a81368a99a8d2e6babbc208e7d4b"
+language = "c"
+est_lines = 461494
+reason = "measured at 461494 lines on clone, far over the band -- it bundles its dependencies under external/, which linguist excludes from the estimate and the corpus counts"
+
+[[considered]]
+name = "hugo"
+url = "https://github.com/gohugoio/hugo"
+sha = "ae07063fcc9a59c95838e83e7fdf12e326ebee7d"
+language = "go"
+est_lines = 227437
+reason = "measured at 227437 lines on clone, over the band; the API estimate of ~179375 was low"
+
+[[considered]]
+name = "etcd"
+url = "https://github.com/etcd-io/etcd"
+sha = "fd8581e0490e8cebd9abf4c771c228f989adb76c"
+language = "go"
+est_lines = 221000
+reason = "measured at 221000 lines on clone, over the band; the API estimate of ~172588 was low"
+
+[[considered]]
+name = "lazygit"
+url = "https://github.com/jesseduffield/lazygit"
+sha = "c07f4d381b90419583b7ce04f87379654d983ebc"
+language = "go"
+est_lines = 530133
+reason = "measured at 530133 lines on clone, far over the band -- it vendors its Go modules, which linguist excludes from the estimate and the corpus counts"
+
+[[considered]]
+name = "bat"
+url = "https://github.com/sharkdp/bat"
+sha = "7323a7514f7601737640e7172be115127d6db08c"
+language = "rust"
+est_lines = 18024
+reason = "measured at 18024 lines on clone, under the band"
+
+[[considered]]
+name = "qBittorrent"
+url = "https://github.com/qbittorrent/qBittorrent"
+sha = "56c9b81571a15df2d4b1a8c3d40fe6d35bf6eea5"
+language = "cpp"
+est_lines = 131891
+reason = "in band, but its CMakeLists needs libtorrent-rasterbar and Qt6 found on the system, so no compile database can be produced without machine-wide development packages -- the same reason mumble was retired"
+
+# Additional languages imported from the corpus manifests on 2026-09-08.
+
+[[repo]]
+name = "Files"
+language = "csharp"
+split = "training"
+url = "https://github.com/files-community/Files"
+sha = "10353d9de32a75ac9a06111a99974b4974f01ded"
+domain = "file manager application"
+dependencies = ""
+notes = "sourced 2026-08-18, ~129552 lines est, 97% C#, 44664 stars"
+
+[[repo]]
+name = "Dapper"
+language = "csharp"
+split = "training"
+url = "https://github.com/DapperLib/Dapper"
+sha = "c0b2097129a2dd0336a8569fdcc86b1fbd16c1ff"
+domain = "object mapper library"
+dependencies = ""
+notes = "sourced 2026-08-18, ~34708 lines est, 100% C#, 18365 stars"
+
+[[repo]]
+name = "Polly"
+language = "csharp"
+split = "training"
+url = "https://github.com/App-vNext/Polly"
+sha = "47e3b412e8c3b7e6db1629acd98f3e3b6b529d6c"
+domain = "resilience and fault-handling library"
+dependencies = ""
+notes = "sourced 2026-08-18, ~132595 lines est, 100% C#, 14226 stars"
+
+[[repo]]
+name = "spectre.console"
+language = "csharp"
+split = "training"
+url = "https://github.com/spectreconsole/spectre.console"
+sha = "0acc92fada6c42f13984e79c2b5f3d993bdfb099"
+domain = "console application library"
+dependencies = ""
+notes = "sourced 2026-08-18, ~80630 lines est, 100% C#, 11590 stars"
+
+[[repo]]
+name = "Playnite"
+language = "csharp"
+split = "training"
+url = "https://github.com/JosefNemec/Playnite"
+sha = "d4fb02f0d29f1fbc08a6311e55a8e5473a4f5927"
+domain = "game library manager"
+dependencies = ""
+notes = "sourced 2026-08-18, ~151865 lines est, 98% C#, 13775 stars"
+
+[[repo]]
+name = "BenchmarkDotNet"
+language = "csharp"
+split = "training"
+url = "https://github.com/dotnet/BenchmarkDotNet"
+sha = "5995bf68f9ae7864ec12916c7b426b02759d1ad5"
+domain = "benchmarking library"
+dependencies = ""
+notes = "sourced 2026-08-18, ~129033 lines est, 98% C#, 11473 stars"
+
+[[repo]]
+name = "QuestPDF"
+language = "csharp"
+split = "training"
+url = "https://github.com/QuestPDF/QuestPDF"
+sha = "e0112bb7f0be442c013059f4a99e1370012cc6e8"
+domain = "PDF document generation library"
+dependencies = ""
+notes = "sourced 2026-08-18, ~52080 lines est, 99% C#, 14160 stars"
+
+[[repo]]
+name = "Jackett"
+language = "csharp"
+split = "training"
+url = "https://github.com/Jackett/Jackett"
+sha = "38e06e321d91651d48934aa04c2d2737115544b3"
+domain = "torrent tracker API proxy"
+dependencies = ""
+notes = "sourced 2026-08-18, ~64538 lines est, 90% C#, 15896 stars"
+
+[[repo]]
+name = "Hangfire"
+language = "csharp"
+split = "training"
+url = "https://github.com/HangfireIO/Hangfire"
+sha = "c236dd0f930f831ec151e436e138ddc429a02a72"
+domain = "background job processing"
+dependencies = ""
+notes = "sourced 2026-08-18, ~92997 lines est, 93% C#, 10117 stars"
+
+[[repo]]
+name = "git-credential-manager"
+language = "csharp"
+split = "training"
+url = "https://github.com/git-ecosystem/git-credential-manager"
+sha = "86e98ce643b39bb332525a0a8cb2921d5506f365"
+domain = "git credential helper"
+dependencies = ""
+notes = "sourced 2026-08-18, ~58439 lines est, 98% C#, 9199 stars"
+
+[[repo]]
+name = "localsend"
+language = "dart"
+split = "training"
+url = "https://github.com/localsend/localsend"
+sha = "c4e1edb2b83f36873e933cebabaa04bffb0472c7"
+domain = "local file transfer application"
+dependencies = ""
+notes = "sourced 2026-08-18, ~167428 lines est, 80% Dart, 88670 stars"
+
+[[repo]]
+name = "spotube"
+language = "dart"
+split = "training"
+url = "https://github.com/KRTirtho/spotube"
+sha = "69a310c78f5ceaf4eab7dfee98f187d38211c9ba"
+domain = "music streaming application"
+dependencies = ""
+notes = "sourced 2026-08-18, ~134619 lines est, 95% Dart, 48487 stars"
+
+[[repo]]
+name = "flame"
+language = "dart"
+split = "training"
+url = "https://github.com/flame-engine/flame"
+sha = "7fd33dee9b822bef7b3fbf0621d0f3ebdab39a5d"
+domain = "game engine"
+dependencies = ""
+notes = "sourced 2026-08-18, ~136503 lines est, 100% Dart, 10728 stars"
+
+[[repo]]
+name = "bloc"
+language = "dart"
+split = "training"
+url = "https://github.com/felangel/bloc"
+sha = "8fcf54dfea7ba51ef04c091d1a27e0da498b29f0"
+domain = "state management library"
+dependencies = ""
+notes = "sourced 2026-08-18, ~24592 lines est, 87% Dart, 12484 stars"
+
+[[repo]]
+name = "dio"
+language = "dart"
+split = "training"
+url = "https://github.com/cfug/dio"
+sha = "6d39187e982d4ff2904ec654ac906d200701546b"
+domain = "HTTP client library"
+dependencies = ""
+notes = "sourced 2026-08-18, ~23178 lines est, 88% Dart, 12839 stars"
+
+[[repo]]
+name = "fl_chart"
+language = "dart"
+split = "training"
+url = "https://github.com/imaNNeo/fl_chart"
+sha = "f3a575827312b8f12628b66d12d08066eb4d2570"
+domain = "charting library"
+dependencies = ""
+notes = "sourced 2026-08-18, ~86799 lines est, 98% Dart, 7571 stars"
+
+[[repo]]
+name = "proxypin"
+language = "dart"
+split = "training"
+url = "https://github.com/wanghongenpin/proxypin"
+sha = "ccdaf9ea889a7037d394dc276a0480c096009bcd"
+domain = "HTTP traffic capture tool"
+dependencies = ""
+notes = "sourced 2026-08-18, ~91823 lines est, 87% Dart, 13762 stars; replaced drift"
+
+[[repo]]
+name = "dart-sass"
+language = "dart"
+split = "training"
+url = "https://github.com/sass/dart-sass"
+sha = "1e0cf2831d4cbba67cdbdd8518facc04858e2cc8"
+domain = "Sass compiler"
+dependencies = ""
+notes = "sourced 2026-08-18, ~86971 lines est, 67% Dart, 4215 stars"
+
+[[repo]]
+name = "saber"
+language = "dart"
+split = "training"
+url = "https://github.com/saber-notes/saber"
+sha = "0a19d582b54958d9ddf718f5b2f34b5f3d540507"
+domain = "handwriting note-taking application"
+dependencies = ""
+notes = "sourced 2026-08-18, ~74315 lines est, 96% Dart, 4693 stars"
+
+[[repo]]
+name = "aves"
+language = "dart"
+split = "training"
+url = "https://github.com/deckerst/aves"
+sha = "a17ee5575564266cdec747f1b1eca77989f3a689"
+domain = "gallery and metadata explorer application"
+dependencies = ""
+notes = "sourced 2026-08-18, ~131047 lines est, 75% Dart, 5105 stars"
+
+[[repo]]
+name = "phoenix"
+language = "elixir"
+split = "training"
+url = "https://github.com/phoenixframework/phoenix"
+sha = "be77755e1cc3ec80bce10ee0e1a31e760361a2ac"
+domain = "web framework"
+dependencies = ""
+notes = "sourced 2026-08-18, ~59942 lines est, 83% Elixir, 23121 stars"
+
+[[repo]]
+name = "ecto"
+language = "elixir"
+split = "training"
+url = "https://github.com/elixir-ecto/ecto"
+sha = "204242f139ace9c535ef503c06a2f849498cb82d"
+domain = "database toolkit and query language"
+dependencies = ""
+notes = "sourced 2026-08-18, ~84282 lines est, 100% Elixir, 6490 stars"
+
+[[repo]]
+name = "livebook"
+language = "elixir"
+split = "training"
+url = "https://github.com/livebook-dev/livebook"
+sha = "bab7c1460dd9be195ddffa6d77093c26be776158"
+domain = "interactive notebook application"
+dependencies = ""
+notes = "sourced 2026-08-18, ~120129 lines est, 89% Elixir, 5850 stars"
+
+[[repo]]
+name = "realtime"
+language = "elixir"
+split = "training"
+url = "https://github.com/supabase/realtime"
+sha = "91812f42c4653ed55270e0bf4df6e9530de7966e"
+domain = "websocket broadcast server"
+dependencies = ""
+notes = "sourced 2026-08-18, ~118047 lines est, 90% Elixir, 7619 stars"
+
+[[repo]]
+name = "credo"
+language = "elixir"
+split = "training"
+url = "https://github.com/rrrene/credo"
+sha = "89457a1608a5b027e508d500f53748aef99d4f1d"
+domain = "static analysis tool"
+dependencies = ""
+notes = "sourced 2026-08-18, ~60266 lines est, 100% Elixir, 5210 stars"
+
+[[repo]]
+name = "absinthe"
+language = "elixir"
+split = "training"
+url = "https://github.com/absinthe-graphql/absinthe"
+sha = "de0e411f3ca4f31ad8cf5e31921c735aa3b0f986"
+domain = "GraphQL toolkit"
+dependencies = ""
+notes = "sourced 2026-08-18, ~53081 lines est, 98% Elixir, 4399 stars"
+
+[[repo]]
+name = "nx"
+language = "elixir"
+split = "training"
+url = "https://github.com/elixir-nx/nx"
+sha = "37901d749105076e2882fdea89a6e18393eecc0f"
+domain = "numerical computing library"
+dependencies = ""
+notes = "sourced 2026-08-18, ~94923 lines est, 94% Elixir, 2899 stars"
+
+[[repo]]
+name = "floki"
+language = "elixir"
+split = "training"
+url = "https://github.com/philss/floki"
+sha = "143df1fa0d89bf0b3ae889c6472d513d0e904a55"
+domain = "HTML parser"
+dependencies = ""
+notes = "sourced 2026-08-18, ~79357 lines est, 99% Elixir, 2147 stars"
+
+[[repo]]
+name = "oban"
+language = "elixir"
+split = "training"
+url = "https://github.com/oban-bg/oban"
+sha = "2939e3134d0812195fbfcfe9a8e8d4bbd30bb23b"
+domain = "job processing library"
+dependencies = ""
+notes = "sourced 2026-08-18, ~23089 lines est, 100% Elixir, 3958 stars"
+
+[[repo]]
+name = "teslamate"
+language = "elixir"
+split = "training"
+url = "https://github.com/teslamate-org/teslamate"
+sha = "5e764906afb1f9c50e227480027ad20e5409c1cc"
+domain = "vehicle data logger application"
+dependencies = ""
+notes = "sourced 2026-08-18, ~38618 lines est, 85% Elixir, 8855 stars"
+
+[[repo]]
+name = "jadx"
+language = "java"
+split = "training"
+url = "https://github.com/skylot/jadx"
+sha = "e738a26571d02919f01df40de93bc9a44dee4e18"
+domain = "dex to Java decompiler"
+dependencies = ""
+notes = "sourced 2026-08-18, ~153727 lines est, 92% Java, 50121 stars"
+
+[[repo]]
+name = "glide"
+language = "java"
+split = "training"
+url = "https://github.com/bumptech/glide"
+sha = "bf4901de78c206ed21ce73f5d25aa2bbf35ebf3c"
+domain = "image loading library for Android"
+dependencies = ""
+notes = "sourced 2026-08-18, ~103917 lines est, 94% Java, 35026 stars"
+
+[[repo]]
+name = "mybatis-3"
+language = "java"
+split = "training"
+url = "https://github.com/mybatis/mybatis-3"
+sha = "69ee03634a27808553fede707dcc4ef70478e0be"
+domain = "SQL mapper framework"
+dependencies = ""
+notes = "sourced 2026-08-18, ~115686 lines est, 99% Java, 20437 stars"
+
+[[repo]]
+name = "gson"
+language = "java"
+split = "training"
+url = "https://github.com/google/gson"
+sha = "dae37cf0fe12235b76fb09f01118a0a8c8823f42"
+domain = "JSON serialization library"
+dependencies = ""
+notes = "sourced 2026-08-18, ~60398 lines est, 100% Java, 24227 stars"
+
+[[repo]]
+name = "mockito"
+language = "java"
+split = "training"
+url = "https://github.com/mockito/mockito"
+sha = "5a676bcd9ef9a10db46e1dc34e190eb46faa2687"
+domain = "mocking framework"
+dependencies = ""
+notes = "sourced 2026-08-18, ~108811 lines est, 99% Java, 15444 stars"
+
+[[repo]]
+name = "caffeine"
+language = "java"
+split = "training"
+url = "https://github.com/ben-manes/caffeine"
+sha = "9ff5db5261481a5e879381712da87c62c9591a58"
+domain = "caching library"
+dependencies = ""
+notes = "sourced 2026-08-18, ~53916 lines est, 68% Java, 17822 stars"
+
+[[repo]]
+name = "jsoup"
+language = "java"
+split = "training"
+url = "https://github.com/jhy/jsoup"
+sha = "3c6e73f0fdede3679a05e41b4cb55a35b3c3ae94"
+domain = "HTML parser and sanitizer"
+dependencies = ""
+notes = "sourced 2026-08-18, ~69011 lines est, 87% Java, 11385 stars"
+
+[[repo]]
+name = "termux-app"
+language = "java"
+split = "training"
+url = "https://github.com/termux/termux-app"
+sha = "3df69d1da197dd9bd71a3bafd902dffd720576b4"
+domain = "Android terminal emulator application"
+dependencies = ""
+notes = "sourced 2026-08-18, ~61694 lines est, 98% Java, 59413 stars"
+
+[[repo]]
+name = "Mindustry"
+language = "java"
+split = "training"
+url = "https://github.com/Anuken/Mindustry"
+sha = "9d6379dbf80dd036da38b18106f9ddf1731c3a1b"
+domain = "tower defence game"
+dependencies = ""
+notes = "sourced 2026-08-18, ~196722 lines est, 99% Java, 28662 stars"
+
+[[repo]]
+name = "zipkin"
+language = "java"
+split = "training"
+url = "https://github.com/openzipkin/zipkin"
+sha = "878ce2a1fad54ca941d17fdcf2e1d924b148eb1f"
+domain = "distributed tracing system"
+dependencies = ""
+notes = "sourced 2026-08-18, ~59634 lines est, 78% Java, 17454 stars"
+
+[[repo]]
+name = "leakcanary"
+language = "kotlin"
+split = "training"
+url = "https://github.com/square/leakcanary"
+sha = "8a176f3eae0ad43de0b467acddd59a2e6321f20c"
+domain = "memory leak detection library for Android"
+dependencies = ""
+notes = "sourced 2026-08-18, ~110219 lines est, 100% Kotlin, 29976 stars"
+
+[[repo]]
+name = "kotlinx.coroutines"
+language = "kotlin"
+split = "training"
+url = "https://github.com/Kotlin/kotlinx.coroutines"
+sha = "3eadf938b1506351bffd7c015445d08faf1c4315"
+domain = "concurrency library"
+dependencies = ""
+notes = "sourced 2026-08-18, ~133968 lines est, 99% Kotlin, 13806 stars"
+
+[[repo]]
+name = "Exposed"
+language = "kotlin"
+split = "training"
+url = "https://github.com/JetBrains/Exposed"
+sha = "4b0cc01b55f675ee59aad9cfb3d93f6034c2e556"
+domain = "SQL framework"
+dependencies = ""
+notes = "sourced 2026-08-18, ~166192 lines est, 100% Kotlin, 9281 stars"
+
+[[repo]]
+name = "coil"
+language = "kotlin"
+split = "training"
+url = "https://github.com/coil-kt/coil"
+sha = "8ccb7160936b2dc5228b98c35f807218dcdb488c"
+domain = "image loading library"
+dependencies = ""
+notes = "sourced 2026-08-18, ~42322 lines est, 99% Kotlin, 11880 stars"
+
+[[repo]]
+name = "mihon"
+language = "kotlin"
+split = "training"
+url = "https://github.com/mihonapp/mihon"
+sha = "3cc0d2c324a2ef3c3d7b89b671e357a83a4e73fe"
+domain = "manga reader application"
+dependencies = ""
+notes = "sourced 2026-08-18, ~112918 lines est, 100% Kotlin, 22959 stars"
+
+[[repo]]
+name = "Seal"
+language = "kotlin"
+split = "training"
+url = "https://github.com/JunkFood02/Seal"
+sha = "44e0d2e6fc26177e0da4cb1948223baa13b0887f"
+domain = "media downloader application"
+dependencies = ""
+notes = "sourced 2026-08-18, ~45732 lines est, 100% Kotlin, 28286 stars"
+
+[[repo]]
+name = "javalin"
+language = "kotlin"
+split = "training"
+url = "https://github.com/javalin/javalin"
+sha = "cdfa0f7249f8c8ffca2b42a5969c3e45369d2c1c"
+domain = "web framework"
+dependencies = ""
+notes = "sourced 2026-08-18, ~43390 lines est, 88% Kotlin, 8337 stars"
+
+[[repo]]
+name = "ktlint"
+language = "kotlin"
+split = "training"
+url = "https://github.com/ktlint/ktlint"
+sha = "78c7d121881e378e2eb389eb2c1a433644de3589"
+domain = "linter and formatter"
+dependencies = ""
+notes = "sourced 2026-08-18, ~116323 lines est, 100% Kotlin, 6733 stars"
+
+[[repo]]
+name = "florisboard"
+language = "kotlin"
+split = "training"
+url = "https://github.com/florisboard/florisboard"
+sha = "2a44855c7fcce943a2d3b2092fe45808037ad258"
+domain = "on-screen keyboard application"
+dependencies = ""
+notes = "sourced 2026-08-18, ~80808 lines est, 98% Kotlin, 8579 stars"
+
+[[repo]]
+name = "arrow"
+language = "kotlin"
+split = "training"
+url = "https://github.com/arrow-kt/arrow"
+sha = "9a5ff120aa7e85662f757861770def13393efc1c"
+domain = "functional programming library"
+dependencies = ""
+notes = "sourced 2026-08-18, ~86839 lines est, 100% Kotlin, 6575 stars"
+
+[[repo]]
+name = "apisix"
+language = "lua"
+split = "training"
+url = "https://github.com/apache/apisix"
+sha = "5e3ad1f10782e4790124d73af16092c70e9de7e2"
+domain = "API gateway"
+dependencies = ""
+notes = "sourced 2026-08-18, ~104251 lines est, 83% Lua, 17006 stars"
+
+[[repo]]
+name = "awesome"
+language = "lua"
+split = "training"
+url = "https://github.com/awesomeWM/awesome"
+sha = "ef525c2ec7c9a675209157aafdcb3d2da3692a9e"
+domain = "window manager"
+dependencies = ""
+notes = "sourced 2026-08-18, ~125121 lines est, 77% Lua, 6943 stars"
+
+[[repo]]
+name = "lua-language-server"
+language = "lua"
+split = "training"
+url = "https://github.com/LuaLS/lua-language-server"
+sha = "7a73c7889c1ec981dfd76fba38f5096379f62f99"
+domain = "language server"
+dependencies = ""
+notes = "sourced 2026-08-18, ~117665 lines est, 100% Lua, 4346 stars; its 3rd/ submodules are named bee.lua and json.lua, so the measure walk reports them as unreadable source files -- they are unpopulated submodule directories, as for every other checkout, and the 126517 measured lines are the server's own Lua"
+
+[[repo]]
+name = "luarocks"
+language = "lua"
+split = "training"
+url = "https://github.com/luarocks/luarocks"
+sha = "2d2cc8eff2f03c23d142f8059146fb241dcf56b5"
+domain = "package manager"
+dependencies = ""
+notes = "sourced 2026-08-18, ~56871 lines est, 90% Lua, 3718 stars"
+
+[[repo]]
+name = "tl"
+language = "lua"
+split = "training"
+url = "https://github.com/teal-language/tl"
+sha = "d0ba26518d7c1cc2a8a4b8cd39f933bea2fe1101"
+domain = "compiler for a typed Lua dialect"
+dependencies = ""
+notes = "sourced 2026-08-18, ~98911 lines est, 78% Lua, 2809 stars"
+
+[[repo]]
+name = "telescope.nvim"
+language = "lua"
+split = "training"
+url = "https://github.com/nvim-telescope/telescope.nvim"
+sha = "40aedd8a68c78a656a10a8d62d80c54af59420fb"
+domain = "editor fuzzy finder plugin"
+dependencies = ""
+notes = "sourced 2026-08-18, ~25478 lines est, 100% Lua, 19711 stars"
+
+[[repo]]
+name = "LuaSnip"
+language = "lua"
+split = "training"
+url = "https://github.com/L3MON4D3/LuaSnip"
+sha = "0abc8f390b278c3b4aabc4c004ac8a088b65cf24"
+domain = "editor snippet engine"
+dependencies = ""
+notes = "sourced 2026-08-18, ~34416 lines est, 98% Lua, 4414 stars"
+
+[[repo]]
+name = "Penlight"
+language = "lua"
+split = "training"
+url = "https://github.com/lunarmodules/Penlight"
+sha = "34a25af6d4d371c189ae09591e8aa99221801c37"
+domain = "general-purpose standard library"
+dependencies = ""
+notes = "sourced 2026-08-18, ~26029 lines est, 100% Lua, 2124 stars"
+
+[[repo]]
+name = "garrysmod"
+language = "lua"
+split = "training"
+url = "https://github.com/Facepunch/garrysmod"
+sha = "0e345e0dad84a9d7190672de4c7cfc5b660ba001"
+domain = "game sandbox mod"
+dependencies = ""
+notes = "sourced 2026-08-18, ~129727 lines est, 89% Lua, 1302 stars"
+
+[[repo]]
+name = "textadept"
+language = "lua"
+split = "training"
+url = "https://github.com/orbitalquark/textadept"
+sha = "251609279a2b5239f7a0ca7b5768c79bc9f87e00"
+domain = "text editor"
+dependencies = ""
+notes = "sourced 2026-08-18, ~30218 lines est, 78% Lua, 909 stars"
+
+[[repo]]
+name = "composer"
+language = "php"
+split = "training"
+url = "https://github.com/composer/composer"
+sha = "6987fe5a4daa888cedf098fc217cd2a04063175b"
+domain = "dependency manager"
+dependencies = ""
+notes = "sourced 2026-08-18, ~158717 lines est, 100% PHP, 29500 stars"
+
+[[repo]]
+name = "guzzle"
+language = "php"
+split = "training"
+url = "https://github.com/guzzle/guzzle"
+sha = "d1cbca76970939a9c2ced55b1e25ea26f34fc773"
+domain = "HTTP client library"
+dependencies = ""
+notes = "sourced 2026-08-18, ~72079 lines est, 100% PHP, 23459 stars"
+
+[[repo]]
+name = "monolog"
+language = "php"
+split = "training"
+url = "https://github.com/Seldaek/monolog"
+sha = "57eb1028342134e701e77c617565d51b6e5a2a53"
+domain = "logging library"
+dependencies = ""
+notes = "sourced 2026-08-18, ~29349 lines est, 100% PHP, 21397 stars"
+
+[[repo]]
+name = "PHP-Parser"
+language = "php"
+split = "training"
+url = "https://github.com/nikic/PHP-Parser"
+sha = "fbd47f7ebcbb450138d92642a0a53b72a5285dda"
+domain = "PHP parser library"
+dependencies = ""
+notes = "sourced 2026-08-18, ~42194 lines est, 95% PHP, 17452 stars"
+
+[[repo]]
+name = "livewire"
+language = "php"
+split = "training"
+url = "https://github.com/livewire/livewire"
+sha = "738d6bedea5f0158083e979b161fba51b0b19632"
+domain = "full-stack framework for Laravel"
+dependencies = ""
+notes = "sourced 2026-08-18, ~93753 lines est, 87% PHP, 23571 stars"
+
+[[repo]]
+name = "grav"
+language = "php"
+split = "training"
+url = "https://github.com/getgrav/grav"
+sha = "1dd5e861e374c2ab124e115763e25f7a692778f3"
+domain = "flat-file CMS"
+dependencies = ""
+notes = "sourced 2026-08-18, ~132656 lines est, 100% PHP, 15635 stars"
+
+[[repo]]
+name = "psysh"
+language = "php"
+split = "training"
+url = "https://github.com/bobthecow/psysh"
+sha = "cd98f04e0e8d8611e4c619334e85e74f3096b24e"
+domain = "interactive REPL"
+dependencies = ""
+notes = "sourced 2026-08-18, ~110723 lines est, 99% PHP, 9831 stars; replaced rector"
+
+[[repo]]
+name = "orm"
+language = "php"
+split = "training"
+url = "https://github.com/doctrine/orm"
+sha = "c9a73325e3b277a5cbe20ae84204ef340009c28d"
+domain = "object relational mapper"
+dependencies = ""
+notes = "sourced 2026-08-18, ~181290 lines est, 100% PHP, 10170 stars"
+
+[[repo]]
+name = "FreshRSS"
+language = "php"
+split = "training"
+url = "https://github.com/FreshRSS/FreshRSS"
+sha = "2ceb78fefbec03c5ccc210255dc49635a61f9cbf"
+domain = "self-hosted news aggregator"
+dependencies = ""
+notes = "sourced 2026-08-18, ~157524 lines est, 81% PHP, 15801 stars"
+
+[[repo]]
+name = "Twig"
+language = "php"
+split = "training"
+url = "https://github.com/twigphp/Twig"
+sha = "9036d8c5aae201a13450f4e60ce5536ac7c11070"
+domain = "template engine"
+dependencies = ""
+notes = "sourced 2026-08-18, ~53239 lines est, 100% PHP, 8374 stars"
+
+[[repo]]
+name = "huginn"
+language = "ruby"
+split = "training"
+url = "https://github.com/huginn/huginn"
+sha = "9faad4aeee0d97570693377e0a281567e775abb4"
+domain = "agent automation web application"
+dependencies = ""
+notes = "sourced 2026-08-18, ~61716 lines est, 89% Ruby, 49821 stars"
+
+[[repo]]
+name = "vagrant"
+language = "ruby"
+split = "training"
+url = "https://github.com/hashicorp/vagrant"
+sha = "35f3160f4ad6edc3a9f3aa9570adfc1a4d73aaa5"
+domain = "development environment manager"
+dependencies = ""
+notes = "sourced 2026-08-18, ~167816 lines est, 94% Ruby, 27196 stars"
+
+[[repo]]
+name = "fluentd"
+language = "ruby"
+split = "training"
+url = "https://github.com/fluent/fluentd"
+sha = "f63d4044093344df60af308d6230f09ca55d6d7b"
+domain = "log collector"
+dependencies = ""
+notes = "sourced 2026-08-18, ~127961 lines est, 100% Ruby, 13578 stars"
+
+[[repo]]
+name = "sidekiq"
+language = "ruby"
+split = "training"
+url = "https://github.com/sidekiq/sidekiq"
+sha = "1bb4aa06e5aa178a114a5e855f9f3d5c24f6c61b"
+domain = "background job processing"
+dependencies = ""
+notes = "sourced 2026-08-18, ~24800 lines est, 90% Ruby, 13553 stars"
+
+[[repo]]
+name = "CocoaPods"
+language = "ruby"
+split = "training"
+url = "https://github.com/CocoaPods/CocoaPods"
+sha = "b80e113e28a7e23cd6dbc169f0c923f6b48bf7a2"
+domain = "dependency manager"
+dependencies = ""
+notes = "sourced 2026-08-18, ~87002 lines est, 97% Ruby, 14834 stars"
+
+[[repo]]
+name = "graphql-ruby"
+language = "ruby"
+split = "training"
+url = "https://github.com/rmosolgo/graphql-ruby"
+sha = "9d86b2eef114337b937daf9644da8b13ef916b60"
+domain = "GraphQL server library"
+dependencies = ""
+notes = "sourced 2026-08-18, ~129886 lines est, 87% Ruby, 5445 stars"
+
+[[repo]]
+name = "asciidoctor"
+language = "ruby"
+split = "training"
+url = "https://github.com/asciidoctor/asciidoctor"
+sha = "ae5891df10f12dda069abea8a318c9b94d545bee"
+domain = "text processor and publishing toolchain"
+dependencies = ""
+notes = "sourced 2026-08-18, ~76759 lines est, 95% Ruby, 5204 stars"
+
+[[repo]]
+name = "capybara"
+language = "ruby"
+split = "training"
+url = "https://github.com/teamcapybara/capybara"
+sha = "15b5fdb76e972e9623d5af2123ed3755594f9732"
+domain = "acceptance testing framework"
+dependencies = ""
+notes = "sourced 2026-08-18, ~41342 lines est, 92% Ruby, 10170 stars"
+
+[[repo]]
+name = "brakeman"
+language = "ruby"
+split = "training"
+url = "https://github.com/presidentbeef/brakeman"
+sha = "649e678d0a46bda0e7c35874fa7af5d16e19b4f1"
+domain = "static analysis security scanner"
+dependencies = ""
+notes = "sourced 2026-08-18, ~57388 lines est, 92% Ruby, 7262 stars"
+
+[[repo]]
+name = "inspec"
+language = "ruby"
+split = "training"
+url = "https://github.com/inspec/inspec"
+sha = "2b6c5f8ae8bcca844d4c0909adfae32fb1fa5c48"
+domain = "infrastructure audit and test framework"
+dependencies = ""
+notes = "sourced 2026-08-18, ~97631 lines est, 97% Ruby, 3083 stars; replaced rubygems"
+
+[[repo]]
+name = "container"
+language = "swift"
+split = "training"
+url = "https://github.com/apple/container"
+sha = "b3357fdb2e3861151a71cb0fbc46e3cbe6c01a42"
+domain = "Linux container tool for macOS"
+dependencies = ""
+notes = "sourced 2026-08-18, ~83322 lines est, 98% Swift, 49058 stars"
+
+[[repo]]
+name = "iina"
+language = "swift"
+split = "training"
+url = "https://github.com/iina/iina"
+sha = "4eb4ddaa18c6f5e02a40944467e09f0205c62f0b"
+domain = "video player"
+dependencies = ""
+notes = "sourced 2026-08-18, ~71429 lines est, 96% Swift, 46005 stars"
+
+[[repo]]
+name = "Alamofire"
+language = "swift"
+split = "training"
+url = "https://github.com/Alamofire/Alamofire"
+sha = "0455bfb650893e86ad07ace16e5f2d36dadf46f4"
+domain = "HTTP networking library"
+dependencies = ""
+notes = "sourced 2026-08-18, ~56570 lines est, 100% Swift, 42417 stars"
+
+[[repo]]
+name = "vapor"
+language = "swift"
+split = "training"
+url = "https://github.com/vapor/vapor"
+sha = "5d5c597647e5aa09fe3268506778762a9857284d"
+domain = "server-side web framework"
+dependencies = ""
+notes = "sourced 2026-08-18, ~42763 lines est, 100% Swift, 26189 stars"
+
+[[repo]]
+name = "SwiftLint"
+language = "swift"
+split = "training"
+url = "https://github.com/realm/SwiftLint"
+sha = "ea29a5bee7f4e546587d3c4b907c62cff60928ef"
+domain = "lint tool"
+dependencies = ""
+notes = "sourced 2026-08-18, ~100833 lines est, 98% Swift, 19701 stars"
+
+[[repo]]
+name = "CodeEdit"
+language = "swift"
+split = "training"
+url = "https://github.com/CodeEditApp/CodeEdit"
+sha = "fa2aebd86373211c78626074b53ab75010767575"
+domain = "code editor application"
+dependencies = ""
+notes = "sourced 2026-08-18, ~63955 lines est, 99% Swift, 22984 stars"
+
+[[repo]]
+name = "Kingfisher"
+language = "swift"
+split = "training"
+url = "https://github.com/onevcat/Kingfisher"
+sha = "6120d8fdca80a645076df0070640cc681abe33e4"
+domain = "image loading and caching library"
+dependencies = ""
+notes = "sourced 2026-08-18, ~43426 lines est, 96% Swift, 24387 stars"
+
+[[repo]]
+name = "swift-composable-architecture"
+language = "swift"
+split = "training"
+url = "https://github.com/pointfreeco/swift-composable-architecture"
+sha = "269d6457986d163557ea2601275b1117e4dee3c0"
+domain = "application architecture library"
+dependencies = ""
+notes = "sourced 2026-08-18, ~52286 lines est, 100% Swift, 14875 stars"
+
+[[repo]]
+name = "alt-tab-macos"
+language = "swift"
+split = "training"
+url = "https://github.com/lwouis/alt-tab-macos"
+sha = "081f3ee4014e03557c2ab39e9e168dac308fa49b"
+domain = "window switcher application"
+dependencies = ""
+notes = "sourced 2026-08-18, ~81976 lines est, 98% Swift, 16185 stars"
+
+[[repo]]
+name = "AeroSpace"
+language = "swift"
+split = "training"
+url = "https://github.com/nikitabobko/AeroSpace"
+sha = "c548c7f879164c7ab1acde7ecd88f4f19eb53d21"
+domain = "tiling window manager"
+dependencies = ""
+notes = "sourced 2026-08-18, ~26591 lines est, 97% Swift, 22472 stars"
+
+[[repo]]
+name = "zls"
+language = "zig"
+split = "training"
+url = "https://github.com/zigtools/zls"
+sha = "8da87d4f3305a550e7b739bad764e34bf1e46a08"
+domain = "language server"
+dependencies = ""
+notes = "sourced 2026-08-18, ~70142 lines est, 100% Zig, 5078 stars"
+
+[[repo]]
+name = "mach"
+language = "zig"
+split = "training"
+url = "https://github.com/hexops/mach"
+sha = "4be8e50fc89a532878887dba002f590cc50d8e89"
+domain = "game engine and graphics toolkit"
+dependencies = ""
+notes = "sourced 2026-08-18, ~107296 lines est, 99% Zig, 4824 stars"
+
+[[repo]]
+name = "zml"
+language = "zig"
+split = "training"
+url = "https://github.com/zml/zml"
+sha = "c58d81a7b3b2be54d418774c63bd05521e1af337"
+domain = "machine learning inference runtime"
+dependencies = ""
+notes = "sourced 2026-08-18, ~94450 lines est, 92% Zig, 3987 stars"
+
+[[repo]]
+name = "Cubyz"
+language = "zig"
+split = "training"
+url = "https://github.com/PixelGuys/Cubyz"
+sha = "920d7627664bd013cbcb30b9584deafc93be18d8"
+domain = "voxel sandbox game"
+dependencies = ""
+notes = "sourced 2026-08-18, ~87191 lines est, 98% Zig, 3615 stars"
+
+[[repo]]
+name = "libxev"
+language = "zig"
+split = "training"
+url = "https://github.com/mitchellh/libxev"
+sha = "9ce8e8e6ff89e583258a7f8e7adeeeaeae8611bf"
+domain = "event loop library"
+dependencies = ""
+notes = "sourced 2026-08-18, ~26167 lines est, 98% Zig, 3559 stars"
+
+[[repo]]
+name = "arocc"
+language = "zig"
+split = "training"
+url = "https://github.com/Vexu/arocc"
+sha = "b33420c983eea74f09cf68f120941be98a52dfe6"
+domain = "C compiler"
+dependencies = ""
+notes = "sourced 2026-08-18, ~68915 lines est, 82% Zig, 1797 stars"
+
+[[repo]]
+name = "dvui"
+language = "zig"
+split = "training"
+url = "https://github.com/david-vanderson/dvui"
+sha = "7c597c5564c3f55cdb876f5ea5a55bb7120cdef9"
+domain = "immediate mode GUI library"
+dependencies = ""
+notes = "sourced 2026-08-18, ~97153 lines est, 98% Zig, 1632 stars"
+
+[[repo]]
+name = "flow"
+language = "zig"
+split = "training"
+url = "https://github.com/neurocyte/flow"
+sha = "c4ee575e805ed91f1844339704aa0656d0d3eda1"
+domain = "text editor"
+dependencies = ""
+notes = "sourced 2026-08-18, ~103627 lines est, 99% Zig, 2177 stars"
+
+[[repo]]
+name = "buzz"
+language = "zig"
+split = "training"
+url = "https://github.com/buzz-language/buzz"
+sha = "9c2660593c45fd9417ecef5e5f06bfd1fde28205"
+domain = "scripting language runtime"
+dependencies = ""
+notes = "sourced 2026-08-18, ~107842 lines est, 99% Zig, 1522 stars"
+
+[[repo]]
+name = "microzig"
+language = "zig"
+split = "training"
+url = "https://github.com/ZigEmbeddedGroup/microzig"
+sha = "603dcbb387e04a5e226528ae509323b7f69cd859"
+domain = "embedded systems toolbox"
+dependencies = ""
+notes = "sourced 2026-08-18, ~187236 lines est, 93% Zig, 2255 stars"
+
+[[repo]]
+name = "serilog"
+language = "csharp"
+split = "test"
+url = "https://github.com/serilog/serilog"
+sha = "49b5339ce85385dc52d4d8e8f2b8308becf23506"
+domain = "structured logging library"
+dependencies = ""
+notes = "sourced 2026-08-18, ~27898 lines est, 100% C#, 8031 stars"
+
+[[repo]]
+name = "yarp"
+language = "csharp"
+split = "test"
+url = "https://github.com/dotnet/yarp"
+sha = "bd11867bee7df522e7fd3effb08a9c85fd616908"
+domain = "HTTP reverse proxy toolkit"
+dependencies = ""
+notes = "sourced 2026-08-18, ~73353 lines est, 88% C#, 9597 stars"
+
+[[repo]]
+name = "ScreenToGif"
+language = "csharp"
+split = "test"
+url = "https://github.com/NickeManarin/ScreenToGif"
+sha = "a4d0a67c2131cd048ceec86cd40afc2f1a06f2fd"
+domain = "screen recorder application"
+dependencies = ""
+notes = "sourced 2026-08-18, ~95492 lines est, 100% C#, 27501 stars"
+
+[[repo]]
+name = "LiteDB"
+language = "csharp"
+split = "test"
+url = "https://github.com/litedb-org/LiteDB"
+sha = "f906a5f850678719e39a39a006cb66dcae563cfa"
+domain = "embedded document database"
+dependencies = ""
+notes = "sourced 2026-08-18, ~68136 lines est, 100% C#, 9458 stars"
+
+[[repo]]
+name = "FluentValidation"
+language = "csharp"
+split = "test"
+url = "https://github.com/FluentValidation/FluentValidation"
+sha = "daa00b795450881c233253488e3ddeb362f59f56"
+domain = "validation library"
+dependencies = ""
+notes = "sourced 2026-08-18, ~34207 lines est, 100% C#, 9755 stars"
+
+[[repo]]
+name = "Obtainium"
+language = "dart"
+split = "test"
+url = "https://github.com/ImranR98/Obtainium"
+sha = "afecbbcce60265e4f135d4899eb6e4151a3a2e48"
+domain = "Android app update manager"
+dependencies = ""
+notes = "sourced 2026-08-18, ~26861 lines est, 98% Dart, 19060 stars"
+
+[[repo]]
+name = "fluent_ui"
+language = "dart"
+split = "test"
+url = "https://github.com/bdlukaa/fluent_ui"
+sha = "2da5649511082d6a466faf33a52406af01791c03"
+domain = "widget library"
+dependencies = ""
+notes = "sourced 2026-08-18, ~108682 lines est, 99% Dart, 3459 stars"
+
+[[repo]]
+name = "fvm"
+language = "dart"
+split = "test"
+url = "https://github.com/conceptadev/fvm"
+sha = "9dc36c5e00d94fd1bf2196df4b85721668d10d86"
+domain = "SDK version manager CLI"
+dependencies = ""
+notes = "sourced 2026-08-18, ~27089 lines est, 97% Dart, 5505 stars"
+
+[[repo]]
+name = "rxdart"
+language = "dart"
+split = "test"
+url = "https://github.com/ReactiveX/rxdart"
+sha = "d1f3ba64f71669a137489341009345f59ec84614"
+domain = "reactive extensions library"
+dependencies = ""
+notes = "sourced 2026-08-18, ~31036 lines est, 100% Dart, 3434 stars"
+
+[[repo]]
+name = "GitJournal"
+language = "dart"
+split = "test"
+url = "https://github.com/GitJournal/GitJournal"
+sha = "c8a67e098db06335762f822d7733c330f4bd0d6b"
+domain = "git-backed note taking application"
+dependencies = ""
+notes = "sourced 2026-08-18, ~69457 lines est, 96% Dart, 4206 stars"
+
+[[repo]]
+name = "elixir-ls"
+language = "elixir"
+split = "test"
+url = "https://github.com/elixir-lsp/elixir-ls"
+sha = "68df44b681ee0dbef91b8008b0354003a9a451fa"
+domain = "language server"
+dependencies = ""
+notes = "sourced 2026-08-18, ~129545 lines est, 100% Elixir, 1772 stars"
+
+[[repo]]
+name = "hexpm"
+language = "elixir"
+split = "test"
+url = "https://github.com/hexpm/hexpm"
+sha = "ab8bdbfb37d6d563a9f79c3eea7a8769573dc2c2"
+domain = "package registry service"
+dependencies = ""
+notes = "sourced 2026-08-18, ~130805 lines est, 90% Elixir, 1170 stars"
+
+[[repo]]
+name = "membrane_core"
+language = "elixir"
+split = "test"
+url = "https://github.com/membraneframework/membrane_core"
+sha = "3aca29d537ae7f49f2bc792c48fd68d16420ec61"
+domain = "multimedia processing framework"
+dependencies = ""
+notes = "sourced 2026-08-18, ~41387 lines est, 100% Elixir, 1505 stars"
+
+[[repo]]
+name = "tesla"
+language = "elixir"
+split = "test"
+url = "https://github.com/elixir-tesla/tesla"
+sha = "e6d214b5b0ff607cc63a6d3bd3cdb1a5d03c105d"
+domain = "HTTP client library"
+dependencies = ""
+notes = "sourced 2026-08-18, ~24174 lines est, 100% Elixir, 2075 stars"
+
+[[repo]]
+name = "asciinema-server"
+language = "elixir"
+split = "test"
+url = "https://github.com/asciinema/asciinema-server"
+sha = "86adf567b7c6596c8df411123a7dc0476bdda3f7"
+domain = "terminal recording hosting platform"
+dependencies = ""
+notes = "sourced 2026-08-18, ~40200 lines est, 76% Elixir, 2490 stars"
+
+[[repo]]
+name = "graphhopper"
+language = "java"
+split = "test"
+url = "https://github.com/graphhopper/graphhopper"
+sha = "56c8e633cccec6baffb4385cf7b83ce3836d4f88"
+domain = "routing engine"
+dependencies = ""
+notes = "sourced 2026-08-18, ~197301 lines est, 98% Java, 6637 stars"
+
+[[repo]]
+name = "dropwizard"
+language = "java"
+split = "test"
+url = "https://github.com/dropwizard/dropwizard"
+sha = "8288ae7c09b1b8de6df8f06354aa2263126fa68b"
+domain = "REST service framework"
+dependencies = ""
+notes = "sourced 2026-08-18, ~85986 lines est, 100% Java, 8576 stars"
+
+[[repo]]
+name = "wiremock"
+language = "java"
+split = "test"
+url = "https://github.com/wiremock/wiremock"
+sha = "3e038e279db59aab5be289ac4573c2d9faaa56bb"
+domain = "HTTP service mocking tool"
+dependencies = ""
+notes = "sourced 2026-08-18, ~172805 lines est, 99% Java, 7338 stars"
+
+[[repo]]
+name = "flyway"
+language = "java"
+split = "test"
+url = "https://github.com/flyway/flyway"
+sha = "55bc98edf95a54ff419e57523e00561642103030"
+domain = "database migration tool"
+dependencies = ""
+notes = "sourced 2026-08-18, ~100680 lines est, 98% Java, 10008 stars"
+
+[[repo]]
+name = "AntennaPod"
+language = "java"
+split = "test"
+url = "https://github.com/AntennaPod/AntennaPod"
+sha = "d39bf05d21bddd10c844357e1253f7fab530bfaf"
+domain = "podcast manager for Android"
+dependencies = ""
+notes = "sourced 2026-08-18, ~97049 lines est, 98% Java, 8087 stars"
+
+[[repo]]
+name = "sqldelight"
+language = "kotlin"
+split = "test"
+url = "https://github.com/sqldelight/sqldelight"
+sha = "988b504052982e1b7c6fc0ec067285aa84a05841"
+domain = "typesafe SQL API generator"
+dependencies = ""
+notes = "sourced 2026-08-18, ~73270 lines est, 95% Kotlin, 6860 stars"
+
+[[repo]]
+name = "breezy-weather"
+language = "kotlin"
+split = "test"
+url = "https://github.com/breezy-weather/breezy-weather"
+sha = "c608ff003ad29bce43b1cfcc5415afcaf7cedc6a"
+domain = "weather application"
+dependencies = ""
+notes = "sourced 2026-08-18, ~181300 lines est, 100% Kotlin, 11053 stars"
+
+[[repo]]
+name = "koin"
+language = "kotlin"
+split = "test"
+url = "https://github.com/InsertKoinIO/koin"
+sha = "dc86ef8dd8fbe8564fb7453c03f5b738da3450bb"
+domain = "dependency injection framework"
+dependencies = ""
+notes = "sourced 2026-08-18, ~37506 lines est, 99% Kotlin, 10014 stars"
+
+[[repo]]
+name = "KeePassDX"
+language = "kotlin"
+split = "test"
+url = "https://github.com/Kunzisoft/KeePassDX"
+sha = "e94bf93079687c4f0f23b562788178bff623cb94"
+domain = "password manager application"
+dependencies = ""
+notes = "sourced 2026-08-18, ~99294 lines est, 83% Kotlin, 7139 stars"
+
+[[repo]]
+name = "Maestro"
+language = "kotlin"
+split = "test"
+url = "https://github.com/mobile-dev-inc/Maestro"
+sha = "8bfa65d720d7bde90be3760028a63d74a80a18ef"
+domain = "end-to-end test automation tool"
+dependencies = ""
+notes = "sourced 2026-08-18, ~85524 lines est, 84% Kotlin, 15366 stars"
+
+[[repo]]
+name = "nvim-lspconfig"
+language = "lua"
+split = "test"
+url = "https://github.com/neovim/nvim-lspconfig"
+sha = "c8a582abc20a3121a768073df569d088cb5604b5"
+domain = "editor language server configurations"
+dependencies = ""
+notes = "sourced 2026-08-18, ~69221 lines est, 100% Lua, 13889 stars"
+
+[[repo]]
+name = "neogit"
+language = "lua"
+split = "test"
+url = "https://github.com/NeogitOrg/neogit"
+sha = "37e0f22a2345bad1bffe01b31970885882f46275"
+domain = "editor git interface plugin"
+dependencies = ""
+notes = "sourced 2026-08-18, ~34101 lines est, 91% Lua, 5588 stars"
+
+[[repo]]
+name = "Techmino"
+language = "lua"
+split = "test"
+url = "https://github.com/26F-Studio/Techmino"
+sha = "f6875badce589adb2bd01d3c963f804950e5453f"
+domain = "puzzle game"
+dependencies = ""
+notes = "sourced 2026-08-18, ~92590 lines est, 100% Lua, 888 stars"
+
+[[repo]]
+name = "Lmod"
+language = "lua"
+split = "test"
+url = "https://github.com/TACC/Lmod"
+sha = "873cb954a059fc75fcd5ec87d605af95fccda696"
+domain = "environment module system"
+dependencies = ""
+notes = "sourced 2026-08-18, ~182676 lines est, 79% Lua, 607 stars"
+
+[[repo]]
+name = "Courseplay_FS25"
+language = "lua"
+split = "test"
+url = "https://github.com/Courseplay/Courseplay_FS25"
+sha = "28fa5d1b1846979ed0cab5484801dc3cdccc9108"
+domain = "farming simulator automation mod"
+dependencies = ""
+notes = "sourced 2026-08-18, ~109311 lines est, 100% Lua, 913 stars"
+
+[[repo]]
+name = "wallabag"
+language = "php"
+split = "test"
+url = "https://github.com/wallabag/wallabag"
+sha = "efe93850ad9006711d871879ae37cc06af3d3bf3"
+domain = "read-it-later web application"
+dependencies = ""
+notes = "sourced 2026-08-18, ~55982 lines est, 84% PHP, 12915 stars"
+
+[[repo]]
+name = "pest"
+language = "php"
+split = "test"
+url = "https://github.com/pestphp/pest"
+sha = "1af74a215c3a89bc7a44fc6f9322e369eaad2423"
+domain = "testing framework"
+dependencies = ""
+notes = "sourced 2026-08-18, ~42981 lines est, 98% PHP, 11668 stars"
+
+[[repo]]
+name = "phpseclib"
+language = "php"
+split = "test"
+url = "https://github.com/phpseclib/phpseclib"
+sha = "d9ef9766cf37158c33c9b8d1955d226978279dda"
+domain = "cryptography library"
+dependencies = ""
+notes = "sourced 2026-08-18, ~99592 lines est, 100% PHP, 5586 stars"
+
+[[repo]]
+name = "shlink"
+language = "php"
+split = "test"
+url = "https://github.com/shlinkio/shlink"
+sha = "d012afd16a5d9a4d001c921d9bf9f411e9ffdc13"
+domain = "self-hosted URL shortener"
+dependencies = ""
+notes = "sourced 2026-08-18, ~54459 lines est, 99% PHP, 5221 stars"
+
+[[repo]]
+name = "PHPWord"
+language = "php"
+split = "test"
+url = "https://github.com/PHPOffice/PHPWord"
+sha = "dc7e1b18b073242c6e1b6b8a9060f801c5f7e4aa"
+domain = "word processing document library"
+dependencies = ""
+notes = "sourced 2026-08-18, ~88295 lines est, 100% PHP, 7583 stars"
+
+[[repo]]
+name = "solidus"
+language = "ruby"
+split = "test"
+url = "https://github.com/solidusio/solidus"
+sha = "4697059c0385b522d8d3cf91fd8d480c26a32d73"
+domain = "eCommerce framework"
+dependencies = ""
+notes = "sourced 2026-08-18, ~165410 lines est, 82% Ruby, 5318 stars"
+
+[[repo]]
+name = "puma"
+language = "ruby"
+split = "test"
+url = "https://github.com/puma/puma"
+sha = "b8341dc946f0a2444e5ea6730d1967ca53c8d006"
+domain = "web server"
+dependencies = ""
+notes = "sourced 2026-08-18, ~30194 lines est, 86% Ruby, 7915 stars"
+
+[[repo]]
+name = "grape"
+language = "ruby"
+split = "test"
+url = "https://github.com/ruby-grape/grape"
+sha = "79c91a84b7fbe043e7e76476373a6b9f59fe1a2d"
+domain = "REST-like API framework"
+dependencies = ""
+notes = "sourced 2026-08-18, ~45403 lines est, 100% Ruby, 10000 stars; replaced devise"
+
+[[repo]]
+name = "mongoid"
+language = "ruby"
+split = "test"
+url = "https://github.com/mongodb/mongoid"
+sha = "ca48e1617ff22c48cdc8d687e02b88546ff8e080"
+domain = "MongoDB object mapper"
+dependencies = ""
+notes = "sourced 2026-08-18, ~190829 lines est, 98% Ruby, 3916 stars"
+
+[[repo]]
+name = "mail"
+language = "ruby"
+split = "test"
+url = "https://github.com/mikel/mail"
+sha = "d645d7b5b7d03218b0bc8971ef041c991a63f5f7"
+domain = "mail library"
+dependencies = ""
+notes = "sourced 2026-08-18, ~118883 lines est, 99% Ruby, 3673 stars"
+
+[[repo]]
+name = "Sourcery"
+language = "swift"
+split = "test"
+url = "https://github.com/krzysztofzablocki/Sourcery"
+sha = "f9d80ddec1d42b83b776064162ce0a93a0289334"
+domain = "code generation tool"
+dependencies = ""
+notes = "sourced 2026-08-18, ~84855 lines est, 97% Swift, 8017 stars"
+
+[[repo]]
+name = "RxSwift"
+language = "swift"
+split = "test"
+url = "https://github.com/ReactiveX/RxSwift"
+sha = "5abdfe46cc21e4d536cdfc3dd09e130503f599fb"
+domain = "reactive programming library"
+dependencies = ""
+notes = "sourced 2026-08-18, ~99787 lines est, 94% Swift, 24644 stars"
+
+[[repo]]
+name = "XcodeGen"
+language = "swift"
+split = "test"
+url = "https://github.com/yonaskolb/XcodeGen"
+sha = "8445e778451c7e44237b90281bde622d764b0084"
+domain = "project file generator CLI"
+dependencies = ""
+notes = "sourced 2026-08-18, ~32220 lines est, 99% Swift, 8718 stars"
+
+[[repo]]
+name = "IceCubesApp"
+language = "swift"
+split = "test"
+url = "https://github.com/Dimillian/IceCubesApp"
+sha = "9c05a720597b3ff13de2e241bf58d3fba0863c09"
+domain = "Mastodon client application"
+dependencies = ""
+notes = "sourced 2026-08-18, ~40396 lines est, 100% Swift, 7040 stars"
+
+[[repo]]
+name = "AudioKit"
+language = "swift"
+split = "test"
+url = "https://github.com/AudioKit/AudioKit"
+sha = "c358c15fdcdd0e78c4b4988f5c532c7cfb5c2eeb"
+domain = "audio synthesis and processing platform"
+dependencies = ""
+notes = "sourced 2026-08-18, ~34515 lines est, 100% Swift, 11435 stars"
+
+[[repo]]
+name = "superhtml"
+language = "zig"
+split = "test"
+url = "https://github.com/kristoff-it/superhtml"
+sha = "23ef2f44ca0df2d2e05a0be3874370553c5b591d"
+domain = "HTML validator and language server"
+dependencies = ""
+notes = "sourced 2026-08-18, ~60068 lines est, 98% Zig, 1363 stars"
+
+[[repo]]
+name = "libvaxis"
+language = "zig"
+split = "test"
+url = "https://github.com/rockorager/libvaxis"
+sha = "7d4aed7fef1944c4446b8e70d6b71b7229794281"
+domain = "terminal user interface library"
+dependencies = ""
+notes = "sourced 2026-08-18, ~23058 lines est, 98% Zig, 1962 stars"
+
+[[repo]]
+name = "zigimg"
+language = "zig"
+split = "test"
+url = "https://github.com/zigimg/zigimg"
+sha = "a7440df3fc41cde7df078b1c5829646c13056d49"
+domain = "image format library"
+dependencies = ""
+notes = "sourced 2026-08-18, ~51067 lines est, 100% Zig, 834 stars"
+
+[[repo]]
+name = "uscope"
+language = "zig"
+split = "test"
+url = "https://github.com/jcalabro/uscope"
+sha = "a9f8901c6d6e400db2a17dabc66535bb5ce3c61c"
+domain = "native code debugger"
+dependencies = ""
+notes = "sourced 2026-08-18, ~28736 lines est, 98% Zig, 1027 stars"
+
+[[repo]]
+name = "Deecy"
+language = "zig"
+split = "test"
+url = "https://github.com/Senryoku/Deecy"
+sha = "0c58f2fcd4616519d26a35134450d1f43478aeed"
+domain = "Dreamcast emulator"
+dependencies = ""
+notes = "sourced 2026-08-18, ~73279 lines est, 98% Zig, 220 stars"
+
+[[considered]]
+name = "runtime"
+url = "https://github.com/dotnet/runtime"
+sha = "335260c10135059cce58b89cf2de024d1cdd8847"
+language = "csharp"
+est_lines = 13669228
+reason = "over the band"
+
+[[considered]]
+name = "roslyn"
+url = "https://github.com/dotnet/roslyn"
+sha = "44dfd2066f2f9fe5f7ca081276f2f99a8716b768"
+language = "csharp"
+est_lines = 7594111
+reason = "over the band"
+
+[[considered]]
+name = "Newtonsoft.Json"
+url = "https://github.com/JamesNK/Newtonsoft.Json"
+sha = "09bb545d72969ad7fb4ea07db0d5c34f4fc07877"
+language = "csharp"
+est_lines = 199196
+reason = "band-marginal at ~199k estimated -- a measured count over 200k would put it out"
+
+[[considered]]
+name = "C-Sharp"
+url = "https://github.com/TheAlgorithms/C-Sharp"
+sha = "96e2905cab7bc6b33ac0a34ee5bb82ddccbcbb6c"
+language = "csharp"
+est_lines = 56128
+reason = "teaching repository -- algorithm exercises rather than production code"
+
+[[considered]]
+name = "eShop"
+url = "https://github.com/dotnet/eShop"
+sha = "b4a40872005d4bb29e5b1fa1ff7e244143d39215"
+language = "csharp"
+est_lines = 25478
+reason = "a reference sample application, written to demonstrate architecture rather than to be used"
+
+[[considered]]
+name = "modular-monolith-with-ddd"
+url = "https://github.com/kgrzybek/modular-monolith-with-ddd"
+sha = "91c8ef24b4cb6ef558c95d8267fa07d68c7059f8"
+language = "csharp"
+est_lines = 42497
+reason = "sample application, and last pushed 2024-06"
+
+[[considered]]
+name = "ml-agents"
+url = "https://github.com/Unity-Technologies/ml-agents"
+sha = "3ecb446f75d1e7400eb404c562dc005d3164cffc"
+language = "csharp"
+est_lines = 56795
+reason = "in band but only 54% C# -- the rest is the Python training half"
+
+[[considered]]
+name = "PEASS-ng"
+url = "https://github.com/peass-ng/PEASS-ng"
+sha = "8e0aabe19110a277692befbca83dc8f80085feb9"
+language = "csharp"
+est_lines = 69812
+reason = "in band but 57% C#, and the repository is mostly generated privilege-escalation scripts"
+
+[[considered]]
+name = "MaterialDesignInXamlToolkit"
+url = "https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit"
+sha = "3f6e67aaee6b5728cab6c45d5ce419cd9b37ab22"
+language = "csharp"
+est_lines = 177221
+reason = "in band, but the substance is XAML resource dictionaries rather than C#"
+
+[[considered]]
+name = "v2rayN"
+url = "https://github.com/2dust/v2rayN"
+sha = "8b8e579bc8ee74513ba17a9347f908a7fee6394c"
+language = "csharp"
+est_lines = 46521
+reason = "in band and real, passed over for domain overlap with the selected desktop applications"
+
+[[considered]]
+name = "flutter"
+url = "https://github.com/flutter/flutter"
+sha = "b444e7897e249e9538e2afe623b533abbabfa4fb"
+language = "dart"
+est_lines = 2955988
+reason = "over the band"
+
+[[considered]]
+name = "samples"
+url = "https://github.com/flutter/samples"
+sha = "463e365e4842f252ffab9c6198594a504d69469f"
+language = "dart"
+est_lines = 166206
+reason = "sample applications written to demonstrate the SDK rather than production code"
+
+[[considered]]
+name = "flutter_architecture_samples"
+url = "https://github.com/brianegan/flutter_architecture_samples"
+sha = "d898d1329e04e5b5fbdef1285b39ef975a6b8efa"
+language = "dart"
+est_lines = 24583
+reason = "one to-do application written many ways -- the same program repeated, not varied code"
+
+[[considered]]
+name = "flutter-tutorials"
+url = "https://github.com/FilledStacks/flutter-tutorials"
+sha = "ea17632fc1b7f0d999550b05c43003d9ae5dfca6"
+language = "dart"
+est_lines = 42857
+reason = "tutorial material, and last pushed 2023-04"
+
+[[considered]]
+name = "flutter-go"
+url = "https://github.com/alibaba/flutter-go"
+sha = "a41b2124278e9f17d222ec1cea2ace3042be03f7"
+language = "dart"
+est_lines = 32887
+reason = "component demo application, and last pushed 2023-12"
+
+[[considered]]
+name = "flutterfire"
+url = "https://github.com/firebase/flutterfire"
+sha = "a57837ef40f73f0187b45125ecc0d81811b71bd9"
+language = "dart"
+est_lines = 188440
+reason = "in band but 59% Dart, and it is a plugin monorepo whose halves are platform Kotlin and Swift"
+
+[[considered]]
+name = "flutter_inappwebview"
+url = "https://github.com/pichillilorenzo/flutter_inappwebview"
+sha = "17527cae5a3371c1e87f9c1df4281a7710debf28"
+language = "dart"
+est_lines = 184860
+reason = "in band but 57% Dart -- the substance is the Kotlin and Swift platform channels"
+
+[[considered]]
+name = "getx"
+url = "https://github.com/jonataslaw/getx"
+sha = "e3c8fa04ae65ebf7ff0128dbeb2dc91d4dafa429"
+language = "dart"
+est_lines = 26894
+reason = "in band and real, passed over for domain overlap with bloc as a state management library"
+
+[[considered]]
+name = "lantern"
+url = "https://github.com/getlantern/lantern"
+sha = "e1b096687fbde8bd1469991431503405f8407080"
+language = "dart"
+est_lines = 58674
+reason = "in band but 55% Dart, with the client core in Go"
+
+[[considered]]
+name = "flutter-wonderous-app"
+url = "https://github.com/gskinnerTeam/flutter-wonderous-app"
+sha = "747b945a7e5239356bf2664261aa2f3b020b8898"
+language = "dart"
+est_lines = 35204
+reason = "a showcase application built to demonstrate the SDK"
+
+[[considered]]
+name = "drift"
+url = "https://github.com/simolus3/drift"
+sha = "3cc83f6cff8b112efbb64f8bc2d4247bf16cce67"
+language = "dart"
+est_lines = 177453
+reason = "selected, cloned, and measured at 242457 lines on 2026-08-18 -- over the band, generated code in its test and example packages counting as Dart source; replaced by proxypin"
+
+[[considered]]
+name = "elixir"
+url = "https://github.com/elixir-lang/elixir"
+sha = "36351ae0518b413d54198b60ebce8cc2243a6559"
+language = "elixir"
+est_lines = 314050
+reason = "over the band"
+
+[[considered]]
+name = "symphony"
+url = "https://github.com/openai/symphony"
+sha = "8001b52e3062495a16e520e4ceaf8f9de868c4d0"
+language = "elixir"
+est_lines = 32570
+reason = "in band and active, but created 2026-02 -- too young for the convention density of a settled codebase"
+
+[[considered]]
+name = "phoenix_live_view"
+url = "https://github.com/phoenixframework/phoenix_live_view"
+sha = "441dc69e34acae6822e753d73083c433d074fcc1"
+language = "elixir"
+est_lines = 81824
+reason = "in band but 59% Elixir, and organisation overlap with phoenix"
+
+[[considered]]
+name = "papercups"
+url = "https://github.com/papercups-io/papercups"
+sha = "6a6f5adc7f0cef5813b2c2f1c0659922defaf976"
+language = "elixir"
+est_lines = 50381
+reason = "in band, but last pushed 2024-02"
+
+[[considered]]
+name = "hologram"
+url = "https://github.com/bartblast/hologram"
+sha = "9bc7db1b19d6b045e8a4bc2797010b2bc84275c1"
+language = "elixir"
+est_lines = 169578
+reason = "in band but 53% Elixir, with the rest the JavaScript it compiles to"
+
+[[considered]]
+name = "changelog.com"
+url = "https://github.com/thechangelog/changelog.com"
+sha = "acc6a3249f24e55c37876deef3438474987346f5"
+language = "elixir"
+est_lines = 41795
+reason = "in band but 52% Elixir"
+
+[[considered]]
+name = "postgrex"
+url = "https://github.com/elixir-ecto/postgrex"
+sha = "bd402a5310d0a7b5e7ab1db1d53309876691b3da"
+language = "elixir"
+est_lines = 22687
+reason = "in band and real, passed over for organisation overlap with ecto"
+
+[[considered]]
+name = "axon"
+url = "https://github.com/elixir-nx/axon"
+sha = "04549836956cb19d378f6641aaab59d313bfb84d"
+language = "elixir"
+est_lines = 35960
+reason = "in band and real, passed over for organisation overlap with nx"
+
+[[considered]]
+name = "timex"
+url = "https://github.com/bitwalker/timex"
+sha = "5ad1b8206977ebffb3bf72f88c18d490c36151c8"
+language = "elixir"
+est_lines = 24388
+reason = "in band, but last pushed 2025-06 and the library is in maintenance"
+
+[[considered]]
+name = "pow"
+url = "https://github.com/pow-auth/pow"
+sha = "fe092233f7c85589e90761a761fb290dcc8cf706"
+language = "elixir"
+est_lines = 23756
+reason = "in band, but last pushed 2025-01"
+
+[[considered]]
+name = "java-design-patterns"
+url = "https://github.com/iluwatar/java-design-patterns"
+sha = "41625d8d354cdf6b6f10a82e29c2392b3efd5d20"
+language = "java"
+est_lines = 154588
+reason = "teaching repository -- pattern demonstrations rather than production code"
+
+[[considered]]
+name = "Java"
+url = "https://github.com/TheAlgorithms/Java"
+sha = "8abfcf796ba72b84111565f2bc8bc0fd3c9a2fb9"
+language = "java"
+est_lines = 139850
+reason = "teaching repository -- algorithm exercises rather than production code"
+
+[[considered]]
+name = "interviews"
+url = "https://github.com/kdn251/interviews"
+sha = "03fdcb2703ce72dc0606748733d0c13f09d41d21"
+language = "java"
+est_lines = 20436
+reason = "interview preparation material, not production code"
+
+[[considered]]
+name = "mall"
+url = "https://github.com/macrozheng/mall"
+sha = "0504e86b1f1b6f1b8aa6a734d37a90fb67346be7"
+language = "java"
+est_lines = 83076
+reason = "in band, but the tutorial-shaped e-commerce demo family (mall, mall-learning, mall-swarm) is one house style repeated"
+
+[[considered]]
+name = "arthas"
+url = "https://github.com/alibaba/arthas"
+sha = "141a349a150b4ee0fed986672581e556b6e2b3ca"
+language = "java"
+est_lines = 120815
+reason = "in band and real, passed over for organisation overlap -- alibaba also supplies canal, Sentinel and DataX"
+
+[[considered]]
+name = "guice"
+url = "https://github.com/google/guice"
+sha = "bb8fb34bf994586b81e7bdfe30e3d4fdf36a73b7"
+language = "java"
+est_lines = 119372
+reason = "in band and real, passed over for organisation overlap with gson"
+
+[[considered]]
+name = "Hystrix"
+url = "https://github.com/Netflix/Hystrix"
+sha = "5ce3bc58c38e7ca60ef2fe0e516e390e294ad941"
+language = "java"
+est_lines = 102279
+reason = "in band, but archived-in-practice: no functional change since 2018"
+
+[[considered]]
+name = "realm-java"
+url = "https://github.com/realm/realm-java"
+sha = "e5f4caac29d2ca36022352ef5c1f59045750e021"
+language = "java"
+est_lines = 191689
+reason = "in band at ~191k, but last pushed 2025-09 and the project is retired"
+
+[[considered]]
+name = "lombok"
+url = "https://github.com/projectlombok/lombok"
+sha = "6d6a3e9fec0a9555702561fbeb8eac836575116e"
+language = "java"
+est_lines = 151968
+reason = "in band, but the sources are annotation-processor plumbing whose call graph is unlike ordinary Java"
+
+[[considered]]
+name = "dubbo"
+url = "https://github.com/apache/dubbo"
+sha = "dab47b78434ae36957c196c65c0c805fc36b7f66"
+language = "java"
+est_lines = 554957
+reason = "over the band"
+
+[[considered]]
+name = "kotlin"
+url = "https://github.com/JetBrains/kotlin"
+sha = "7a68359b4b191815103748bf91228ecc88927555"
+language = "kotlin"
+est_lines = 3281853
+reason = "over the band"
+
+[[considered]]
+name = "ktor"
+url = "https://github.com/ktorio/ktor"
+sha = "341505aec0a0806ac6cdf5225e7cdecde7a2f0cb"
+language = "kotlin"
+est_lines = 309797
+reason = "over the band"
+
+[[considered]]
+name = "Signal-Android"
+url = "https://github.com/signalapp/Signal-Android"
+sha = "366aa664a34ba74d664fc5b88f57e6086e6bf2e0"
+language = "kotlin"
+est_lines = 697746
+reason = "over the band"
+
+[[considered]]
+name = "nowinandroid"
+url = "https://github.com/android/nowinandroid"
+sha = "12f80da6518e161ed16a06a68e71fb8a873576d6"
+language = "kotlin"
+est_lines = 36460
+reason = "a reference sample application, written to demonstrate the platform"
+
+[[considered]]
+name = "compose-samples"
+url = "https://github.com/android/compose-samples"
+sha = "018c5207fb63c4f78e5841bd8ddd4faabdf19d3a"
+language = "kotlin"
+est_lines = 54780
+reason = "official samples rather than production code"
+
+[[considered]]
+name = "awesome-kotlin"
+url = "https://github.com/Heapy/awesome-kotlin"
+sha = "966882b09219180782ac13aa7e9957ee5aaccce1"
+language = "kotlin"
+est_lines = 110170
+reason = "a curated list, not a program"
+
+[[considered]]
+name = "plaid"
+url = "https://github.com/nickbutcher/plaid"
+sha = "15958cc287f4a8efb2c39b65ca57cd41c7aad518"
+language = "kotlin"
+est_lines = 23321
+reason = "sample application, and last pushed 2024-01"
+
+[[considered]]
+name = "RxTool"
+url = "https://github.com/Tamsiree/RxTool"
+sha = "fa5f88c24594a562c2a9047c40ceeb94de297428"
+language = "kotlin"
+est_lines = 70196
+reason = "in band, but last pushed 2023-08"
+
+[[considered]]
+name = "fanqiang"
+url = "https://github.com/bannedbook/fanqiang"
+sha = "6b09e61cd77c00020c24676f926d7374afd5dd04"
+language = "kotlin"
+est_lines = 100122
+reason = "in band by Kotlin bytes, but the repository is circumvention documentation and configuration"
+
+[[considered]]
+name = "v2rayNG"
+url = "https://github.com/2dust/v2rayNG"
+sha = "2020807c255b76b09c9ced4255c95600250aef48"
+language = "kotlin"
+est_lines = 37107
+reason = "in band and real, passed over for domain overlap -- the Android proxy clients are a crowded family here"
+
+[[considered]]
+name = "kong"
+url = "https://github.com/Kong/kong"
+sha = "3091de006da341d5f289d446a3d73875a14560e0"
+language = "lua"
+est_lines = 359519
+reason = "over the band"
+
+[[considered]]
+name = "koreader"
+url = "https://github.com/koreader/koreader"
+sha = "cccc87affe5ca2b45208814da0a6d12726f1ee83"
+language = "lua"
+est_lines = 354397
+reason = "over the band"
+
+[[considered]]
+name = "mini.nvim"
+url = "https://github.com/nvim-mini/mini.nvim"
+sha = "25f25d3e6661d942323e56711096de1850d814ec"
+language = "lua"
+est_lines = 219949
+reason = "over the band"
+
+[[considered]]
+name = "xmake"
+url = "https://github.com/xmake-io/xmake"
+sha = "ce68fff92418640019399b8f5edc529a4e737e53"
+language = "lua"
+est_lines = 229257
+reason = "in band by Lua bytes but only 47% Lua, and the Lua half is build description rather than program code"
+
+[[considered]]
+name = "PathOfBuilding"
+url = "https://github.com/PathOfBuildingCommunity/PathOfBuilding"
+sha = "16de4b82d57f1c0de6eb40f37143c32d4da36a02"
+language = "lua"
+est_lines = 7022561
+reason = "far over the band, and dominated by generated game data tables"
+
+[[considered]]
+name = "lite-xl"
+url = "https://github.com/lite-xl/lite-xl"
+sha = "234fa0998016f3da9eb9ceaf3c4bc79b93462276"
+language = "lua"
+est_lines = 22146
+reason = "in band but 57% Lua -- the editor core is C and the definitions cross that boundary"
+
+[[considered]]
+name = "ZeroBraneStudio"
+url = "https://github.com/pkulchenko/ZeroBraneStudio"
+sha = "90eef407af7485611f2e65e61b011254eb5c5826"
+language = "lua"
+est_lines = 151449
+reason = "in band, but last pushed 2024-05"
+
+[[considered]]
+name = "diffview.nvim"
+url = "https://github.com/sindrets/diffview.nvim"
+sha = "4516612fe98ff56ae0415a259ff6361a89419b0a"
+language = "lua"
+est_lines = 21430
+reason = "in band, but last pushed 2024-08"
+
+[[considered]]
+name = "openwrt-passwall"
+url = "https://github.com/Openwrt-Passwall/openwrt-passwall"
+sha = "92714cdb2eb613fbab195f8b6005b9b1d9843294"
+language = "lua"
+est_lines = 25885
+reason = "in band but the Lua is router configuration glue rather than a program"
+
+[[considered]]
+name = "ArknightsGameData"
+url = "https://github.com/Kengxxiao/ArknightsGameData"
+sha = "cc5bf84b0e6d552d9c13619e2683ff25c5bbeecb"
+language = "lua"
+est_lines = 51276
+reason = "Lua-shaped game data rather than code"
+
+[[considered]]
+name = "luaradio"
+url = "https://github.com/vsergeev/luaradio"
+sha = "73468683e22c6b7583a6307f2c897aa8f0a353d3"
+language = "lua"
+est_lines = 152130
+reason = "in band and clean, but last pushed 2025-11"
+
+[[considered]]
+name = "framework"
+url = "https://github.com/laravel/framework"
+sha = "31d8efb9dd7ab1b9bc5c1c7f31288b7505edb579"
+language = "php"
+est_lines = 577318
+reason = "over the band"
+
+[[considered]]
+name = "symfony"
+url = "https://github.com/symfony/symfony"
+sha = "4409df45ff296f9088c683ed5ad94bc340982388"
+language = "php"
+est_lines = 1248088
+reason = "over the band"
+
+[[considered]]
+name = "CodeIgniter"
+url = "https://github.com/bcit-ci/CodeIgniter"
+sha = "3658d731eaabe6117298a105ffb5b9dd59e190ce"
+language = "php"
+est_lines = 66026
+reason = "in band, but last pushed 2024-07 and superseded by CodeIgniter4"
+
+[[considered]]
+name = "PHP_CodeSniffer"
+url = "https://github.com/squizlabs/PHP_CodeSniffer"
+sha = "c6c65ca0dc8608ba87631523b97b2f8d5351a854"
+language = "php"
+est_lines = 135264
+reason = "in band, but development moved to PHPCSStandards/PHP_CodeSniffer in 2024"
+
+[[considered]]
+name = "console"
+url = "https://github.com/symfony/console"
+sha = "757a736f585d40052a1a62f91a3795849fcf18a0"
+language = "php"
+est_lines = 60542
+reason = "in band, but the symfony/* component repositories are read-only splits of symfony/symfony"
+
+[[considered]]
+name = "dbal"
+url = "https://github.com/doctrine/dbal"
+sha = "205fdf552ffafe33c1d12a41a2d6c7217666c32c"
+language = "php"
+est_lines = 94845
+reason = "in band and real, passed over for organisation overlap with doctrine/orm"
+
+[[considered]]
+name = "monica"
+url = "https://github.com/monicahq/monica"
+sha = "e08e91734170b6bbd582cb578532c3948196124e"
+language = "php"
+est_lines = 153574
+reason = "in band, 78% PHP, passed over for domain overlap with the selected web applications"
+
+[[considered]]
+name = "laravel-crm"
+url = "https://github.com/krayin/laravel-crm"
+sha = "2c1209102a77969665b880af9dda730cf9748a04"
+language = "php"
+est_lines = 85454
+reason = "in band but only 50% PHP -- half the tree is Blade and JavaScript"
+
+[[considered]]
+name = "PHPMailer"
+url = "https://github.com/PHPMailer/PHPMailer"
+sha = "f2fd6537c8b98fd192c7ca68aa4672bd6f18113f"
+language = "php"
+est_lines = 24729
+reason = "in band and clean, passed over for domain -- a single-purpose library thinner than the rest of the set"
+
+[[considered]]
+name = "pixelfed"
+url = "https://github.com/pixelfed/pixelfed"
+sha = "545889152689a03c9b0b3f663705f56da9a6dc9b"
+language = "php"
+est_lines = 138874
+reason = "in band but 54% PHP, and the definitions worth finding are split with the JavaScript half"
+
+[[considered]]
+name = "rector"
+url = "https://github.com/rectorphp/rector"
+sha = "1c0a42bb1eef7f819aa132a8ba30307ec8504670"
+language = "php"
+est_lines = 144836
+reason = "selected, cloned, and measured at 300570 lines on 2026-08-18 -- over the band, because the estimate counts the per-rule test fixtures as PHP source; replaced by psysh"
+
+[[considered]]
+name = "rails"
+url = "https://github.com/rails/rails"
+sha = "71191796c080cd7dd378ab85774f9303c6377499"
+language = "ruby"
+est_lines = 678815
+reason = "over the band"
+
+[[considered]]
+name = "discourse"
+url = "https://github.com/discourse/discourse"
+sha = "7b13572c76fa2c32e86267c91c238b0a3d8084f9"
+language = "ruby"
+est_lines = 1463569
+reason = "over the band"
+
+[[considered]]
+name = "jekyll"
+url = "https://github.com/jekyll/jekyll"
+sha = "74d751339d3e534aa51d5d7b0640e9bd743509e4"
+language = "ruby"
+est_lines = 25724
+reason = "in band, but only 70% Ruby -- the rest is the site fixtures it renders"
+
+[[considered]]
+name = "devdocs"
+url = "https://github.com/freeCodeCamp/devdocs"
+sha = "0f9111bcde14522af5bbc3372ed6d4a96392fe77"
+language = "ruby"
+est_lines = 50913
+reason = "in band, but the Ruby half is per-site scraper definitions, a repeated shape rather than varied code"
+
+[[considered]]
+name = "liquid"
+url = "https://github.com/Shopify/liquid"
+sha = "807d45a6b3d4568e64e86b375e3702df2c7c860c"
+language = "ruby"
+est_lines = 21841
+reason = "in band and clean, passed over for domain overlap with asciidoctor as a template/markup processor"
+
+[[considered]]
+name = "backup"
+url = "https://github.com/backup/backup"
+sha = "86c9b07c2a2974376888b1506001f77792d6359a"
+language = "ruby"
+est_lines = 38121
+reason = "in band, but last pushed 2024-07 and the project is retired"
+
+[[considered]]
+name = "fog"
+url = "https://github.com/fog/fog"
+sha = "f3e5ceacc44cd1b63daf9db9a4a5985f0802de50"
+language = "ruby"
+est_lines = 56523
+reason = "in band, but last pushed 2024-11 and superseded by the split fog-* gems"
+
+[[considered]]
+name = "kamal"
+url = "https://github.com/basecamp/kamal"
+sha = "fd335d803b8436863bb2cbbfc5e73e175e5fe0cc"
+language = "ruby"
+est_lines = 26153
+reason = "in band and real, passed over for domain overlap with vagrant as a deployment tool"
+
+[[considered]]
+name = "activeadmin"
+url = "https://github.com/activeadmin/activeadmin"
+sha = "141dd5a17e25f11755a1da2917aa3a9f4cd75500"
+language = "ruby"
+est_lines = 24232
+reason = "in band and real, passed over for organisation-independent but heavy Rails-engine overlap with rails_admin"
+
+[[considered]]
+name = "brew"
+url = "https://github.com/Homebrew/brew"
+sha = "6b0073f0567ba03db6def4350d490ac29ac89afc"
+language = "ruby"
+est_lines = 340718
+reason = "over the band"
+
+[[considered]]
+name = "rubygems"
+url = "https://github.com/ruby/rubygems"
+sha = "f171d2d564401adda633317202149f6ce7e970d3"
+language = "ruby"
+est_lines = 185549
+reason = "selected, cloned, and measured at 213931 lines on 2026-08-18 -- over the band; replaced by inspec"
+
+[[considered]]
+name = "devise"
+url = "https://github.com/heartcombo/devise"
+sha = "372b295fe6f63b4af3269f5dcd51a18c0bc2016c"
+language = "ruby"
+est_lines = 21154
+reason = "selected, cloned, and measured at 17629 lines on 2026-08-18 -- under the band; replaced by grape"
+
+[[considered]]
+name = "swift"
+url = "https://github.com/swiftlang/swift"
+sha = "0c9f6dce53201605ce07805a4bfed3e8cb6daa3f"
+language = "swift"
+est_lines = 2091663
+reason = "far over the band, and only 47% Swift -- the compiler itself is C++"
+
+[[considered]]
+name = "firefox-ios"
+url = "https://github.com/mozilla-mobile/firefox-ios"
+sha = "5e082ca804a7c21237bcbde3aab450c6d1faff4f"
+language = "swift"
+est_lines = 591093
+reason = "over the band"
+
+[[considered]]
+name = "swift-algorithm-club"
+url = "https://github.com/kodecocodes/swift-algorithm-club"
+sha = "05c6d0bc5fa9484dd29eb324603b3452f4f44f39"
+language = "swift"
+est_lines = 31881
+reason = "teaching repository, and last pushed 2024-12"
+
+[[considered]]
+name = "SwiftFormat"
+url = "https://github.com/nicklockwood/SwiftFormat"
+sha = "0256422f1a5e967c68dc923f1905c0a155dca188"
+language = "swift"
+est_lines = 198108
+reason = "band-marginal at ~198k estimated -- a measured count over 200k would put it out"
+
+[[considered]]
+name = "facebook-ios-sdk"
+url = "https://github.com/facebook/facebook-ios-sdk"
+sha = "90cff9a39cbd6cb092c9a044400660d695e3075f"
+language = "swift"
+est_lines = 129371
+reason = "in band, but a vendor SDK whose shape is generated bindings around a remote API"
+
+[[considered]]
+name = "Mos"
+url = "https://github.com/Caldis/Mos"
+sha = "8a2fd112e2af444c37ca5f65f42e9bd19c08a5c2"
+language = "swift"
+est_lines = 44856
+reason = "in band but only 52% Swift"
+
+[[considered]]
+name = "Lona"
+url = "https://github.com/Lona/Lona"
+sha = "03733a8c7a978a87874579cfd453f6a427f01c67"
+language = "swift"
+est_lines = 74153
+reason = "in band, but last pushed 2023-01 and the project is archived in practice"
+
+[[considered]]
+name = "Material"
+url = "https://github.com/CosmicMind/Material"
+sha = "ea59f7c4d72a4c3a3694042b05d4276e2ffd4e26"
+language = "swift"
+est_lines = 20698
+reason = "in band, but last pushed 2022-05"
+
+[[considered]]
+name = "Charts"
+url = "https://github.com/ChartsOrg/Charts"
+sha = "1bad5469f57628782110b05996d4fa00473abf06"
+language = "swift"
+est_lines = 33718
+reason = "in band and real, passed over for domain overlap with the selected UI libraries"
+
+[[considered]]
+name = "UTM"
+url = "https://github.com/utmapp/UTM"
+sha = "b6f7475be54f9cb542c46b131319454b83489ced"
+language = "swift"
+est_lines = 64090
+reason = "in band by Swift bytes, but the substance is the C and Objective-C virtualisation core"
+
+[[considered]]
+name = "Easydict"
+url = "https://github.com/tisfeng/Easydict"
+sha = "602c56b24a68d2917f4d9e5ed5180f9f4cbdf91a"
+language = "swift"
+est_lines = 69982
+reason = "in band but 68% Swift, with the rest Objective-C"
+
+[[considered]]
+name = "zig"
+url = "https://github.com/ziglang/zig"
+sha = "738d2be9d6b6ef3ff3559130c05159ef53336224"
+language = "zig"
+est_lines = 1998994
+reason = "over the band"
+
+[[considered]]
+name = "ghostty"
+url = "https://github.com/ghostty-org/ghostty"
+sha = "448062571c5edf010b7490d06869b88b5ebf8f80"
+language = "zig"
+est_lines = 386291
+reason = "over the band"
+
+[[considered]]
+name = "tigerbeetle"
+url = "https://github.com/tigerbeetle/tigerbeetle"
+sha = "47aeb2212a255273dda508288412e537d11e4b7c"
+language = "zig"
+est_lines = 206008
+reason = "over the band"
+
+[[considered]]
+name = "browser"
+url = "https://github.com/lightpanda-io/browser"
+sha = "5d732eb8f1ec88604a9d07a20fe4998cdc103654"
+language = "zig"
+est_lines = 242818
+reason = "over the band"
+
+[[considered]]
+name = "capy"
+url = "https://github.com/capy-ui/capy"
+sha = "fd77077e296a969ae258c595e75a0723183b3138"
+language = "zig"
+est_lines = 175246
+reason = "in band, but last pushed 2025-12"
+
+[[considered]]
+name = "cyber"
+url = "https://github.com/fubark/cyber"
+sha = "c853fcc2b79da014ac40e9418db7c4cebea63177"
+language = "zig"
+est_lines = 82121
+reason = "in band, but last pushed 2025-12"
+
+[[considered]]
+name = "pluto"
+url = "https://github.com/ZystemOS/pluto"
+sha = "4758313be11285fc951c19964125aa6c95b7e12a"
+language = "zig"
+est_lines = 34590
+reason = "in band, but last pushed 2024-01"
+
+[[considered]]
+name = "zig-course"
+url = "https://github.com/zigcc/zig-course"
+sha = "a759e26fd601805c242d3f3dd1ea70d4d809b547"
+language = "zig"
+est_lines = 33936
+reason = "teaching material rather than production code"
+
+[[considered]]
+name = "Black-Hat-Zig"
+url = "https://github.com/CX330Blake/Black-Hat-Zig"
+sha = "c27e9dde9d014a90ff29f703546fa2b7de30e447"
+language = "zig"
+est_lines = 21269
+reason = "example snippets rather than a program"
+
+[[considered]]
+name = "zine"
+url = "https://github.com/kristoff-it/zine"
+sha = "a8339ef8f61f08ce427694e5992b0e13975b0cab"
+language = "zig"
+est_lines = 20092
+reason = "in band and real, passed over for organisation overlap with superhtml"
