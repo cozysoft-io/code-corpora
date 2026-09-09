@@ -964,5 +964,74 @@
       ]
     ],
     "repair_note": "Let Webpack parse the textlint dependency as an ES module. Use LSP logging without opening a log file in the read-only installation."
+  },
+  "ton-language-server": {
+    "name": "ton-language-server",
+    "url": "https://github.com/ton-blockchain/ton-language-server",
+    "sha": "bf697cc162779ac1797cfbc7f4806cc5991ae09b",
+    "references": [
+      {
+        "extension": "ton",
+        "ids": [
+          "tolk",
+          "func",
+          "tlb",
+          "tact",
+          "fift"
+        ]
+      }
+    ],
+    "kind": "npm",
+    "script": null,
+    "node_bins": {
+      "ton-language-server": "dist/server.js"
+    },
+    "before_prepare": [
+      [
+        "python3",
+        "-c",
+        "import json; from pathlib import Path; path=Path('package.json'); data=json.loads(path.read_text()); data['dependencies']['vscode-languageserver-protocol']='3.17.5'; path.write_text(json.dumps(data,indent=2)+'\\n')"
+      ]
+    ],
+    "before_build": [
+      [
+        "python3",
+        "-c",
+        "from pathlib import Path; path=Path('server/src/server.ts'); text=path.read_text(); assert text.count('Logger.initialize(connection, `${__dirname}/ton-language-server.log`)')==1; path.write_text(text.replace('Logger.initialize(connection, `${__dirname}/ton-language-server.log`)','Logger.initialize(connection)'))"
+      ],
+      [
+        "python3",
+        "-c",
+        "from pathlib import Path\nimport subprocess\nfor language in ['tolk','func','fift','tlb']:\n directory=Path('server/src/languages')/language/('tree-sitter-'+language)\n scanners=list((directory/'src').glob('scanner.c'))\n subprocess.run(['/opt/toolchains/wasi-sdk/bin/clang','-fPIC','-shared','-Os','-Wl,--export=tree_sitter_'+language,'-I'+str(directory/'src'),str(directory/'src/parser.c'),*map(str,scanners),'-o',str(directory/('tree-sitter-'+language+'.wasm'))],check=True)\nPath('corpus.webpack.cjs').write_text(\"const config = require('./webpack.config.js')[0];\\nconfig.entry = {server: config.entry.server};\\nmodule.exports = config;\\n\")\n"
+      ],
+      [
+        "node",
+        "node_modules/webpack/bin/webpack.js",
+        "--config",
+        "corpus.webpack.cjs"
+      ]
+    ],
+    "repair_note": "Build the four bundled WASM grammars; retain yarn.lock protocol version 3.17.5 and bundle only the server. Use LSP logging without opening a log file in the read-only installation."
+  },
+  "django-language-server": {
+    "name": "django-language-server",
+    "url": "https://github.com/joshuadavidthomas/django-language-server",
+    "sha": "ac0770304d9b0d85bf6ecbf09ff02f6d10b45385",
+    "references": [
+      {
+        "extension": "django",
+        "ids": [
+          "django-language-server",
+          "django-template-lsp"
+        ]
+      }
+    ],
+    "kind": "cargo",
+    "network_exception": "Public dependency preparation only; no credentials/private data; host egress rejects internal and metadata HTTP endpoints",
+    "repair_lock": true,
+    "repair_note": "Regenerate the stale lockfile and build only djls, excluding the corpus download/test utility.",
+    "cargo_packages": [
+      "djls"
+    ]
   }
 }
