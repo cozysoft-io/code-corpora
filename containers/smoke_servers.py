@@ -12,7 +12,7 @@ import tempfile
 import time
 
 
-def probe(command, diagnostic, initialization_options=None):
+def probe(command, diagnostic, initialization_options=None, timeout=8):
     # Temporary stderr is bounded by the container's tmpfs; only a short excerpt
     # reaches the report. Keep protocol stdout separate.
     stderr = tempfile.TemporaryFile()
@@ -28,7 +28,7 @@ def probe(command, diagnostic, initialization_options=None):
     selector = selectors.DefaultSelector()
     selector.register(process.stdout, selectors.EVENT_READ)
     buf = b''
-    deadline = time.monotonic()+8
+    deadline = time.monotonic()+timeout
     try:
         send({'jsonrpc': '2.0', 'id': 1, 'method': 'initialize', 'params': {
             'processId': None, 'rootUri': 'file:///work/project', 'capabilities': {},
@@ -96,7 +96,9 @@ for directory in [Path('/opt/corpus/servers')/sys.argv[1]]:
         for arguments in ([], ['--stdio'], ['--lsp'], ['--lsp', '--stdio'], ['lsp'], ['server'], ['language-server'], ['move-analyzer'], ['serve'], ['lsp-proxy'], ['start', '--stdio']):
             record['attempts'].append([entry['name'], *arguments])
             diagnostic = {'command': [entry['name'], *arguments]}
-            try: passed = probe(command+arguments, diagnostic, initialization_options)
+            # Kotlin initializes its compiler and class path before replying.
+            timeout = 30 if directory.name == 'kotlin-language-server' else 8
+            try: passed = probe(command+arguments, diagnostic, initialization_options, timeout)
             except (OSError, ValueError, TypeError) as error:
                 passed = False
                 record['last_error'] = str(error)[:500]
