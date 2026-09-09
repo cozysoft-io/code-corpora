@@ -675,5 +675,28 @@
       "nomicfoundation-solidity-language-server": "server/out/index.js"
     },
     "repair_note": "Use the release npm workspaces; compile only the server."
+  },
+  "dexter": {
+    "name": "dexter",
+    "url": "https://github.com/remoteoss/dexter",
+    "sha": "5e7b86e12a2e6f15dbc350518713345bdd9c7bac",
+    "references": [
+      {
+        "extension": "elixir",
+        "ids": [
+          "expert",
+          "elixir-ls",
+          "dexter",
+          "next-ls",
+          "lexical"
+        ]
+      }
+    ],
+    "kind": "go",
+    "network_exception": "Public dependency preparation only; no credentials/private data; host egress rejects internal and metadata HTTP endpoints",
+    "go_packages": [
+      "./cmd"
+    ],
+    "repair_note": "Build the production cmd package, excluding the test-only root."
   }
 }
