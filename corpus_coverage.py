@@ -225,14 +225,21 @@ def report(document):
     lines += ["", f"{len(document['registrations'])} registrations; {len(languages)} language names; "
               f"{len(suffix_names)} unique suffixes/filenames; {below} languages below {MINIMUM_FILES} files or {MINIMUM_LINES:,} raw lines combined. "
               f"{len(document['unavailable_extensions'])} extension inventories unavailable.", "",
-              "Full registrations, pins, per-suffix counts, ambiguities, and failures are in [language-coverage.json](language-coverage.json).", "",
-              "| Language | Suffixes / filenames | Training files | Training lines | Test files | Test lines | Below threshold |",
-              "| --- | --- | ---: | ---: | ---: | ---: | --- |"]
-    for name, language in document["languages"].items():
-        suffixes = ", ".join(f"`{suffix.replace('|', '&#124;')}`" for suffix in language["suffixes"]) or "—"
-        status = "yes" if language["below_threshold"] else ("no" if language["suffixes"] else "no filename registration")
-        training, test = language["training"], language["test"]
-        lines.append(f"| {name.replace('|', '&#124;')} | {suffixes} | {training['files']:,} | {training['lines']:,} | {test['files']:,} | {test['lines']:,} | {status} |")
+              "Full registrations, pins, per-suffix counts, ambiguities, and failures are in [language-coverage.json](language-coverage.json)."]
+    for below_threshold, title in [(True, "Below coverage threshold"), (False, "Meets coverage threshold")]:
+        lines += ["", f"## {title}", "",
+                  "| Language | Suffixes / filenames | Training files | Training lines | Test files | Test lines |",
+                  "| --- | --- | ---: | ---: | ---: | ---: |"]
+        for name, language in document["languages"].items():
+            if not language["suffixes"] or language["below_threshold"] != below_threshold:
+                continue
+            suffixes = ", ".join(f"`{suffix.replace('|', '&#124;')}`" for suffix in language["suffixes"])
+            training, test = language["training"], language["test"]
+            lines.append(f"| {name.replace('|', '&#124;')} | {suffixes} | {training['files']:,} | {training['lines']:,} | {test['files']:,} | {test['lines']:,} |")
+    unregistered = [name for name, language in document["languages"].items() if not language["suffixes"]]
+    if unregistered:
+        lines += ["", "## No filename registration", "",
+                  "These languages cannot be measured by the filename census: " + ", ".join(unregistered) + "."]
     if document["unavailable_extensions"]:
         lines += ["", "## Unavailable extension inventories", ""]
         lines.extend(f"- `{row['source']}`: {row['error']}" for row in document["unavailable_extensions"])
