@@ -559,5 +559,26 @@
       ]
     ],
     "repair_note": "Apply the release TypeScript patches and regenerate diagnostics; build only the production command, excluding test fixtures."
+  },
+  "baml": {
+    "name": "baml",
+    "url": "https://github.com/BoundaryML/baml",
+    "sha": "d9c0bc720d813821cdd00c90a774bf6f71e4e572",
+    "references": [
+      {
+        "extension": "baml",
+        "ids": [
+          "baml-language-server"
+        ]
+      }
+    ],
+    "kind": "cargo",
+    "network_exception": "Public dependency preparation only; no credentials/private data; host egress rejects internal and metadata HTTP endpoints",
+    "directory": "engine",
+    "cargo_packages": [
+      "baml-cli"
+    ],
+    "repair_note": "Build the native Rust baml-cli lsp command; full release LTO needs a larger memory limit locally.",
+    "memory": "12g"
   }
 }
