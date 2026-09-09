@@ -119,6 +119,8 @@ def build(arguments, state):
     result = subprocess.run(['git', '-C', str(source), 'rev-parse', 'HEAD'], capture_output=True, text=True)
     job['source_head'] = result.stdout.strip() if result.returncode == 0 else None
     job['builder_image'] = image
+    job['memory'] = arguments.memory
+    job['cpus'] = 2
     directory = state/'builds'/image/kind/name
     with locked(state/'locks'/(kind+'-'+name+'.lock')):
         work = directory/'work'

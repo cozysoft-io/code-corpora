@@ -178,5 +178,117 @@
       ]
     ],
     "repair_note": "Prepare checksum-pinned standard and domain library bundles before offline compilation."
+  },
+  "bicep": {
+    "name": "bicep",
+    "url": "https://github.com/Azure/bicep",
+    "sha": "3f73e1a234fcdf3907d606504aa2ff546921da03",
+    "references": [
+      {
+        "extension": "bicep",
+        "ids": [
+          "bicep-ls"
+        ]
+      }
+    ],
+    "kind": "dotnet",
+    "fetch_git": true,
+    "project": "src/Bicep.LangServer/Bicep.LangServer.csproj",
+    "executable": "Bicep.LangServer",
+    "before_prepare": [
+      [
+        "git",
+        "fetch",
+        "--unshallow",
+        "origin",
+        "3f73e1a234fcdf3907d606504aa2ff546921da03"
+      ]
+    ],
+    "repair_note": "Provide ancestry required by NerdbankGitVersioning."
+  },
+  "kotlin-language-server": {
+    "name": "kotlin-language-server",
+    "url": "https://github.com/fwcd/kotlin-language-server",
+    "sha": "f532bcc9c6578f5a35009a8b5f281f93d4d131ba",
+    "references": [
+      {
+        "extension": "kotlin",
+        "ids": [
+          "kotlin-language-server",
+          "kotlin-lsp"
+        ]
+      }
+    ],
+    "kind": "gradle",
+    "fetch_git": true,
+    "prepare_timeout": 1800,
+    "gradle_tasks": [
+      ":server:installDist"
+    ],
+    "outputs": [
+      {
+        "source": "server/build/install/server/bin/kotlin-language-server",
+        "name": "kotlin-language-server",
+        "path": "bin/kotlin-language-server"
+      }
+    ],
+    "runtime_directories": [
+      {
+        "source": "server/build/install/server/lib",
+        "path": "lib"
+      }
+    ],
+    "java_toolchain": "java-11",
+    "repair_note": "Use the Java 11 toolchain required by this release."
+  },
+  "basedpyright": {
+    "name": "basedpyright",
+    "url": "https://github.com/DetachHead/basedpyright",
+    "sha": "d64b2274480bc64c146f5b387127d4bb35eb403e",
+    "references": [
+      {
+        "extension": "basedpyright",
+        "ids": [
+          "basedpyright"
+        ]
+      }
+    ],
+    "kind": "pnpm",
+    "package_manager": "pnpm@10.34.4",
+    "script": "build:cli:dev",
+    "node_bins": {
+      "basedpyright-langserver": "packages/pyright/langserver.index.js",
+      "basedpyright": "packages/pyright/index.js"
+    },
+    "prepare_commands": [
+      [
+        "python3",
+        "-m",
+        "venv",
+        "/work/docify"
+      ],
+      [
+        "/work/docify/bin/pip",
+        "install",
+        "docify==1.2.1"
+      ],
+      [
+        "python3",
+        "-c",
+        "from pathlib import Path; import subprocess; Path(\"corpus-docify-requirements.txt\").write_text(subprocess.check_output([\"/work/docify/bin/pip\", \"freeze\"], text=True))"
+      ]
+    ],
+    "before_build": [
+      [
+        "python3",
+        "-c",
+        "from pathlib import Path; p=Path(\"build/py_old/generate_docstubs.py\"); p.write_text(p.read_text().replace(\"workers=0,\", \"workers=2,\"))"
+      ],
+      [
+        "/work/docify/bin/python",
+        "build/py_old/generate_docstubs.py"
+      ]
+    ],
+    "repair_note": "Generate real docstubs with the uv.lock-pinned docify; includes documentation for the builder Python version and OS."
   }
 }

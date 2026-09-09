@@ -15,3 +15,5 @@ COPY toolchains.go-compat.json install_go_compat.py /opt/corpus/
 RUN python3 /opt/corpus/install_go_compat.py
 COPY toolchains.java.json install_tar_toolchain.py /opt/corpus/
 RUN python3 /opt/corpus/install_tar_toolchain.py /opt/corpus/toolchains.java.json java-25
+COPY toolchains.java-11.json /opt/corpus/
+RUN python3 /opt/corpus/install_tar_toolchain.py /opt/corpus/toolchains.java-11.json java-11
