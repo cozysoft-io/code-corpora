@@ -348,5 +348,144 @@
         "--use-lock-file"
       ]
     ]
+  },
+  "pkl-lsp": {
+    "name": "pkl-lsp",
+    "url": "https://github.com/apple/pkl-lsp",
+    "sha": "2a364e145629d3a2caa8ed9cf9b76b93db944241",
+    "references": [
+      {
+        "extension": "pkl",
+        "ids": [
+          "pkl"
+        ]
+      }
+    ],
+    "kind": "gradle",
+    "java_toolchain": "java-25",
+    "fetch_git": true,
+    "prepare_timeout": 1800,
+    "gradle_tasks": [
+      "installDist",
+      "-x",
+      "updateTreeSitterRepo",
+      "-x",
+      "updateTreeSitterPklRepo"
+    ],
+    "build_commands": [
+      [
+        "python3",
+        "-c",
+        "from pathlib import Path; Path(\"/work/pkl-lsp\").write_text('#!/bin/sh\\nexport JAVA_HOME=/opt/toolchains/java-25\\nexec /opt/corpus/servers/pkl-lsp/package/bin/pkl-lsp \"$@\"\\n')"
+      ]
+    ],
+    "runtime_directories": [
+      {
+        "source": "build/install/pkl-lsp",
+        "path": "package"
+      }
+    ],
+    "outputs": [
+      {
+        "source": "/work/pkl-lsp",
+        "path": "pkl-lsp",
+        "name": "pkl-lsp"
+      }
+    ],
+    "prepare_commands": [
+      [
+        "bash",
+        "gradlew",
+        "--no-daemon",
+        "--max-workers=2",
+        "--stacktrace",
+        "installZig",
+        "setupTreeSitterRepo",
+        "setupTreeSitterPklRepo"
+      ]
+    ],
+    "repair_note": "Prepare Zig and pinned native grammar repositories online; skip Git refresh tasks during offline compilation."
+  },
+  "vscode-motoko": {
+    "name": "vscode-motoko",
+    "url": "https://github.com/caffeinelabs/vscode-motoko",
+    "sha": "d185d1ed17492f39dfbdcf9f89c389b21ad60e03",
+    "references": [
+      {
+        "extension": "motoko",
+        "ids": [
+          "motoko-language-server"
+        ]
+      }
+    ],
+    "kind": "npm",
+    "before_build": [
+      [
+        "python3",
+        "-c",
+        "from pathlib import Path; directory=Path(\"src/generated\"); directory.mkdir(exist_ok=True); (directory/\"aaaaa-aa.did.ts\").write_text(\"export default `\"+Path(\"/work/ic.did\").read_text()+\"`;\\n\")"
+      ],
+      [
+        "npm",
+        "run",
+        "compile:pre"
+      ],
+      [
+        "npm",
+        "run",
+        "compile:formatter"
+      ],
+      [
+        "npm",
+        "run",
+        "compile:keywords"
+      ],
+      [
+        "npm",
+        "run",
+        "compile:server"
+      ],
+      [
+        "npm",
+        "run",
+        "compile:motoko"
+      ]
+    ],
+    "node_bins": {
+      "motoko-language-server": "out/server.js"
+    },
+    "prepare_commands": [
+      [
+        "python3",
+        "-c",
+        "import hashlib, shutil, urllib.request\nfrom pathlib import Path\npath = Path('/work/ic.did')\nwith urllib.request.urlopen('https://raw.githubusercontent.com/dfinity/portal/ed742236de3b54ed56161f188913536259941a12/docs/references/_attachments/ic.did', timeout=120) as response, path.open('wb') as output:\n    shutil.copyfileobj(response, output)\nwith path.open('rb') as stream:\n    assert hashlib.file_digest(stream, 'sha256').hexdigest() == '8b5fbb5ab8a585c67f4180607f38bd66953a4e280d328a0ca380eee1a880dc84', 'Input checksum mismatch'\n"
+      ]
+    ],
+    "repair_note": "Generate the Candid module offline from a checksum-pinned portal revision."
+  },
+  "dhall-haskell": {
+    "name": "dhall-haskell",
+    "url": "https://github.com/dhall-lang/dhall-haskell",
+    "sha": "addf2bae80bc1b2d38536fd6555f8e829d8f8b2b",
+    "references": [
+      {
+        "extension": "dhall",
+        "ids": [
+          "dhall-lsp-server"
+        ]
+      }
+    ],
+    "kind": "cabal",
+    "fetch_git": true,
+    "submodules": true,
+    "cabal_targets": [
+      "exe:dhall-lsp-server"
+    ],
+    "prepare_timeout": 1800,
+    "build_timeout": 7200,
+    "environment": {
+      "PATH": "/opt/toolchains/cabal:/usr/bin:/bin"
+    },
+    "repair_note": "Use the builder base GHC 9.4 and Cabal, not the incompatible supplemental GHC 9.10."
   }
 }

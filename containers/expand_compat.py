@@ -16,6 +16,7 @@ for source, target in [('Containerfile.build-compat', 'Containerfile'),
                        ('toolchains.go-compat.json', 'toolchains.go-compat.json'),
                        ('install_go_compat.py', 'install_go_compat.py'),
                        ('toolchains.java.json', 'toolchains.java.json'),
+                       ('toolchains.java-11.json', 'toolchains.java-11.json'),
                        ('install_tar_toolchain.py', 'install_tar_toolchain.py')]:
     shutil.copyfile(ROOT/'repo/containers'/source, context/target)
 base = subprocess.check_output([*PODMAN, 'inspect', '--format={{.Id}}', 'localhost/code-corpora-build:expanded'], text=True).strip()
