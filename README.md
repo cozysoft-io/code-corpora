@@ -91,6 +91,11 @@ verification retains the existing dependency checks, using `.corpus/build/SPLIT/
 for build artifacts. Migrated build products may need regeneration because they
 can embed the old absolute paths.
 
+Precompiled Tree-sitter grammars are available in the private
+`ghcr.io/mgsloan/code-corpora-grammars` image. See the
+[container usage instructions](containers/README.md#runtime-use) for running
+them with Podman.
+
 # Recorded data and history
 
 [`lsp-data/`](https://github.com/cozysoft-io/code-corpora-lsp-data) stores the latest
