@@ -851,12 +851,12 @@ upstream_ref = "refs/tags/0.5.0"
 [[repo]]
 name = "magequery"
 url = "https://github.com/cresset-tools/magequery"
-sha = "765294ac3f527b35fd1cc5752a64357d29104ba5"
+sha = "af40dfab90a529d9ac8c5076c4903ff784755bf8"
 sources = ["magequery-lsp"]
 role = "source"
 selection = "version-tag"
-version = "v0.17.5"
-upstream_ref = "refs/tags/v0.17.5"
+version = "magequery-v0.17.5"
+upstream_ref = "refs/tags/magequery-v0.17.5"
 
 [[repo]]
 name = "ameba-ls"
