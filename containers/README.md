@@ -275,9 +275,8 @@ The existing progress release uses private
 `ghcr.io/mgsloan/code-corpora-{build,grammars,servers}` packages. The intended
 namespace for the next release is `ghcr.io/cozysoft-io/`; existing lock records
 continue to identify the actual published digests.
-Before publishing again, transfer the existing private
-[publishing repository](https://github.com/mgsloan/corpus-containers) to
-`cozysoft-io/corpus-containers`, or create that private repository from `publisher/`.
+The private [publishing repository](https://github.com/cozysoft-io/corpus-containers)
+is deployed from `publisher/`.
 `upload_release.py` targets this organization repository; the workflow publishes
 under its owner's GHCR namespace and checks organization package visibility.
 Associate the packages with `cozysoft-io/code-corpora` and grant the publisher
@@ -299,8 +298,15 @@ and validation before the next publication. Do not publish periodic snapshots.
 The workflow runs only on manual dispatch. Local compilation and checkpointing
 continue independently of publication.
 
-To publish another snapshot, download its OCI archives and SHA-256 files through
-IAP (use resumable `rsync` for large files). Run `prepare_upload.py --help`, create
+For small snapshots, download OCI archives and SHA-256 files through IAP.
+For large archives, use temporary private Cloud Storage: a dedicated signer grants
+object-specific PUT/GET URLs, and `upload_signed.py` uploads directly from the VM.
+Run `prepare_upload.py --manifest-only` there and set each image's `archive_url`
+in the private release manifest to its signed GET URL. No cloud or GitHub account
+credentials are copied to the VM. Keep URL files private, and delete the temporary
+bucket and signer after verifying publication.
+
+Run `prepare_upload.py --help`, create
 a private prerelease in the publisher repository, then run:
 
 ```bash

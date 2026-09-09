@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Split local OCI archives into private GitHub release assets; never execute them."""
 import argparse
+from contextlib import nullcontext
 import hashlib
 import json
 from pathlib import Path
@@ -8,6 +9,7 @@ import re
 
 p = argparse.ArgumentParser()
 p.add_argument('--output', type=Path, required=True)
+p.add_argument('--manifest-only', action='store_true', help='Hash chunks without copying them; use with a signed archive URL')
 p.add_argument('--image', nargs=3, action='append', metavar=('KIND', 'ARCHIVE', 'IMAGE_ID'), required=True)
 args = p.parse_args()
 args.output.mkdir(parents=True, exist_ok=True)
@@ -26,16 +28,16 @@ for kind, archive, image_id in args.image:
             path = args.output/name
             digest = hashlib.sha256()
             size = 0
-            with path.open('wb') as output:
+            with (nullcontext(None) if args.manifest_only else path.open('wb')) as output:
                 while size < 1800*1024*1024:
                     block = source.read(min(8*1024*1024, 1800*1024*1024-size))
                     if not block: break
-                    output.write(block)
+                    if output is not None: output.write(block)
                     whole.update(block)
                     digest.update(block)
                     size += len(block)
             if not size:
-                path.unlink()
+                if not args.manifest_only: path.unlink()
                 break
             parts.append({'name': name, 'sha256': digest.hexdigest(), 'bytes': size})
             number += 1

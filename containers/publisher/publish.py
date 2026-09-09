@@ -6,6 +6,37 @@ import os
 from pathlib import Path
 import re
 import subprocess
+import urllib.parse
+import urllib.request
+
+
+def download_signed_archive(spec, archive):
+    url = spec['archive_url']
+    parsed = urllib.parse.urlsplit(url)
+    if parsed.scheme != 'https' or parsed.netloc != 'storage.googleapis.com':
+        raise ValueError('Signed archives must use the Cloud Storage HTTPS endpoint')
+    whole = hashlib.sha256()
+    try:
+        response = urllib.request.urlopen(url, timeout=300)
+    except Exception:
+        # Signed URLs are temporary credentials; keep them out of diagnostics.
+        raise RuntimeError('Could not open the signed archive URL') from None
+    with response as source, archive.open('wb') as output:
+        if source.status != 200: raise ValueError('Unexpected archive response')
+        for part in spec['parts']:
+            remaining = part['bytes']
+            if not isinstance(remaining, int) or remaining <= 0: raise ValueError('Invalid chunk size')
+            digest = hashlib.sha256()
+            while remaining:
+                block = source.read(min(8*1024*1024, remaining))
+                if not block: raise ValueError('Truncated archive')
+                remaining -= len(block)
+                digest.update(block)
+                whole.update(block)
+                output.write(block)
+            if digest.hexdigest() != part['sha256']: raise ValueError('Chunk checksum mismatch')
+        if source.read(1): raise ValueError('Unexpected trailing archive data')
+    if whole.hexdigest() != spec['sha256']: raise ValueError('Archive checksum mismatch')
 
 
 def api(path):
@@ -34,22 +65,25 @@ manifest = json.loads(Path('incoming/manifest.json').read_text())
 spec = manifest['images'][kind]
 archive = Path('image.tar')
 whole = hashlib.sha256()
-with archive.open('wb') as output:
-    for part in spec['parts']:
-        name = part['name']
-        if not re.fullmatch(r'[A-Za-z0-9_.-]+', name): raise ValueError('Unsafe asset name')
-        subprocess.run(['gh', 'release', 'download', tag, '--repo', repo,
-                        '--pattern', name, '--dir', 'incoming'], check=True)
-        path = Path('incoming')/name
-        digest = hashlib.sha256()
-        with path.open('rb') as source:
-            while block := source.read(8*1024*1024):
-                digest.update(block)
-                whole.update(block)
-                output.write(block)
-        if digest.hexdigest() != part['sha256']: raise ValueError('Chunk checksum mismatch')
-        path.unlink()
-if whole.hexdigest() != spec['sha256']: raise ValueError('Archive checksum mismatch')
+if spec.get('archive_url'):
+    download_signed_archive(spec, archive)
+else:
+    with archive.open('wb') as output:
+        for part in spec['parts']:
+            name = part['name']
+            if not re.fullmatch(r'[A-Za-z0-9_.-]+', name): raise ValueError('Unsafe asset name')
+            subprocess.run(['gh', 'release', 'download', tag, '--repo', repo,
+                            '--pattern', name, '--dir', 'incoming'], check=True)
+            path = Path('incoming')/name
+            digest = hashlib.sha256()
+            with path.open('rb') as source:
+                while block := source.read(8*1024*1024):
+                    digest.update(block)
+                    whole.update(block)
+                    output.write(block)
+            if digest.hexdigest() != part['sha256']: raise ValueError('Chunk checksum mismatch')
+            path.unlink()
+    if whole.hexdigest() != spec['sha256']: raise ValueError('Archive checksum mismatch')
 transport = 'oci-archive:'+str(archive)
 image_manifest = json.loads(subprocess.check_output(['skopeo', 'inspect', '--raw', transport]))
 if image_manifest['config']['digest'] != spec['image_id']: raise ValueError('Image config digest mismatch')

@@ -20,13 +20,15 @@ manifest_path = args.directory/'manifest.json'
 manifest = json.loads(manifest_path.read_text())
 assets = []
 for kind in args.kind:
+    if manifest['images'][kind].get('archive_url'): continue
     for part in manifest['images'][kind]['parts']:
         if Path(part['name']).name != part['name']: raise ValueError('Unsafe asset path')
         path = args.directory/part['name']
         with path.open('rb') as source: actual = hashlib.file_digest(source, 'sha256').hexdigest()
         if actual != part['sha256']: raise ValueError('Asset checksum mismatch: '+str(path))
         assets.append(str(path))
-subprocess.run(['gh', 'release', 'upload', args.release, '--repo', repo, '--clobber', *assets], check=True)
+if assets:
+    subprocess.run(['gh', 'release', 'upload', args.release, '--repo', repo, '--clobber', *assets], check=True)
 # Publish the manifest last; a dispatched job will only see complete assets.
 subprocess.run(['gh', 'release', 'upload', args.release, '--repo', repo, '--clobber', str(manifest_path)], check=True)
 subprocess.run(['gh', 'workflow', 'run', 'publish.yml', '--repo', repo,
