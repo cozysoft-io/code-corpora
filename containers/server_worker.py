@@ -213,7 +213,9 @@ elif phase == 'build':
             run(['go', 'build', '-mod=readonly', '-p', '2', '-trimpath', '-o', str(output/name), package])
             bins.append({'name': name, 'path': name})
     elif kind == 'cabal':
-        run(['cabal', 'v2-build', '--offline', '-j2', '--disable-tests', '--disable-benchmarks', *job['cabal_targets']])
+        # Cabal 3.14's --offline rejects remote package origins even when cached.
+        # This phase's network namespace already forbids downloads.
+        run(['cabal', 'v2-build', '-j2', '--disable-tests', '--disable-benchmarks', *job['cabal_targets']])
         for target in job['cabal_targets']:
             artifact = Path(subprocess.check_output(['cabal', 'list-bin', '--offline', target], text=True).strip())
             shutil.copyfile(artifact, output/artifact.name)
