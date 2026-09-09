@@ -1,0 +1,316 @@
+{
+  "arkts": {
+    "kind": "pnpm",
+    "before_build": [
+      [
+        "pnpm",
+        "--recursive",
+        "--workspace-concurrency=2",
+        "--filter=@arkts/language-server...",
+        "run",
+        "build"
+      ]
+    ],
+    "node_bins": {
+      "ets-language-server": "packages/language-server/bin/ets-language-server.js"
+    }
+  },
+  "astro": {
+    "kind": "pnpm",
+    "before_build": [
+      [
+        "pnpm",
+        "--recursive",
+        "--workspace-concurrency=2",
+        "--filter=@astrojs/language-server...",
+        "run",
+        "build"
+      ]
+    ],
+    "node_bins": {
+      "astro-ls": "packages/language-tools/language-server/bin/nodeServer.js"
+    }
+  },
+  "dep-beacon": {
+    "kind": "pnpm",
+    "before_build": [
+      [
+        "pnpm",
+        "--recursive",
+        "--workspace-concurrency=2",
+        "--filter=@santi020k/dep-beacon-lsp...",
+        "run",
+        "build"
+      ]
+    ],
+    "node_bins": {
+      "dep-beacon-lsp": "packages/dep-beacon-lsp/dist/server.cjs"
+    }
+  },
+  "hardhat-vscode": {
+    "kind": "pnpm",
+    "before_build": [
+      [
+        "pnpm",
+        "--recursive",
+        "--workspace-concurrency=2",
+        "--filter=@nomicfoundation/solidity-language-server...",
+        "run",
+        "build"
+      ]
+    ],
+    "node_bins": {
+      "nomicfoundation-solidity-language-server": "server/out/index.js"
+    }
+  },
+  "language-server--marko-js": {
+    "kind": "pnpm",
+    "before_build": [
+      [
+        "pnpm",
+        "exec",
+        "tsc",
+        "-b"
+      ],
+      [
+        "pnpm",
+        "--recursive",
+        "--workspace-concurrency=2",
+        "--filter=@marko/language-server...",
+        "run",
+        "build"
+      ]
+    ],
+    "node_bins": {
+      "marko-language-server": "packages/language-server/bin.js"
+    }
+  },
+  "language-tools": {
+    "kind": "pnpm",
+    "before_build": [
+      [
+        "pnpm",
+        "--recursive",
+        "--workspace-concurrency=2",
+        "--filter=@prisma/language-server...",
+        "run",
+        "build"
+      ]
+    ],
+    "node_bins": {
+      "prisma-language-server": "packages/language-server/dist/bin.js"
+    }
+  },
+  "likec4": {
+    "kind": "pnpm",
+    "before_build": [
+      [
+        "pnpm",
+        "--recursive",
+        "--workspace-concurrency=2",
+        "--filter=@likec4/language-server...",
+        "run",
+        "build"
+      ],
+      [
+        "pnpm",
+        "--recursive",
+        "--workspace-concurrency=2",
+        "--filter=@likec4/lsp...",
+        "run",
+        "build"
+      ]
+    ],
+    "node_bins": {
+      "likec4-language-server": "packages/language-server/bin/likec4-language-server.mjs",
+      "likec4-lsp": "packages/lsp/bin/likec4-lsp.mjs"
+    }
+  },
+  "ts-macro": {
+    "kind": "pnpm",
+    "before_build": [
+      [
+        "pnpm",
+        "--recursive",
+        "--workspace-concurrency=2",
+        "--filter=@ts-macro/language-server...",
+        "run",
+        "build"
+      ]
+    ],
+    "node_bins": {
+      "tsm-language-server": "packages/language-server/bin/tsm-language-server.js"
+    }
+  },
+  "tsrx": {
+    "kind": "pnpm",
+    "before_build": [
+      [
+        "pnpm",
+        "--recursive",
+        "--workspace-concurrency=2",
+        "--filter=@tsrx/language-server...",
+        "run",
+        "build"
+      ]
+    ],
+    "node_bins": {
+      "tsrx-language-server": "packages/language-server/dist/language-server.js"
+    }
+  },
+  "vscode-containers": {
+    "kind": "pnpm",
+    "before_build": [
+      [
+        "pnpm",
+        "--recursive",
+        "--workspace-concurrency=2",
+        "--filter=@microsoft/compose-language-service...",
+        "run",
+        "build"
+      ]
+    ],
+    "node_bins": {
+      "docker-compose-langserver": "packages/compose-language-service/bin/docker-compose-langserver"
+    }
+  },
+  "vscode-ansible": {
+    "kind": "pnpm",
+    "before_build": [
+      [
+        "pnpm",
+        "--recursive",
+        "--workspace-concurrency=2",
+        "--filter=@ansible/ansible-language-server...",
+        "run",
+        "compile"
+      ]
+    ],
+    "node_bins": {
+      "ansible-language-server": "packages/ansible-language-server/dist/cli.cjs"
+    }
+  },
+  "coffeesense": {
+    "kind": "npm",
+    "npm_install_directories": [
+      ".",
+      "server"
+    ],
+    "before_build": [
+      [
+        "npm",
+        "--prefix",
+        "server",
+        "run",
+        "compile"
+      ]
+    ],
+    "node_bins": {
+      "coffeesense-language-server": "server/bin/coffeesense-language-server"
+    }
+  },
+  "stimulus-lsp": {
+    "kind": "npm",
+    "npm_install_directories": [
+      ".",
+      "client",
+      "server"
+    ],
+    "before_build": [
+      [
+        "./node_modules/.bin/tsc",
+        "-b"
+      ],
+      [
+        "node",
+        "server/scripts/executable.mjs"
+      ]
+    ],
+    "node_bins": {
+      "stimulus-language-server": "server/out/stimulus-language-server"
+    }
+  },
+  "vscode-stylelint": {
+    "kind": "npm",
+    "before_build": [
+      [
+        "npm",
+        "--workspace=@stylelint/language-server",
+        "run",
+        "build"
+      ]
+    ],
+    "node_bins": {
+      "stylelint-language-server": "packages/language-server/bin/stylelint-language-server.mjs"
+    }
+  },
+  "vscode-antlers-language-server": {
+    "kind": "npm",
+    "npm_install_directories": [
+      ".",
+      "client",
+      "server"
+    ],
+    "script": "bundle:antlersls",
+    "node_bins": {
+      "antlersls": "antlersls/server.js"
+    }
+  },
+  "some-sass": {
+    "kind": "npm",
+    "before_build": [
+      [
+        "npm",
+        "--workspace=some-sass-language-server",
+        "run",
+        "build:production"
+      ]
+    ],
+    "node_bins": {
+      "some-sass-language-server": "packages/language-server/bin/some-sass-language-server"
+    }
+  },
+  "naive-ui-intellisense": {
+    "kind": "npm",
+    "npm_install_directories": [
+      ".",
+      "client",
+      "server"
+    ],
+    "prepare_commands": [
+      [
+        "npm",
+        "--prefix",
+        "server",
+        "run",
+        "download"
+      ]
+    ],
+    "before_build": [
+      [
+        "npm",
+        "--prefix",
+        "server",
+        "run",
+        "build"
+      ]
+    ],
+    "node_bins": {
+      "naive-ui-language-server": "server/dist/server.js"
+    }
+  },
+  "tact-language-server": {
+    "kind": "npm",
+    "script": "build",
+    "node_bins": {
+      "tact-language-server": "dist/server.js"
+    }
+  },
+  "ton-language-server": {
+    "kind": "npm",
+    "script": "build",
+    "node_bins": {
+      "ton-language-server": "dist/server.js"
+    }
+  }
+}

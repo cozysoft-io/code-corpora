@@ -1,0 +1,9 @@
+ARG BUILDER_IMAGE
+FROM ${BUILDER_IMAGE}
+COPY toolchains.extra.json /opt/corpus/toolchains.extra.json
+COPY install_extra.py /opt/corpus/install_extra.py
+RUN python3 /opt/corpus/install_extra.py
+ENV DOTNET_ROOT=/opt/toolchains/dotnet \
+    DOTNET_CLI_TELEMETRY_OPTOUT=1 \
+    DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1
+ENV PATH=/opt/toolchains/dotnet:${PATH}

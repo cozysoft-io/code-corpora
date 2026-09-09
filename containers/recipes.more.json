@@ -1,0 +1,696 @@
+{
+  "vscode-ansible": {
+    "kind": "pnpm",
+    "before_build": [
+      [
+        "pnpm",
+        "--recursive",
+        "--workspace-concurrency=2",
+        "--filter=@ansible/ansible-language-server...",
+        "run",
+        "compile"
+      ]
+    ],
+    "node_bins": {
+      "ansible-language-server": "packages/ansible-language-server/dist/cli.cjs"
+    }
+  },
+  "some-sass": {
+    "kind": "npm",
+    "before_build": [
+      [
+        "npm",
+        "--workspace=@somesass/vscode-css-languageservice",
+        "run",
+        "build:production"
+      ],
+      [
+        "npm",
+        "--workspace=@somesass/language-services",
+        "run",
+        "build:production"
+      ],
+      [
+        "npm",
+        "--workspace=some-sass-language-server",
+        "run",
+        "build:production"
+      ]
+    ],
+    "node_bins": {
+      "some-sass-language-server": "packages/language-server/bin/some-sass-language-server"
+    }
+  },
+  "likec4": {
+    "kind": "pnpm",
+    "before_build": [
+      [
+        "pnpm",
+        "--filter=@likec4/style-preset",
+        "run",
+        "sources"
+      ],
+      [
+        "pnpm",
+        "--recursive",
+        "--workspace-concurrency=2",
+        "--filter=@likec4/language-server...",
+        "run",
+        "build"
+      ],
+      [
+        "pnpm",
+        "--recursive",
+        "--workspace-concurrency=2",
+        "--filter=@likec4/lsp...",
+        "run",
+        "build"
+      ]
+    ],
+    "node_bins": {
+      "likec4-language-server": "packages/language-server/bin/likec4-language-server.mjs",
+      "likec4-lsp": "packages/lsp/bin/likec4-lsp.mjs"
+    }
+  },
+  "naive-ui-intellisense": {
+    "kind": "npm",
+    "npm_install_directories": [
+      ".",
+      "client",
+      "server"
+    ],
+    "prepare_commands": [
+      [
+        "npm",
+        "--prefix",
+        "server",
+        "run",
+        "download"
+      ]
+    ],
+    "before_build": [
+      [
+        "npm",
+        "--prefix",
+        "server",
+        "run",
+        "build"
+      ]
+    ],
+    "node_bins": {
+      "naive-ui-language-server": "server/dist/server.js"
+    },
+    "repair_lock": true,
+    "repair_reason": "Selected package-lock omits declared build dependencies including rollup terser and cross-env; preserve both lockfiles"
+  },
+  "solargraph": {
+    "kind": "bundler",
+    "fetch_git": true,
+    "ruby_bins": {
+      "solargraph": "bin/solargraph"
+    }
+  },
+  "psalm": {
+    "kind": "composer"
+  },
+  "quint": {
+    "kind": "npm",
+    "directory": "vscode/quint-vscode/server",
+    "script": "compile"
+  },
+  "devglobe-extension": {
+    "kind": "npm",
+    "directory": "devglobe-core",
+    "script": "build"
+  },
+  "vscode-motoko": {
+    "kind": "npm",
+    "before_build": [
+      [
+        "npm",
+        "run",
+        "generate"
+      ],
+      [
+        "npm",
+        "run",
+        "compile:pre"
+      ],
+      [
+        "npm",
+        "run",
+        "compile:formatter"
+      ],
+      [
+        "npm",
+        "run",
+        "compile:keywords"
+      ],
+      [
+        "npm",
+        "run",
+        "compile:server"
+      ],
+      [
+        "npm",
+        "run",
+        "compile:motoko"
+      ]
+    ],
+    "node_bins": {
+      "motoko-language-server": "out/server.js"
+    }
+  },
+  "batch-language-server": {
+    "kind": "commands",
+    "prepare_commands": [
+      [
+        "git",
+        "clone",
+        "--no-checkout",
+        "https://github.com/RechInformatica/rech-editor-batch.git",
+        "/work/upstream"
+      ],
+      [
+        "git",
+        "-C",
+        "/work/upstream",
+        "checkout",
+        "--detach",
+        "fcce16377c726f95d5afd25d91a05cd29208e2a7"
+      ],
+      [
+        "npm",
+        "--prefix=/work/upstream",
+        "ci",
+        "--ignore-scripts",
+        "--no-audit",
+        "--no-fund"
+      ],
+      [
+        "npm",
+        "install",
+        "--prefix=/work/tools",
+        "--ignore-scripts",
+        "--no-audit",
+        "--no-fund",
+        "esbuild@0.28.1"
+      ]
+    ],
+    "build_commands": [
+      [
+        "/work/tools/node_modules/.bin/esbuild",
+        "/work/upstream/src/lsp/server.ts",
+        "--bundle",
+        "--platform=node",
+        "--target=node18",
+        "--format=cjs",
+        "--outfile=/work/server.js"
+      ]
+    ],
+    "outputs": [
+      {
+        "source": "/work/server.js",
+        "name": "batch-language-server",
+        "path": "server.js",
+        "interpreter": "node"
+      }
+    ],
+    "additional_sources": [
+      {
+        "url": "https://github.com/RechInformatica/rech-editor-batch",
+        "sha": "fcce16377c726f95d5afd25d91a05cd29208e2a7",
+        "reason": "Exact upstream pin in selected build.mjs"
+      }
+    ]
+  },
+  "matlab-language-server": {
+    "kind": "npm",
+    "npm_install_directories": [
+      ".",
+      "src/licensing/gui"
+    ],
+    "script": "compile"
+  },
+  "inlang-language-server": {
+    "kind": "pnpm",
+    "script": "pack"
+  },
+  "noir": {
+    "kind": "cargo",
+    "fetch_git": true,
+    "cargo_packages": [
+      "nargo_cli"
+    ]
+  },
+  "kotlin-language-server": {
+    "kind": "gradle",
+    "fetch_git": true,
+    "prepare_timeout": 1800,
+    "gradle_tasks": [
+      ":server:installDist"
+    ],
+    "outputs": [
+      {
+        "source": "server/build/install/server/bin/kotlin-language-server",
+        "name": "kotlin-language-server",
+        "path": "bin/kotlin-language-server"
+      }
+    ],
+    "runtime_directories": [
+      {
+        "source": "server/build/install/server/lib",
+        "path": "lib"
+      }
+    ]
+  },
+  "nil": {
+    "kind": "cargo",
+    "fetch_git": true
+  },
+  "zls": {
+    "kind": "commands",
+    "fetch_git": true,
+    "submodules": true,
+    "environment": {
+      "ZIG_GLOBAL_CACHE_DIR": "/work/zig-cache",
+      "ZIG_LOCAL_CACHE_DIR": "/work/zig-local"
+    },
+    "prepare_commands": [
+      [
+        "zig",
+        "build",
+        "--fetch",
+        "-Doptimize=ReleaseSafe"
+      ]
+    ],
+    "build_commands": [
+      [
+        "zig",
+        "build",
+        "-Doptimize=ReleaseSafe",
+        "-j2"
+      ]
+    ],
+    "outputs": [
+      {
+        "source": "zig-out/bin/zls",
+        "name": "zls",
+        "path": "zls"
+      }
+    ]
+  },
+  "ziggy": {
+    "kind": "commands",
+    "fetch_git": true,
+    "submodules": true,
+    "environment": {
+      "ZIG_GLOBAL_CACHE_DIR": "/work/zig-cache",
+      "ZIG_LOCAL_CACHE_DIR": "/work/zig-local"
+    },
+    "prepare_commands": [
+      [
+        "zig",
+        "build",
+        "--fetch",
+        "-Doptimize=ReleaseSafe"
+      ]
+    ],
+    "build_commands": [
+      [
+        "zig",
+        "build",
+        "-Doptimize=ReleaseSafe",
+        "-j2"
+      ]
+    ],
+    "outputs": [
+      {
+        "source": "zig-out/bin/ziggy",
+        "name": "ziggy",
+        "path": "ziggy"
+      }
+    ]
+  },
+  "superhtml": {
+    "kind": "commands",
+    "fetch_git": true,
+    "submodules": true,
+    "environment": {
+      "ZIG_GLOBAL_CACHE_DIR": "/work/zig-cache",
+      "ZIG_LOCAL_CACHE_DIR": "/work/zig-local"
+    },
+    "prepare_commands": [
+      [
+        "zig",
+        "build",
+        "--fetch",
+        "-Doptimize=ReleaseSafe"
+      ]
+    ],
+    "build_commands": [
+      [
+        "zig",
+        "build",
+        "-Doptimize=ReleaseSafe",
+        "-j2"
+      ]
+    ],
+    "outputs": [
+      {
+        "source": "zig-out/bin/superhtml",
+        "name": "superhtml",
+        "path": "superhtml"
+      }
+    ]
+  },
+  "glsl_analyzer": {
+    "kind": "commands",
+    "fetch_git": true,
+    "submodules": true,
+    "environment": {
+      "ZIG_GLOBAL_CACHE_DIR": "/work/zig-cache",
+      "ZIG_LOCAL_CACHE_DIR": "/work/zig-local"
+    },
+    "prepare_commands": [
+      [
+        "zig",
+        "build",
+        "--fetch",
+        "-Doptimize=ReleaseSafe"
+      ]
+    ],
+    "build_commands": [
+      [
+        "zig",
+        "build",
+        "-Doptimize=ReleaseSafe",
+        "-j2"
+      ]
+    ],
+    "outputs": [
+      {
+        "source": "zig-out/bin/glsl_analyzer",
+        "name": "glsl_analyzer",
+        "path": "glsl_analyzer"
+      }
+    ]
+  },
+  "erlang_ls": {
+    "kind": "commands",
+    "fetch_git": true,
+    "environment": {
+      "REBAR_CACHE_DIR": "/work/rebar-cache",
+      "ERL_FLAGS": "+S 2:2 +A 2"
+    },
+    "prepare_commands": [
+      [
+        "rebar3",
+        "get-deps"
+      ]
+    ],
+    "build_commands": [
+      [
+        "rebar3",
+        "escriptize"
+      ]
+    ],
+    "outputs": [
+      {
+        "source": "_build/default/bin/erlang_ls",
+        "name": "erlang_ls",
+        "path": "erlang_ls"
+      }
+    ]
+  },
+  "haskell-language-server": {
+    "kind": "cabal",
+    "fetch_git": true,
+    "submodules": true,
+    "cabal_targets": [
+      "exe:haskell-language-server",
+      "exe:haskell-language-server-wrapper"
+    ],
+    "prepare_timeout": 1800,
+    "build_timeout": 7200
+  },
+  "dhall-haskell": {
+    "kind": "cabal",
+    "fetch_git": true,
+    "submodules": true,
+    "cabal_targets": [
+      "exe:dhall-lsp-server"
+    ],
+    "prepare_timeout": 1800,
+    "build_timeout": 7200
+  },
+  "agda-language-server": {
+    "kind": "cabal",
+    "fetch_git": true,
+    "submodules": true,
+    "cabal_targets": [
+      "exe:als"
+    ],
+    "prepare_timeout": 1800,
+    "build_timeout": 7200
+  },
+  "awsum": {
+    "kind": "cabal",
+    "fetch_git": true,
+    "submodules": true,
+    "cabal_targets": [
+      "exe:awsum"
+    ],
+    "prepare_timeout": 1800,
+    "build_timeout": 7200
+  },
+  "mesonlsp": {
+    "kind": "commands",
+    "fetch_git": true,
+    "submodules": true,
+    "prepare_commands": [
+      [
+        "meson",
+        "subprojects",
+        "download"
+      ]
+    ],
+    "build_commands": [
+      [
+        "meson",
+        "setup",
+        "_build",
+        "--buildtype=release",
+        "--wrap-mode=nodownload",
+        "-Ddefault_library=static"
+      ],
+      [
+        "ninja",
+        "-C",
+        "_build",
+        "-j2"
+      ]
+    ],
+    "outputs": [
+      {
+        "source": "_build/src/mesonlsp",
+        "name": "mesonlsp",
+        "path": "mesonlsp"
+      }
+    ]
+  },
+  "vala-language-server": {
+    "kind": "commands",
+    "fetch_git": true,
+    "submodules": true,
+    "prepare_commands": [
+      [
+        "meson",
+        "subprojects",
+        "download"
+      ]
+    ],
+    "build_commands": [
+      [
+        "meson",
+        "setup",
+        "_build",
+        "--buildtype=release",
+        "--wrap-mode=nodownload",
+        "-Ddefault_library=static"
+      ],
+      [
+        "ninja",
+        "-C",
+        "_build",
+        "-j2"
+      ]
+    ],
+    "outputs": [
+      {
+        "source": "_build/src/vala-language-server",
+        "name": "vala-language-server",
+        "path": "vala-language-server"
+      }
+    ]
+  },
+  "lexical": {
+    "kind": "commands",
+    "fetch_git": true,
+    "submodules": true,
+    "environment": {
+      "MIX_HOME": "/work/mix",
+      "HEX_HOME": "/work/hex",
+      "HEX_CACERTS_PATH": "/etc/ssl/certs/ca-certificates.crt",
+      "ERL_FLAGS": "+S 2:2 +A 2",
+      "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    },
+    "prepare_commands": [
+      [
+        "mix",
+        "local.hex",
+        "--force"
+      ],
+      [
+        "mix",
+        "local.rebar",
+        "--force"
+      ],
+      [
+        "mix",
+        "deps.get"
+      ]
+    ],
+    "build_commands": [
+      [
+        "env",
+        "HEX_OFFLINE=1",
+        "mix",
+        "package",
+        "--path",
+        "/work/distribution"
+      ]
+    ],
+    "runtime_directories": [
+      {
+        "source": "/work/distribution",
+        "path": "package"
+      }
+    ],
+    "outputs": [
+      {
+        "source": "/work/distribution/bin/start_lexical.sh",
+        "path": "package/bin/start_lexical.sh",
+        "name": "lexical"
+      }
+    ]
+  },
+  "elixir-ls": {
+    "kind": "commands",
+    "fetch_git": true,
+    "submodules": true,
+    "environment": {
+      "MIX_ENV": "prod",
+      "MIX_HOME": "/work/mix",
+      "HEX_HOME": "/work/hex",
+      "HEX_CACERTS_PATH": "/etc/ssl/certs/ca-certificates.crt",
+      "ERL_FLAGS": "+S 2:2 +A 2"
+    },
+    "prepare_commands": [
+      [
+        "mix",
+        "local.hex",
+        "--force"
+      ],
+      [
+        "mix",
+        "local.rebar",
+        "--force"
+      ],
+      [
+        "mix",
+        "deps.get"
+      ]
+    ],
+    "build_commands": [
+      [
+        "env",
+        "HEX_OFFLINE=1",
+        "mix",
+        "compile"
+      ],
+      [
+        "python3",
+        "-c",
+        "from pathlib import Path; Path(\"/work/elixir-ls\").write_text('#!/bin/sh\\nexport MIX_ENV=prod MIX_HOME=/opt/corpus/servers/elixir-ls/mix HEX_HOME=/work/home/hex HEX_OFFLINE=1 ERL_FLAGS=\"+S 2:2 +A 2\"\\ncd /opt/corpus/servers/elixir-ls/package\\nexec mix run --no-start --no-compile --no-deps-check --no-halt -e \"ElixirLS.LanguageServer.main()\"\\n')"
+      ]
+    ],
+    "runtime_directories": [
+      {
+        "source": ".",
+        "path": "package"
+      },
+      {
+        "source": "/work/mix",
+        "path": "mix"
+      }
+    ],
+    "outputs": [
+      {
+        "source": "/work/elixir-ls",
+        "path": "elixir-ls",
+        "name": "elixir-ls"
+      }
+    ]
+  },
+  "python-lsp-server": {
+    "kind": "python",
+    "fetch_git": true
+  },
+  "arkts": {
+    "kind": "pnpm",
+    "before_build": [
+      [
+        "pnpm",
+        "--filter=ohos-typescript",
+        "run",
+        "build:compiler"
+      ],
+      [
+        "python3",
+        "-c",
+        "from pathlib import Path; import shutil; p=Path(\"ohos-typescript\"); built=p/\"built/local\"; assert (built/\"typescript.js\").is_file(); shutil.copytree(built,p/\"lib\",dirs_exist_ok=True)"
+      ],
+      [
+        "pnpm",
+        "--recursive",
+        "--workspace-concurrency=2",
+        "--filter=@arkts/language-server...",
+        "run",
+        "build"
+      ]
+    ],
+    "node_bins": {
+      "ets-language-server": "packages/language-server/bin/ets-language-server.js"
+    },
+    "fetch_git": true,
+    "submodules": true,
+    "submodule_urls": {
+      "ohos-typescript": "https://github.com/openharmony/third_party_typescript"
+    },
+    "prepare_timeout": 1800
+  },
+  "flow-cli": {
+    "kind": "go",
+    "go_toolchain": "go-1.26"
+  },
+  "sui": {
+    "kind": "cargo",
+    "directory": "external-crates/move",
+    "cargo_packages": [
+      "move-analyzer"
+    ],
+    "fetch_git": true,
+    "submodules": true
+  }
+}

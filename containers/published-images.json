@@ -1,0 +1,28 @@
+{
+  "release": "progress-20260909-1",
+  "publisher_repository": "mgsloan/corpus-containers",
+  "images": {
+    "grammars": {
+      "kind": "grammars",
+      "reference": "ghcr.io/mgsloan/code-corpora-grammars@sha256:659bd7c749d086b6733d71408cb9ee72c76324b1a84273dd2098e21ca38605c8",
+      "tag": "ghcr.io/mgsloan/code-corpora-grammars:progress-20260909-1",
+      "image_id": "sha256:253b6b937b75ac1b046835151e9a5f88d8c64db8d8c8127c5fb6ce63f4474c50",
+      "visibility": "private"
+    },
+    "servers": {
+      "kind": "servers",
+      "reference": "ghcr.io/mgsloan/code-corpora-servers@sha256:91fc374ed05a66355465dcebb44fa19fa420ed293125ba44088b742e9ad9b7cc",
+      "tag": "ghcr.io/mgsloan/code-corpora-servers:progress-20260909-1",
+      "image_id": "sha256:f3682e677a4681f2fcde8aa1dc1f22cb9ae40b1cad0b9abdfcbfa6a07189716f",
+      "visibility": "private",
+      "grammar_parent_digest": "sha256:659bd7c749d086b6733d71408cb9ee72c76324b1a84273dd2098e21ca38605c8"
+    },
+    "build": {
+      "kind": "build",
+      "reference": "ghcr.io/mgsloan/code-corpora-build@sha256:291efe02b4cae336f200277a31e46bca0966ded0a7d8a36d383133d2a7aee8c0",
+      "tag": "ghcr.io/mgsloan/code-corpora-build:progress-20260909-1",
+      "image_id": "sha256:5ff72f3e7f62492123f122a0ecc46a880adc7a71f2566231aee99b7009104fb5",
+      "visibility": "private"
+    }
+  }
+}

@@ -1,0 +1,141 @@
+{
+  "marksman": {
+    "kind": "dotnet",
+    "project": "Marksman/Marksman.fsproj",
+    "executable": "marksman",
+    "fetch_git": true
+  },
+  "csharp-language-server": {
+    "kind": "dotnet",
+    "project": "src/CSharpLanguageServer/CSharpLanguageServer.fsproj",
+    "executable": "CSharpLanguageServer",
+    "fetch_git": true,
+    "command_name": "csharp-ls",
+    "prepare_commands": [
+      [
+        "dotnet",
+        "restore",
+        "src/Ionide.LanguageServerProtocol/tools/MetaModelGenerator/MetaModelGenerator.fsproj"
+      ]
+    ]
+  },
+  "bash-language-server": {
+    "kind": "pnpm",
+    "package_manager": "pnpm@10.34.4",
+    "before_build": [
+      [
+        "pnpm",
+        "exec",
+        "tsc",
+        "-p",
+        "server"
+      ],
+      [
+        "cp",
+        "server/src/get-options.sh",
+        "server/out/"
+      ]
+    ],
+    "node_bins": {
+      "bash-language-server": "server/out/cli.js"
+    }
+  },
+  "pyright": {
+    "kind": "pnpm",
+    "script": "build:cli:dev",
+    "node_bins": {
+      "pyright-langserver": "packages/pyright/langserver.index.js",
+      "pyright": "packages/pyright/index.js"
+    }
+  },
+  "vtsls": {
+    "kind": "pnpm",
+    "script": "build",
+    "node_bins": {
+      "vtsls": "packages/server/bin/vtsls.js"
+    }
+  },
+  "language-tools--sveltejs": {
+    "kind": "pnpm",
+    "before_build": [
+      [
+        "pnpm",
+        "--filter",
+        "svelte2tsx",
+        "build"
+      ],
+      [
+        "pnpm",
+        "--filter",
+        "svelte-language-server",
+        "build"
+      ]
+    ],
+    "node_bins": {
+      "svelteserver": "packages/language-server/bin/server.js"
+    }
+  },
+  "language-tools--vuejs": {
+    "kind": "pnpm",
+    "script": "build",
+    "node_bins": {
+      "vue-language-server": "packages/language-server/bin/vue-language-server.js"
+    }
+  },
+  "wc-language-server": {
+    "kind": "pnpm",
+    "before_build": [
+      [
+        "pnpm",
+        "--dir",
+        "packages/language-server",
+        "exec",
+        "tsc",
+        "-p",
+        "tsconfig.json"
+      ]
+    ],
+    "node_bins": {
+      "wc-language-server": "packages/language-server/bin/wc-language-server"
+    }
+  },
+  "tailwindcss-intellisense": {
+    "kind": "pnpm",
+    "before_build": [
+      [
+        "pnpm",
+        "--filter",
+        "@tailwindcss/language-server",
+        "build"
+      ]
+    ],
+    "node_bins": {
+      "tailwindcss-language-server": "packages/tailwindcss-language-server/bin/tailwindcss-language-server",
+      "css-language-server": "packages/tailwindcss-language-server/bin/css-language-server"
+    }
+  },
+  "perlnavigator": {
+    "kind": "npm",
+    "script": null,
+    "npm_install_directories": [
+      ".",
+      "server"
+    ],
+    "before_build": [
+      [
+        "./node_modules/.bin/tsc",
+        "-p",
+        "server"
+      ]
+    ],
+    "node_bins": {
+      "perlnavigator": "server/out/server.js"
+    }
+  },
+  "codebook": {
+    "kind": "cargo",
+    "cargo_packages": [
+      "codebook-lsp"
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "dotnet-9.0": {
+    "version": "9.0.318",
+    "url": "https://builds.dotnet.microsoft.com/dotnet/Sdk/9.0.318/dotnet-sdk-9.0.318-linux-x64.tar.gz",
+    "sha512": "e8685293a3512178e0de1bb3c1663e31fdf9d761af705094bf833cc1ff6b9a18c543aa4141f0216503c98039c719585a6d32905b0bbb3279e93b7e7616e047c3",
+    "metadata_url": "https://builds.dotnet.microsoft.com/dotnet/release-metadata/9.0/releases.json"
+  },
+  "dotnet-10.0": {
+    "version": "10.0.401",
+    "url": "https://builds.dotnet.microsoft.com/dotnet/Sdk/10.0.401/dotnet-sdk-10.0.401-linux-x64.tar.gz",
+    "sha512": "51c8b999af9e8dd9998c9edc5944e19a90788862068acd38694e098889054ce8c23d4f0c5cccfa16bf187d044562359e5ee69a9f8ad0bbe913ba90311fbce25b",
+    "metadata_url": "https://builds.dotnet.microsoft.com/dotnet/release-metadata/10.0/releases.json"
+  }
+}

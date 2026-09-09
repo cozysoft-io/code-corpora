@@ -1,0 +1,56 @@
+{
+  "llvm-project": {
+    "kind": "commands",
+    "cpus": 8,
+    "memory": "16g",
+    "build_timeout": 10800,
+    "build_commands": [
+      [
+        "cmake",
+        "-S",
+        "llvm",
+        "-B",
+        "/work/llvm-build",
+        "-G",
+        "Ninja",
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DCMAKE_C_COMPILER=clang",
+        "-DCMAKE_CXX_COMPILER=clang++",
+        "-DLLVM_ENABLE_PROJECTS=clang;clang-tools-extra",
+        "-DLLVM_TARGETS_TO_BUILD=Native",
+        "-DLLVM_INCLUDE_TESTS=OFF",
+        "-DLLVM_INCLUDE_BENCHMARKS=OFF",
+        "-DLLVM_INCLUDE_EXAMPLES=OFF",
+        "-DCLANG_INCLUDE_TESTS=OFF",
+        "-DLLVM_PARALLEL_LINK_JOBS=1",
+        "-DLLVM_USE_LINKER=lld",
+        "-DLLVM_ENABLE_LIBXML2=OFF",
+        "-DCMAKE_CXX_FLAGS=-include cstdint"
+      ],
+      [
+        "cmake",
+        "--build",
+        "/work/llvm-build",
+        "--target",
+        "clangd",
+        "clang-resource-headers",
+        "--parallel",
+        "8"
+      ]
+    ],
+    "outputs": [
+      {
+        "source": "/work/llvm-build/bin/clangd",
+        "name": "clangd",
+        "path": "bin/clangd"
+      }
+    ],
+    "runtime_directories": [
+      {
+        "source": "/work/llvm-build/lib/clang",
+        "path": "lib/clang"
+      }
+    ],
+    "build_note": "Force the standard integer header because pinned LLVM Signals.h uses uintptr_t without including it."
+  }
+}

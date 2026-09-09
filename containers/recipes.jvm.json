@@ -1,0 +1,88 @@
+{
+  "ltex-ls-plus": {
+    "kind": "maven",
+    "maven_args": [
+      "-Prelease",
+      "-DskipTests"
+    ],
+    "maven_goals": [
+      "package"
+    ],
+    "prepare_timeout": 1800,
+    "environment": {
+      "JAVA_TOOL_OPTIONS": "-Xmx256m",
+      "PATH": "/work/bin:/opt/toolchains/node/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "MAVEN_OPTS": "-Xmx2g -XX:ActiveProcessorCount=2"
+    },
+    "before_prepare": [
+      [
+        "python3",
+        "-c",
+        "from pathlib import Path; import re; p=Path(\"tools/createCompletionLists.py\"); s=p.read_text(); s,n=re.subn(r'checkIfCompletionListsAvailable\\(\"target[^\"\\n]*\"\\)','checkIfCompletionListsAvailable(\"src/main/resources\")',s); assert n==1; p.write_text(s)"
+      ]
+    ],
+    "prepare_commands": [
+      [
+        "python3",
+        "tools/createCompletionLists.py"
+      ]
+    ],
+    "before_build": [
+      [
+        "mkdir",
+        "-p",
+        "/work/bin"
+      ],
+      [
+        "ln",
+        "-s",
+        "/usr/bin/python3",
+        "/work/bin/python"
+      ]
+    ],
+    "build_commands": [],
+    "runtime_directories": [
+      {
+        "source": "target/appassembler",
+        "path": "package"
+      }
+    ],
+    "outputs": [
+      {
+        "source": "target/appassembler/bin/ltex-ls-plus",
+        "path": "package/bin/ltex-ls-plus",
+        "name": "ltex-ls-plus"
+      }
+    ],
+    "repair_reason": "Use the actual generated resource directory for the completion-list cache check on Linux; preserve downloaded dictionaries for offline compilation"
+  },
+  "pkl-lsp": {
+    "kind": "gradle",
+    "java_toolchain": "java-25",
+    "fetch_git": true,
+    "prepare_timeout": 1800,
+    "gradle_tasks": [
+      "installDist"
+    ],
+    "build_commands": [
+      [
+        "python3",
+        "-c",
+        "from pathlib import Path; Path(\"/work/pkl-lsp\").write_text('#!/bin/sh\\nexport JAVA_HOME=/opt/toolchains/java-25\\nexec /opt/corpus/servers/pkl-lsp/package/bin/pkl-lsp \"$@\"\\n')"
+      ]
+    ],
+    "runtime_directories": [
+      {
+        "source": "build/install/pkl-lsp",
+        "path": "package"
+      }
+    ],
+    "outputs": [
+      {
+        "source": "/work/pkl-lsp",
+        "path": "pkl-lsp",
+        "name": "pkl-lsp"
+      }
+    ]
+  }
+}

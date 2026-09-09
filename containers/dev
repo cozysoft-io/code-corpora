@@ -1,0 +1,412 @@
+#!/usr/bin/env python3
+"""Build editable sources and prepare a dedicated Zed profile with rootless Podman."""
+import argparse
+from contextlib import contextmanager
+import fcntl
+from functools import cache
+import hashlib
+import json
+import os
+from pathlib import Path
+import re
+import shlex
+import shutil
+import subprocess
+import sys
+import threading
+import tomllib
+import urllib.request
+import uuid
+
+REPOSITORY = Path(__file__).resolve().parent.parent
+
+
+def identifier(value):
+    if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.-]*', value):
+        raise ValueError('Invalid identifier: '+value)
+    return value
+
+
+def write_json(path, value):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_name(path.name+'.'+uuid.uuid4().hex+'.tmp')
+    temporary.write_text(json.dumps(value, indent=2)+'\n')
+    temporary.replace(path)
+
+
+@cache
+def catalog(filename):
+    return tomllib.loads((REPOSITORY/filename).read_text())
+
+
+def select(filename, name, section='repo', key='name'):
+    return next(row for row in catalog(filename)[section] if row[key] == name)
+
+
+def image_id(image):
+    # Resolve mutable input tags once; every process in this build uses the same ID.
+    return subprocess.check_output(['podman', 'image', 'inspect', '--format={{.Id}}', image], text=True).strip()
+
+
+def mount(source, destination, writable=False):
+    if any(character in str(source) for character in ':,\n'):
+        raise ValueError('Unsupported mount path: '+str(source))
+    return ['-v', f'{source}:{destination}:'+('rw,z' if writable else 'ro,z')]
+
+
+def container(image, mounts, command, online=False, interactive=False, timeout=3600):
+    if os.getuid() == 0:
+        raise ValueError('Use rootless Podman as an ordinary user')
+    network = 'none'
+    if online:
+        network = 'slirp4netns:allow_host_loopback=false' if shutil.which('slirp4netns') else 'pasta:--no-map-gw'
+    return ['podman', 'run', '--rm', *(['-i'] if interactive else []), '--pull=never',
+            '--network='+network, '--http-proxy=false', '--userns=keep-id',
+            f'--user={os.getuid()}:{os.getgid()}', '--cap-drop=ALL',
+            '--security-opt=no-new-privileges', '--read-only', '--read-only-tmpfs=false',
+            '--pids-limit=512', '--memory=4g', '--memory-swap=4g', '--cpus=2',
+            '--timeout='+str(timeout), '--ulimit=core=0:0', '--log-driver=none',
+            '--tmpfs=/tmp:rw,nosuid,nodev,size=1g,mode=1777',
+            '--tmpfs=/dev/shm:rw,nosuid,nodev,noexec,size=64m,mode=1777',
+            '-e', 'HOME=/work/home', '-e', 'XDG_CACHE_HOME=/work/cache',
+            '--workdir=/work', *mounts, '--entrypoint='+command[0], image, *command[1:]]
+
+
+@contextmanager
+def locked(path):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open('a') as stream:
+        try:
+            fcntl.flock(stream, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError:
+            raise RuntimeError('Already in use: '+str(path)) from None
+        yield
+
+
+def publish(directory, target):
+    for path in directory.rglob('*'):
+        if path.is_symlink() and not path.resolve().is_relative_to(directory.resolve()):
+            raise ValueError('Artifact symlink escapes output: '+str(path))
+        if not (path.is_symlink() or path.is_file() or path.is_dir()):
+            raise ValueError('Special artifact file: '+str(path))
+    if target.exists() and not target.is_symlink():
+        raise ValueError('Refusing to replace a non-symlink: '+str(target))
+    target.parent.mkdir(parents=True, exist_ok=True)
+    temporary = target.with_name(target.name+'.'+uuid.uuid4().hex)
+    temporary.symlink_to(os.path.relpath(directory, target.parent), target_is_directory=True)
+    temporary.replace(target)
+
+
+def build(arguments, state):
+    kind, name = arguments.action, identifier(arguments.name)
+    image = image_id(arguments.image)
+    source = (arguments.source or arguments.source_root/('grammars' if kind == 'grammar' else 'servers')/name).resolve(strict=True)
+    if not source.is_dir() or source in (Path('/'), Path.home()):
+        raise ValueError('Source must be a checkout directory')
+    job = select('selected-grammars.toml' if kind == 'grammar' else 'selected-servers.toml', name)
+    if kind == 'grammar':
+        job['generate'] = not arguments.no_generate
+    else:
+        recipe = json.loads(arguments.recipe.read_text())
+        recipe = next(row for row in recipe if row['name'] == name) if isinstance(recipe, list) else recipe[name]
+        job.update(recipe)
+        job['name'] = name
+        job['local_development'] = True
+        job.setdefault('references', [])
+        job.setdefault('environment', {}).setdefault('CARGO_TARGET_DIR', '/work/target')
+    result = subprocess.run(['git', '-C', str(source), 'rev-parse', 'HEAD'], capture_output=True, text=True)
+    job['source_head'] = result.stdout.strip() if result.returncode == 0 else None
+    job['builder_image'] = image
+    directory = state/'builds'/image/kind/name
+    with locked(state/'locks'/(kind+'-'+name+'.lock')):
+        work = directory/'work'
+        output = directory/'outputs'/uuid.uuid4().hex
+        work.mkdir(parents=True, exist_ok=True)
+        output.mkdir(parents=True)
+        write_json(directory/'job.json', job)
+        mounts = [*mount(source, '/input/source'), *mount(directory/'job.json', '/input/job.json'),
+                  *mount(work, '/work', True), *mount(output, '/out', True)]
+        if kind == 'server':
+            mounts += mount(output, '/opt/corpus/servers/'+name, True)
+        for phase in (['grammar'] if kind == 'grammar' else ['prepare', 'build']):
+            command = container(image, mounts, ['python3', '/opt/corpus/dev_worker.py', phase],
+                                online=kind == 'server' and phase == 'prepare' and arguments.prepare_online)
+            with (directory/(phase+'.log')).open('wb') as log:
+                result = subprocess.run(command, stdout=log, stderr=subprocess.STDOUT)
+            if result.returncode:
+                raise RuntimeError(f'{name} {phase} failed; see {directory/ (phase+".log")}')
+        publish(output, state/'overrides'/('grammars' if kind == 'grammar' else 'servers')/name)
+        print(output/'artifact.json')
+
+
+def fetch_extension(arguments, state):
+    name = identifier(arguments.name)
+    selected = select('zed-sources.toml', name, 'extension', 'id')
+    version = selected['version']
+    identifier(version)
+    image = image_id(arguments.image)
+    directory = state/'packages'/name/version
+    directory.mkdir(parents=True, exist_ok=True)
+    archive = directory/'extension.tar.gz'
+    record = directory/'download.json'
+    with locked(state/'locks'/('extension-'+name+'.lock')):
+        if not archive.exists():
+            url = f'https://api.zed.dev/extensions/{name}/{version}/download'
+            temporary = archive.with_suffix('.partial')
+            request = urllib.request.Request(url, headers={'User-Agent': 'code-corpora/1.0'})
+            with urllib.request.urlopen(request, timeout=120) as response, temporary.open('wb') as output:
+                total = 0
+                while block := response.read(1024**2):
+                    total += len(block)
+                    if total > 256*1024**2:
+                        raise ValueError('Extension download exceeds 256 MiB')
+                    output.write(block)
+            temporary.replace(archive)
+            with archive.open('rb') as stream:
+                checksum = hashlib.file_digest(stream, 'sha256').hexdigest()
+            write_json(record, dict(selected, archive_sha256=checksum, download_url=url))
+        provenance = json.loads(record.read_text())
+        with archive.open('rb') as stream:
+            if hashlib.file_digest(stream, 'sha256').hexdigest() != provenance['archive_sha256']:
+                raise ValueError('Cached extension package checksum changed')
+        output = directory/'unpacked'/uuid.uuid4().hex
+        output.mkdir(parents=True)
+        mounts = [*mount(archive, '/input/package'), *mount(record, '/input/job.json'), *mount(output, '/out', True),
+                  '--tmpfs=/work:rw,nosuid,nodev,size=256m,mode=1777']
+        subprocess.run(container(image, mounts, ['python3', '/opt/corpus/dev_worker.py', 'extension']), check=True)
+        publish(output, state/'extensions'/name)
+        print(state/'extensions'/name)
+
+
+def profile_stopped(state):
+    # Catch manually launched instances too; normal launches also hold zed.lock.
+    profile = str(state/'zed-profile')
+    for process in Path('/proc').glob('[0-9]*/cmdline'):
+        try:
+            arguments = process.read_bytes().split(b'\0')
+        except (FileNotFoundError, PermissionError, ProcessLookupError):
+            continue
+        if b'--user-data-dir' in arguments and profile.encode() in arguments:
+            raise RuntimeError('Close the dedicated Zed instance before updating its profile')
+
+
+def prepare_profile(arguments, state):
+    with locked(state/'zed.lock'):
+        profile_stopped(state)
+        profile = state/'zed-profile'
+        installed = profile/'extensions/installed'
+        installed.mkdir(parents=True, exist_ok=True)
+        launchers = state/'launchers'
+        launchers.mkdir(exist_ok=True)
+        server_map = json.loads(arguments.server_map.read_text()) if arguments.server_map else {}
+        disabled_extensions = {row['id']: False for row in catalog('zed-sources.toml')['extension']}
+        settings = {'auto_update': False, 'auto_update_extensions': dict(disabled_extensions),
+                    'auto_install_extensions': dict(disabled_extensions), 'granted_extension_capabilities': [],
+                    'telemetry': {'diagnostics': False, 'metrics': False},
+                    'enable_language_server': bool(server_map), 'lsp': {}}
+        image = image_id(arguments.server_image) if server_map else None
+        project = arguments.project.resolve(strict=True) if server_map else None
+        if project in (Path('/'), Path.home()):
+            raise ValueError('Use a dedicated project directory')
+        prepared = []
+        server_ids = set()
+        for path in installed.iterdir():
+            if not path.is_symlink():
+                raise ValueError('Unexpected unmanaged extension: '+str(path))
+        for name in arguments.extension:
+            identifier(name)
+            source = (state/'extensions'/name).resolve(strict=True)
+            manifest = tomllib.loads((source/'extension.toml').read_text())
+            destination = state/'prepared'/name/uuid.uuid4().hex
+            shutil.copytree(source, destination, symlinks=True)
+            audit = select('zed-sources.toml', name, 'extension', 'id')
+            for selected_path in audit['grammars']:
+                grammar_name = selected_path.split('/')[-1]
+                grammar = select('selected-grammars.toml', grammar_name)
+                override = state/'overrides/grammars'/grammar_name
+                if override.is_dir():
+                    artifact = json.loads((override/'artifact.json').read_text())
+                    target = grammar['grammar']
+                    if target not in manifest.get('grammars', {}):
+                        raise ValueError('Grammar override does not match extension manifest: '+target)
+                    (destination/'grammars').mkdir(exist_ok=True)
+                    shutil.copyfile(override/'parser.wasm', destination/'grammars'/(target+'.wasm'))
+                    write_json(destination/('corpus-'+target+'.json'), artifact)
+            for grammar_name in manifest.get('grammars', {}):
+                identifier(grammar_name)
+                if not (destination/'grammars'/(grammar_name+'.wasm')).is_file():
+                    raise ValueError('Missing compiled extension grammar: '+grammar_name)
+            server_ids.update(manifest.get('language_servers', {}))
+            settings['auto_update_extensions'][name] = False
+            settings['auto_install_extensions'][name] = False
+            prepared.append((name, destination))
+        for server_id in sorted(server_ids) if server_map else []:
+            identifier(server_id)
+            if server_id not in server_map:
+                raise ValueError('Missing explicit launch specification for '+server_id)
+            entry = server_map[server_id]
+            identifier(entry['repository'])
+            specification = dict(entry, image=image, project=str(project), state=str(state))
+            write_json(launchers/(server_id+'.json'), specification)
+            wrapper = launchers/server_id
+            wrapper.write_text('#!/bin/sh\nexec '+shlex.join([sys.executable, str(Path(__file__).resolve()),
+                               '--state', str(state), 'server-run', str(launchers/(server_id+'.json'))])+' "$@"\n')
+            wrapper.chmod(0o755)
+            settings['lsp'][server_id] = {'binary': {'path': str(wrapper), 'arguments': [], 'env': {}}}
+        # Write settings to both locations used by stock Zed releases. Both are
+        # inside this profile; the ordinary user's configuration is never touched.
+        write_json(profile/'config/settings.json', settings)
+        write_json(state/'xdg-config/zed/settings.json', settings)
+        for name, destination in prepared:
+            publish(destination, installed/name)
+        for path in installed.iterdir():
+            if path.name not in arguments.extension:
+                path.unlink()
+        (profile/'extensions/index.json').unlink(missing_ok=True)
+        write_json(state/'profile.json', {'extensions': arguments.extension, 'servers': server_map,
+                                         'server_image': image, 'project': str(project) if project else None})
+        print(profile)
+
+
+def relay_lsp_input(source, destination):
+    # Host PIDs have no meaning in the server's PID namespace. EOF supervises
+    # container lifetime instead of the server polling the editor's process ID.
+    while True:
+        headers = []
+        while True:
+            line = source.readline(8193)
+            if not line and not headers:
+                return
+            if not line or len(line) > 8192 or len(headers) > 32:
+                raise ValueError('Invalid LSP header')
+            if line == b'\r\n':
+                break
+            headers.append(line)
+        length = int(next(line.split(b':', 1)[1] for line in headers
+                          if line.lower().startswith(b'content-length:')))
+        if not 0 <= length <= 16*1024**2:
+            raise ValueError('Oversized LSP initialization message')
+        body = source.read(length)
+        if len(body) != length:
+            raise ValueError('Truncated LSP message')
+        message = json.loads(body)
+        initialized = message.get('method') == 'initialize'
+        if initialized:
+            message['params']['processId'] = None
+            body = json.dumps(message, separators=(',', ':')).encode()
+            headers = [line for line in headers if not line.lower().startswith(b'content-length:')]
+            headers.append(b'Content-Length: '+str(len(body)).encode()+b'\r\n')
+        destination.write(b''.join(headers)+b'\r\n'+body)
+        destination.flush()
+        if initialized:
+            while block := source.read1(65536):
+                destination.write(block)
+                destination.flush()
+            return
+
+
+def run_server(specification):
+    state = Path(specification['state'])
+    repository = identifier(specification['repository'])
+    project = Path(specification['project']).resolve(strict=True)
+    mounts = [*mount(project, str(project)), '--tmpfs=/work:rw,nosuid,nodev,size=1g,mode=1777']
+    override = state/'overrides/servers'/repository
+    if override.is_dir():
+        mounts += mount(override.resolve(), '/opt/corpus/servers/'+repository)
+    for key, value in specification.get('env', {}).items():
+        if not re.fullmatch(r'[A-Za-z_][A-Za-z0-9_]*', key):
+            raise ValueError('Invalid environment key')
+        mounts += ['-e', key+'='+value]
+    command = ['python3', '/opt/corpus/launch_server.py', repository,
+               specification['executable'], *specification.get('arguments', [])]
+    runtime = container(specification['image'], mounts, command, interactive=True, timeout=0)
+    process = subprocess.Popen(runtime, stdin=subprocess.PIPE)
+    def forward():
+        try:
+            relay_lsp_input(sys.stdin.buffer, process.stdin)
+        except (OSError, ValueError, StopIteration) as error:
+            print('LSP input: '+str(error), file=sys.stderr)
+        finally:
+            process.stdin.close()
+            if process.poll() is None:
+                process.terminate()
+    threading.Thread(target=forward, daemon=True).start()
+    try:
+        returncode = process.wait()
+    finally:
+        if process.poll() is None:
+            process.terminate()
+            process.wait()
+    raise SystemExit(returncode)
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--source-root', type=Path, default=REPOSITORY)
+    parser.add_argument('--state', type=Path, default=REPOSITORY/'.corpus/dev')
+    commands = parser.add_subparsers(dest='action', required=True)
+    for kind in ('grammar', 'server'):
+        command = commands.add_parser(kind)
+        command.add_argument('name')
+        command.add_argument('--image', required=True)
+        command.add_argument('--source', type=Path, help='Override this target checkout only')
+        if kind == 'grammar':
+            command.add_argument('--no-generate', action='store_true', help='Build edited parser.c without regenerating it')
+        else:
+            command.add_argument('--recipe', type=Path, required=True)
+            command.add_argument('--prepare-online', action='store_true', help='Allow public dependency preparation to use the network')
+    command = commands.add_parser('extension')
+    command.add_argument('name')
+    command.add_argument('--image', required=True)
+    command = commands.add_parser('profile')
+    command.add_argument('--extension', action='append', required=True)
+    command.add_argument('--server-map', type=Path)
+    command.add_argument('--server-image')
+    command.add_argument('--project', type=Path)
+    command = commands.add_parser('zed')
+    command.add_argument('paths', nargs='*')
+    command = commands.add_parser('server-run')
+    command.add_argument('specification', type=Path)
+    command = commands.add_parser('reset')
+    command.add_argument('kind', choices=['grammars', 'servers'])
+    command.add_argument('name', type=identifier)
+    arguments = parser.parse_args()
+    state = arguments.state.expanduser().resolve()
+    if state in (Path('/'), Path.home(), REPOSITORY, arguments.source_root.resolve()):
+        parser.error('Use a dedicated state directory')
+    marker = state/'code-corpora-dev.json'
+    if state.exists() and any(state.iterdir()) and not marker.exists():
+        parser.error('State directory is not owned by this helper')
+    state.mkdir(parents=True, exist_ok=True)
+    if not marker.exists():
+        write_json(marker, {'schema_version': 1})
+    if arguments.action in ('grammar', 'server'):
+        build(arguments, state)
+    elif arguments.action == 'extension':
+        fetch_extension(arguments, state)
+    elif arguments.action == 'profile':
+        if arguments.server_map and not (arguments.server_image and arguments.project):
+            parser.error('--server-map requires --server-image and --project')
+        prepare_profile(arguments, state)
+    elif arguments.action == 'server-run':
+        run_server(json.loads(arguments.specification.read_text()))
+    elif arguments.action == 'reset':
+        with locked(state/'locks'/(arguments.kind[:-1]+'-'+arguments.name+'.lock')):
+            path = state/'overrides'/arguments.kind/arguments.name
+            if path.is_symlink():
+                path.unlink()
+            elif path.exists():
+                raise ValueError('Refusing to remove a non-symlink')
+    else:
+        with locked(state/'zed.lock'):
+            profile_stopped(state)
+            environment = dict(os.environ, XDG_CONFIG_HOME=str(state/'xdg-config'), XDG_CACHE_HOME=str(state/'xdg-cache'))
+            subprocess.run(['zed', '--foreground', '--user-data-dir', str(state/'zed-profile'), *arguments.paths],
+                           env=environment, check=True)
+
+
+if __name__ == '__main__':
+    try:
+        main()
+    except (ValueError, RuntimeError, StopIteration) as error:
+        raise SystemExit('corpus dev: '+str(error)) from None

@@ -1,0 +1,17 @@
+{
+  "rust": {
+    "version": "1.98.1",
+    "url": "https://static.rust-lang.org/dist/2026-09-03/rust-1.98.1-x86_64-unknown-linux-gnu.tar.xz",
+    "sha256": "5326b36c53de11d148c8f8dab6553a3d1006c2cfd32123683073fad3c302605b"
+  },
+  "go": {
+    "version": "1.27.1",
+    "url": "https://go.dev/dl/go1.27.1.linux-amd64.tar.gz",
+    "sha256": "63d339f0da5ab53635a56f2490a7984dfe12dfcff22ad749f63edaf590168445"
+  },
+  "node": {
+    "version": "24.20.0",
+    "url": "https://nodejs.org/dist/v24.20.0/node-v24.20.0-linux-x64.tar.xz",
+    "sha256": "2f2c0da162318f0de47665410c7c8c2ed3d36c8f3105de4bbc61176c70a7cbf2"
+  }
+}

@@ -40,6 +40,9 @@ These are setup such that modifications to the grammars or servers are accessibl
 
 * In the servers version, including a Zed configuration which overrides the binary path of every language server.
 
+See the [local development workflow](containers/README.md#editing-grammars-and-servers-locally)
+for building edited grammars and trying them in Zed. Bulk WASM/extension packaging is still pending.
+
 
 # Fetching repositories
 

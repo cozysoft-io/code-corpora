@@ -1,0 +1,14 @@
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE}
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3 python3-venv ca-certificates libstdc++6 libgcc-s1 libatomic1 && \
+    rm -rf /var/lib/apt/lists/*
+COPY python /opt/corpus/python
+COPY grammars /opt/corpus/grammars
+COPY quarantine /opt/corpus/quarantine/grammars
+COPY grammar-catalog.json /opt/corpus/grammar-catalog.json
+COPY worker.py /opt/corpus/worker.py
+RUN mkdir -p /input /out /work /opt/corpus/servers
+WORKDIR /work
+ENTRYPOINT ["python3", "/opt/corpus/worker.py"]

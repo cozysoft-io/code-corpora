@@ -1,0 +1,9 @@
+{
+  "bruno-language-server": {
+    "kind": "npm",
+    "repair_lock": true,
+    "repair_reason": "Pinned package-lock and package.json disagree on @types/node; preserve original and resolved lockfiles",
+    "script": "compile",
+    "build_note": "The selected upstream package defines compile, not build; use its TypeScript compilation script."
+  }
+}

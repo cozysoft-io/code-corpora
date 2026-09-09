@@ -1,0 +1,16 @@
+ARG GRAMMARS_IMAGE
+FROM ${GRAMMARS_IMAGE}
+ENV DEBIAN_FRONTEND=noninteractive LANG=C.UTF-8 LC_ALL=C.UTF-8
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    nodejs python3-venv default-jre-headless libssl3t64 libicu74 libzstd1 \
+    libgmp10 libncurses6 libtinfo6 zlib1g libstdc++6 ruby bundler php-cli php-mbstring php-xml php-curl \
+    erlang-nox nix-bin libgee-0.8-2 libjsonrpc-glib-1.0-1 libjson-glib-1.0-0 libvala-0.56-0 libnuma1 \
+    libarchive13t64 libcurl4t64 libpkgconf3 libre2-10 && \
+    rm -rf /var/lib/apt/lists/*
+COPY servers /opt/corpus/servers
+COPY server-catalog.json /opt/corpus/server-catalog.json
+COPY toolchains /opt/toolchains
+COPY launch_server.py /opt/corpus/launch_server.py
+COPY bin /opt/corpus/bin
+ENV DOTNET_ROOT=/opt/toolchains/dotnet DOTNET_CLI_TELEMETRY_OPTOUT=1
+ENV PATH=/opt/corpus/bin:/opt/toolchains/dotnet:/opt/toolchains/node/bin:/opt/toolchains/go/bin:/opt/toolchains/rust/bin:/opt/toolchains/zig:/opt/toolchains/elixir/bin:/opt/toolchains/ghc/bin:${PATH}

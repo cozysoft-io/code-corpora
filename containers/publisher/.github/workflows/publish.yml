@@ -1,0 +1,35 @@
+name: Publish saved corpus images
+on:
+  workflow_dispatch:
+    inputs:
+      release:
+        description: Private release containing the checked OCI archives
+        type: string
+        required: true
+      kinds:
+        description: JSON array of image kinds to publish
+        type: string
+        default: '["build","grammars","servers"]'
+        required: true
+permissions:
+  contents: read
+  packages: write
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        kind: ${{ fromJSON(inputs.kinds) }}
+    env:
+      GH_TOKEN: ${{ github.token }}
+      CORPUS_RELEASE: ${{ inputs.release }}
+      CORPUS_KIND: ${{ matrix.kind }}
+    steps:
+      - name: Install registry transport
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends skopeo
+      - name: Read the publisher at this workflow commit
+        run: gh api "repos/$GITHUB_REPOSITORY/contents/publish.py?ref=$GITHUB_SHA" --jq .content | base64 --decode > publish.py
+      - name: Verify archive and publish without executing the image
+        run: python3 publish.py

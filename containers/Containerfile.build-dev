@@ -1,0 +1,7 @@
+ARG BUILDER_IMAGE
+FROM ${BUILDER_IMAGE}
+COPY toolchains.dev.json install_dev.py /opt/corpus/
+RUN python3 /opt/corpus/install_dev.py
+COPY worker.py server_worker.py dev_worker.py launch_server.py /opt/corpus/
+ENV WASI_SDK_PATH=/opt/toolchains/wasi-sdk
+ENV PATH=/opt/toolchains:${PATH}

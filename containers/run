@@ -1,0 +1,34 @@
+#!/usr/bin/env python3
+"""Rootless offline runtime. Persist results through stdout, not host mounts."""
+import argparse
+import os
+from pathlib import Path
+import subprocess
+
+p = argparse.ArgumentParser(description=__doc__)
+p.add_argument('image', help='Already-pulled immutable image digest or local image ID')
+p.add_argument('input', type=Path, help='Dedicated staged input directory, mounted read-only')
+p.add_argument('command', nargs=argparse.REMAINDER)
+args = p.parse_args()
+if os.getuid() == 0: p.error('Run as an ordinary user; rootful execution is not supported')
+source = args.input.resolve(strict=True)
+if not source.is_dir() or source in (Path('/'), Path.home()): p.error('Use a dedicated input directory')
+if ':' in str(source) or ',' in str(source): p.error('Input path contains an unsupported mount separator')
+command = args.command
+if command and command[0] == '--': command = command[1:]
+if not command: p.error('A command is required after --')
+if not (args.image.startswith('sha256:') or '@sha256:' in args.image or len(args.image) == 64):
+    p.error('Use an immutable image digest or full local image ID, not a mutable tag')
+runtime = ['podman', 'run', '--rm', '-i', '--pull=never', '--network=none',
+    '--http-proxy=false', '--userns=keep-id', f'--user={os.getuid()}:{os.getgid()}',
+    '--cap-drop=ALL', '--security-opt=no-new-privileges', '--read-only',
+    '--read-only-tmpfs=false', '--pids-limit=512', '--memory=8g', '--memory-swap=8g',
+    '--cpus=2', '--timeout=1800', '--ulimit=core=0:0', '--log-driver=none',
+    '--tmpfs=/work:rw,nosuid,nodev,size=4g,mode=1777',
+    '--tmpfs=/tmp:rw,nosuid,nodev,noexec,size=256m,mode=1777',
+    '--tmpfs=/out:rw,nosuid,nodev,noexec,size=512m,mode=1777',
+    '--tmpfs=/dev/shm:rw,nosuid,nodev,noexec,size=64m,mode=1777',
+    '-v', f'{source}:/input:ro,Z', '-e', 'HOME=/work/home',
+    '-e', 'XDG_CACHE_HOME=/work/cache', '--workdir=/work',
+    '--entrypoint='+command[0], args.image, *command[1:]]
+os.execvp(runtime[0], runtime)

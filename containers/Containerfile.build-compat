@@ -1,0 +1,17 @@
+ARG BUILDER_IMAGE
+FROM ${BUILDER_IMAGE}
+RUN apt-get update && apt-get install -y --no-install-recommends php-xml && rm -rf /var/lib/apt/lists/*
+COPY toolchains.rust-compat.json install_rust_compat.py /opt/corpus/
+RUN python3 /opt/corpus/install_rust_compat.py
+RUN apt-get update && apt-get install -y --no-install-recommends libyaml-dev php-curl && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    nix-bin meson valac libvala-0.56-dev libgee-0.8-dev libjsonrpc-glib-1.0-dev libjson-glib-dev \
+    nlohmann-json3-dev libarchive-dev uuid-dev libpkgconf-dev libre2-dev libnuma1 && \
+    rm -rf /var/lib/apt/lists/*
+COPY toolchains.more.json install_more.py /opt/corpus/
+RUN python3 /opt/corpus/install_more.py
+ENV PATH=/opt/toolchains/zig:/opt/toolchains/elixir/bin:/opt/toolchains/ghc/bin:/opt/toolchains/cabal:${PATH}
+COPY toolchains.go-compat.json install_go_compat.py /opt/corpus/
+RUN python3 /opt/corpus/install_go_compat.py
+COPY toolchains.java.json install_tar_toolchain.py /opt/corpus/
+RUN python3 /opt/corpus/install_tar_toolchain.py /opt/corpus/toolchains.java.json java-25

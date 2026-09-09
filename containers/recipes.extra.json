@@ -1,0 +1,178 @@
+{
+  "edge-language-server": {
+    "kind": "npm",
+    "script": "build",
+    "node_bins": {
+      "edge-language-server": "out/server.js"
+    }
+  },
+  "tyranoscript-lsp": {
+    "kind": "npm",
+    "script": "build",
+    "node_bins": {
+      "tyranoscript-lsp": "dist/server.js"
+    }
+  },
+  "jsonl-tools": {
+    "kind": "npm",
+    "node_bins": {
+      "jsonl-lsp": "packages/jsonl-lsp/bin/jsonl-lsp.js"
+    }
+  },
+  "mdx-analyzer": {
+    "kind": "npm",
+    "before_build": [
+      [
+        "./node_modules/.bin/tsc",
+        "--build",
+        "packages/language-server"
+      ]
+    ],
+    "node_bins": {
+      "mdx-language-server": "packages/language-server/lib/index.js"
+    }
+  },
+  "vscode-autohotkey": {
+    "kind": "npm",
+    "script": "compile",
+    "npm_install_directories": [
+      ".",
+      "client",
+      "server"
+    ],
+    "node_bins": {
+      "autohotkey-lsp": "server/out/server.js"
+    }
+  },
+  "vscode-eslint": {
+    "kind": "npm",
+    "script": "compile:server",
+    "npm_install_directories": [
+      ".",
+      "server"
+    ],
+    "node_bins": {
+      "vscode-eslint-language-server": "server/out/eslintServer.js"
+    }
+  },
+  "perlnavigator": {
+    "kind": "npm",
+    "script": null,
+    "npm_install_directories": [
+      ".",
+      "server"
+    ],
+    "before_build": [
+      [
+        "./node_modules/.bin/tsc",
+        "-p",
+        "server"
+      ]
+    ],
+    "node_bins": {
+      "perlnavigator": "server/out/server.js"
+    }
+  },
+  "esbonio": {
+    "kind": "python",
+    "directory": "lib/esbonio"
+  },
+  "poryscript-ls": {
+    "kind": "cargo",
+    "package": "poryscript-ls",
+    "fetch_git": true,
+    "submodules": true
+  },
+  "odoo-lsp": {
+    "kind": "cargo",
+    "package": "odoo-lsp",
+    "fetch_git": true
+  },
+  "spicedb": {
+    "kind": "go",
+    "go_packages": [
+      "./cmd/spicedb"
+    ]
+  },
+  "vacuum": {
+    "kind": "go",
+    "go_packages": [
+      "."
+    ]
+  },
+  "duso": {
+    "kind": "go",
+    "go_packages": [
+      "./cmd/duso"
+    ],
+    "before_build": [
+      [
+        "mkdir",
+        "-p",
+        "cmd/duso/app"
+      ],
+      [
+        "touch",
+        "cmd/duso/app/PLACEHOLDER"
+      ],
+      [
+        "go",
+        "generate",
+        "./cmd/duso"
+      ]
+    ]
+  },
+  "tsgo": {
+    "kind": "go",
+    "fetch_git": true,
+    "submodules": true
+  },
+  "ty": {
+    "kind": "cargo",
+    "directory": "ruff",
+    "package": "ty",
+    "fetch_git": true,
+    "submodules": true
+  },
+  "relay": {
+    "kind": "cargo",
+    "directory": "compiler",
+    "package": "relay"
+  },
+  "luau-lsp": {
+    "kind": "commands",
+    "fetch_git": true,
+    "submodules": true,
+    "prepare_commands": [],
+    "build_commands": [
+      [
+        "cmake",
+        "-S",
+        ".",
+        "-B",
+        "build",
+        "-G",
+        "Ninja",
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DLSP_BUILD_WITH_SENTRY=OFF",
+        "-DLSP_WERROR=OFF"
+      ],
+      [
+        "cmake",
+        "--build",
+        "build",
+        "--target",
+        "Luau.LanguageServer.CLI",
+        "--parallel",
+        "2"
+      ]
+    ],
+    "outputs": [
+      {
+        "name": "luau-lsp",
+        "source": "build/luau-lsp",
+        "path": "luau-lsp"
+      }
+    ]
+  }
+}

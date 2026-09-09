@@ -1,0 +1,19 @@
+{
+  "project": "mgsloan-compute",
+  "zone": "us-central1-a",
+  "instance": "corpus-builder",
+  "machine_type": "e2-standard-16",
+  "boot_disk_gib": 50,
+  "data_disk": "corpus-build-data",
+  "data_disk_gib": 450,
+  "data_disk_auto_delete": false,
+  "network": "corpus-build",
+  "ssh": "IAP",
+  "external_address_for_downloads": true,
+  "ingress": "SSH from IAP only",
+  "service_account": null,
+  "automatic_stop_after": "12h",
+  "registry_prefix": "ghcr.io/mgsloan",
+  "registry_visibility": "private",
+  "notes": "N2 capacity unavailable; SSD quota 500 GiB. Build disk preserved on VM deletion."
+}

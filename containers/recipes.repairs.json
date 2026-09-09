@@ -1,0 +1,264 @@
+{
+  "fortls": {
+    "kind": "python",
+    "fetch_git": true
+  },
+  "basedpyright": {
+    "kind": "pnpm",
+    "package_manager": "pnpm@10.34.4",
+    "script": "build:cli:dev",
+    "node_bins": {
+      "basedpyright-langserver": "packages/pyright/langserver.index.js",
+      "basedpyright": "packages/pyright/index.js"
+    }
+  },
+  "vtsls": {
+    "kind": "pnpm",
+    "script": "build",
+    "node_bins": {
+      "vtsls": "packages/server/bin/vtsls.js"
+    },
+    "fetch_git": true,
+    "submodules": true
+  },
+  "wc-language-server": {
+    "kind": "pnpm",
+    "before_build": [
+      [
+        "pnpm",
+        "--dir",
+        "packages/language-server",
+        "exec",
+        "tsc",
+        "-p",
+        "tsconfig.json"
+      ]
+    ],
+    "node_bins": {
+      "wc-language-server": "packages/language-server/dist/index.js"
+    }
+  },
+  "csharp-language-server": {
+    "kind": "dotnet",
+    "project": "src/CSharpLanguageServer/CSharpLanguageServer.fsproj",
+    "executable": "CSharpLanguageServer",
+    "fetch_git": true,
+    "command_name": "csharp-ls",
+    "prepare_commands": [
+      [
+        "dotnet",
+        "restore",
+        "src/Ionide.LanguageServerProtocol/tools/MetaModelGenerator/MetaModelGenerator.fsproj"
+      ]
+    ],
+    "dotnet_properties": {
+      "FSharpCoreImplicitPackageVersion": "10.0.101"
+    }
+  },
+  "bruno-language-server": {
+    "kind": "npm",
+    "repair_lock": true,
+    "repair_reason": "Pinned package-lock and package.json disagree on @types/node; preserve original and resolved lockfiles",
+    "script": "build"
+  },
+  "gregorio-lsp": {
+    "kind": "cargo",
+    "repair_lock": true,
+    "repair_reason": "Pinned Cargo.lock requires updating to match the selected manifests; preserve original and resolved lockfiles"
+  },
+  "skill-language-server": {
+    "kind": "npm",
+    "prepare_commands": [
+      [
+        "npm",
+        "install",
+        "--prefix=/work/tools",
+        "--ignore-scripts",
+        "--no-audit",
+        "--no-fund",
+        "esbuild@0.28.0"
+      ]
+    ],
+    "before_build": [
+      [
+        "/work/tools/node_modules/.bin/esbuild",
+        "src/main.ts",
+        "--bundle",
+        "--platform=node",
+        "--format=cjs",
+        "--outfile=dist/main.cjs"
+      ]
+    ],
+    "node_bins": {
+      "skill-language-server": "dist/main.cjs"
+    }
+  },
+  "scls": {
+    "kind": "cargo",
+    "rust_toolchain": "rust-1.79.0"
+  },
+  "buck2": {
+    "kind": "cargo",
+    "cargo_packages": [
+      "buck2"
+    ],
+    "rust_toolchain": "rust-nightly-2026-05-22"
+  },
+  "ruby-lsp": {
+    "kind": "bundler",
+    "fetch_git": true,
+    "ruby_bins": {
+      "ruby-lsp": "exe/ruby-lsp"
+    }
+  },
+  "rubocop": {
+    "kind": "bundler",
+    "fetch_git": true,
+    "ruby_bins": {
+      "rubocop": "exe/rubocop"
+    }
+  },
+  "solargraph": {
+    "kind": "bundler",
+    "fetch_git": true,
+    "ruby_bins": {
+      "solargraph": "bin/solargraph"
+    }
+  },
+  "phpactor": {
+    "kind": "composer"
+  },
+  "psalm": {
+    "kind": "composer"
+  },
+  "alzed": {
+    "kind": "cargo",
+    "directory": "crates/bridge"
+  },
+  "circom-lsp": {
+    "kind": "cargo",
+    "directory": "server/circom-lsp"
+  },
+  "odoo-ls": {
+    "kind": "cargo",
+    "directory": "server",
+    "fetch_git": true,
+    "submodules": true
+  },
+  "skriptzed": {
+    "kind": "cargo",
+    "directory": "language-server",
+    "cargo_packages": [
+      "skript-lsp"
+    ]
+  },
+  "zed-dependi": {
+    "kind": "cargo",
+    "directory": "depsy-lsp"
+  },
+  "zed-depsy": {
+    "kind": "cargo",
+    "directory": "depsy-lsp"
+  },
+  "c3-lsp": {
+    "kind": "go",
+    "directory": "server"
+  },
+  "steep": {
+    "kind": "bundler",
+    "fetch_git": true,
+    "ruby_bins": {
+      "steep": "exe/steep"
+    }
+  },
+  "fsautocomplete": {
+    "kind": "dotnet",
+    "fetch_git": true,
+    "project": "src/FsAutoComplete/FsAutoComplete.fsproj",
+    "executable": "fsautocomplete",
+    "dotnet_properties": {
+      "TargetFramework": "net10.0"
+    }
+  },
+  "yarnspinner": {
+    "kind": "dotnet",
+    "fetch_git": true,
+    "project": "YarnSpinner.LanguageServer/YarnLanguageServer.csproj",
+    "executable": "YarnLanguageServer"
+  },
+  "bicep": {
+    "kind": "dotnet",
+    "fetch_git": true,
+    "project": "src/Bicep.LangServer/Bicep.LangServer.csproj",
+    "executable": "Bicep.LangServer"
+  },
+  "lua-language-server": {
+    "kind": "commands",
+    "fetch_git": true,
+    "submodules": true,
+    "build_commands": [
+      [
+        "bash",
+        "-c",
+        "cd 3rd/luamake && ./compile/build.sh"
+      ],
+      [
+        "3rd/luamake/luamake",
+        "all"
+      ]
+    ],
+    "outputs": [
+      {
+        "source": "bin/lua-language-server",
+        "name": "lua-language-server",
+        "path": "bin/lua-language-server"
+      }
+    ],
+    "runtime_directories": [
+      {
+        "source": "script",
+        "path": "script"
+      },
+      {
+        "source": "meta",
+        "path": "meta"
+      },
+      {
+        "source": "locale",
+        "path": "locale"
+      }
+    ],
+    "runtime_files": [
+      {
+        "source": "main.lua",
+        "path": "main.lua"
+      },
+      {
+        "source": "debugger.lua",
+        "path": "debugger.lua"
+      }
+    ]
+  },
+  "coffeesense": {
+    "kind": "npm",
+    "npm_install_directories": [
+      ".",
+      "server"
+    ],
+    "before_build": [
+      [
+        "npm",
+        "--prefix",
+        "server",
+        "run",
+        "compile"
+      ]
+    ],
+    "node_bins": {
+      "coffeesense-language-server": "server/bin/coffeesense-language-server"
+    },
+    "environment": {
+      "npm_config_legacy_peer_deps": "true"
+    }
+  }
+}
