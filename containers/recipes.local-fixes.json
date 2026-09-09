@@ -900,11 +900,21 @@
         "build",
         "-Doptimize=ReleaseSafe",
         "-j2"
+      ],
+      [
+        "python3",
+        "-c",
+        "from pathlib import Path; Path(\"/work/zls-launcher\").write_text('#!/bin/sh\\nexport PATH=/opt/corpus/servers/zls/zig-sdk:$PATH\\nexec /opt/corpus/servers/zls/zls-native \"$@\"\\n')"
       ]
     ],
     "outputs": [
       {
         "source": "zig-out/bin/zls",
+        "name": "zls-native",
+        "path": "zls-native"
+      },
+      {
+        "source": "/work/zls-launcher",
         "name": "zls",
         "path": "zls"
       }
@@ -916,7 +926,13 @@
         "from pathlib import Path\nimport hashlib,urllib.request,tarfile\npath=Path('/work/zig.tar.xz')\npath.write_bytes(urllib.request.urlopen('https://ziglang.org/download/0.16.0/zig-x86_64-linux-0.16.0.tar.xz',timeout=120).read())\nassert hashlib.sha256(path.read_bytes()).hexdigest()=='70e49664a74374b48b51e6f3fdfbf437f6395d42509050588bd49abe52ba3d00'\nwith tarfile.open(path) as archive: archive.extractall('/work/zig-toolchain',filter='data')\n"
       ]
     ],
-    "repair_note": "Use the release-required checksum-pinned Zig 0.16.0 toolchain."
+    "repair_note": "Build with checksum-pinned Zig 0.16.0 and include that SDK for ZLS project analysis; the launcher selects it instead of the generic builder Zig.",
+    "runtime_directories": [
+      {
+        "source": "/work/zig-toolchain/zig-x86_64-linux-0.16.0",
+        "path": "zig-sdk"
+      }
+    ]
   },
   "tact-language-server": {
     "name": "tact-language-server",
@@ -1033,5 +1049,62 @@
     "cargo_packages": [
       "djls"
     ]
+  },
+  "gem": {
+    "name": "gem",
+    "url": "https://github.com/mantou132/gem",
+    "sha": "2e57e624c05a2474ee9422a50f8d3210a82f7924",
+    "references": [
+      {
+        "extension": "gem",
+        "ids": [
+          "gem"
+        ]
+      }
+    ],
+    "kind": "npm",
+    "network_exception": "Public dependency preparation only; no credentials/private data; host egress rejects internal and metadata HTTP endpoints",
+    "directory": "packages/language-service",
+    "script": null,
+    "before_prepare": [
+      [
+        "python3",
+        "-c",
+        "import json,shutil; from pathlib import Path; shutil.copytree('../config','corpus-config'); path=Path('package.json'); data=json.loads(path.read_text()); data['devDependencies']['@gemjs/config']='file:./corpus-config'; data['dependencies']['@mantou/gem']='2.2.10'; data['dependencies']['duoyun-ui']='2.2.10'; path.write_text(json.dumps(data,indent=2)+'\\n')"
+      ],
+      [
+        "npm",
+        "install",
+        "--prefix=/work/tools",
+        "--ignore-scripts",
+        "--no-audit",
+        "--no-fund",
+        "esbuild@0.24.2"
+      ]
+    ],
+    "environment": {
+      "npm_config_nodedir": "/opt/toolchains/node",
+      "npm_config_jobs": "2",
+      "npm_config_legacy_peer_deps": "true"
+    },
+    "before_build": [
+      [
+        "npm",
+        "rebuild",
+        "tree-sitter",
+        "tree-sitter-typescript",
+        "--offline"
+      ],
+      [
+        "/work/tools/node_modules/.bin/esbuild",
+        "./src/index.ts",
+        "--outdir=./dist",
+        "--platform=node",
+        "--sourcemap",
+        "--bundle",
+        "--packages=external"
+      ]
+    ],
+    "repair_note": "Build the Node language-service package with its local workspace config; retain upstream permissive optional peer resolution and compile native tree-sitter dependencies offline."
   }
 }
