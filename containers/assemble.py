@@ -222,6 +222,7 @@ def main():
         containerfile.write_text(containerfile.read_text().replace('COPY servers /opt/corpus/servers', copies))
         (context/'.containerignore').write_text('servers/\n')
     image = f'localhost/code-corpora-{args.kind}:{args.tag}'
+    call(['chown', '-hR', f'{USER.pw_uid}:{USER.pw_gid}', str(context)])
     call([*PODMAN, 'build', '--network=slirp4netns', *build_args, '-t', image, str(context)])
     result = json.loads(subprocess.check_output([*PODMAN, 'image', 'inspect', image]))
     atomic_json(ROOT/'artifacts'/(args.kind+'-image.json'), result)
