@@ -158,7 +158,8 @@ containers/dev server bruno-language-server --image localhost/code-corpora-build
 The inherited builder must contain the target's SDKs. Grammar builds regenerate
 `parser.c` and compile native and WASM artifacts; use `--no-generate` to test edits
 to generated C directly. `--source PATH` selects an alternate checkout. Server
-recipes use the same format as the batch recipes. Dependency preparation is
+recipes use the same format as the batch recipes. Builds default to 2 CPUs and
+4 GB RAM; use `--memory 8g` for targets that need more memory. Dependency preparation is
 offline unless `--prepare-online` is explicit; compilation is always offline.
 Local online preparation does not have the VM's private-address firewall rules,
 so use public inputs only. Source snapshots must already contain required nested

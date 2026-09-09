@@ -54,7 +54,7 @@ def mount(source, destination, writable=False):
     return ['-v', f'{source}:{destination}:'+('rw,z' if writable else 'ro,z')]
 
 
-def container(image, mounts, command, online=False, interactive=False, timeout=3600):
+def container(image, mounts, command, online=False, interactive=False, timeout=3600, memory="4g"):
     if os.getuid() == 0:
         raise ValueError('Use rootless Podman as an ordinary user')
     network = 'none'
@@ -64,7 +64,7 @@ def container(image, mounts, command, online=False, interactive=False, timeout=3
             '--network='+network, '--http-proxy=false', '--userns=keep-id',
             f'--user={os.getuid()}:{os.getgid()}', '--cap-drop=ALL',
             '--security-opt=no-new-privileges', '--read-only', '--read-only-tmpfs=false',
-            '--pids-limit=512', '--memory=4g', '--memory-swap=4g', '--cpus=2',
+            '--pids-limit=512', '--memory='+memory, '--memory-swap='+memory, '--cpus=2',
             '--timeout='+str(timeout), '--ulimit=core=0:0', '--log-driver=none',
             '--tmpfs=/tmp:rw,nosuid,nodev,size=1g,mode=1777',
             '--tmpfs=/dev/shm:rw,nosuid,nodev,noexec,size=64m,mode=1777',
@@ -112,6 +112,8 @@ def build(arguments, state):
         job.update(recipe)
         job['name'] = name
         job['local_development'] = True
+        job['network_exception'] = ('Public dependency preparation only; no credentials or private data; '
+                                    'rootless networking with host loopback disabled') if arguments.prepare_online else None
         job.setdefault('references', [])
         job.setdefault('environment', {}).setdefault('CARGO_TARGET_DIR', '/work/target')
     result = subprocess.run(['git', '-C', str(source), 'rev-parse', 'HEAD'], capture_output=True, text=True)
@@ -130,7 +132,8 @@ def build(arguments, state):
             mounts += mount(output, '/opt/corpus/servers/'+name, True)
         for phase in (['grammar'] if kind == 'grammar' else ['prepare', 'build']):
             command = container(image, mounts, ['python3', '/opt/corpus/dev_worker.py', phase],
-                                online=kind == 'server' and phase == 'prepare' and arguments.prepare_online)
+                                online=kind == 'server' and phase == 'prepare' and arguments.prepare_online,
+                                memory=arguments.memory)
             with (directory/(phase+'.log')).open('wb') as log:
                 result = subprocess.run(command, stdout=log, stderr=subprocess.STDOUT)
             if result.returncode:
@@ -349,6 +352,7 @@ def main():
         command = commands.add_parser(kind)
         command.add_argument('name')
         command.add_argument('--image', required=True)
+        command.add_argument('--memory', default='4g', help='Container memory limit (default: 4g)')
         command.add_argument('--source', type=Path, help='Override this target checkout only')
         if kind == 'grammar':
             command.add_argument('--no-generate', action='store_true', help='Build edited parser.c without regenerating it')
