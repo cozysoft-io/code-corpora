@@ -271,6 +271,28 @@ probes cover namespace/privilege/resource settings, read-only inputs, missing ho
 files/sockets, and offline/metadata/internal network denial. They do not prove
 resistance to kernel vulnerabilities. Keep the VM disposable and patched.
 
+### Bounded server repairs
+
+Of the 39 remaining version-rebuild failures, 15 now build and answer LSP
+initialization locally and on GCE: CSpell, Dexter, Django, Dot, Gem, Hardhat,
+Pyright, Regal, Stan, Starpls, Tact, TON, YarnSpinner, Dependi, and ZLS.
+Their recipes are in `recipes.local-fixes.json`. These checks used the builder;
+the released server image needs its own runtime checks.
+
+The other 24 are deferred under the limit on expensive repairs:
+
+| Reason | Repositories |
+| --- | --- |
+| Prior timeout or comparatively large build/dependencies | aptos-core, buck2, cqlls, ltex-ls-plus, postgres-language-server, roc, slint, uiua, veryl |
+| Toolchain or dependency alignment still needed | blueprint-compiler, csharp-language-server, erlang-language-platform, psalm, steep |
+| Build/generation pipeline needs investigation | kcl, likec4, naive-ui-intellisense, oso |
+| Inaccessible dependencies or unavailable pinned compiler archive | aer-dist, superhtml, ziggy |
+| Source checksum differs from the public Go checksum database | tilt |
+| Client API drift; also requires an ActivityWatch service | aw-watcher-zed |
+| TypeScript plugin with an embedded no-op LSP adapter, not a standalone server | css-modules-kit |
+
+### Publication
+
 The existing progress release uses private
 `ghcr.io/mgsloan/code-corpora-{build,grammars,servers}` packages. The intended
 namespace for the next release is `ghcr.io/cozysoft-io/`; existing lock records
