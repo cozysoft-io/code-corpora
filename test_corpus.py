@@ -36,7 +36,7 @@ class CorpusTests(unittest.TestCase):
         self.git("add", ".")
         self.git("commit", "-qm", "pin")
         self.sha = self.git("rev-parse", "HEAD")
-        self.repo = dict(name="example", language="java", split="training",
+        self.repo = dict(name="example", language="java", split="train",
                          url=self.upstream.as_uri(), domain="test", sha=self.sha)
         self.pin = dict(self.repo, sha=self.sha, branch="main", lines=1,
                         lines_nonblank=1, source_files=1, tracked_files=1,
@@ -50,6 +50,13 @@ class CorpusTests(unittest.TestCase):
     def args(self, **kwargs):
         return argparse.Namespace(directory=self.target, language=None, split=None,
                                   repo=None, jobs=2, **kwargs)
+
+    def test_training_filter_alias_selects_train_paths(self):
+        selection = corpus.Selection(self.target, {}, [self.repo], [], [])
+        arguments = self.args()
+        arguments.split = "training"
+        self.assertEqual(corpus.selected(selection, arguments), [self.repo])
+        self.assertEqual(corpus.checkout_path(self.target, self.repo), self.target / "train" / "example")
 
     def test_pin_is_fetched_even_when_upstream_advances_and_local_edits_survive(self):
         (self.upstream / "Main.java").write_text("newer\n")
@@ -102,9 +109,9 @@ class CorpusTests(unittest.TestCase):
                 self.assertEqual(corpus.command_status(args), 1)
                 args.repo = ["example"]
                 self.assertEqual(corpus.command_verify(args), 0)
-            self.assertTrue((self.target / "training" / "example" / ".git").exists())
+            self.assertTrue((self.target / "train" / "example" / ".git").exists())
             self.assertFalse(corpus.checkout_path(self.target, second).exists())
-            self.assertFalse((self.target / "training" / "java").exists())
+            self.assertFalse((self.target / "train" / "java").exists())
             with contextlib.redirect_stdout(io.StringIO()):
                 self.assertEqual(corpus.command_clone(args), 0)
             self.assertEqual(lock_path.read_bytes(), original)

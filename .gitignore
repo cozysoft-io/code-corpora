@@ -1,5 +1,5 @@
 # Independent checkouts are fetched from selected-*.toml, never tracked here.
-/training/
+/train/
 /test/
 /grammars/
 /servers/

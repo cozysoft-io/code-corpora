@@ -3,7 +3,7 @@
 
 selected-repos.toml records repository choices and immutable Git pins.
 corpus-lock.toml caches measurements of those pins. Checkouts are flat within
-training/, test/, grammars/, and servers/. The default corpus directory is this repository, independent
+train/, test/, grammars/, and servers/. The default corpus directory is this repository, independent
 of the current working directory. Python 3.11+ and Git are required.
 
 clone fetches missing checkouts at the selected SHA; existing checkouts
@@ -33,7 +33,7 @@ SELECTION = REPO / "selected-repos.toml"
 LOCK = REPO / "corpus-lock.toml"
 SOURCES = REPO / "zed-sources.toml"
 
-SPLITS = ("training", "test")
+SPLITS = ("train", "test")
 
 # How a checkout is made. Recorded in the lock because it is part of what the
 # working tree *is*: skipping the LFS smudge leaves pointer files where a
@@ -572,7 +572,8 @@ def selected(selection: Selection, arguments) -> list[dict]:
     if arguments.language:
         repos = [repo for repo in repos if repo["language"] == arguments.language]
     if arguments.split:
-        repos = [repo for repo in repos if repo["split"] == arguments.split]
+        split = "train" if arguments.split == "training" else arguments.split
+        repos = [repo for repo in repos if repo["split"] == split]
     if arguments.repo:
         repos = [repo for repo in repos if repo["name"] in arguments.repo]
     if not repos:
@@ -862,7 +863,7 @@ def main() -> int:
         target.add_argument("--set", choices=("repos", "grammars", "servers"), default="repos", help="which TOML selection to fetch or check")
         target.add_argument("--repo", action="append", help="repository name; may be repeated")
         target.add_argument("--language", help="restrict to one language")
-        target.add_argument("--split", choices=SPLITS, help="restrict to one split")
+        target.add_argument("--split", choices=(*SPLITS, "training"), help="restrict to one split (training is an alias for train)")
 
     clone = subparsers.add_parser(
         "clone",

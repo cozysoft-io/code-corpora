@@ -9,7 +9,7 @@ for two [Cozysoft](https://cozysoft.io) projects:
 
 # Organization
 
-* `test/` and `training/` contain checkouts of selected open-source repositories. Each sub-folder is a repository.
+* `test/` and `train/` contain checkouts of selected open-source repositories. Each sub-folder is a repository.
 
 * `grammars/` and `servers/` contain editable checkouts of the available Tree-sitter grammars and language-server sources referenced by Zed or an extension.
 
@@ -49,13 +49,13 @@ Corpus, grammar, and server checkouts are independent, ignored Git repositories.
 
 ```sh
 ./corpus clone                           # selected corpus repositories
-./corpus clone --split training --language rust --repo ripgrep
+./corpus clone --split train --language rust --repo ripgrep
 ./corpus clone /tmp/small-corpus --repo ripgrep
 ./corpus clone --set grammars            # all available grammar pins
 ./corpus clone --set grammars --repo csharp
 ./corpus clone --set servers --repo zls
 ./corpus status --set grammars
-./corpus verify --split training --language rust
+./corpus verify --split train --language rust
 
 ./corpus submodules --references         # opt in to Zed and its registry
 ./corpus submodules --data               # opt in to recorded LSP data
@@ -104,8 +104,9 @@ resetting it. Local modifications and untracked files are preserved. Failed clon
 remove only their own staging directory. Source fetching does not build parsers,
 install language servers, or initialize upstream repositories' nested submodules.
 
-Paths are flat: `training/NAME`, `test/NAME`, `grammars/NAME`, and `servers/NAME`.
-There are no per-language repository directories or generated manifests. `status`
+Paths are flat: `train/NAME`, `test/NAME`, `grammars/NAME`, and `servers/NAME`.
+`training` remains a compatibility symlink to `train`; `--split training` is
+also accepted. There are no per-language repository directories or generated manifests. `status`
 checks pins; `verify` also checks working-tree cleanliness. For corpus repositories,
 verification retains the existing dependency checks, using `.corpus/build/SPLIT/NAME`
 for build artifacts. Migrated build products may need regeneration because they
