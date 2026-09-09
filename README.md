@@ -39,6 +39,10 @@ exceptions, deferrals, and unresolved gaps. Its
 New source selections remain unverified for evaluation until their language
 support and dependencies have been checked.
 
+[`DATA-PROPOSALS.md`](DATA-PROPOSALS.md) proposes sources for the remaining gaps,
+including Rosetta Code, grammar tests, and repositories covering several languages.
+[`data-proposals.json`](data-proposals.json) records the measurements and per-language routes.
+
 [`language-coverage.md`](language-coverage.md) lists registered Zed language
 suffixes and UTF-8 file/raw-line counts in `training/` and `test/`.
 The census also accepts RosettaCodeData's `.arturo`, `.uiua`, and `.simula` aliases.
