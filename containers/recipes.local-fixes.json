@@ -717,5 +717,40 @@
       "dependi-lsp"
     ],
     "repair_note": "Build the renamed dependi-lsp subproject."
+  },
+  "cspell-lsp": {
+    "name": "cspell-lsp",
+    "url": "https://github.com/vlabo/cspell-lsp",
+    "sha": "7e27b4433997da35e654e6c56f49936249700ff7",
+    "references": [
+      {
+        "extension": "cspell",
+        "ids": [
+          "cspell"
+        ]
+      }
+    ],
+    "kind": "npm",
+    "script": "build",
+    "network_exception": "Public dependency preparation only; no credentials/private data; host egress rejects internal and metadata HTTP endpoints",
+    "before_prepare": [
+      [
+        "npm",
+        "install",
+        "--prefix=/work/tools",
+        "--ignore-scripts",
+        "--no-audit",
+        "--no-fund",
+        "bun@1.3.13"
+      ],
+      [
+        "node",
+        "/work/tools/node_modules/bun/install.js"
+      ]
+    ],
+    "environment": {
+      "PATH": "/work/tools/node_modules/.bin:/opt/toolchains/node/bin:/usr/bin:/bin"
+    },
+    "repair_note": "Prepare Bun 1.3.13 explicitly, then build the Node distribution offline."
   }
 }
