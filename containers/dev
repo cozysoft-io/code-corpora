@@ -135,6 +135,7 @@ def build(arguments, state):
         for phase in (['grammar'] if kind == 'grammar' else ['prepare', 'build']):
             command = container(image, mounts, ['python3', '/opt/corpus/dev_worker.py', phase],
                                 online=kind == 'server' and phase == 'prepare' and arguments.prepare_online,
+                                timeout=arguments.timeout,
                                 memory=arguments.memory)
             with (directory/(phase+'.log')).open('wb') as log:
                 result = subprocess.run(command, stdout=log, stderr=subprocess.STDOUT)
@@ -355,6 +356,7 @@ def main():
         command.add_argument('name')
         command.add_argument('--image', required=True)
         command.add_argument('--memory', default='4g', help='Container memory limit (default: 4g)')
+        command.add_argument('--timeout', type=int, default=3600, help='Maximum seconds per build phase (default: 3600)')
         command.add_argument('--source', type=Path, help='Override this target checkout only')
         if kind == 'grammar':
             command.add_argument('--no-generate', action='store_true', help='Build edited parser.c without regenerating it')

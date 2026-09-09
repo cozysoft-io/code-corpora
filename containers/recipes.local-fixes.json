@@ -580,5 +580,100 @@
     ],
     "repair_note": "Build the native Rust baml-cli lsp command; full release LTO needs a larger memory limit locally.",
     "memory": "12g"
+  },
+  "dot-language-server": {
+    "name": "dot-language-server",
+    "url": "https://github.com/nikeee/dot-language-server",
+    "sha": "27decb36291efeb3e0e135878bf0151ec2221ded",
+    "references": [
+      {
+        "extension": "graphviz",
+        "ids": [
+          "dot-language-server"
+        ]
+      }
+    ],
+    "kind": "npm",
+    "script": null,
+    "network_exception": "Public dependency preparation only; no credentials/private data; host egress rejects internal and metadata HTTP endpoints",
+    "before_build": [
+      [
+        "node",
+        "node_modules/typescript/bin/tsc"
+      ]
+    ],
+    "repair_note": "Compile the Node entrypoint; omit cross-platform standalone Bun bundles."
+  },
+  "yarnspinner": {
+    "name": "yarnspinner",
+    "url": "https://github.com/yuna0x0/YarnSpinner",
+    "sha": "0740cc2126e191f3f9dd4042370a98f7a60278cf",
+    "references": [
+      {
+        "extension": "yarn-spinner",
+        "ids": [
+          "yarn-spinner-lsp"
+        ]
+      }
+    ],
+    "kind": "dotnet",
+    "fetch_git": true,
+    "project": "YarnSpinner.LanguageServer/YarnLanguageServer.csproj",
+    "executable": "YarnLanguageServer",
+    "dotnet_properties": {
+      "UseAppHost": "true"
+    },
+    "repair_note": "Enable the application host required for a self-contained executable."
+  },
+  "pyright": {
+    "name": "pyright",
+    "url": "https://github.com/microsoft/pyright",
+    "sha": "789d8275fef25f347ffef7b847305fefd8a3e363",
+    "references": [
+      {
+        "extension": "pyright",
+        "ids": [
+          "pyright"
+        ]
+      }
+    ],
+    "kind": "npm",
+    "script": "build:cli:dev",
+    "node_bins": {
+      "pyright-langserver": "packages/pyright/langserver.index.js",
+      "pyright": "packages/pyright/index.js"
+    },
+    "npm_install_directories": [
+      ".",
+      "packages/pyright-internal",
+      "packages/pyright"
+    ],
+    "repair_note": "Use npm and install the CLI and internal packages explicitly."
+  },
+  "hardhat-vscode": {
+    "name": "hardhat-vscode",
+    "url": "https://github.com/NomicFoundation/hardhat-vscode",
+    "sha": "03d942869dd9601df65db37efc65ac3bb5c21d7d",
+    "references": [
+      {
+        "extension": "solidity",
+        "ids": [
+          "solidity"
+        ]
+      }
+    ],
+    "kind": "npm",
+    "before_build": [
+      [
+        "node",
+        "node_modules/typescript/bin/tsc",
+        "-b",
+        "server/tsconfig.build.json"
+      ]
+    ],
+    "node_bins": {
+      "nomicfoundation-solidity-language-server": "server/out/index.js"
+    },
+    "repair_note": "Use the release npm workspaces; compile only the server."
   }
 }
