@@ -807,5 +807,162 @@
       "."
     ],
     "repair_note": "Match the module declaration to the release source imports under styrainc/regal."
+  },
+  "stan-language-server": {
+    "name": "stan-language-server",
+    "url": "https://github.com/tomatitito/stan-language-server",
+    "sha": "db98727e3392c928b4280a757f95ff91b48d78a1",
+    "references": [
+      {
+        "extension": "stan",
+        "ids": [
+          "stan-language-server"
+        ]
+      }
+    ],
+    "kind": "npm",
+    "script": null,
+    "network_exception": "Public dependency preparation only; no credentials/private data; host egress rejects internal and metadata HTTP endpoints",
+    "before_prepare": [
+      [
+        "npm",
+        "install",
+        "--prefix=/work/tools",
+        "--ignore-scripts",
+        "--no-audit",
+        "--no-fund",
+        "bun@1.3.13"
+      ],
+      [
+        "node",
+        "/work/tools/node_modules/bun/install.js"
+      ]
+    ],
+    "environment": {
+      "PATH": "/work/tools/node_modules/.bin:/opt/toolchains/node/bin:/usr/bin:/bin"
+    },
+    "repair_note": "Prepare Bun 1.3.13; emit the missing CLI as CommonJS so Node resolves vscode-languageserver subpaths.",
+    "before_build": [
+      [
+        "npm",
+        "run",
+        "build"
+      ],
+      [
+        "/work/tools/node_modules/.bin/bun",
+        "build",
+        "src/server/cli.ts",
+        "--outfile",
+        "dist/server/cli.cjs",
+        "--packages",
+        "external",
+        "--target",
+        "node",
+        "--format",
+        "cjs"
+      ]
+    ],
+    "node_bins": {
+      "stan-language-server": "dist/server/cli.cjs"
+    }
+  },
+  "zls": {
+    "name": "zls",
+    "url": "https://github.com/zigtools/zls",
+    "sha": "494486203c3a48927f2383aa3d5ce5fca112186d",
+    "references": [
+      {
+        "extension": "zig",
+        "ids": [
+          "zls"
+        ]
+      }
+    ],
+    "kind": "commands",
+    "fetch_git": true,
+    "submodules": true,
+    "environment": {
+      "ZIG_GLOBAL_CACHE_DIR": "/work/zig-cache",
+      "ZIG_LOCAL_CACHE_DIR": "/work/zig-local",
+      "PATH": "/work/zig-toolchain/zig-x86_64-linux-0.16.0:/usr/bin:/bin"
+    },
+    "prepare_commands": [
+      [
+        "zig",
+        "build",
+        "--fetch",
+        "-Doptimize=ReleaseSafe"
+      ]
+    ],
+    "build_commands": [
+      [
+        "zig",
+        "build",
+        "-Doptimize=ReleaseSafe",
+        "-j2"
+      ]
+    ],
+    "outputs": [
+      {
+        "source": "zig-out/bin/zls",
+        "name": "zls",
+        "path": "zls"
+      }
+    ],
+    "before_prepare": [
+      [
+        "python3",
+        "-c",
+        "from pathlib import Path\nimport hashlib,urllib.request,tarfile\npath=Path('/work/zig.tar.xz')\npath.write_bytes(urllib.request.urlopen('https://ziglang.org/download/0.16.0/zig-x86_64-linux-0.16.0.tar.xz',timeout=120).read())\nassert hashlib.sha256(path.read_bytes()).hexdigest()=='70e49664a74374b48b51e6f3fdfbf437f6395d42509050588bd49abe52ba3d00'\nwith tarfile.open(path) as archive: archive.extractall('/work/zig-toolchain',filter='data')\n"
+      ]
+    ],
+    "repair_note": "Use the release-required checksum-pinned Zig 0.16.0 toolchain."
+  },
+  "tact-language-server": {
+    "name": "tact-language-server",
+    "url": "https://github.com/tact-lang/tact-language-server",
+    "sha": "fd645e0fbe378870b9441633022d2b8c6ce9436f",
+    "references": [
+      {
+        "extension": "tact",
+        "ids": [
+          "tact"
+        ]
+      },
+      {
+        "extension": "ton",
+        "ids": [
+          "tolk",
+          "func",
+          "tlb",
+          "tact",
+          "fift"
+        ]
+      }
+    ],
+    "kind": "npm",
+    "script": null,
+    "node_bins": {
+      "tact-language-server": "dist/server.js"
+    },
+    "before_build": [
+      [
+        "python3",
+        "-c",
+        "from pathlib import Path; path=Path('server/src/server.ts'); text=path.read_text(); assert text.count('Logger.initialize(connection, `${__dirname}/tact-language-server.log`)')==1; path.write_text(text.replace('Logger.initialize(connection, `${__dirname}/tact-language-server.log`)','Logger.initialize(connection)'))"
+      ],
+      [
+        "python3",
+        "-c",
+        "from pathlib import Path; Path('corpus.webpack.cjs').write_text(\"const config = require('./webpack.config.js');\\nconfig.entry = {server: config.entry.server};\\nconfig.module.rules.unshift({test: /@textlint.*ast-node-types.*\\\\.js$/, type: 'javascript/auto'});\\nmodule.exports = config;\\n\")"
+      ],
+      [
+        "node",
+        "node_modules/webpack/bin/webpack.js",
+        "--config",
+        "corpus.webpack.cjs"
+      ]
+    ],
+    "repair_note": "Let Webpack parse the textlint dependency as an ES module. Use LSP logging without opening a log file in the read-only installation."
   }
 }
