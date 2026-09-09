@@ -7,18 +7,38 @@ for two [Cozysoft](https://cozysoft.io) projects:
 
 * [`tree-squatter`](https://github.com/cozysoft-io/tree-squatter), an experiment in a more compact representation for Tree-sitter. This corpus is used to check for behavioral equivalence and benchmarking.
 
-
 # Organization
 
 * `test/` and `training/` contain checkouts of selected open-source repositories. Each sub-folder is a repository.
 
-* `grammars/` and `servers/` contain checkouts of every available Tree-sitter grammar and language server referenced by Zed or an extension.
+* `grammars/` and `servers/` contain editable checkouts of the available Tree-sitter grammars and language-server sources referenced by Zed or an extension.
 
 * The [`zed/`](https://github.com/zed-industries/zed) and [`zed-extensions/`](https://github.com/zed-industries/extensions) submodules are used to determine the repositories and versions to use.
 
   - `selected-grammars.toml` and `selected-servers.toml` are computed from these, and pin the URLs and SHAs for those.
 
+  - Zed integration will use the registered extension versions and our selected grammar and server builds.
+
 * [`lsp-data/`](https://github.com/cozysoft-io/code-corpora-lsp-data) is an optional submodule containing LSP data computed for the repositories based on the `servers`.
+
+* [`containers/`](containers/README.md) contains build and runtime scripts for building the containers
+
+* `.corpus/` is bind mounted in to the container(s) and holds build outputs.
+
+
+# Containers
+
+`ghcr.io/cozysoft-io/code-corpora-build`: dependencies needed to build grammars and servers
+
+`ghcr.io/cozysoft-io/code-corpora-grammars`: grammars compiled to both native and WASM. This has a local copy of the Zed extensions and grammars.
+
+`ghcr.io/cozysoft-io/code-corpora-servers`: atop the grammars image, adds the language server and dependencies needed to load the corpus repos into the servers
+
+These are setup such that modifications to the grammars or servers are accessible to both Zed and native builds.  This is done by:
+
+* Symlinking the extensions into the directory Zed expects, and automatically structuring the extensions in the way that Zed expects.
+
+* In the servers version, including a Zed configuration which overrides the binary path of every language server.
 
 
 # Fetching repositories
