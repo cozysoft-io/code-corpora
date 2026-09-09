@@ -14,17 +14,19 @@ images does not mean three long-lived, shared processes. Prepare dependencies
 separately, then build and run offline. Add Google Cloud Batch when scheduling
 becomes tedious.
 
-Implementation has started in [containers/](containers/README.md); `./corpus`
-itself still does not impose isolation. The VM is running, the initial three
-images exist, and server compilation is ongoing. All 544 enabled grammars passed
-tests in the runtime image; two compiled parsers are quarantined after resource
-failures, and the DuckyScript pin remains unavailable. Rust was recovered from a
-published crate whose recorded Git SHA matches the selection. The builder/server
-images are incomplete progress snapshots. All three are published privately to
-GHCR as `code-corpora-build`, `code-corpora-grammars`, and `code-corpora-servers`,
-with tag `progress-20260909-1`. Publication uses the separate GitHub Actions
-publisher described below. [images.lock.toml](containers/images.lock.toml) records
-their local IDs, registry digests, and coverage.
+Implementation lives in [containers/](containers/README.md); `./corpus` itself
+still does not impose isolation. All three images are published privately under
+`ghcr.io/cozysoft-io/` with tag `progress-20260909-2`.
+The grammar image has 544 validated parsers, two quarantined parsers, and one
+unavailable DuckyScript pin. The server image contains 292 distributions; 248
+passed offline LSP initialization, including all 15 newly repaired builds.
+The other 44 need runtime or project-configuration investigation. Builder/server
+coverage remains incomplete; the remaining 24 version-rebuild failures were
+deferred under the limit on expensive repairs.
+[images.lock.toml](containers/images.lock.toml) records immutable registry
+digests and coverage; the private release includes the detailed runtime report.
+The GCE VM is stopped, with its 50 GB boot disk and 450 GB data disk retained.
+Build artifacts, logs, caches, and OCI archives remain on the data disk.
 
 The deliverables remain three reusable images, a small runner, and reproducible
 build recipes. Documentation and local command availability were checked
@@ -349,18 +351,15 @@ the included allowance) and requires transferring archives out of Google Cloud,
 even though retaining the images in GHCR is currently free. See
 [Actions billing](https://docs.github.com/en/billing/concepts/product-billing/github-actions).
 
-The existing checkpoint was published through the private
-[`mgsloan/corpus-containers`](https://github.com/mgsloan/corpus-containers)
-repository. Before the next publication, transfer that repository to
-`cozysoft-io/corpus-containers` or create a private organization publisher from
-`containers/publisher/`. Its owner determines the GHCR namespace; the upload
-script now targets the organization publisher. Check organization package-creation
-permissions and the publisher's Actions access before dispatch. Associate the
-packages with `cozysoft-io/code-corpora`, retaining publisher write access; see
-[GitHub's repository-linking instructions](https://docs.github.com/en/packages/learn-github-packages/connecting-a-repository-to-a-package).
-Keep existing `mgsloan` digest records until an organization release is actually
-published and verified. Transfer saved OCI archives through the trusted local machine into
-private release assets, split below GitHub's per-asset limit. A reviewed workflow
+Publication uses the private
+[`cozysoft-io/corpus-containers`](https://github.com/cozysoft-io/corpus-containers)
+repository, deployed from `containers/publisher/`. All three organization packages
+have been verified private. Previous `mgsloan` digest records remain in Git history.
+Transfer small OCI archives through the trusted local machine into private release
+assets. For large archives, use temporary private Cloud Storage and object-specific
+signed PUT/GET URLs. The latest release used this path; its temporary bucket and
+signer have been removed, while the archives remain on the GCE data disk.
+A reviewed workflow
 checks archive/chunk hashes and expected image configuration digests, then uses
 `skopeo copy --preserve-digests` to upload without executing the images. It checks
 repository/package visibility and refuses existing public packages. Its temporary

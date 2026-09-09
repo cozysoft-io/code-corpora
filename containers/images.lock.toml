@@ -1,22 +1,22 @@
 schema_version = 1
-release = "progress-20260909-1"
+release = "progress-20260909-2"
 platform = "linux/amd64"
 published_to_ghcr = true
 
 [build]
-registry_name = "ghcr.io/mgsloan/code-corpora-build"
-registry_digest = "sha256:291efe02b4cae336f200277a31e46bca0966ded0a7d8a36d383133d2a7aee8c0"
-registry_tag = "progress-20260909-1"
+registry_name = "ghcr.io/cozysoft-io/code-corpora-build"
+registry_digest = "sha256:027a8ea80a0f7e0067e10fa77a639fab81b40b03acdaf573bc60f34325fa5a8f"
+registry_tag = "progress-20260909-2"
 published = true
-local_image_id = "sha256:5ff72f3e7f62492123f122a0ecc46a880adc7a71f2566231aee99b7009104fb5"
-unpacked_bytes = 7092669991
+local_image_id = "sha256:eed29878dc0b110b80daf8331fd072ab6ceedc6dbb66d15865ff05bcae083abe"
+unpacked_bytes = 12839454122
 complete = false
-remaining = "Additional target-specific SDKs and offline dependency snapshots"
+remaining = "Additional target-specific SDKs, recipes, and offline dependency snapshots"
 
 [grammars]
-registry_name = "ghcr.io/mgsloan/code-corpora-grammars"
+registry_name = "ghcr.io/cozysoft-io/code-corpora-grammars"
 registry_digest = "sha256:659bd7c749d086b6733d71408cb9ee72c76324b1a84273dd2098e21ca38605c8"
-registry_tag = "progress-20260909-1"
+registry_tag = "progress-20260909-2"
 published = true
 local_image_id = "sha256:253b6b937b75ac1b046835151e9a5f88d8c64db8d8c8127c5fb6ce63f4474c50"
 unpacked_bytes = 570788165
@@ -25,16 +25,18 @@ quarantined = ["animationtxt", "pdxinfo"]
 unavailable_pin = ["duckyscript"]
 
 [servers]
-registry_name = "ghcr.io/mgsloan/code-corpora-servers"
-registry_digest = "sha256:91fc374ed05a66355465dcebb44fa19fa420ed293125ba44088b742e9ad9b7cc"
-registry_tag = "progress-20260909-1"
+registry_name = "ghcr.io/cozysoft-io/code-corpora-servers"
+registry_digest = "sha256:a05396d9dea1af54dd6c379a9d88decf1068c06f5542f6c7bfa5d2c55eca4ba0"
+registry_tag = "progress-20260909-2"
 published = true
-local_image_id = "sha256:f3682e677a4681f2fcde8aa1dc1f22cb9ae40b1cad0b9abdfcbfa6a07189716f"
+local_image_id = "sha256:27563ce9dc792595e1e39796b8441e97a71562d926a17bb848dbea93d9c3a991"
+unpacked_bytes = 36089970981
 parent_local_image_id = "sha256:253b6b937b75ac1b046835151e9a5f88d8c64db8d8c8127c5fb6ce63f4474c50"
-unpacked_bytes = 4608581025
-catalog_build_records = 78
-runtime_smoke_passed = 63
-runtime_no_initialize_response = 14
-catalog_artifact_not_in_snapshot = 1
+parent_registry_digest = "sha256:659bd7c749d086b6733d71408cb9ee72c76324b1a84273dd2098e21ca38605c8"
+catalog_repositories = 432
+catalog_build_records = 292
+runtime_smoke_passed = 248
+runtime_no_initialize_response = 44
+runtime_report = "https://github.com/cozysoft-io/corpus-containers/releases/download/progress-20260909-2/runtime-servers-progress20260909-2.json"
 complete = false
-remaining = "First-pass server builds, additional recipes, runtime dependencies, and LSP verification"
+remaining = "Unbuilt selections and runtime/configuration investigation for servers that did not initialize"

@@ -276,8 +276,15 @@ resistance to kernel vulnerabilities. Keep the VM disposable and patched.
 Of the 39 remaining version-rebuild failures, 15 now build and answer LSP
 initialization locally and on GCE: CSpell, Dexter, Django, Dot, Gem, Hardhat,
 Pyright, Regal, Stan, Starpls, Tact, TON, YarnSpinner, Dependi, and ZLS.
-Their recipes are in `recipes.local-fixes.json`. These checks used the builder;
-the released server image needs its own runtime checks.
+Their recipes are in `recipes.local-fixes.json`. All 15 also pass in the final
+server image. The probe now uses the selected Zed adapters' launch arguments for
+Awsum, Buf, Cargo Appraiser, and Cargotom; all four pass.
+
+The `progress-20260909-2` runtime contains 292 server distributions. Its minimal
+offline initialization check passes for 248; 44 do not respond and need further
+runtime or project-configuration investigation. The private release includes the
+[individual results](https://github.com/cozysoft-io/corpus-containers/releases/download/progress-20260909-2/runtime-servers-progress20260909-2.json),
+probe hashes, and superseded cold-start results.
 
 The other 24 are deferred under the limit on expensive repairs:
 
@@ -293,16 +300,14 @@ The other 24 are deferred under the limit on expensive repairs:
 
 ### Publication
 
-The existing progress release uses private
-`ghcr.io/mgsloan/code-corpora-{build,grammars,servers}` packages. The intended
-namespace for the next release is `ghcr.io/cozysoft-io/`; existing lock records
-continue to identify the actual published digests.
+The `progress-20260909-2` release uses private
+`ghcr.io/cozysoft-io/code-corpora-{build,grammars,servers}` packages. The previous
+`mgsloan` checkpoint's digest records remain in Git history.
 The private [publishing repository](https://github.com/cozysoft-io/corpus-containers)
 is deployed from `publisher/`.
 `upload_release.py` targets this organization repository; the workflow publishes
 under its owner's GHCR namespace and checks organization package visibility.
-Associate the packages with `cozysoft-io/code-corpora` and grant the publisher
-Actions access. The publisher uses GitHub Actions' temporary package token. No additional personal access token
+The publisher uses GitHub Actions' temporary package token. No additional personal access token
 is needed for upload. `publisher/` contains the reviewed workflow and transfer code.
 `prepare_upload.py` splits OCI archives into checksummed private release assets;
 the workflow verifies those hashes and image IDs before copying to GHCR without
@@ -327,6 +332,10 @@ Run `prepare_upload.py --manifest-only` there and set each image's `archive_url`
 in the private release manifest to its signed GET URL. No cloud or GitHub account
 credentials are copied to the VM. Keep URL files private, and delete the temporary
 bucket and signer after verifying publication.
+The current release's temporary transfer storage and signer have been removed;
+the builder/server OCI archives remain on the GCE data disk. To republish those
+archives, restage them and supply fresh URLs. The release manifest retains their
+hashes, and GHCR holds the published images.
 
 Run `prepare_upload.py --help`, create
 a private prerelease in the publisher repository, then run:
