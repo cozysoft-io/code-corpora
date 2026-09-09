@@ -28,6 +28,8 @@ from dataclasses import dataclass, field
 from datetime import date
 from pathlib import Path
 
+from corpus_coverage import matching_suffixes
+
 REPO = Path(__file__).resolve().parent
 SELECTION = REPO / "selected-repos.toml"
 LOCK = REPO / "corpus-lock.toml"
@@ -137,8 +139,17 @@ def load_selection(directory: Path | None = None) -> Selection:
             die(f"unsupported repository URL: {repo['url']}")
         if repo["split"] not in SPLITS:
             die(f"{repo['name']}: split {repo['split']!r} is not one of {SPLITS}")
-        if repo["language"] not in EXTENSIONS:
+        if "path_suffixes" in repo and (not isinstance(repo["path_suffixes"], list)
+                or not repo["path_suffixes"] or any(
+                not isinstance(suffix, str) or not suffix for suffix in repo["path_suffixes"])):
+            die(f"{repo['name']}: invalid path_suffixes")
+        if repo["language"] not in EXTENSIONS and not repo.get("path_suffixes"):
             die(f"{repo['name']}: no extension set for language {repo['language']!r}")
+        if "languages" in repo and (not isinstance(repo["languages"], list)
+                or repo["language"] not in repo["languages"] or any(
+                    not isinstance(language, str) or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.-]*", language)
+                    for language in repo["languages"])):
+            die(f"{repo['name']}: invalid languages")
     names = [(repo["split"], repo["name"]) for repo in document["repo"]]
     duplicates = {name for name in names if names.count(name) > 1}
     if duplicates:
@@ -241,19 +252,26 @@ class Measurement:
     files_tracked: int = 0
 
 
-def measure(checkout: Path, language: str) -> Measurement:
-    extensions = EXTENSIONS[language]
+def measure(checkout: Path, language: str, path_suffixes: list[str] | None = None) -> Measurement:
+    suffixes = set(path_suffixes) if path_suffixes else None
+    extensions = EXTENSIONS.get(language, ())
     tracked = git("ls-files", "-z", cwd=checkout).split("\0")
     result = Measurement()
     for relative in tracked:
         if not relative:
             continue
         result.files_tracked += 1
-        if not relative.endswith(extensions):
+        if not (matching_suffixes(relative, suffixes) if suffixes else relative.endswith(extensions)):
             continue
         path = checkout / relative
+        if suffixes and path.is_symlink():
+            continue
         try:
             data = path.read_bytes()
+            if suffixes:
+                data.decode("utf-8")
+        except UnicodeDecodeError:
+            continue
         except OSError as error:
             print(f"corpus: unreadable {path}: {error}", file=sys.stderr)
             continue
@@ -383,7 +401,7 @@ def clone_one(root: Path, repo: dict, pin: dict | None) -> Result:
         )
         return result
 
-    counted = measure(destination, repo["language"])
+    counted = measure(destination, repo["language"], repo.get("path_suffixes"))
 
     result.entry = {
         "name": repo["name"],
@@ -447,6 +465,8 @@ def verify_dependencies(root: Path, repo: dict, label: str) -> list[str]:
     one implementation of the question. `collect-matrix` runs this before it
     starts.
     """
+    if repo.get("evaluation_ready") is False:
+        return [f"{label}: source selected; language support and dependency resolution are not verified"]
     language, name = repo["language"], repo["name"]
     build = build_path(root, repo)
     checkout = checkout_path(root, repo)
@@ -570,7 +590,7 @@ def verify_compile_database(root: Path, repo: dict, label: str) -> list[str]:
 def selected(selection: Selection, arguments) -> list[dict]:
     repos = [repo for repo in selection.repos if not repo.get("retired")]
     if arguments.language:
-        repos = [repo for repo in repos if repo["language"] == arguments.language]
+        repos = [repo for repo in repos if arguments.language in repo.get("languages", [repo["language"]])]
     if arguments.split:
         split = "train" if arguments.split == "training" else arguments.split
         repos = [repo for repo in repos if repo["split"] == split]

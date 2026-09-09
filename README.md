@@ -28,6 +28,17 @@ for two [Cozysoft](https://cozysoft.io) projects:
 
 # Language coverage
 
+[`SELECTION.md`](SELECTION.md) describes how to choose new repositories for
+heuristic-jump, preserve train/test assignments, and verify readiness for LSP
+evaluation. Configuration and data languages are deferred during the current
+programming-language expansion.
+
+[`repo-selection.md`](repo-selection.md) lists the selected train/test pairs,
+exceptions, deferrals, and unresolved gaps. Its
+[`JSON audit`](repo-selection.json) records candidate evidence and source scopes.
+New source selections remain unverified for evaluation until their language
+support and dependencies have been checked.
+
 [`language-coverage.md`](language-coverage.md) lists registered Zed language
 suffixes and UTF-8 file/raw-line counts in `training/` and `test/`.
 The census also accepts RosettaCodeData's `.arturo`, `.uiua`, and `.simula` aliases.

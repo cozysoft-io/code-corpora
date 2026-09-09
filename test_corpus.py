@@ -4,6 +4,7 @@ import contextlib
 import importlib.machinery
 import importlib.util
 import io
+import json
 import os
 from pathlib import Path
 import shutil
@@ -59,6 +60,26 @@ class CorpusTests(unittest.TestCase):
         arguments.split = "training"
         self.assertEqual(corpus.selected(selection, arguments), [self.repo])
         self.assertEqual(corpus.checkout_path(self.target, self.repo), self.target / "train" / "example")
+
+    def test_registered_language_suffixes_and_readiness(self):
+        (self.upstream / "source.new").write_bytes("// comment\n\nλ".encode())
+        (self.upstream / "Buildfile").write_bytes(b"build\n")
+        (self.upstream / "invalid.new").write_bytes(b"\xff\n")
+        self.git("add", ".")
+        self.git("commit", "-qm", "new language sources")
+        repo = dict(self.repo, language="new-language", languages=["new-language", "companion"],
+                    path_suffixes=["new", "Buildfile"], evaluation_ready=False,
+                    sha=self.git("rev-parse", "HEAD"))
+        cloned = corpus.clone_one(self.target, repo, None)
+        self.assertEqual(cloned.problems, [])
+        self.assertEqual(cloned.entry["source_files"], 2)
+        self.assertEqual(cloned.entry["lines"], 4)
+        selection = corpus.Selection(self.target, {}, [repo], [], [])
+        arguments = self.args()
+        arguments.language = "companion"
+        self.assertEqual(corpus.selected(selection, arguments), [repo])
+        problems = corpus.verify_dependencies(self.target, repo, "train/example")
+        self.assertTrue(any("not verified" in problem for problem in problems))
 
     def test_pin_is_fetched_even_when_upstream_advances_and_local_edits_survive(self):
         (self.upstream / "Main.java").write_text("newer\n")
@@ -139,9 +160,13 @@ class CorpusTests(unittest.TestCase):
     def test_selection_and_measurements_preserve_all_repositories(self):
         selection = corpus.load_selection()
         lock = corpus.load_lock()
-        self.assertEqual(len(selection.repos), 256)
-        self.assertEqual(len(lock), 256)
-        self.assertEqual({r["language"] for r in selection.repos}, set(corpus.EXTENSIONS))
+        audit = json.loads((corpus.REPO / "repo-selection.json").read_text())
+        by_name = {repo["name"]: repo for repo in selection.repos}
+        self.assertEqual(len(audit["baseline_selection"]), 256)
+        for original in audit["baseline_selection"]:
+            self.assertEqual({key: by_name[original["name"]][key] for key in original}, original)
+            self.assertIn(corpus.key_of(original), lock)
+        self.assertTrue(set(corpus.EXTENSIONS) <= {repo["language"] for repo in selection.repos})
         self.assertEqual(len(selection.considered), 248)
         self.assertEqual(len(selection.reserves), 14)
         corpus.validate_measurements(selection, lock)
@@ -149,12 +174,36 @@ class CorpusTests(unittest.TestCase):
         self.assertEqual(len(set(paths)), len(paths))
         self.assertTrue(all(len(path.relative_to(self.target).parts) == 2 for path in paths))
 
+    def test_expansion_pairs_match_manifest_pins_and_repository_splits(self):
+        selection = corpus.load_selection()
+        audit = json.loads((corpus.REPO / "repo-selection.json").read_text())
+        by_url = {repo["url"]: repo for repo in selection.repos}
+        new_names = set()
+        for language, decision in audit["languages"].items():
+            if decision["status"] != "selected":
+                self.assertNotIn("repositories", decision)
+                continue
+            self.assertEqual(set(decision["repositories"]), {"train", "test"})
+            self.assertEqual(len(set(decision["repositories"].values())), 2)
+            for split, identity in decision["repositories"].items():
+                evidence = audit["repositories"][identity]
+                repo = by_url[evidence["html_url"]]
+                self.assertEqual((repo["sha"], repo["split"]), (evidence["sha"], split))
+                self.assertIn(language, repo["coverage_languages"])
+                self.assertTrue(set(decision["suffixes"]) <= set(repo["path_suffixes"]))
+                self.assertGreater(evidence["scoped_measurements"][language]["files"], 0)
+                self.assertFalse(repo["evaluation_ready"])
+                new_names.add(repo["name"])
+        self.assertEqual(len(new_names), audit["summary"]["new_repositories"])
+
     def test_invalid_paths_duplicates_and_pins_are_rejected(self):
         path = self.root / "selection.toml"
         prefix = 'corpus_root = "."\n[criteria]\nsize_lines = [1, 10]\n'
         with patch.object(corpus, "SELECTION", path), contextlib.redirect_stderr(io.StringIO()):
             for repos in ([dict(self.repo, name="../escape")], [self.repo, self.repo], [self.repo, dict(self.repo, language="rust")],
                           [dict(self.repo, url="--bad-url")], [dict(self.repo, sha="main")],
+                          [dict(self.repo, path_suffixes="java")], [dict(self.repo, path_suffixes=[1])],
+                          [dict(self.repo, languages="java")], [dict(self.repo, languages=["other"])],
                           [{k: v for k, v in self.repo.items() if k != "sha"}]):
                 path.write_text(prefix + "\n".join("\n".join(corpus.emit_table("repo", repo)) for repo in repos))
                 with self.assertRaises(SystemExit):
@@ -169,6 +218,7 @@ class CorpusTests(unittest.TestCase):
         fixture = self.root / "fixture"
         fixture.mkdir()
         shutil.copy2(TOOL, fixture / "corpus")
+        shutil.copy2(TOOL.with_name("corpus_coverage.py"), fixture / "corpus_coverage.py")
         (fixture / "selected-repos.toml").write_text(
             'corpus_root = "."\n[criteria]\nsize_lines = [1, 10]\n' +
             "\n".join(corpus.emit_table("repo", self.repo)) + "\n")

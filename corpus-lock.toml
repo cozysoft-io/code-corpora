@@ -2,7 +2,7 @@
 #
 # This file plus `selected-repos.toml` is the whole corpus. Running
 # `./corpus clone` against them rebuilds every checkout at the commit
-# recorded here, which is why the corpus directory itself is derived output
+# selected there, which is why the corpus directory itself is derived output
 # rather than something that has to be backed up.
 #
 # `sha` copies the selection when first measured and is never
@@ -3600,3 +3600,2607 @@ source_files = 99
 tracked_files = 157
 clone = "depth 1, single branch, no tags, LFS smudge skipped"
 added = "2026-08-18"
+
+[[repo]]
+name = "Gamua--Starling-Framework"
+language = "actionscript"
+split = "train"
+url = "https://github.com/Gamua/Starling-Framework"
+sha = "9d68d61b9c672fbe64aae6ec22d0bcb30dda2a86"
+branch = "HEAD"
+lines = 43100
+lines_nonblank = 36558
+source_files = 192
+tracked_files = 385
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "away3d--away3d-core-fp11"
+language = "actionscript"
+split = "test"
+url = "https://github.com/away3d/away3d-core-fp11"
+sha = "26739318fe555a115bf47bd7b865bace09743682"
+branch = "HEAD"
+lines = 92563
+lines_nonblank = 78572
+source_files = 478
+tracked_files = 486
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "AdaCore--gnatcoll-core"
+language = "ada"
+split = "train"
+url = "https://github.com/AdaCore/gnatcoll-core"
+sha = "8664a82b552715a0a6486beeec25b68ecde95e5e"
+branch = "HEAD"
+lines = 102577
+lines_nonblank = 86767
+source_files = 493
+tracked_files = 1271
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "alire-project--alire"
+language = "ada"
+split = "test"
+url = "https://github.com/alire-project/alire"
+sha = "9d87a3f09613dbb4300e8841af1da1cf4002b7eb"
+branch = "HEAD"
+lines = 67254
+lines_nonblank = 54799
+source_files = 479
+tracked_files = 1828
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "agda--agda-stdlib"
+language = "agda"
+split = "train"
+url = "https://github.com/agda/agda-stdlib"
+sha = "810f87395c45a5dc06dc2815f69a1fbc8260e961"
+branch = "HEAD"
+lines = 149161
+lines_nonblank = 116749
+source_files = 1263
+tracked_files = 1415
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "agda--cubical"
+language = "agda"
+split = "test"
+url = "https://github.com/agda/cubical"
+sha = "6e6df4e74d4b03205c942c1574c6fea0b2cc213e"
+branch = "HEAD"
+lines = 203514
+lines_nonblank = 169959
+source_files = 1203
+tracked_files = 1223
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "aiken-lang--stdlib"
+language = "aiken"
+split = "train"
+url = "https://github.com/aiken-lang/stdlib"
+sha = "41f3c823f8d36dc81c285f34c8c6e545e2fffbfd"
+branch = "HEAD"
+lines = 15962
+lines_nonblank = 13690
+source_files = 56
+tracked_files = 64
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "SundaeSwap-finance--sundae-contracts"
+language = "aiken"
+split = "test"
+url = "https://github.com/SundaeSwap-finance/sundae-contracts"
+sha = "be33466b7dbe0f8e6c0e0f46ff23737897f45835"
+branch = "HEAD"
+lines = 7326
+lines_nonblank = 6921
+source_files = 34
+tracked_files = 48
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "Drakonian--data-editor-for-bc"
+language = "al"
+split = "train"
+url = "https://github.com/Drakonian/data-editor-for-bc"
+sha = "36c9176fd5c2b9560c7f346a1615c153c6dfdf62"
+branch = "HEAD"
+lines = 15943
+lines_nonblank = 14724
+source_files = 36
+tracked_files = 86
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "Bertverbeek4PS--bc2adls"
+language = "al"
+split = "test"
+url = "https://github.com/Bertverbeek4PS/bc2adls"
+sha = "3c0cbb160411a236ebb3e1a48163dc2b0c423504"
+branch = "HEAD"
+lines = 17515
+lines_nonblank = 15597
+source_files = 111
+tracked_files = 234
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "section83--MacYTDL"
+language = "applescript"
+split = "train"
+url = "https://github.com/section83/MacYTDL"
+sha = "5846bfa7bb13db0ea8d3e8af2c277067531c9ad3"
+branch = "HEAD"
+lines = 14075
+lines_nonblank = 12732
+source_files = 9
+tracked_files = 31
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "franzheidl--alfred-workflows"
+language = "applescript"
+split = "test"
+url = "https://github.com/franzheidl/alfred-workflows"
+sha = "9e7a6e6e8104cd0aaff97e555ffad7de1d25a214"
+branch = "HEAD"
+lines = 919
+lines_nonblank = 738
+source_files = 14
+tracked_files = 65
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "letscontrolit--ESPEasy"
+language = "arduino"
+split = "train"
+url = "https://github.com/letscontrolit/ESPEasy"
+sha = "23cbc8461676cdf16dcac800b185be4aa0b6abaa"
+branch = "HEAD"
+lines = 110620
+lines_nonblank = 92297
+source_files = 690
+tracked_files = 5632
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "arendst--Tasmota"
+language = "arduino"
+split = "test"
+url = "https://github.com/arendst/Tasmota"
+sha = "211691d5fb368a14cb3f25215e1236a3529e9770"
+branch = "HEAD"
+lines = 355455
+lines_nonblank = 311519
+source_files = 869
+tracked_files = 7545
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "Descolada--UIA-v2"
+language = "autohotkey"
+split = "train"
+url = "https://github.com/Descolada/UIA-v2"
+sha = "2846a9b10518a95cf26a6c43671a9512b231ccb7"
+branch = "HEAD"
+lines = 10738
+lines_nonblank = 9944
+source_files = 32
+tracked_files = 35
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "abgox--InputTip"
+language = "autohotkey"
+split = "test"
+url = "https://github.com/abgox/InputTip"
+sha = "00998a53f21c8273779ed10ec6359dd566828d93"
+branch = "HEAD"
+lines = 8354
+lines_nonblank = 7587
+source_files = 27
+tracked_files = 133
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "soimort--translate-shell"
+language = "awk"
+split = "train"
+url = "https://github.com/soimort/translate-shell"
+sha = "dc67af4e66ca7b33381e5013204d954c86a6fe37"
+branch = "HEAD"
+lines = 9243
+lines_nonblank = 8348
+source_files = 28
+tracked_files = 47
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "step---JSON.awk"
+language = "awk"
+split = "test"
+url = "https://github.com/step-/JSON.awk"
+sha = "7185bf0afc786ae3ca0250a3fda4dfcf3c23f0d3"
+branch = "HEAD"
+lines = 740
+lines_nonblank = 629
+source_files = 3
+tracked_files = 32
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "bluespec--Flute"
+language = "bluespec-systemverilog"
+split = "train"
+url = "https://github.com/bluespec/Flute"
+sha = "9b2b056527429e509c719c417a588b3ea594949b"
+branch = "HEAD"
+lines = 75584
+lines_nonblank = 61648
+source_files = 210
+tracked_files = 1821
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "cambridgehackers--connectal"
+language = "bluespec-systemverilog"
+split = "test"
+url = "https://github.com/cambridgehackers/connectal"
+sha = "f182656bfe21160b8b263f3261b041d708adafe8"
+branch = "HEAD"
+lines = 75930
+lines_nonblank = 67822
+source_files = 421
+tracked_files = 1402
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "mlochbaum--BQN"
+language = "bqn"
+split = "train"
+url = "https://github.com/mlochbaum/BQN"
+sha = "5abbab967fefc68ae9b3c2620d5d38473a90cb66"
+branch = "HEAD"
+lines = 7056
+lines_nonblank = 6494
+source_files = 52
+tracked_files = 553
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "mlochbaum--Singeli"
+language = "bqn"
+split = "test"
+url = "https://github.com/mlochbaum/Singeli"
+sha = "bdb43bebaa7350850ab80e0b0f42fb79fa502fe7"
+branch = "HEAD"
+lines = 2461
+lines_nonblank = 2339
+source_files = 8
+tracked_files = 128
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "cpr1c--tools_ui_1c"
+language = "bsl"
+split = "train"
+url = "https://github.com/cpr1c/tools_ui_1c"
+sha = "46784631ffd91009025fd7f481ac3f461092d128"
+branch = "HEAD"
+lines = 233089
+lines_nonblank = 184132
+source_files = 333
+tracked_files = 1441
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "vbondarevsky--Connector"
+language = "bsl"
+split = "test"
+url = "https://github.com/vbondarevsky/Connector"
+sha = "7e37f1f5cdd35aac220af853b20a551d4da88cdd"
+branch = "HEAD"
+lines = 9578
+lines_nonblank = 7254
+source_files = 6
+tracked_files = 28
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "c3lang--c3c"
+language = "c3"
+split = "train"
+url = "https://github.com/c3lang/c3c"
+sha = "acda47f794e860946dd048b77558ad3ec4c6bdde"
+branch = "HEAD"
+lines = 143430
+lines_nonblank = 125224
+source_files = 1437
+tracked_files = 2523
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "tonis2--lsp"
+language = "c3"
+split = "test"
+url = "https://github.com/tonis2/lsp"
+sha = "daa76c48a237987d1f89c147cee0e0e9faf9e990"
+branch = "HEAD"
+lines = 19196
+lines_nonblank = 17145
+source_files = 51
+tracked_files = 61
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "onflow--flow-core-contracts"
+language = "cadence"
+split = "train"
+url = "https://github.com/onflow/flow-core-contracts"
+sha = "6339190b6945e0a7f7d1b4ab74480b1197f845c7"
+branch = "HEAD"
+lines = 24957
+lines_nonblank = 20518
+source_files = 385
+tracked_files = 451
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "dapperlabs--nba-smart-contracts"
+language = "cadence"
+split = "test"
+url = "https://github.com/dapperlabs/nba-smart-contracts"
+sha = "9aeef65e0596ab188fcb0524bfa0078706724cd2"
+branch = "HEAD"
+lines = 8783
+lines_nonblank = 7108
+source_files = 146
+tracked_files = 267
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "OpenZeppelin--cairo-contracts"
+language = "cairo"
+split = "train"
+url = "https://github.com/OpenZeppelin/cairo-contracts"
+sha = "f29c5cd7ff094c49243b263fa20a7efdb6f21361"
+branch = "HEAD"
+lines = 63373
+lines_nonblank = 52966
+source_files = 319
+tracked_files = 717
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "keep-starknet-strange--alexandria"
+language = "cairo"
+split = "test"
+url = "https://github.com/keep-starknet-strange/alexandria"
+sha = "6d2cfcc0954c8d7796f028b25336faa8e9378da8"
+branch = "HEAD"
+lines = 49234
+lines_nonblank = 43016
+source_files = 229
+tracked_files = 781
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "ColdBox--coldbox-platform"
+language = "cfml-tag"
+split = "train"
+url = "https://github.com/ColdBox/coldbox-platform"
+sha = "ad82ee59d86ff1d1b9760c27d26847d7b586dcaf"
+branch = "HEAD"
+lines = 93465
+lines_nonblank = 82419
+source_files = 657
+tracked_files = 813
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "framework-one--fw1"
+language = "cfml-tag"
+split = "test"
+url = "https://github.com/framework-one/fw1"
+sha = "d7fb9add9b82be4d7c884ebb2d0f88ffb59ed8c9"
+branch = "HEAD"
+lines = 13273
+lines_nonblank = 11177
+source_files = 305
+tracked_files = 374
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "iden3--circomlib"
+language = "circom"
+split = "train"
+url = "https://github.com/iden3/circomlib"
+sha = "35e54ea21da3e8762557234298dbb553c175ea8d"
+branch = "HEAD"
+lines = 31779
+lines_nonblank = 30333
+source_files = 104
+tracked_files = 148
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "privacy-ethereum--maci"
+language = "circom"
+split = "test"
+url = "https://github.com/privacy-ethereum/maci"
+sha = "919c433d09aa776a05ca2d89a0074324d6199e91"
+branch = "HEAD"
+lines = 3737
+lines_nonblank = 3191
+source_files = 37
+tracked_files = 1072
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "stacks-sbtc--sbtc"
+language = "clarity"
+split = "train"
+url = "https://github.com/stacks-sbtc/sbtc"
+sha = "18caa9d62ef58055b692da72a07eb6375e98b673"
+branch = "HEAD"
+lines = 1150
+lines_nonblank = 1030
+source_files = 6
+tracked_files = 828
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "alexgo-io--alex-v1"
+language = "clarity"
+split = "test"
+url = "https://github.com/alexgo-io/alex-v1"
+sha = "ac6f97fafdf2ae43c993b1ebf173bf0646d23554"
+branch = "HEAD"
+lines = 98558
+lines_nonblank = 85251
+source_files = 364
+tracked_files = 489
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "clojure--clojurescript"
+language = "clojure"
+split = "train"
+url = "https://github.com/clojure/clojurescript"
+sha = "b45dff9f9aeb506864ecb5618ba686ff2ee8de77"
+branch = "HEAD"
+lines = 77672
+lines_nonblank = 68853
+source_files = 303
+tracked_files = 413
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "ring-clojure--ring"
+language = "clojure"
+split = "test"
+url = "https://github.com/ring-clojure/ring"
+sha = "5d98bfa4b2813a9b0575ea90b3fa1d63d105f7e4"
+branch = "HEAD"
+lines = 8026
+lines_nonblank = 7161
+source_files = 83
+tracked_files = 117
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "meyfa--CobolCraft"
+language = "cobol"
+split = "train"
+url = "https://github.com/meyfa/CobolCraft"
+sha = "e8c420df7a901b51b10c70bc08b56af7310d00f2"
+branch = "HEAD"
+lines = 29442
+lines_nonblank = 24724
+source_files = 206
+tracked_files = 282
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "walmartlabs--zECS"
+language = "cobol"
+split = "test"
+url = "https://github.com/walmartlabs/zECS"
+sha = "6d6bcbbc89c9be086a58cb7ad2ff4d702e873d02"
+branch = "HEAD"
+lines = 4056
+lines_nonblank = 3350
+source_files = 5
+tracked_files = 38
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "kemalcr--kemal"
+language = "crystal"
+split = "train"
+url = "https://github.com/kemalcr/kemal"
+sha = "c493853f7d82818b9b420a1211f7284342fdf0ca"
+branch = "HEAD"
+lines = 13084
+lines_nonblank = 11137
+source_files = 79
+tracked_files = 117
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "luckyframework--lucky"
+language = "crystal"
+split = "test"
+url = "https://github.com/luckyframework/lucky"
+sha = "692e5b7ef5621638339dcc0b75b697a2283c0cb7"
+branch = "HEAD"
+lines = 21219
+lines_nonblank = 17671
+source_files = 251
+tracked_files = 297
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "curry-language--curry2go"
+language = "curry"
+split = "train"
+url = "https://github.com/curry-language/curry2go"
+sha = "3e89b488204f190e3ce5c80694c7125ebcdecc4d"
+branch = "HEAD"
+lines = 9088
+lines_nonblank = 7521
+source_files = 83
+tracked_files = 191
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "curry-language--kics2"
+language = "curry"
+split = "test"
+url = "https://github.com/curry-language/kics2"
+sha = "f989d57326be699a3b00d69972f4c31aae334051"
+branch = "HEAD"
+lines = 13906
+lines_nonblank = 11408
+source_files = 151
+tracked_files = 380
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "scikit-learn--scikit-learn"
+language = "cython"
+split = "train"
+url = "https://github.com/scikit-learn/scikit-learn"
+sha = "2cc7893a2097be891426ca6a4d9ea2e14cf82b9c"
+branch = "HEAD"
+lines = 21728
+lines_nonblank = 18103
+source_files = 77
+tracked_files = 1845
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "lxml--lxml"
+language = "cython"
+split = "test"
+url = "https://github.com/lxml/lxml"
+sha = "ae3ef5da350bae0c80f3bf0763b28e276e7c871e"
+branch = "HEAD"
+lines = 28035
+lines_nonblank = 23847
+source_files = 53
+tracked_files = 373
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "dafny-lang--libraries"
+language = "dafny"
+split = "train"
+url = "https://github.com/dafny-lang/libraries"
+sha = "b486ff7faadbf306ed7e71386a2b0aeb1e38bd4d"
+branch = "HEAD"
+lines = 20978
+lines_nonblank = 18610
+source_files = 109
+tracked_files = 154
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "Consensys-Incorporated--evm-dafny"
+language = "dafny"
+split = "test"
+url = "https://github.com/Consensys-Incorporated/evm-dafny"
+sha = "e2e52e86d6623d48d0849f5ce1664f88c8f0e547"
+branch = "HEAD"
+lines = 9725
+lines_nonblank = 8964
+source_files = 37
+tracked_files = 2597
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "digital-asset--daml"
+language = "daml"
+split = "train"
+url = "https://github.com/digital-asset/daml"
+sha = "66a1e6d93f4a9b54bfe226097f81d2309792b2e0"
+branch = "HEAD"
+lines = 64630
+lines_nonblank = 53412
+source_files = 1125
+tracked_files = 3063
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "digital-asset--daml-finance"
+language = "daml"
+split = "test"
+url = "https://github.com/digital-asset/daml-finance"
+sha = "155f931b6ebe7d3662fd72788cb17f0bfb5a7ba6"
+branch = "HEAD"
+lines = 75502
+lines_nonblank = 66872
+source_files = 634
+tracked_files = 1418
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "dylan-lang--http"
+language = "dylan"
+split = "train"
+url = "https://github.com/dylan-lang/http"
+sha = "57df28b87c3f567c061ccdca8b37cf48a9fda1e1"
+branch = "HEAD"
+lines = 12481
+lines_nonblank = 10987
+source_files = 78
+tracked_files = 124
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "dylan-lang--binary-data"
+language = "dylan"
+split = "test"
+url = "https://github.com/dylan-lang/binary-data"
+sha = "f86356792fd2bb7174a6e0f69f3038629181d3d2"
+branch = "HEAD"
+lines = 4185
+lines_nonblank = 3673
+source_files = 14
+tracked_files = 32
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "magit--magit"
+language = "elisp"
+split = "train"
+url = "https://github.com/magit/magit"
+sha = "9cb07d820d2b9ebbe9940e4d493293522d4e21d2"
+branch = "HEAD"
+lines = 37533
+lines_nonblank = 33176
+source_files = 49
+tracked_files = 83
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "abo-abo--swiper"
+language = "elisp"
+split = "test"
+url = "https://github.com/abo-abo/swiper"
+sha = "0d02f5063d36ff4fa6138f0973c83c6d3874fba0"
+branch = "HEAD"
+lines = 18010
+lines_nonblank = 16072
+source_files = 14
+tracked_files = 41
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "mdgriffith--elm-ui"
+language = "elm"
+split = "train"
+url = "https://github.com/mdgriffith/elm-ui"
+sha = "acae8857a02e600cc4b4737ca2f70607228b4489"
+branch = "HEAD"
+lines = 25603
+lines_nonblank = 20932
+source_files = 115
+tracked_files = 168
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "eikek--docspell"
+language = "elm"
+split = "test"
+url = "https://github.com/eikek/docspell"
+sha = "06f5fc8f3e63b0361e72315c7bfe55e4b3189433"
+branch = "HEAD"
+lines = 85748
+lines_nonblank = 70656
+source_files = 453
+tracked_files = 2112
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "ninenines--cowboy"
+language = "erlang"
+split = "train"
+url = "https://github.com/ninenines/cowboy"
+sha = "79e3fb02b31d47af6e69e8f3ba18fba291a3072a"
+branch = "HEAD"
+lines = 44631
+lines_nonblank = 40302
+source_files = 190
+tracked_files = 424
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "processone--ejabberd"
+language = "erlang"
+split = "test"
+url = "https://github.com/processone/ejabberd"
+sha = "4fbfd14839a0628f005238b89e07131896bfd762"
+branch = "HEAD"
+lines = 160298
+lines_nonblank = 146641
+source_files = 397
+tracked_files = 633
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "fish-shell--fish-shell"
+language = "fish"
+split = "train"
+url = "https://github.com/fish-shell/fish-shell"
+sha = "79f79059dbd9f5071b98418509fd72d59503aafb"
+branch = "HEAD"
+lines = 93960
+lines_nonblank = 84319
+source_files = 1596
+tracked_files = 2212
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "IlanCosman--tide"
+language = "fish"
+split = "test"
+url = "https://github.com/IlanCosman/tide"
+sha = "fcda500d2c2996e25456fb46cd1a5532b3157b16"
+branch = "HEAD"
+lines = 3382
+lines_nonblank = 2924
+source_files = 117
+tracked_files = 142
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "fortran-lang--stdlib"
+language = "fortran"
+split = "train"
+url = "https://github.com/fortran-lang/stdlib"
+sha = "90f135a00e2502e9a93994e612811178b9d16d76"
+branch = "HEAD"
+lines = 37056
+lines_nonblank = 30600
+source_files = 415
+tracked_files = 845
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "jacobwilliams--json-fortran"
+language = "fortran"
+split = "test"
+url = "https://github.com/jacobwilliams/json-fortran"
+sha = "d9ed2e4ee53745f4ed98d7536e17bee5198aa3b0"
+branch = "HEAD"
+lines = 26230
+lines_nonblank = 20807
+source_files = 61
+tracked_files = 133
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "fsprojects--FAKE"
+language = "fsharp"
+split = "train"
+url = "https://github.com/fsprojects/FAKE"
+sha = "e8e1cae79e3573167d7421c622b51adc8c536004"
+branch = "HEAD"
+lines = 97641
+lines_nonblank = 83304
+source_files = 446
+tracked_files = 1088
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "fsprojects--FSharpPlus"
+language = "fsharp"
+split = "test"
+url = "https://github.com/fsprojects/FSharpPlus"
+sha = "b5a650a483cb31af75f2ee698d78731298a19abf"
+branch = "HEAD"
+lines = 44521
+lines_nonblank = 36331
+source_files = 217
+tracked_files = 267
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "ton-blockchain--token-contract"
+language = "func"
+split = "train"
+url = "https://github.com/ton-blockchain/token-contract"
+sha = "1182ad99413242f09925d50e70ccb7e0e09f94d4"
+branch = "HEAD"
+lines = 1925
+lines_nonblank = 1615
+source_files = 19
+tracked_files = 56
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "ton-blockchain--nominator-pool"
+language = "func"
+split = "test"
+url = "https://github.com/ton-blockchain/nominator-pool"
+sha = "2f35c36b5ad662f10fd7b01ef780c3f1949c399d"
+branch = "HEAD"
+lines = 1265
+lines_nonblank = 1060
+source_files = 3
+tracked_files = 69
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "Orama-Interactive--Pixelorama"
+language = "gdscript"
+split = "train"
+url = "https://github.com/Orama-Interactive/Pixelorama"
+sha = "a1ba7927a563ecbee1bb3bc7c900deb56b0efb83"
+branch = "HEAD"
+lines = 62238
+lines_nonblank = 53280
+source_files = 290
+tracked_files = 1380
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "HungryProton--scatter"
+language = "gdscript"
+split = "test"
+url = "https://github.com/HungryProton/scatter"
+sha = "2ced25f1ebef13648e94d3cc6a643da92a7e33d8"
+branch = "HEAD"
+lines = 9363
+lines_nonblank = 6871
+source_files = 83
+tracked_files = 428
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "gdquest-demos--godot-shaders"
+language = "gdshader"
+split = "test"
+url = "https://github.com/gdquest-demos/godot-shaders"
+sha = "05a3931acc85513b67b80b6e88671a596a3f9693"
+branch = "HEAD"
+lines = 2445
+lines_nonblank = 2030
+source_files = 58
+tracked_files = 572
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "gleam-lang--stdlib"
+language = "gleam"
+split = "train"
+url = "https://github.com/gleam-lang/stdlib"
+sha = "db3791b04555bceff281e8c00326a1d0be0db6cd"
+branch = "HEAD"
+lines = 19293
+lines_nonblank = 16868
+source_files = 42
+tracked_files = 62
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "lustre-labs--lustre"
+language = "gleam"
+split = "test"
+url = "https://github.com/lustre-labs/lustre"
+sha = "e88aa0e04934e20329ef6dd82004bb4d06d85f9c"
+branch = "HEAD"
+lines = 22537
+lines_nonblank = 19237
+source_files = 80
+tracked_files = 323
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "gren-lang--core"
+language = "gren"
+split = "train"
+url = "https://github.com/gren-lang/core"
+sha = "ee36bbf49391e210cca0003fe70e60f28bce8b67"
+branch = "HEAD"
+lines = 21530
+lines_nonblank = 16586
+source_files = 51
+tracked_files = 111
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "gren-lang--node"
+language = "gren"
+split = "test"
+url = "https://github.com/gren-lang/node"
+sha = "ae00b50f83c1dcf0c690055b145789d8405e9ea9"
+branch = "HEAD"
+lines = 7468
+lines_nonblank = 5890
+source_files = 27
+tracked_files = 121
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "sircmpwn--hare"
+language = "hare"
+split = "train"
+url = "https://git.sr.ht/~sircmpwn/hare"
+sha = "7016c5a8e6cad2c6314116aad97afe7e2a8826af"
+branch = "HEAD"
+lines = 136813
+lines_nonblank = 123027
+source_files = 856
+tracked_files = 1064
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "sircmpwn--himitsu"
+language = "hare"
+split = "test"
+url = "https://git.sr.ht/~sircmpwn/himitsu"
+sha = "5dc9c4fee0bda528de9d0d6ce367c3265d437444"
+branch = "HEAD"
+lines = 5389
+lines_nonblank = 4702
+source_files = 34
+tracked_files = 50
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "jgm--pandoc"
+language = "haskell"
+split = "train"
+url = "https://github.com/jgm/pandoc"
+sha = "0e399cc79935ae69f708c0fc6d8e7abec3af27d5"
+branch = "HEAD"
+lines = 122661
+lines_nonblank = 112286
+source_files = 365
+tracked_files = 2846
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "koalaman--shellcheck"
+language = "haskell"
+split = "test"
+url = "https://github.com/koalaman/shellcheck"
+sha = "9af7ee28ce587baadd950b85dd6826a16b9c068d"
+branch = "HEAD"
+lines = 19954
+lines_nonblank = 17477
+source_files = 30
+tracked_files = 90
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "HaxeFlixel--flixel"
+language = "haxe"
+split = "train"
+url = "https://github.com/HaxeFlixel/flixel"
+sha = "5e147e81bb59a441f4afed72ab9a8299d8211216"
+branch = "HEAD"
+lines = 97405
+lines_nonblank = 83935
+source_files = 348
+tracked_files = 447
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "HeapsIO--heaps"
+language = "haxe"
+split = "test"
+url = "https://github.com/HeapsIO/heaps"
+sha = "efb1a98de9d280dac0edbc749b95d83f4b02bc34"
+branch = "HEAD"
+lines = 133115
+lines_nonblank = 116969
+source_files = 595
+tracked_files = 672
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "Blinue--Magpie"
+language = "hlsl"
+split = "train"
+url = "https://github.com/Blinue/Magpie"
+sha = "3396e1e000bbab050d098032dac04ba0250683ad"
+branch = "HEAD"
+lines = 99860
+lines_nonblank = 94731
+source_files = 123
+tracked_files = 611
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "microsoft--DirectX-Graphics-Samples"
+language = "hlsl"
+split = "test"
+url = "https://github.com/microsoft/DirectX-Graphics-Samples"
+sha = "213dd4fd4918ea009dd8f35adee1aff1f2ecaba4"
+branch = "HEAD"
+lines = 21393
+lines_nonblank = 18053
+source_files = 359
+tracked_files = 3005
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "urbit--urbit"
+language = "hoon"
+split = "train"
+url = "https://github.com/urbit/urbit"
+sha = "ac289d90bae0c549455ed4216d888bb740c057f6"
+branch = "HEAD"
+lines = 173495
+lines_nonblank = 173381
+source_files = 828
+tracked_files = 1593
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "yosoyubik--canvas"
+language = "hoon"
+split = "test"
+url = "https://github.com/yosoyubik/canvas"
+sha = "2d9ad2c1a007128379184f63dbacf08423bd0bc2"
+branch = "HEAD"
+lines = 19643
+lines_nonblank = 19643
+source_files = 6
+tracked_files = 149
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "idris-lang--Idris2"
+language = "idris-2"
+split = "train"
+url = "https://github.com/idris-lang/Idris2"
+sha = "1c630e67c386629a0fbbc6b78a59176fde7f0a76"
+branch = "HEAD"
+lines = 181145
+lines_nonblank = 153275
+source_files = 1935
+tracked_files = 4652
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "stefan-hoeck--idris2-pack"
+language = "idris-2"
+split = "test"
+url = "https://github.com/stefan-hoeck/idris2-pack"
+sha = "6baee7d5d59a93cf147de7b1208a2ad934645673"
+branch = "HEAD"
+lines = 10506
+lines_nonblank = 8943
+source_files = 45
+tracked_files = 80
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "focus-editor--focus"
+language = "jai"
+split = "train"
+url = "https://github.com/focus-editor/focus"
+sha = "c6b3ead7d4174527d0138e8a31f7c3c5663badec"
+branch = "HEAD"
+lines = 128032
+lines_nonblank = 109004
+source_files = 210
+tracked_files = 273
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "valignatev--hitboxer"
+language = "jai"
+split = "test"
+url = "https://github.com/valignatev/hitboxer"
+sha = "285bca220b8778b6829f301a4d219779f22d6ea6"
+branch = "HEAD"
+lines = 49889
+lines_nonblank = 44333
+source_files = 46
+tracked_files = 56
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "wader--fq"
+language = "jq"
+split = "train"
+url = "https://github.com/wader/fq"
+sha = "a1622f6009dcfe0d5927b9b062aedfd402987cdf"
+branch = "HEAD"
+lines = 4155
+lines_nonblank = 3944
+source_files = 54
+tracked_files = 5699
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "wader--jqjq"
+language = "jq"
+split = "test"
+url = "https://github.com/wader/jqjq"
+sha = "644d9650359eaef9d82bdd2cb146a54e891a0538"
+branch = "HEAD"
+lines = 3172
+lines_nonblank = 3056
+source_files = 1
+tracked_files = 8
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "JuliaStats--Distributions.jl"
+language = "julia"
+split = "train"
+url = "https://github.com/JuliaStats/Distributions.jl"
+sha = "050e0f9f74fc9a8d84265de5aefa1e7ada857b84"
+branch = "HEAD"
+lines = 32726
+lines_nonblank = 27186
+source_files = 256
+tracked_files = 357
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "FluxML--Flux.jl"
+language = "julia"
+split = "test"
+url = "https://github.com/FluxML/Flux.jl"
+sha = "404ff37d68d256a9ca0bb176ed119b631bc9cad8"
+branch = "HEAD"
+lines = 17138
+lines_nonblank = 13925
+source_files = 96
+tracked_files = 176
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "koka-lang--koka"
+language = "koka"
+split = "train"
+url = "https://github.com/koka-lang/koka"
+sha = "3ac4f001ab7277b484d661fdbada1aaf8d01ecbf"
+branch = "HEAD"
+lines = 115196
+lines_nonblank = 99987
+source_files = 1104
+tracked_files = 2123
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "koka-community--std"
+language = "koka"
+split = "test"
+url = "https://github.com/koka-community/std"
+sha = "f79a7cadd9bbdbeac67f9f1a11d800b7f292a9fc"
+branch = "HEAD"
+lines = 9597
+lines_nonblank = 8130
+source_files = 89
+tracked_files = 106
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "leanprover-community--batteries"
+language = "lean-4"
+split = "train"
+url = "https://github.com/leanprover-community/batteries"
+sha = "4cac2177c37f5530c4da76aa8e4307f3fc9e4dcb"
+branch = "HEAD"
+lines = 34078
+lines_nonblank = 28200
+source_files = 258
+tracked_files = 288
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "leanprover-community--aesop"
+language = "lean-4"
+split = "test"
+url = "https://github.com/leanprover-community/aesop"
+sha = "18889deb9e83ea7420ef51c160d6f88552e744e3"
+branch = "HEAD"
+lines = 24242
+lines_nonblank = 19931
+source_files = 250
+tracked_files = 258
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "savonet--liquidsoap"
+language = "liquidsoap"
+split = "train"
+url = "https://github.com/savonet/liquidsoap"
+sha = "1f2cb96d7fc6d974ff68e4bab328f27469a9c73a"
+branch = "HEAD"
+lines = 46556
+lines_nonblank = 41388
+source_files = 632
+tracked_files = 2540
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "radiofrance--rf-liquidsoap"
+language = "liquidsoap"
+split = "test"
+url = "https://github.com/radiofrance/rf-liquidsoap"
+sha = "4da07792dd656c598118e224fab4c504e0386b09"
+branch = "HEAD"
+lines = 1403
+lines_nonblank = 1263
+source_files = 23
+tracked_files = 70
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "littensy--charm"
+language = "luau"
+split = "train"
+url = "https://github.com/littensy/charm"
+sha = "b05f3a9de6fc5b784ad95681908c52d1ee418cc0"
+branch = "HEAD"
+lines = 6786
+lines_nonblank = 5709
+source_files = 58
+tracked_files = 97
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "Sleitnick--RbxUtil"
+language = "luau"
+split = "test"
+url = "https://github.com/Sleitnick/RbxUtil"
+sha = "31f9120fca021e3dec275b42bc7047d626962082"
+branch = "HEAD"
+lines = 16363
+lines_nonblank = 13997
+source_files = 69
+tracked_files = 157
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "ml-explore--mlx"
+language = "metal"
+split = "train"
+url = "https://github.com/ml-explore/mlx"
+sha = "24c699ecee2f7c8b2040de8da1c8382c8bcf31c7"
+branch = "HEAD"
+lines = 4717
+lines_nonblank = 4119
+source_files = 43
+tracked_files = 947
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "BradLarson--GPUImage3"
+language = "metal"
+split = "test"
+url = "https://github.com/BradLarson/GPUImage3"
+sha = "84466fc344e1220238c1c07e94e91207caaabe51"
+branch = "HEAD"
+lines = 3183
+lines_nonblank = 2605
+source_files = 86
+tracked_files = 304
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "moonbitlang--core"
+language = "moonbit"
+split = "train"
+url = "https://github.com/moonbitlang/core"
+sha = "d20af152ccffd639170de6298581f2d5f05a1745"
+branch = "HEAD"
+lines = 217285
+lines_nonblank = 202152
+source_files = 874
+tracked_files = 1139
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "mizchi--actrun"
+language = "moonbit"
+split = "test"
+url = "https://github.com/mizchi/actrun"
+sha = "3ea136d34e7ee071986bbaaad54e40aa496b8488"
+branch = "HEAD"
+lines = 66009
+lines_nonblank = 62790
+source_files = 99
+tracked_files = 932
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "caffeinelabs--motoko-base"
+language = "motoko"
+split = "train"
+url = "https://github.com/caffeinelabs/motoko-base"
+sha = "c768aa8d5c67e6e5b72fc09fb6695d5041060856"
+branch = "HEAD"
+lines = 50087
+lines_nonblank = 46700
+source_files = 87
+tracked_files = 122
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "canscale--StableBuffer"
+language = "motoko"
+split = "test"
+url = "https://github.com/canscale/StableBuffer"
+sha = "acdde6bb5b939227997cebdbb8919d2e6da8691c"
+branch = "HEAD"
+lines = 9029
+lines_nonblank = 8184
+source_files = 3
+tracked_files = 14
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "aptos-labs--aptos-core"
+language = "move"
+split = "train"
+url = "https://github.com/aptos-labs/aptos-core"
+sha = "860f9b7c8ab5fc4ef702db9780e8917f75ad39fe"
+branch = "HEAD"
+lines = 452207
+lines_nonblank = 399611
+source_files = 4837
+tracked_files = 19845
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "MystenLabs--sui"
+language = "move"
+split = "test"
+url = "https://github.com/MystenLabs/sui"
+sha = "5be216e39f252085f4721d0c11dcbf87b5484959"
+branch = "HEAD"
+lines = 231542
+lines_nonblank = 193901
+source_files = 4558
+tracked_files = 20065
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "DavidVine--amx-util-library"
+language = "netlinx"
+split = "train"
+url = "https://github.com/DavidVine/amx-util-library"
+sha = "b73eca536390c90ee6c259df0932cac61ad18c25"
+branch = "HEAD"
+lines = 7952
+lines_nonblank = 7041
+source_files = 24
+tracked_files = 26
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "rverstappen--AMX"
+language = "netlinx"
+split = "test"
+url = "https://github.com/rverstappen/AMX"
+sha = "f51a7770e767a8c77b4dead77314c410f23e125f"
+branch = "HEAD"
+lines = 18126
+lines_nonblank = 16299
+source_files = 84
+tracked_files = 246
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "nim-lang--nimble"
+language = "nim"
+split = "train"
+url = "https://github.com/nim-lang/nimble"
+sha = "8a6214f922a6382b8e287a695d1554c82fafc535"
+branch = "HEAD"
+lines = 37441
+lines_nonblank = 32594
+source_files = 292
+tracked_files = 775
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "zedeus--nitter"
+language = "nim"
+split = "test"
+url = "https://github.com/zedeus/nitter"
+sha = "376f14908e27e095049bbbeb648e742501144010"
+branch = "HEAD"
+lines = 9081
+lines_nonblank = 7619
+source_files = 73
+tracked_files = 175
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "noir-lang--noir-bignum"
+language = "noir"
+split = "train"
+url = "https://github.com/noir-lang/noir-bignum"
+sha = "dacecea946237c4e2e5b7d45f318fe9a1b9dd5f5"
+branch = "HEAD"
+lines = 9481
+lines_nonblank = 8435
+source_files = 50
+tracked_files = 66
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "AztecProtocol--aztec-nr"
+language = "noir"
+split = "test"
+url = "https://github.com/AztecProtocol/aztec-nr"
+sha = "00e55071e004245d6d2890fa23eed0fc46cb9aca"
+branch = "HEAD"
+lines = 36180
+lines_nonblank = 31629
+source_files = 248
+tracked_files = 263
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "intersystems--ipm"
+language = "objectscriptudl"
+split = "train"
+url = "https://github.com/intersystems/ipm"
+sha = "737d1a5eddb9720ea171e340623338bf7db40c2c"
+branch = "HEAD"
+lines = 53017
+lines_nonblank = 46736
+source_files = 393
+tracked_files = 795
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "intersystems-community--webterminal"
+language = "objectscriptudl"
+split = "test"
+url = "https://github.com/intersystems-community/webterminal"
+sha = "91b54afa0ef4c80d5ac2d114df55b07de72e3864"
+branch = "HEAD"
+lines = 3869
+lines_nonblank = 3496
+source_files = 24
+tracked_files = 207
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "ocaml--dune"
+language = "ocaml"
+split = "train"
+url = "https://github.com/ocaml/dune"
+sha = "bc9391869506962c80df0c488037c65c0cdbef18"
+branch = "HEAD"
+lines = 272388
+lines_nonblank = 242021
+source_files = 2844
+tracked_files = 8271
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "mirage--mirage"
+language = "ocaml"
+split = "test"
+url = "https://github.com/mirage/mirage"
+sha = "dccd7db3c3358587f52350cd7f4d412f6cec82bf"
+branch = "HEAD"
+lines = 14064
+lines_nonblank = 11883
+source_files = 158
+tracked_files = 245
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "DanielGavin--ols"
+language = "odin"
+split = "train"
+url = "https://github.com/DanielGavin/ols"
+sha = "110e63703db100e9cd5f381328bfde99fdb4b85f"
+branch = "HEAD"
+lines = 65292
+lines_nonblank = 55182
+source_files = 147
+tracked_files = 216
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "laytan--odin-http"
+language = "odin"
+split = "test"
+url = "https://github.com/laytan/odin-http"
+sha = "fac113fbd828aad3d71479a534b5de4358b6a07b"
+branch = "HEAD"
+lines = 11616
+lines_nonblank = 9577
+source_files = 39
+tracked_files = 69
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "BelfrySCAD--BOSL2"
+language = "openscad"
+split = "train"
+url = "https://github.com/BelfrySCAD/BOSL2"
+sha = "a05de6da748830a3559ae035710a31c443e8c0c7"
+branch = "HEAD"
+lines = 87411
+lines_nonblank = 82159
+source_files = 67
+tracked_files = 183
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "nophead--NopSCADlib"
+language = "openscad"
+split = "test"
+url = "https://github.com/nophead/NopSCADlib"
+sha = "c9baa0ed0faa23e849141c3d8c6728545d6af910"
+branch = "HEAD"
+lines = 39948
+lines_nonblank = 34367
+source_files = 389
+tracked_files = 718
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "p4lang--open-p4studio"
+language = "p4-language"
+split = "train"
+url = "https://github.com/p4lang/open-p4studio"
+sha = "0e81a468930b6f29ddf7744250b472d709944dcc"
+branch = "HEAD"
+lines = 51114
+lines_nonblank = 45057
+source_files = 153
+tracked_files = 29864
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "sonic-net--sonic-pins"
+language = "p4-language"
+split = "test"
+url = "https://github.com/sonic-net/sonic-pins"
+sha = "e77250b8dcab96e6f0e6ba1a9643f66771caa46c"
+branch = "HEAD"
+lines = 9810
+lines_nonblank = 8687
+source_files = 71
+tracked_files = 1061
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "kadena-io--chainweb-node"
+language = "pact"
+split = "train"
+url = "https://github.com/kadena-io/chainweb-node"
+sha = "5e46fa79f1cc4aa0a90a6c4aa32d32c90013ea4f"
+branch = "HEAD"
+lines = 14069
+lines_nonblank = 10943
+source_files = 44
+tracked_files = 527
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "kadena-io--marmalade"
+language = "pact"
+split = "test"
+url = "https://github.com/kadena-io/marmalade"
+sha = "0404eb71ed980b37d07f569adbc3a740367c1632"
+branch = "HEAD"
+lines = 12955
+lines_nonblank = 10751
+source_files = 58
+tracked_files = 118
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "MinLL--SkyrimNet-GamePlugin"
+language = "papyrus"
+split = "train"
+url = "https://github.com/MinLL/SkyrimNet-GamePlugin"
+sha = "1493c44c4c829c15a780471c1c0087cb3baae2e0"
+branch = "HEAD"
+lines = 7967
+lines_nonblank = 7101
+source_files = 110
+tracked_files = 1834
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "Starfield-Community-Patch--Starfield-Community-Patch"
+language = "papyrus"
+split = "test"
+url = "https://github.com/Starfield-Community-Patch/Starfield-Community-Patch"
+sha = "0ad97d3eb087dafb91afbc4bbb1588598212cc87"
+branch = "HEAD"
+lines = 16899
+lines_nonblank = 13820
+source_files = 25
+tracked_files = 1051
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "ponylang--ponyc"
+language = "pony"
+split = "train"
+url = "https://github.com/ponylang/ponyc"
+sha = "bfbf74e997ed553830bcabdfd7145801f6ac9cbf"
+branch = "HEAD"
+lines = 155199
+lines_nonblank = 137314
+source_files = 1037
+tracked_files = 2029
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "WallarooLabs--wally"
+language = "pony"
+split = "test"
+url = "https://github.com/WallarooLabs/wally"
+sha = "2b985a3e756786139316c72ebcca342346546ba7"
+branch = "HEAD"
+lines = 70876
+lines_nonblank = 60197
+source_files = 299
+tracked_files = 1311
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "purescript-halogen--purescript-halogen"
+language = "purescript"
+split = "train"
+url = "https://github.com/purescript-halogen/purescript-halogen"
+sha = "7354e1dd7a7fac253048c2a08c99d6720f5bd45b"
+branch = "HEAD"
+lines = 6300
+lines_nonblank = 5255
+source_files = 67
+tracked_files = 158
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "purescript--spago"
+language = "purescript"
+split = "test"
+url = "https://github.com/purescript/spago"
+sha = "6fe232842930a27f74c5722af3204791a99bbf9b"
+branch = "HEAD"
+lines = 21372
+lines_nonblank = 18608
+source_files = 215
+tracked_files = 540
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "KDE--kirigami"
+language = "qml"
+split = "train"
+url = "https://github.com/KDE/kirigami"
+sha = "436116ca5e5ace5f07c28d63d45f761dd36bd10b"
+branch = "HEAD"
+lines = 29743
+lines_nonblank = 24916
+source_files = 225
+tracked_files = 493
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "Swordfish90--cool-retro-term"
+language = "qml"
+split = "test"
+url = "https://github.com/Swordfish90/cool-retro-term"
+sha = "1394ce82fa53d2a87d5adc4d99f9eeba598ea53d"
+branch = "HEAD"
+lines = 3723
+lines_nonblank = 3350
+source_files = 26
+tracked_files = 233
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "xonotic--xonotic-data.pk3dir"
+language = "quakec"
+split = "train"
+url = "https://github.com/xonotic/xonotic-data.pk3dir"
+sha = "15655695cb1ce55867cd8d2f5a76c182a548daa6"
+branch = "HEAD"
+lines = 188902
+lines_nonblank = 165671
+source_files = 704
+tracked_files = 5990
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "fte-team--fteqw"
+language = "quakec"
+split = "test"
+url = "https://github.com/fte-team/fteqw"
+sha = "f937b9d88f71fc4429db5fe56c6a98d922711b2e"
+branch = "HEAD"
+lines = 83251
+lines_nonblank = 70752
+source_files = 198
+tracked_files = 999
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "racket--typed-racket"
+language = "racket"
+split = "train"
+url = "https://github.com/racket/typed-racket"
+sha = "57b7edab6074dbf4361354b546185f41e4a4c572"
+branch = "HEAD"
+lines = 118968
+lines_nonblank = 104781
+source_files = 1873
+tracked_files = 1932
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "greghendershott--frog"
+language = "racket"
+split = "test"
+url = "https://github.com/greghendershott/frog"
+sha = "9009517a349c9353991c930cc256324041782584"
+branch = "HEAD"
+lines = 4179
+lines_nonblank = 3784
+source_files = 42
+tracked_files = 84
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "grain-lang--grain"
+language = "reason"
+split = "train"
+url = "https://github.com/grain-lang/grain"
+sha = "d6ab36811236010bccb203cda4d93c9903ccb192"
+branch = "HEAD"
+lines = 80176
+lines_nonblank = 74679
+source_files = 282
+tracked_files = 1190
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "esy--esy"
+language = "reason"
+split = "test"
+url = "https://github.com/esy/esy"
+sha = "4afe7a5fba92ff1b7dc168bc63e6d06155ff1a7a"
+branch = "HEAD"
+lines = 40552
+lines_nonblank = 35746
+source_files = 302
+tracked_files = 822
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "red--red"
+language = "red"
+split = "train"
+url = "https://github.com/red/red"
+sha = "b492f75752cc6b3abb8136825e9448ced9a357f2"
+branch = "HEAD"
+lines = 272242
+lines_nonblank = 248493
+source_files = 519
+tracked_files = 826
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "red--code"
+language = "red"
+split = "test"
+url = "https://github.com/red/code"
+sha = "82b7bce0c4d0febd42f5179a7b2ad2792f3037b0"
+branch = "HEAD"
+lines = 97843
+lines_nonblank = 90268
+source_files = 211
+tracked_files = 239
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "djkovrik--CP77Mods"
+language = "redscript"
+split = "train"
+url = "https://github.com/djkovrik/CP77Mods"
+sha = "be5834ca16f45b560f578c25121a359b385f5709"
+branch = "HEAD"
+lines = 66441
+lines_nonblank = 59075
+source_files = 390
+tracked_files = 622
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "psiberx--cp2077-codeware"
+language = "redscript"
+split = "test"
+url = "https://github.com/psiberx/cp2077-codeware"
+sha = "3a43182dbcfefc4c371bd1d3bc8d941d8628a0d1"
+branch = "HEAD"
+lines = 43924
+lines_nonblank = 41357
+source_files = 7307
+tracked_files = 7611
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "roc-lang--basic-webserver"
+language = "roc"
+split = "train"
+url = "https://github.com/roc-lang/basic-webserver"
+sha = "7f9d81106247ea9f8f308594444744183a9c7c3f"
+branch = "HEAD"
+lines = 15415
+lines_nonblank = 13527
+source_files = 75
+tracked_files = 250
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "smores56--weaver"
+language = "roc"
+split = "test"
+url = "https://github.com/smores56/weaver"
+sha = "3e45d2f4013865e9c5516dd166da8a86fca8ecb8"
+branch = "HEAD"
+lines = 5525
+lines_nonblank = 5050
+source_files = 19
+tracked_files = 24
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "typelevel--cats"
+language = "scala"
+split = "train"
+url = "https://github.com/typelevel/cats"
+sha = "b26388c4152ed37e9669578f59317293218186b5"
+branch = "HEAD"
+lines = 97904
+lines_nonblank = 84346
+source_files = 840
+tracked_files = 962
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "http4s--http4s"
+language = "scala"
+split = "test"
+url = "https://github.com/http4s/http4s"
+sha = "1a0a35b99a8ea3429db733a0b13a9ebb8f5c226a"
+branch = "HEAD"
+lines = 91309
+lines_nonblank = 81384
+source_files = 666
+tracked_files = 759
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "OpenZeppelin--openzeppelin-contracts"
+language = "solidity"
+split = "train"
+url = "https://github.com/OpenZeppelin/openzeppelin-contracts"
+sha = "bbf3600dc2fd09c7409c5e9d65e2faea36f35115"
+branch = "HEAD"
+lines = 50288
+lines_nonblank = 43847
+source_files = 420
+tracked_files = 961
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "Uniswap--v4-core"
+language = "solidity"
+split = "test"
+url = "https://github.com/Uniswap/v4-core"
+sha = "46c6834698c48bc4a463a86d8420f4eb1d7f3b75"
+branch = "HEAD"
+lines = 17912
+lines_nonblank = 14947
+source_files = 132
+tracked_files = 206
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "alliedmodders--sourcemod"
+language = "sourcepawn"
+split = "train"
+url = "https://github.com/alliedmodders/sourcemod"
+sha = "73fd660ff44ac89348125e80c8816cc76fee5d60"
+branch = "HEAD"
+lines = 25113
+lines_nonblank = 21407
+source_files = 93
+tracked_files = 3236
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "shavitush--bhoptimer"
+language = "sourcepawn"
+split = "test"
+url = "https://github.com/shavitush/bhoptimer"
+sha = "e4382c4d32fd24fdefb9b3816636968aa2ee3cce"
+branch = "HEAD"
+lines = 37736
+lines_nonblank = 31076
+source_files = 22
+tracked_files = 105
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "KelvinShadewing--supertux-advance"
+language = "squirrel"
+split = "train"
+url = "https://github.com/KelvinShadewing/supertux-advance"
+sha = "cb51c39235b5bd99ad899ba9e14592292f517c75"
+branch = "HEAD"
+lines = 52309
+lines_nonblank = 46846
+source_files = 71
+tracked_files = 1243
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "R2Northstar--NorthstarMods"
+language = "squirrel"
+split = "test"
+url = "https://github.com/R2Northstar/NorthstarMods"
+sha = "426ce10ac4bcd25df9e52442dc77598ec035bce6"
+branch = "HEAD"
+lines = 67535
+lines_nonblank = 55730
+source_files = 146
+tracked_files = 725
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "stan-dev--rstanarm"
+language = "stan"
+split = "train"
+url = "https://github.com/stan-dev/rstanarm"
+sha = "97fdba425ea0bd280c25928f118d247e617f43ae"
+branch = "HEAD"
+lines = 4834
+lines_nonblank = 4476
+source_files = 59
+tracked_files = 329
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "paul-buerkner--brms"
+language = "stan"
+split = "test"
+url = "https://github.com/paul-buerkner/brms"
+sha = "2ebf3222f341ef616b1663534eca286e1e02ca00"
+branch = "HEAD"
+lines = 2933
+lines_nonblank = 2908
+source_files = 69
+tracked_files = 466
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "melsman--mlkit"
+language = "standard-ml"
+split = "train"
+url = "https://github.com/melsman/mlkit"
+sha = "3b3c501a483f8a44b429c47f16af7b7c2c6fb2ad"
+branch = "HEAD"
+lines = 301672
+lines_nonblank = 263205
+source_files = 1456
+tracked_files = 2351
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "diku-dk--smlpkg"
+language = "standard-ml"
+split = "test"
+url = "https://github.com/diku-dk/smlpkg"
+sha = "bfc9216f76ff38fa9d39c2e50667cb74a7a4084d"
+branch = "HEAD"
+lines = 2196
+lines_nonblank = 1838
+source_files = 28
+tracked_files = 153
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "imputnet--cobalt"
+language = "svelte"
+split = "train"
+url = "https://github.com/imputnet/cobalt"
+sha = "a636575b09de1fc55d9b8cd98cac88f5f2f16b42"
+branch = "HEAD"
+lines = 9613
+lines_nonblank = 8247
+source_files = 96
+tracked_files = 468
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "VERT-sh--VERT"
+language = "svelte"
+split = "test"
+url = "https://github.com/VERT-sh/VERT"
+sha = "cc7b5a54d5e9c797b377db47b9bdfbb561707783"
+branch = "HEAD"
+lines = 5366
+lines_nonblank = 4986
+source_files = 42
+tracked_files = 152
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "FuelLabs--sway"
+language = "sway"
+split = "train"
+url = "https://github.com/FuelLabs/sway"
+sha = "dad95cc42b0383b4e3bacdeda9766565aa584a92"
+branch = "HEAD"
+lines = 168452
+lines_nonblank = 147118
+source_files = 2050
+tracked_files = 8029
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "FuelLabs--sway-libs"
+language = "sway"
+split = "test"
+url = "https://github.com/FuelLabs/sway-libs"
+sha = "cd0b864c38bf6e98ea4736147707accbfcd8a56f"
+branch = "HEAD"
+lines = 16825
+lines_nonblank = 14487
+source_files = 92
+tracked_files = 358
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "tact-lang--tact"
+language = "tact"
+split = "train"
+url = "https://github.com/tact-lang/tact"
+sha = "e3d660568eca259b6ae653717e7414e5eac0830e"
+branch = "HEAD"
+lines = 34495
+lines_nonblank = 29025
+source_files = 996
+tracked_files = 1836
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "tact-lang--jetton"
+language = "tact"
+split = "test"
+url = "https://github.com/tact-lang/jetton"
+sha = "8b72747e48f203cd4dd4256a8e5cb468d47f4643"
+branch = "HEAD"
+lines = 2144
+lines_nonblank = 1797
+source_files = 19
+tracked_files = 79
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "tcltk--tklib"
+language = "tcl"
+split = "train"
+url = "https://github.com/tcltk/tklib"
+sha = "952c093c66d631dd87d81841beea26e7117ea344"
+branch = "HEAD"
+lines = 175002
+lines_nonblank = 153381
+source_files = 453
+tracked_files = 1627
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "macports--macports-base"
+language = "tcl"
+split = "test"
+url = "https://github.com/macports/macports-base"
+sha = "c9797f69df0c00fd5fdbe0da51c86276e0698730"
+branch = "HEAD"
+lines = 574478
+lines_nonblank = 505736
+source_files = 1203
+tracked_files = 10070
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "svenvc--NeoJSON"
+language = "tonel-smalltalk"
+split = "train"
+url = "https://github.com/svenvc/NeoJSON"
+sha = "11e274dd96dc9636cab90929937b7cd09719de7c"
+branch = "HEAD"
+lines = 5367
+lines_nonblank = 4620
+source_files = 53
+tracked_files = 66
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "ObjectProfile--Roassal3"
+language = "tonel-smalltalk"
+split = "test"
+url = "https://github.com/ObjectProfile/Roassal3"
+sha = "5da7e8ddd42f17a884d3b3e969d5ce5c03368254"
+branch = "HEAD"
+lines = 93718
+lines_nonblank = 81061
+source_files = 944
+tracked_files = 970
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "openwrt--firewall4"
+language = "ucode"
+split = "train"
+url = "https://github.com/openwrt/firewall4"
+sha = "b6e5157527d361f99ad52eaa6da273cb0f2dfd59"
+branch = "HEAD"
+lines = 5077
+lines_nonblank = 4024
+source_files = 17
+tracked_files = 92
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "aredn--aredn"
+language = "ucode"
+split = "test"
+url = "https://github.com/aredn/aredn"
+sha = "29033ba464d866a5cf803b7da21813d99b6c737d"
+branch = "HEAD"
+lines = 5980
+lines_nonblank = 5601
+source_files = 27
+tracked_files = 346
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "GNOME--vala"
+language = "vala"
+split = "train"
+url = "https://github.com/GNOME/vala"
+sha = "25ede52578acc706c07b8816eeceb914510505b3"
+branch = "HEAD"
+lines = 338784
+lines_nonblank = 310529
+source_files = 1366
+tracked_files = 3583
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "elementary--files"
+language = "vala"
+split = "test"
+url = "https://github.com/elementary/files"
+sha = "527862d00249682049551c9aab894eb8a0e94345"
+branch = "HEAD"
+lines = 38853
+lines_nonblank = 32778
+source_files = 123
+tracked_files = 595
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "stnolting--neorv32"
+language = "vhdl"
+split = "train"
+url = "https://github.com/stnolting/neorv32"
+sha = "8bdbe48dfd8cbbb3f992f14812bde9c32bb97ea7"
+branch = "HEAD"
+lines = 27247
+lines_nonblank = 24623
+source_files = 67
+tracked_files = 352
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "VUnit--vunit"
+language = "vhdl"
+split = "test"
+url = "https://github.com/VUnit/vunit"
+sha = "bbbe9caba5278dd8057020edc3aeb5f223c0e037"
+branch = "HEAD"
+lines = 71797
+lines_nonblank = 62662
+source_files = 331
+tracked_files = 919
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "wren-lang--wren-cli"
+language = "wren"
+split = "train"
+url = "https://github.com/wren-lang/wren-cli"
+sha = "18553636618a4d33f10af9b5ab92da6431784a8c"
+branch = "HEAD"
+lines = 3129
+lines_nonblank = 2560
+source_files = 111
+tracked_files = 321
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "UnicornsOfDeath--continuous-factory"
+language = "wren"
+split = "test"
+url = "https://github.com/UnicornsOfDeath/continuous-factory"
+sha = "cf7b40a6cc8c695d9f3d426a6d1fd36d71092d88"
+branch = "HEAD"
+lines = 3158
+lines_nonblank = 2929
+source_files = 1
+tracked_files = 8
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "apex-enterprise-patterns--fflib-apex-common"
+language = "apex"
+split = "train"
+url = "https://github.com/apex-enterprise-patterns/fflib-apex-common"
+sha = "e6f3409eaa4228a261300a4bcbd0e30b2d2beddf"
+branch = "HEAD"
+lines = 11969
+lines_nonblank = 10677
+source_files = 31
+tracked_files = 76
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "jongpie--NebulaLogger"
+language = "apex"
+split = "test"
+url = "https://github.com/jongpie/NebulaLogger"
+sha = "b792ac8d8b4eb31b14a164a24951c3cb4125a616"
+branch = "HEAD"
+lines = 56812
+lines_nonblank = 48808
+source_files = 252
+tracked_files = 2015
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "openharmony--applications_contacts"
+language = "arkts-language"
+split = "train"
+url = "https://github.com/openharmony/applications_contacts"
+sha = "6be5a44abb3e672355214d4fcf7fd00d8adce723"
+branch = "HEAD"
+lines = 22716
+lines_nonblank = 21117
+source_files = 175
+tracked_files = 362
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "openharmony--applications_mms"
+language = "arkts-language"
+split = "test"
+url = "https://github.com/openharmony/applications_mms"
+sha = "79298c9da3914247e47038f3fa790c7de22172be"
+branch = "HEAD"
+lines = 15374
+lines_nonblank = 14504
+source_files = 63
+tracked_files = 178
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "reasonml--reason"
+language = "ocamllex"
+split = "test"
+url = "https://github.com/reasonml/reason"
+sha = "1a47c6813417f6cd384c2f2cbde1b75fe3144098"
+branch = "HEAD"
+lines = 1068
+lines_nonblank = 1010
+source_files = 2
+tracked_files = 540
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "zeek--zeek"
+language = "zeek"
+split = "train"
+url = "https://github.com/zeek/zeek"
+sha = "bb4f001ae4336cc788061c4ef5c3a6eef8ae6b24"
+branch = "HEAD"
+lines = 148354
+lines_nonblank = 124730
+source_files = 2593
+tracked_files = 11822
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "mitre-attack--bzar"
+language = "zeek"
+split = "test"
+url = "https://github.com/mitre-attack/bzar"
+sha = "59bae4a0e7849a75fa5ea86a206f10f3ce8dbe22"
+branch = "HEAD"
+lines = 4546
+lines_nonblank = 3871
+source_files = 11
+tracked_files = 18
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "Mojo-Numerics-and-Algorithms-group--NuMojo"
+language = "mojo"
+split = "train"
+url = "https://github.com/Mojo-Numerics-and-Algorithms-group/NuMojo"
+sha = "515fb2856f0ecf3d2740a34d958fe168183e1129"
+branch = "HEAD"
+lines = 50451
+lines_nonblank = 41944
+source_files = 123
+tracked_files = 161
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "Lightbug-HQ--lightbug_http"
+language = "mojo"
+split = "test"
+url = "https://github.com/Lightbug-HQ/lightbug_http"
+sha = "04d303e6515ee6f35ca36643b8e1a879f54738cb"
+branch = "HEAD"
+lines = 13453
+lines_nonblank = 10480
+source_files = 62
+tracked_files = 101
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "kunstmusik--csound-live-code"
+language = "csound"
+split = "train"
+url = "https://github.com/kunstmusik/csound-live-code"
+sha = "556e36996a17ba17fb80eae19aec5df403b40c03"
+branch = "HEAD"
+lines = 12793
+lines_nonblank = 9567
+source_files = 170
+tracked_files = 229
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"
+
+[[repo]]
+name = "csudo--csudo"
+language = "csound"
+split = "test"
+url = "https://github.com/csudo/csudo"
+sha = "2feaebbbf8dd325087be43c8b4d23923576d4132"
+branch = "HEAD"
+lines = 29276
+lines_nonblank = 26244
+source_files = 155
+tracked_files = 178
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-08"

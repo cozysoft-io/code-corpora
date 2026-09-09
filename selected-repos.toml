@@ -46,6 +46,8 @@
 #   whether the corpus earned it. Every candidate that was looked at and
 #   passed over is here with the reason, including the ones rejected for
 #   nothing more interesting than size.
+#   The registered-language expansion uses repo-selection.json as its candidate
+#   ledger; these original [[considered]] entries remain historical evidence.
 #
 # Line counts in `[[considered]]` are estimates from the GitHub API --
 # primary-language bytes over an average bytes-per-line -- taken on
@@ -67,7 +69,9 @@ corpus_root = "."
 # `shared::vocabulary::LanguageId` agree. TSX is not a separate directory --
 # `heuristic-jump/design/data-collection.md` treats TypeScript/TSX as one language and the
 # `.tsx` files live inside the typescript repositories.
-languages = ["c", "cpp", "csharp", "dart", "elixir", "go", "java", "javascript", "kotlin", "lua", "php", "python", "ruby", "rust", "swift", "typescript", "zig"]
+# Expansion identifiers are selection filters until their language handlers
+# exist; path_suffixes records the actual registered filename matching.
+languages = ["c", "cpp", "csharp", "dart", "elixir", "go", "java", "javascript", "kotlin", "lua", "php", "python", "ruby", "rust", "swift", "typescript", "zig", "actionscript", "ada", "agda", "aiken", "al", "applescript", "arduino", "autohotkey", "awk", "bluespec-systemverilog", "bqn", "bsl", "c3", "cadence", "cairo", "cfml-tag", "circom", "clarity", "clojure", "cobol", "crystal", "curry", "cython", "dafny", "daml", "dylan", "elisp", "elm", "erlang", "fish", "fortran", "fsharp", "func", "gdscript", "gdshader", "gleam", "gren", "hare", "haskell", "haxe", "hlsl", "hoon", "idris-2", "jai", "jq", "julia", "koka", "lean-4", "liquidsoap", "luau", "metal", "moonbit", "motoko", "move", "netlinx", "nim", "noir", "objectscriptudl", "ocaml", "ocaml-interface", "ocamllex", "odin", "openscad", "p4-language", "pact", "papyrus", "pony", "purescript", "qml", "quakec", "racket", "reason", "reason-interface", "red", "redscript", "roc", "scala", "solidity", "sourcepawn", "squirrel", "stan", "standard-ml", "svelte", "sway", "tact", "tcl", "tonel-smalltalk", "ucode", "vala", "vhdl", "wren", "apex", "arkts-language", "zeek", "mojo", "csound"]
 
 # Selection criteria, recorded so the manifest states what the repositories
 # were chosen *for* rather than only what was chosen.
@@ -4649,3 +4653,2770 @@ sha = "a8339ef8f61f08ce427694e5992b0e13975b0cab"
 language = "zig"
 est_lines = 20092
 reason = "in band and real, passed over for organisation overlap with superhtml"
+
+# Registered-language expansion, 2026-09-08.
+# Process and scope: SELECTION.md; candidate decisions: repo-selection.json.
+# These additions are source selections, not verified evaluation workloads.
+
+[[repo]]
+name = "Gamua--Starling-Framework"
+url = "https://github.com/Gamua/Starling-Framework"
+sha = "9d68d61b9c672fbe64aae6ec22d0bcb30dda2a86"
+language = "actionscript"
+split = "train"
+languages = ["actionscript"]
+coverage_languages = ["ActionScript"]
+path_suffixes = ["as"]
+domain = "The Cross Platform Game Engine"
+reason = "Mature graphics frameworks; Away3D has little recent maintenance. Legacy-source exception."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "away3d--away3d-core-fp11"
+url = "https://github.com/away3d/away3d-core-fp11"
+sha = "26739318fe555a115bf47bd7b865bace09743682"
+language = "actionscript"
+split = "test"
+languages = ["actionscript"]
+coverage_languages = ["ActionScript"]
+path_suffixes = ["as"]
+domain = "Away3D engine for Flash Player 11"
+reason = "Mature graphics frameworks; Away3D has little recent maintenance. Legacy-source exception."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Legacy source: archived or no push within two years of selection. Retained for an established implementation; maintenance is not assumed."]
+
+[[repo]]
+name = "AdaCore--gnatcoll-core"
+url = "https://github.com/AdaCore/gnatcoll-core"
+sha = "8664a82b552715a0a6486beeec25b68ecde95e5e"
+language = "ada"
+split = "train"
+languages = ["ada"]
+coverage_languages = ["Ada"]
+path_suffixes = ["adb", "ads"]
+domain = "GNAT Components Collection – Core packages"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "alire-project--alire"
+url = "https://github.com/alire-project/alire"
+sha = "9d87a3f09613dbb4300e8841af1da1cf4002b7eb"
+language = "ada"
+split = "test"
+languages = ["ada"]
+coverage_languages = ["Ada"]
+path_suffixes = ["adb", "ads"]
+domain = "Command-line tool from the Alire project and supporting library"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "agda--agda-stdlib"
+url = "https://github.com/agda/agda-stdlib"
+sha = "810f87395c45a5dc06dc2815f69a1fbc8260e961"
+language = "agda"
+split = "train"
+languages = ["agda"]
+coverage_languages = ["Agda"]
+path_suffixes = ["agda"]
+domain = "The Agda standard library"
+reason = "Independent algebra and cubical libraries under the same language organization; cubical is slightly above the preferred size band."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "agda--cubical"
+url = "https://github.com/agda/cubical"
+sha = "6e6df4e74d4b03205c942c1574c6fea0b2cc213e"
+language = "agda"
+split = "test"
+languages = ["agda"]
+coverage_languages = ["Agda"]
+path_suffixes = ["agda"]
+domain = "An experimental library for Cubical Agda"
+reason = "Independent algebra and cubical libraries under the same language organization; cubical is slightly above the preferred size band."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Agda: 201,323 scoped raw lines; larger indexing workload retained for its substantive implementation; indexing cost remains unverified."]
+
+[[repo]]
+name = "aiken-lang--stdlib"
+url = "https://github.com/aiken-lang/stdlib"
+sha = "41f3c823f8d36dc81c285f34c8c6e545e2fffbfd"
+language = "aiken"
+split = "train"
+languages = ["aiken"]
+coverage_languages = ["Aiken"]
+path_suffixes = ["ak"]
+domain = "The Aiken Standard Library"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Aiken: 8,318 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "SundaeSwap-finance--sundae-contracts"
+url = "https://github.com/SundaeSwap-finance/sundae-contracts"
+sha = "be33466b7dbe0f8e6c0e0f46ff23737897f45835"
+language = "aiken"
+split = "test"
+languages = ["aiken"]
+coverage_languages = ["Aiken"]
+path_suffixes = ["ak"]
+domain = "Himitsu secret-storage application"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Aiken: 3,949 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "Drakonian--data-editor-for-bc"
+url = "https://github.com/Drakonian/data-editor-for-bc"
+sha = "36c9176fd5c2b9560c7f346a1615c153c6dfdf62"
+language = "al"
+split = "train"
+languages = ["al"]
+coverage_languages = ["AL"]
+path_suffixes = ["al", "dal"]
+domain = "Data Editor Tool is a free, open-source tool for Microsoft Dynamics 365 Business Central that simplifies table data management. It allows users to easily view, edit, import, export, and manipulate table records with an intuitive interface. Designed for flexibility and efficiency."
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["AL: 12,871 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "Bertverbeek4PS--bc2adls"
+url = "https://github.com/Bertverbeek4PS/bc2adls"
+sha = "3c0cbb160411a236ebb3e1a48163dc2b0c423504"
+language = "al"
+split = "test"
+languages = ["al"]
+coverage_languages = ["AL"]
+path_suffixes = ["al", "dal"]
+domain = "Exporting data from Dynamics 365 Business Central to Azure data lake storage or MS Fabric lakehouse"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+evaluation_source_roots = ["businessCentral/"]
+selection_exceptions = ["AL: 10,341 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "section83--MacYTDL"
+url = "https://github.com/section83/MacYTDL"
+sha = "5846bfa7bb13db0ea8d3e8af2c277067531c9ad3"
+language = "applescript"
+split = "train"
+languages = ["applescript"]
+coverage_languages = ["AppleScript"]
+path_suffixes = ["applescript", "scpt"]
+domain = "A macOS GUI front-end for the YT-DLP video downloader"
+reason = "macOS downloader and Alfred workflows. Small correctness workloads; Alfred workflows are legacy source (last push 2016), with application dependencies requiring review."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["AppleScript: 14,075 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "franzheidl--alfred-workflows"
+url = "https://github.com/franzheidl/alfred-workflows"
+sha = "9e7a6e6e8104cd0aaff97e555ffad7de1d25a214"
+language = "applescript"
+split = "test"
+languages = ["applescript"]
+coverage_languages = ["AppleScript"]
+path_suffixes = ["applescript", "scpt"]
+domain = "Workflows for Alfred"
+reason = "macOS downloader and Alfred workflows. Small correctness workloads; Alfred workflows are legacy source (last push 2016), with application dependencies requiring review."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["AppleScript: 919 scoped raw lines; small correctness workload, not a latency workload.", "Legacy source: archived or no push within two years of selection. Retained for an established implementation; maintenance is not assumed."]
+
+[[repo]]
+name = "letscontrolit--ESPEasy"
+url = "https://github.com/letscontrolit/ESPEasy"
+sha = "23cbc8461676cdf16dcac800b185be4aa0b6abaa"
+language = "arduino"
+split = "train"
+languages = ["arduino"]
+coverage_languages = ["Arduino"]
+path_suffixes = ["ino"]
+domain = "Easy MultiSensor device based on ESP8266/ESP32"
+reason = "Production firmware. Restrict evaluation to src/ and tasmota/; bundled Arduino libraries and examples overlap. Tasmota exceeds the preferred band."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+evaluation_source_roots = ["src/"]
+
+[[repo]]
+name = "arendst--Tasmota"
+url = "https://github.com/arendst/Tasmota"
+sha = "211691d5fb368a14cb3f25215e1236a3529e9770"
+language = "arduino"
+split = "test"
+languages = ["arduino"]
+coverage_languages = ["Arduino"]
+path_suffixes = ["ino"]
+domain = "Alternative firmware for ESP8266 and ESP32 based devices with easy configuration using webUI, OTA updates, automation using timers or rules, expandability and entirely local control over MQTT, HTTP, Serial or KNX. Full documentation at"
+reason = "Production firmware. Restrict evaluation to src/ and tasmota/; bundled Arduino libraries and examples overlap. Tasmota exceeds the preferred band."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+evaluation_source_roots = ["tasmota/"]
+selection_exceptions = ["Arduino: 289,078 scoped raw lines; larger indexing workload retained for its substantive implementation; indexing cost remains unverified."]
+
+[[repo]]
+name = "Descolada--UIA-v2"
+url = "https://github.com/Descolada/UIA-v2"
+sha = "2846a9b10518a95cf26a6c43671a9512b231ccb7"
+language = "autohotkey"
+split = "train"
+languages = ["autohotkey"]
+coverage_languages = ["AutoHotkey"]
+path_suffixes = ["ahk"]
+domain = "UIAutomation library for AHK v2, based on thqby's UIA library"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["AutoHotkey: 9,533 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "abgox--InputTip"
+url = "https://github.com/abgox/InputTip"
+sha = "00998a53f21c8273779ed10ec6359dd566828d93"
+language = "autohotkey"
+split = "test"
+languages = ["autohotkey"]
+coverage_languages = ["AutoHotkey"]
+path_suffixes = ["ahk"]
+domain = "规则驱动的输入法状态管理器 · 即时 · 强大 · 高效"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["AutoHotkey: 8,354 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "soimort--translate-shell"
+url = "https://github.com/soimort/translate-shell"
+sha = "dc67af4e66ca7b33381e5013204d954c86a6fe37"
+language = "awk"
+split = "train"
+languages = ["awk"]
+coverage_languages = ["AWK"]
+path_suffixes = ["awk"]
+domain = ":speech_balloon: Command-line translator using Google Translate, Bing Translator, Yandex.Translate, etc."
+reason = "Translation application and JSON parser. The parser is deliberately small; this pair exercises correctness rather than search latency."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["AWK: 8,678 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "step---JSON.awk"
+url = "https://github.com/step-/JSON.awk"
+sha = "7185bf0afc786ae3ca0250a3fda4dfcf3c23f0d3"
+language = "awk"
+split = "test"
+languages = ["awk"]
+coverage_languages = ["AWK"]
+path_suffixes = ["awk"]
+domain = "Practical JSON parser written in awk"
+reason = "Translation application and JSON parser. The parser is deliberately small; this pair exercises correctness rather than search latency."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["AWK: 740 scoped raw lines; small correctness workload, not a latency workload.", "Legacy source: archived or no push within two years of selection. Retained for an established implementation; maintenance is not assumed."]
+
+[[repo]]
+name = "bluespec--Flute"
+url = "https://github.com/bluespec/Flute"
+sha = "9b2b056527429e509c719c417a588b3ea594949b"
+language = "bluespec-systemverilog"
+split = "train"
+languages = ["bluespec-systemverilog"]
+coverage_languages = ["Bluespec SystemVerilog"]
+path_suffixes = ["bsv"]
+domain = "RISC-V CPU, simple 5-stage in-order pipeline, for low-end applications needing MMUs and some performance"
+reason = "Processor and hardware/software interface framework. Mature hardware sources with last pushes in 2023; legacy-source exception."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Legacy source: archived or no push within two years of selection. Retained for an established implementation; maintenance is not assumed."]
+
+[[repo]]
+name = "cambridgehackers--connectal"
+url = "https://github.com/cambridgehackers/connectal"
+sha = "f182656bfe21160b8b263f3261b041d708adafe8"
+language = "bluespec-systemverilog"
+split = "test"
+languages = ["bluespec-systemverilog"]
+coverage_languages = ["Bluespec SystemVerilog"]
+path_suffixes = ["bsv"]
+domain = "Connectal is a framework for software-driven hardware development."
+reason = "Processor and hardware/software interface framework. Mature hardware sources with last pushes in 2023; legacy-source exception."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Legacy source: archived or no push within two years of selection. Retained for an established implementation; maintenance is not assumed."]
+
+[[repo]]
+name = "mlochbaum--BQN"
+url = "https://github.com/mlochbaum/BQN"
+sha = "5abbab967fefc68ae9b3c2620d5d38473a90cb66"
+language = "bqn"
+split = "train"
+languages = ["bqn"]
+coverage_languages = ["BQN"]
+path_suffixes = ["bqn"]
+domain = "An APL-like programming language"
+reason = "Language tools and the Singeli compiler, both implemented partly in BQN. Small same-maintainer exception; separate implementations."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["BQN: 3,880 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "mlochbaum--Singeli"
+url = "https://github.com/mlochbaum/Singeli"
+sha = "bdb43bebaa7350850ab80e0b0f42fb79fa502fe7"
+language = "bqn"
+split = "test"
+languages = ["bqn"]
+coverage_languages = ["BQN"]
+path_suffixes = ["bqn"]
+domain = "High-level interface for low-level programming"
+reason = "Language tools and the Singeli compiler, both implemented partly in BQN. Small same-maintainer exception; separate implementations."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["BQN: 2,458 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "cpr1c--tools_ui_1c"
+url = "https://github.com/cpr1c/tools_ui_1c"
+sha = "46784631ffd91009025fd7f481ac3f461092d128"
+language = "bsl"
+split = "train"
+languages = ["bsl"]
+coverage_languages = ["Bsl"]
+path_suffixes = ["bsl"]
+domain = "Универсальные инструменты 1С для управляемых форм"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Bsl: 233,089 scoped raw lines; larger indexing workload retained for its substantive implementation; indexing cost remains unverified."]
+
+[[repo]]
+name = "vbondarevsky--Connector"
+url = "https://github.com/vbondarevsky/Connector"
+sha = "7e37f1f5cdd35aac220af853b20a551d4da88cdd"
+language = "bsl"
+split = "test"
+languages = ["bsl"]
+coverage_languages = ["Bsl"]
+path_suffixes = ["bsl"]
+domain = "Коннектор: удобный HTTP-клиент для 1С:Предприятие 8"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Bsl: 8,121 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "c3lang--c3c"
+url = "https://github.com/c3lang/c3c"
+sha = "acda47f794e860946dd048b77558ad3ec4c6bdde"
+language = "c3"
+split = "train"
+languages = ["c3"]
+coverage_languages = ["C3"]
+path_suffixes = ["c3", "c3i"]
+domain = "Compiler for the C3 language"
+reason = "Compiler repository qualifies through lib/std C3 implementations; its C implementation and parser fixtures do not supply this language workload."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+evaluation_source_roots = ["lib/std/"]
+
+[[repo]]
+name = "tonis2--lsp"
+url = "https://github.com/tonis2/lsp"
+sha = "daa76c48a237987d1f89c147cee0e0e9faf9e990"
+language = "c3"
+split = "test"
+languages = ["c3"]
+coverage_languages = ["C3"]
+path_suffixes = ["c3", "c3i"]
+domain = "C3 language server, for code editors"
+reason = "Compiler repository qualifies through lib/std C3 implementations; its C implementation and parser fixtures do not supply this language workload."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["C3: 12,786 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "onflow--flow-core-contracts"
+url = "https://github.com/onflow/flow-core-contracts"
+sha = "6339190b6945e0a7f7d1b4ab74480b1197f845c7"
+language = "cadence"
+split = "train"
+languages = ["cadence"]
+coverage_languages = ["Cadence"]
+path_suffixes = ["cdc"]
+domain = "Cadence core contracts of the Flow network. Staking, delegation, epochs, service account, and FLOW token. The protocol contracts of Flow"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Cadence: 18,033 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "dapperlabs--nba-smart-contracts"
+url = "https://github.com/dapperlabs/nba-smart-contracts"
+sha = "9aeef65e0596ab188fcb0524bfa0078706724cd2"
+language = "cadence"
+split = "test"
+languages = ["cadence"]
+coverage_languages = ["Cadence"]
+path_suffixes = ["cdc"]
+domain = "Smart contracts and transactions for Topshot, the official NBA digital collectibles game on the Flow Blockchain"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Cadence: 8,730 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "OpenZeppelin--cairo-contracts"
+url = "https://github.com/OpenZeppelin/cairo-contracts"
+sha = "f29c5cd7ff094c49243b263fa20a7efdb6f21361"
+language = "cairo"
+split = "train"
+languages = ["cairo"]
+coverage_languages = ["Cairo"]
+path_suffixes = ["cairo"]
+domain = "OpenZeppelin Contracts written in Cairo for Starknet, a decentralized ZK Rollup"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Cairo: 19,215 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "keep-starknet-strange--alexandria"
+url = "https://github.com/keep-starknet-strange/alexandria"
+sha = "6d2cfcc0954c8d7796f028b25336faa8e9378da8"
+language = "cairo"
+split = "test"
+languages = ["cairo"]
+coverage_languages = ["Cairo"]
+path_suffixes = ["cairo"]
+domain = "Community maintained Cairo  libraries and set of well maintained, optimised and secure components."
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "ColdBox--coldbox-platform"
+url = "https://github.com/ColdBox/coldbox-platform"
+sha = "ad82ee59d86ff1d1b9760c27d26847d7b586dcaf"
+language = "cfml-tag"
+split = "train"
+languages = ["cfml-tag"]
+coverage_languages = ["CFML (Tag)"]
+path_suffixes = ["cfc", "cfm", "cfml"]
+domain = "A modern, fluent and conventions based HMVC framework for BoxLang and CFML"
+reason = "The registered suffix group includes both tag and script syntax in .cfc/.cfm files. This does not establish coverage of the separately registered .cfs suffix."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "framework-one--fw1"
+url = "https://github.com/framework-one/fw1"
+sha = "d7fb9add9b82be4d7c884ebb2d0f88ffb59ed8c9"
+language = "cfml-tag"
+split = "test"
+languages = ["cfml-tag"]
+coverage_languages = ["CFML (Tag)"]
+path_suffixes = ["cfc", "cfm", "cfml"]
+domain = "FW/1 - Framework One - is a lightweight, convention over configuration, MVC application framework for ColdFusion / CFML."
+reason = "The registered suffix group includes both tag and script syntax in .cfc/.cfm files. This does not establish coverage of the separately registered .cfs suffix."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["CFML (Tag): 5,843 scoped raw lines; small correctness workload, not a latency workload.", "Legacy source: archived or no push within two years of selection. Retained for an established implementation; maintenance is not assumed."]
+
+[[repo]]
+name = "iden3--circomlib"
+url = "https://github.com/iden3/circomlib"
+sha = "35e54ea21da3e8762557234298dbb553c175ea8d"
+language = "circom"
+split = "train"
+languages = ["circom"]
+coverage_languages = ["Circom"]
+path_suffixes = ["circom"]
+domain = "Library of basic circuits for circom"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Circom: 5,768 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "privacy-ethereum--maci"
+url = "https://github.com/privacy-ethereum/maci"
+sha = "919c433d09aa776a05ca2d89a0074324d6199e91"
+language = "circom"
+split = "test"
+languages = ["circom"]
+coverage_languages = ["Circom"]
+path_suffixes = ["circom"]
+domain = "Minimal Anti-Collusion Infrastructure (MACI)"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Circom: 3,737 scoped raw lines; small correctness workload, not a latency workload.", "Legacy source: archived or no push within two years of selection. Retained for an established implementation; maintenance is not assumed."]
+
+[[repo]]
+name = "stacks-sbtc--sbtc"
+url = "https://github.com/stacks-sbtc/sbtc"
+sha = "18caa9d62ef58055b692da72a07eb6375e98b673"
+language = "clarity"
+split = "train"
+languages = ["clarity"]
+coverage_languages = ["Clarity"]
+path_suffixes = ["clar"]
+domain = "sBTC is a 1:1 Bitcoin-backed asset, enabling users to put their BTC to work in DeFi, dApps, and other applications."
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Clarity: 1,106 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "alexgo-io--alex-v1"
+url = "https://github.com/alexgo-io/alex-v1"
+sha = "ac6f97fafdf2ae43c993b1ebf173bf0646d23554"
+language = "clarity"
+split = "test"
+languages = ["clarity"]
+coverage_languages = ["Clarity"]
+path_suffixes = ["clar"]
+domain = "Build Finance on Bitcoin"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Legacy source: archived or no push within two years of selection. Retained for an established implementation; maintenance is not assumed."]
+
+[[repo]]
+name = "clojure--clojurescript"
+url = "https://github.com/clojure/clojurescript"
+sha = "b45dff9f9aeb506864ecb5618ba686ff2ee8de77"
+language = "clojure"
+split = "train"
+languages = ["clojure"]
+coverage_languages = ["Clojure"]
+path_suffixes = ["bb", "clj", "cljc", "cljd", "cljs", "edn"]
+domain = "Clojure to JS compiler"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+evaluation_source_roots = ["src/"]
+
+[[repo]]
+name = "ring-clojure--ring"
+url = "https://github.com/ring-clojure/ring"
+sha = "5d98bfa4b2813a9b0575ea90b3fa1d63d105f7e4"
+language = "clojure"
+split = "test"
+languages = ["clojure"]
+coverage_languages = ["Clojure"]
+path_suffixes = ["bb", "clj", "cljc", "cljd", "cljs", "edn"]
+domain = "Clojure HTTP server abstraction"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+evaluation_source_roots = ["ring-core/src/", "ring-devel/src/", "ring-jetty-adapter/src/", "ring-servlet/src/"]
+selection_exceptions = ["Clojure: 3,107 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "meyfa--CobolCraft"
+url = "https://github.com/meyfa/CobolCraft"
+sha = "e8c420df7a901b51b10c70bc08b56af7310d00f2"
+language = "cobol"
+split = "train"
+languages = ["cobol"]
+coverage_languages = ["COBOL"]
+path_suffixes = ["cbl", "cob"]
+domain = "A Minecraft server written in COBOL"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "walmartlabs--zECS"
+url = "https://github.com/walmartlabs/zECS"
+sha = "6d6bcbbc89c9be086a58cb7ad2ff4d702e873d02"
+language = "cobol"
+split = "test"
+languages = ["cobol"]
+coverage_languages = ["COBOL"]
+path_suffixes = ["cbl", "cob"]
+domain = "z/OS-based Enterprise Cache Service"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["COBOL: 4,056 scoped raw lines; small correctness workload, not a latency workload.", "Legacy source: archived or no push within two years of selection. Retained for an established implementation; maintenance is not assumed."]
+
+[[repo]]
+name = "kemalcr--kemal"
+url = "https://github.com/kemalcr/kemal"
+sha = "c493853f7d82818b9b420a1211f7284342fdf0ca"
+language = "crystal"
+split = "train"
+languages = ["crystal"]
+coverage_languages = ["Crystal"]
+path_suffixes = ["cr"]
+domain = "Fast, Effective, Simple Web Framework"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Crystal: 4,370 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "luckyframework--lucky"
+url = "https://github.com/luckyframework/lucky"
+sha = "692e5b7ef5621638339dcc0b75b697a2283c0cb7"
+language = "crystal"
+split = "test"
+languages = ["crystal"]
+coverage_languages = ["Crystal"]
+path_suffixes = ["cr"]
+domain = "A full-featured Crystal web framework that catches bugs for you, runs incredibly fast, and helps you write code that lasts."
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Crystal: 10,633 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "curry-language--curry2go"
+url = "https://github.com/curry-language/curry2go"
+sha = "3e89b488204f190e3ce5c80694c7125ebcdecc4d"
+language = "curry"
+split = "train"
+languages = ["curry"]
+coverage_languages = ["Curry"]
+path_suffixes = ["curry"]
+domain = "A compiler and run-time system to compile and run Curry programs as Go programs"
+reason = "Two self-hosted compiler backends under one umbrella. Exclude the shared Docker example and debugger fixtures; dependencies may share runtime interfaces."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+evaluation_exclude_paths = ["docker/"]
+selection_exceptions = ["Curry: 7,177 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "curry-language--kics2"
+url = "https://github.com/curry-language/kics2"
+sha = "f989d57326be699a3b00d69972f4c31aae334051"
+language = "curry"
+split = "test"
+languages = ["curry"]
+coverage_languages = ["Curry"]
+path_suffixes = ["curry"]
+domain = "An implementation of the multi-paradigm declarative language Curry which compiles Curry programs into Haskell programs"
+reason = "Two self-hosted compiler backends under one umbrella. Exclude the shared Docker example and debugger fixtures; dependencies may share runtime interfaces."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+evaluation_exclude_paths = ["debug/", "docker/"]
+selection_exceptions = ["Curry: 7,687 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "scikit-learn--scikit-learn"
+url = "https://github.com/scikit-learn/scikit-learn"
+sha = "2cc7893a2097be891426ca6a4d9ea2e14cf82b9c"
+language = "cython"
+split = "train"
+languages = ["cython"]
+coverage_languages = ["Cython"]
+path_suffixes = ["pxd", "pxi", "pyx"]
+domain = "scikit-learn: machine learning in Python"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "lxml--lxml"
+url = "https://github.com/lxml/lxml"
+sha = "ae3ef5da350bae0c80f3bf0763b28e276e7c871e"
+language = "cython"
+split = "test"
+languages = ["cython"]
+coverage_languages = ["Cython"]
+path_suffixes = ["pxd", "pxi", "pyx"]
+domain = "The lxml XML toolkit for Python"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "dafny-lang--libraries"
+url = "https://github.com/dafny-lang/libraries"
+sha = "b486ff7faadbf306ed7e71386a2b0aeb1e38bd4d"
+language = "dafny"
+split = "train"
+languages = ["dafny"]
+coverage_languages = ["Dafny"]
+path_suffixes = ["dfy"]
+domain = "Libraries useful for Dafny programs"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Dafny: 19,090 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "Consensys-Incorporated--evm-dafny"
+url = "https://github.com/Consensys-Incorporated/evm-dafny"
+sha = "e2e52e86d6623d48d0849f5ce1664f88c8f0e547"
+language = "dafny"
+split = "test"
+languages = ["dafny"]
+coverage_languages = ["Dafny"]
+path_suffixes = ["dfy"]
+domain = "An EVM interpreter in Dafny"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Dafny: 6,902 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "digital-asset--daml"
+url = "https://github.com/digital-asset/daml"
+sha = "66a1e6d93f4a9b54bfe226097f81d2309792b2e0"
+language = "daml"
+split = "train"
+languages = ["daml"]
+coverage_languages = ["DAML"]
+path_suffixes = ["daml"]
+domain = "The Daml smart contract language"
+reason = "SDK qualifies through Daml primitive/standard libraries and Daml Script, paired with the separate finance library. Same-organization exception."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+evaluation_source_roots = ["sdk/compiler/damlc/daml-prim-src/", "sdk/compiler/damlc/daml-stdlib-src/", "sdk/daml-script/daml/"]
+selection_exceptions = ["DAML: 12,468 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "digital-asset--daml-finance"
+url = "https://github.com/digital-asset/daml-finance"
+sha = "155f931b6ebe7d3662fd72788cb17f0bfb5a7ba6"
+language = "daml"
+split = "test"
+languages = ["daml"]
+coverage_languages = ["DAML"]
+path_suffixes = ["daml"]
+domain = "Himitsu secret-storage application"
+reason = "SDK qualifies through Daml primitive/standard libraries and Daml Script, paired with the separate finance library. Same-organization exception."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+evaluation_source_roots = ["src/main/daml/"]
+selection_exceptions = ["DAML: 15,912 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "dylan-lang--http"
+url = "https://github.com/dylan-lang/http"
+sha = "57df28b87c3f567c061ccdca8b37cf48a9fda1e1"
+language = "dylan"
+split = "train"
+languages = ["dylan"]
+coverage_languages = ["Dylan"]
+path_suffixes = ["dylan", "lid"]
+domain = "HTTP server and client for Dylan"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Dylan: 10,169 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "dylan-lang--binary-data"
+url = "https://github.com/dylan-lang/binary-data"
+sha = "f86356792fd2bb7174a6e0f69f3038629181d3d2"
+language = "dylan"
+split = "test"
+languages = ["dylan"]
+coverage_languages = ["Dylan"]
+path_suffixes = ["dylan", "lid"]
+domain = "A DSL for parsing and assembling binary data."
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Dylan: 3,115 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "magit--magit"
+url = "https://github.com/magit/magit"
+sha = "9cb07d820d2b9ebbe9940e4d493293522d4e21d2"
+language = "elisp"
+split = "train"
+languages = ["elisp"]
+coverage_languages = ["Elisp"]
+path_suffixes = ["el"]
+domain = "It's Magit! A Git Porcelain inside Emacs."
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "abo-abo--swiper"
+url = "https://github.com/abo-abo/swiper"
+sha = "0d02f5063d36ff4fa6138f0973c83c6d3874fba0"
+language = "elisp"
+split = "test"
+languages = ["elisp"]
+coverage_languages = ["Elisp"]
+path_suffixes = ["el"]
+domain = "Ivy - a generic completion frontend for Emacs, Swiper - isearch with an overview, and more. Oh, man!"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Elisp: 15,937 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "mdgriffith--elm-ui"
+url = "https://github.com/mdgriffith/elm-ui"
+sha = "acae8857a02e600cc4b4737ca2f70607228b4489"
+language = "elm"
+split = "train"
+languages = ["elm"]
+coverage_languages = ["Elm"]
+path_suffixes = ["elm"]
+domain = "What if you never had to write CSS again?"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Elm: 13,808 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "eikek--docspell"
+url = "https://github.com/eikek/docspell"
+sha = "06f5fc8f3e63b0361e72315c7bfe55e4b3189433"
+language = "elm"
+split = "test"
+languages = ["elm"]
+coverage_languages = ["Elm"]
+path_suffixes = ["elm"]
+domain = "Assist in organizing your piles of documents, resulting from scanners, e-mails and other sources with miminal effort."
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "ninenines--cowboy"
+url = "https://github.com/ninenines/cowboy"
+sha = "79e3fb02b31d47af6e69e8f3ba18fba291a3072a"
+language = "erlang"
+split = "train"
+languages = ["erlang"]
+coverage_languages = ["Erlang"]
+path_suffixes = ["Emakefile", "app.src", "erl", "erlang", "escript", "hrl", "rebar.config", "xrl", "yrl"]
+domain = "Small, fast, modern HTTP server for Erlang/OTP."
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Erlang: 12,893 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "processone--ejabberd"
+url = "https://github.com/processone/ejabberd"
+sha = "4fbfd14839a0628f005238b89e07131896bfd762"
+language = "erlang"
+split = "test"
+languages = ["erlang"]
+coverage_languages = ["Erlang"]
+path_suffixes = ["Emakefile", "app.src", "erl", "erlang", "escript", "hrl", "rebar.config", "xrl", "yrl"]
+domain = "Robust, Ubiquitous and Massively Scalable Messaging Platform (XMPP, MQTT, SIP Server)"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "fish-shell--fish-shell"
+url = "https://github.com/fish-shell/fish-shell"
+sha = "79f79059dbd9f5071b98418509fd72d59503aafb"
+language = "fish"
+split = "train"
+languages = ["fish"]
+coverage_languages = ["Fish"]
+path_suffixes = ["fish"]
+domain = "The user-friendly command line shell."
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+evaluation_source_roots = ["share/"]
+
+[[repo]]
+name = "IlanCosman--tide"
+url = "https://github.com/IlanCosman/tide"
+sha = "fcda500d2c2996e25456fb46cd1a5532b3157b16"
+language = "fish"
+split = "test"
+languages = ["fish"]
+coverage_languages = ["Fish"]
+path_suffixes = ["fish"]
+domain = "🌊 The ultimate Fish prompt."
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Fish: 2,508 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "fortran-lang--stdlib"
+url = "https://github.com/fortran-lang/stdlib"
+sha = "90f135a00e2502e9a93994e612811178b9d16d76"
+language = "fortran"
+split = "train"
+languages = ["fortran"]
+coverage_languages = ["Fortran"]
+path_suffixes = ["F", "F03", "F08", "F90", "F95", "f", "f03", "f08", "f90", "f95"]
+domain = "Fortran Standard Library"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+evaluation_source_roots = ["src/"]
+selection_exceptions = ["Fortran: 9,841 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "jacobwilliams--json-fortran"
+url = "https://github.com/jacobwilliams/json-fortran"
+sha = "d9ed2e4ee53745f4ed98d7536e17bee5198aa3b0"
+language = "fortran"
+split = "test"
+languages = ["fortran"]
+coverage_languages = ["Fortran"]
+path_suffixes = ["F", "F03", "F08", "F90", "F95", "f", "f03", "f08", "f90", "f95"]
+domain = "A Modern Fortran JSON API"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+evaluation_source_roots = ["src/"]
+selection_exceptions = ["Fortran: 17,068 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "fsprojects--FAKE"
+url = "https://github.com/fsprojects/FAKE"
+sha = "e8e1cae79e3573167d7421c622b51adc8c536004"
+language = "fsharp"
+split = "train"
+languages = ["fsharp"]
+coverage_languages = ["FSharp"]
+path_suffixes = ["fs", "fsi", "fsscript", "fsx"]
+domain = "FAKE - F# Make"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "fsprojects--FSharpPlus"
+url = "https://github.com/fsprojects/FSharpPlus"
+sha = "b5a650a483cb31af75f2ee698d78731298a19abf"
+language = "fsharp"
+split = "test"
+languages = ["fsharp"]
+coverage_languages = ["FSharp"]
+path_suffixes = ["fs", "fsi", "fsscript", "fsx"]
+domain = "Extensions for F#"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "ton-blockchain--token-contract"
+url = "https://github.com/ton-blockchain/token-contract"
+sha = "1182ad99413242f09925d50e70ccb7e0e09f94d4"
+language = "func"
+split = "train"
+languages = ["func"]
+coverage_languages = ["Func"]
+path_suffixes = ["fc"]
+domain = "Old Fungible, Non-Fungible, Semi-Fungible Tokens Smart Contracts"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Func: 1,925 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "ton-blockchain--nominator-pool"
+url = "https://github.com/ton-blockchain/nominator-pool"
+sha = "2f35c36b5ad662f10fd7b01ef780c3f1949c399d"
+language = "func"
+split = "test"
+languages = ["func"]
+coverage_languages = ["Func"]
+path_suffixes = ["fc"]
+domain = "Nominator Pool smart contract"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Func: 955 scoped raw lines; small correctness workload, not a latency workload.", "Legacy source: archived or no push within two years of selection. Retained for an established implementation; maintenance is not assumed."]
+
+[[repo]]
+name = "Orama-Interactive--Pixelorama"
+url = "https://github.com/Orama-Interactive/Pixelorama"
+sha = "a1ba7927a563ecbee1bb3bc7c900deb56b0efb83"
+language = "gdscript"
+split = "train"
+languages = ["gdscript", "gdshader"]
+coverage_languages = ["GDScript", "GDShader"]
+path_suffixes = ["gd", "gdshader", "gdshaderinc"]
+domain = "Unleash your creativity with Pixelorama, a powerful and accessible open-source pixel art multitool. Whether you want to create sprites, tiles, animations, or just express yourself in the language of pixel art, this software will realize your pixel-perfect dreams with a vast toolbox of features. Avai"
+reason = "Pixelorama effects and reusable GDQuest shaders. Small graphics workloads; exclude demonstrations and bundled addon shaders. Godot versions require separate readiness checks."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+evaluation_source_roots = ["src/"]
+selection_exceptions = ["GDShader: 2,823 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "HungryProton--scatter"
+url = "https://github.com/HungryProton/scatter"
+sha = "2ced25f1ebef13648e94d3cc6a643da92a7e33d8"
+language = "gdscript"
+split = "test"
+languages = ["gdscript"]
+coverage_languages = ["GDScript"]
+path_suffixes = ["gd"]
+domain = "Godot engine addon to randomly fill an area with props or other scenes. Mirror of https://codeberg.org/hungryproton/proton_scatter"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["GDScript: 8,175 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "gdquest-demos--godot-shaders"
+url = "https://github.com/gdquest-demos/godot-shaders"
+sha = "05a3931acc85513b67b80b6e88671a596a3f9693"
+language = "gdshader"
+split = "test"
+languages = ["gdshader"]
+coverage_languages = ["GDShader"]
+path_suffixes = ["gdshader", "gdshaderinc"]
+domain = "A large library of free and open-source shaders for the Godot game engine. Here, you'll get 2D and 3D shaders with playable demos."
+reason = "Pixelorama effects and reusable GDQuest shaders. Small graphics workloads; exclude demonstrations and bundled addon shaders. Godot versions require separate readiness checks."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+evaluation_source_roots = ["godot/Shaders/"]
+selection_exceptions = ["GDShader: 2,043 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "gleam-lang--stdlib"
+url = "https://github.com/gleam-lang/stdlib"
+sha = "db3791b04555bceff281e8c00326a1d0be0db6cd"
+language = "gleam"
+split = "train"
+languages = ["gleam"]
+coverage_languages = ["Gleam"]
+path_suffixes = ["gleam"]
+domain = "🎁  Gleam's standard library"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Gleam: 9,699 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "lustre-labs--lustre"
+url = "https://github.com/lustre-labs/lustre"
+sha = "e88aa0e04934e20329ef6dd82004bb4d06d85f9c"
+language = "gleam"
+split = "test"
+languages = ["gleam"]
+coverage_languages = ["Gleam"]
+path_suffixes = ["gleam"]
+domain = "A Gleam web framework for building HTML templates, single page applications, and real-time server components."
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Gleam: 11,562 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "gren-lang--core"
+url = "https://github.com/gren-lang/core"
+sha = "ee36bbf49391e210cca0003fe70e60f28bce8b67"
+language = "gren"
+split = "train"
+languages = ["gren"]
+coverage_languages = ["Gren"]
+path_suffixes = ["gren"]
+domain = "Gren's core package"
+reason = "Core and Node platform libraries from the language organization; separate modules, same-organization exception."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Gren: 15,230 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "gren-lang--node"
+url = "https://github.com/gren-lang/node"
+sha = "ae00b50f83c1dcf0c690055b145789d8405e9ea9"
+language = "gren"
+split = "test"
+languages = ["gren"]
+coverage_languages = ["Gren"]
+path_suffixes = ["gren"]
+domain = "Run Gren on NodeJS"
+reason = "Core and Node platform libraries from the language organization; separate modules, same-organization exception."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Gren: 5,127 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "sircmpwn--hare"
+url = "https://git.sr.ht/~sircmpwn/hare"
+sha = "7016c5a8e6cad2c6314116aad97afe7e2a8826af"
+language = "hare"
+split = "train"
+languages = ["hare"]
+coverage_languages = ["Hare"]
+path_suffixes = ["ha"]
+domain = "Standard library and language tools"
+reason = "Canonical SourceHut standard library and Himitsu secret-storage implementation; license evidence is in COPYING rather than GitHub metadata."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "sircmpwn--himitsu"
+url = "https://git.sr.ht/~sircmpwn/himitsu"
+sha = "5dc9c4fee0bda528de9d0d6ce367c3265d437444"
+language = "hare"
+split = "test"
+languages = ["hare"]
+coverage_languages = ["Hare"]
+path_suffixes = ["ha"]
+domain = "Himitsu secret-storage application"
+reason = "Canonical SourceHut standard library and Himitsu secret-storage implementation; license evidence is in COPYING rather than GitHub metadata."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Hare: 5,389 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "jgm--pandoc"
+url = "https://github.com/jgm/pandoc"
+sha = "0e399cc79935ae69f708c0fc6d8e7abec3af27d5"
+language = "haskell"
+split = "train"
+languages = ["haskell"]
+coverage_languages = ["Haskell"]
+path_suffixes = ["hs"]
+domain = "Universal markup converter"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "koalaman--shellcheck"
+url = "https://github.com/koalaman/shellcheck"
+sha = "9af7ee28ce587baadd950b85dd6826a16b9c068d"
+language = "haskell"
+split = "test"
+languages = ["haskell"]
+coverage_languages = ["Haskell"]
+path_suffixes = ["hs"]
+domain = "ShellCheck, a static analysis tool for shell scripts"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Haskell: 19,600 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "HaxeFlixel--flixel"
+url = "https://github.com/HaxeFlixel/flixel"
+sha = "5e147e81bb59a441f4afed72ab9a8299d8211216"
+language = "haxe"
+split = "train"
+languages = ["haxe"]
+coverage_languages = ["Haxe"]
+path_suffixes = ["hx"]
+domain = "Free, cross-platform 2D game engine powered by Haxe and OpenFL"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "HeapsIO--heaps"
+url = "https://github.com/HeapsIO/heaps"
+sha = "efb1a98de9d280dac0edbc749b95d83f4b02bc34"
+language = "haxe"
+split = "test"
+languages = ["haxe"]
+coverage_languages = ["Haxe"]
+path_suffixes = ["hx"]
+domain = "Heaps : Haxe Game Framework"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "Blinue--Magpie"
+url = "https://github.com/Blinue/Magpie"
+sha = "3396e1e000bbab050d098032dac04ba0250683ad"
+language = "hlsl"
+split = "train"
+languages = ["hlsl"]
+coverage_languages = ["HLSL"]
+path_suffixes = ["hlsl"]
+domain = "A general-purpose window upscaler for Windows 10/11."
+reason = "Magpie image effects and DirectX MiniEngine/library shaders. Only reusable engine/library code qualifies in the samples repository."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+evaluation_source_roots = ["src/Effects/"]
+
+[[repo]]
+name = "microsoft--DirectX-Graphics-Samples"
+url = "https://github.com/microsoft/DirectX-Graphics-Samples"
+sha = "213dd4fd4918ea009dd8f35adee1aff1f2ecaba4"
+language = "hlsl"
+split = "test"
+languages = ["hlsl"]
+coverage_languages = ["HLSL"]
+path_suffixes = ["hlsl"]
+domain = "This repo contains the DirectX Graphics samples that demonstrate how to build graphics intensive applications on Windows."
+reason = "Magpie image effects and DirectX MiniEngine/library shaders. Only reusable engine/library code qualifies in the samples repository."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+evaluation_source_roots = ["MiniEngine/", "Libraries/"]
+selection_exceptions = ["HLSL: 10,016 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "urbit--urbit"
+url = "https://github.com/urbit/urbit"
+sha = "ac289d90bae0c549455ed4216d888bb740c057f6"
+language = "hoon"
+split = "train"
+languages = ["hoon"]
+coverage_languages = ["Hoon"]
+path_suffixes = ["hoon"]
+domain = "An operating function"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "yosoyubik--canvas"
+url = "https://github.com/yosoyubik/canvas"
+sha = "2d9ad2c1a007128379184f63dbacf08423bd0bc2"
+language = "hoon"
+split = "test"
+languages = ["hoon"]
+coverage_languages = ["Hoon"]
+path_suffixes = ["hoon"]
+domain = "Pixel art app for Urbit"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Hoon: 19,643 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "idris-lang--Idris2"
+url = "https://github.com/idris-lang/Idris2"
+sha = "1c630e67c386629a0fbbc6b78a59176fde7f0a76"
+language = "idris-2"
+split = "train"
+languages = ["idris-2"]
+coverage_languages = ["Idris 2"]
+path_suffixes = ["idr", "idr2"]
+domain = "A purely functional programming language with first class types"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "stefan-hoeck--idris2-pack"
+url = "https://github.com/stefan-hoeck/idris2-pack"
+sha = "6baee7d5d59a93cf147de7b1208a2ad934645673"
+language = "idris-2"
+split = "test"
+languages = ["idris-2"]
+coverage_languages = ["Idris 2"]
+path_suffixes = ["idr", "idr2"]
+domain = "Himitsu secret-storage application"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Idris 2: 10,443 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "focus-editor--focus"
+url = "https://github.com/focus-editor/focus"
+sha = "c6b3ead7d4174527d0138e8a31f7c3c5663badec"
+language = "jai"
+split = "train"
+languages = ["jai"]
+coverage_languages = ["Jai"]
+path_suffixes = ["jai"]
+domain = "A simple and fast text editor"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "valignatev--hitboxer"
+url = "https://github.com/valignatev/hitboxer"
+sha = "285bca220b8778b6829f301a4d219779f22d6ea6"
+language = "jai"
+split = "test"
+languages = ["jai"]
+coverage_languages = ["Jai"]
+path_suffixes = ["jai"]
+domain = "Key remapper for epic gamers"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+evaluation_exclude_paths = ["modules/libxkbcommon.jai"]
+selection_exceptions = ["Jai: 12,655 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "wader--fq"
+url = "https://github.com/wader/fq"
+sha = "a1622f6009dcfe0d5927b9b062aedfd402987cdf"
+language = "jq"
+split = "train"
+languages = ["jq"]
+coverage_languages = ["jq"]
+path_suffixes = ["jq"]
+domain = "fq - jq for binary formats. Tool, language and decoders for working with binary formats."
+reason = "Binary inspection modules and an interpreter implemented in jq. Small same-maintainer exception; separate tools."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["jq: 3,910 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "wader--jqjq"
+url = "https://github.com/wader/jqjq"
+sha = "644d9650359eaef9d82bdd2cb146a54e891a0538"
+language = "jq"
+split = "test"
+languages = ["jq"]
+coverage_languages = ["jq"]
+path_suffixes = ["jq"]
+domain = "jq implementation of jq"
+reason = "Binary inspection modules and an interpreter implemented in jq. Small same-maintainer exception; separate tools."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["jq: 3,172 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "JuliaStats--Distributions.jl"
+url = "https://github.com/JuliaStats/Distributions.jl"
+sha = "050e0f9f74fc9a8d84265de5aefa1e7ada857b84"
+language = "julia"
+split = "train"
+languages = ["julia"]
+coverage_languages = ["Julia"]
+path_suffixes = ["jl"]
+domain = "A Julia package for probability distributions and associated functions."
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "FluxML--Flux.jl"
+url = "https://github.com/FluxML/Flux.jl"
+sha = "404ff37d68d256a9ca0bb176ed119b631bc9cad8"
+language = "julia"
+split = "test"
+languages = ["julia"]
+coverage_languages = ["Julia"]
+path_suffixes = ["jl"]
+domain = "Relax! Flux is the ML library that doesn't make you tensor"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Julia: 9,716 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "koka-lang--koka"
+url = "https://github.com/koka-lang/koka"
+sha = "3ac4f001ab7277b484d661fdbada1aaf8d01ecbf"
+language = "koka"
+split = "train"
+languages = ["koka"]
+coverage_languages = ["Koka"]
+path_suffixes = ["kk"]
+domain = "Koka language compiler and interpreter"
+reason = "Standard library and community library extensions. Exclude community std/async, which is derived from the language project; retain the separate data-structure and utility implementations."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "koka-community--std"
+url = "https://github.com/koka-community/std"
+sha = "f79a7cadd9bbdbeac67f9f1a11d800b7f292a9fc"
+language = "koka"
+split = "test"
+languages = ["koka"]
+coverage_languages = ["Koka"]
+path_suffixes = ["kk"]
+domain = "Extensions to Koka's std libraries (definitely unofficial, likely to be split into other packages)"
+reason = "Standard library and community library extensions. Exclude community std/async, which is derived from the language project; retain the separate data-structure and utility implementations."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+evaluation_exclude_paths = ["std/async/"]
+selection_exceptions = ["Koka: 6,810 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "leanprover-community--batteries"
+url = "https://github.com/leanprover-community/batteries"
+sha = "4cac2177c37f5530c4da76aa8e4307f3fc9e4dcb"
+language = "lean-4"
+split = "train"
+languages = ["lean-4"]
+coverage_languages = ["Lean 4"]
+path_suffixes = ["lean"]
+domain = "The \"batteries included\" extended library for the Lean programming language and theorem prover"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "leanprover-community--aesop"
+url = "https://github.com/leanprover-community/aesop"
+sha = "18889deb9e83ea7420ef51c160d6f88552e744e3"
+language = "lean-4"
+split = "test"
+languages = ["lean-4"]
+coverage_languages = ["Lean 4"]
+path_suffixes = ["lean"]
+domain = "White-box automation for Lean 4"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "savonet--liquidsoap"
+url = "https://github.com/savonet/liquidsoap"
+sha = "1f2cb96d7fc6d974ff68e4bab328f27469a9c73a"
+language = "liquidsoap"
+split = "train"
+languages = ["liquidsoap"]
+coverage_languages = ["Liquidsoap"]
+path_suffixes = ["liq"]
+domain = "Liquidsoap is a statically typed scripting general-purpose language with dedicated operators and backend for all thing media, streaming, file generation, automation, HTTP backend and more."
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "radiofrance--rf-liquidsoap"
+url = "https://github.com/radiofrance/rf-liquidsoap"
+sha = "4da07792dd656c598118e224fab4c504e0386b09"
+language = "liquidsoap"
+split = "test"
+languages = ["liquidsoap"]
+coverage_languages = ["Liquidsoap"]
+path_suffixes = ["liq"]
+domain = "Radio France's liquidsoap configuration for resilient radio streaming with a self contained docker infrastructure"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Liquidsoap: 1,287 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "littensy--charm"
+url = "https://github.com/littensy/charm"
+sha = "b05f3a9de6fc5b784ad95681908c52d1ee418cc0"
+language = "luau"
+split = "train"
+languages = ["luau"]
+coverage_languages = ["Luau"]
+path_suffixes = ["luau"]
+domain = "🍀 Atomic state management for Roblox"
+reason = "State-management and Roblox utility libraries; Roblox APIs must be available to the oracle."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Luau: 2,389 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "Sleitnick--RbxUtil"
+url = "https://github.com/Sleitnick/RbxUtil"
+sha = "31f9120fca021e3dec275b42bc7047d626962082"
+language = "luau"
+split = "test"
+languages = ["luau"]
+coverage_languages = ["Luau"]
+path_suffixes = ["luau"]
+domain = "A collection of utility modules for Roblox."
+reason = "State-management and Roblox utility libraries; Roblox APIs must be available to the oracle."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Luau: 13,127 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "ml-explore--mlx"
+url = "https://github.com/ml-explore/mlx"
+sha = "24c699ecee2f7c8b2040de8da1c8382c8bcf31c7"
+language = "metal"
+split = "train"
+languages = ["metal"]
+coverage_languages = ["Metal"]
+path_suffixes = ["metal"]
+domain = "MLX: An array framework for Apple silicon"
+reason = "MLX compute kernels and GPUImage image-processing kernels. Small source subsets with host-language dependencies; GPUImage is mature legacy source."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Metal: 4,670 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "BradLarson--GPUImage3"
+url = "https://github.com/BradLarson/GPUImage3"
+sha = "84466fc344e1220238c1c07e94e91207caaabe51"
+language = "metal"
+split = "test"
+languages = ["metal"]
+coverage_languages = ["Metal"]
+path_suffixes = ["metal"]
+domain = "GPUImage 3 is a BSD-licensed Swift framework for GPU-accelerated video and image processing using Metal."
+reason = "MLX compute kernels and GPUImage image-processing kernels. Small source subsets with host-language dependencies; GPUImage is mature legacy source."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Metal: 3,183 scoped raw lines; small correctness workload, not a latency workload.", "Legacy source: archived or no push within two years of selection. Retained for an established implementation; maintenance is not assumed."]
+
+[[repo]]
+name = "moonbitlang--core"
+url = "https://github.com/moonbitlang/core"
+sha = "d20af152ccffd639170de6298581f2d5f05a1745"
+language = "moonbit"
+split = "train"
+languages = ["moonbit"]
+coverage_languages = ["MoonBit"]
+path_suffixes = ["mbt"]
+domain = "MoonBit's Core library"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "mizchi--actrun"
+url = "https://github.com/mizchi/actrun"
+sha = "3ea136d34e7ee071986bbaaad54e40aa496b8488"
+language = "moonbit"
+split = "test"
+languages = ["moonbit"]
+coverage_languages = ["MoonBit"]
+path_suffixes = ["mbt"]
+domain = "GitHub Actions compatible local runner"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "caffeinelabs--motoko-base"
+url = "https://github.com/caffeinelabs/motoko-base"
+sha = "c768aa8d5c67e6e5b72fc09fb6695d5041060856"
+language = "motoko"
+split = "train"
+languages = ["motoko"]
+coverage_languages = ["Motoko"]
+path_suffixes = ["mo"]
+domain = "The original Motoko base library (replaced by `core`)"
+reason = "Standard library and persistent buffer implementation. Base is archived; exclude StableBuffer reference/ and tests, which include upstream comparison code."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Legacy source: archived or no push within two years of selection. Retained for an established implementation; maintenance is not assumed."]
+
+[[repo]]
+name = "canscale--StableBuffer"
+url = "https://github.com/canscale/StableBuffer"
+sha = "acdde6bb5b939227997cebdbb8919d2e6da8691c"
+language = "motoko"
+split = "test"
+languages = ["motoko"]
+coverage_languages = ["Motoko"]
+path_suffixes = ["mo"]
+domain = "Stable Buffers in Motoko"
+reason = "Standard library and persistent buffer implementation. Base is archived; exclude StableBuffer reference/ and tests, which include upstream comparison code."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+evaluation_source_roots = ["src/"]
+selection_exceptions = ["Motoko: 2,628 scoped raw lines; small correctness workload, not a latency workload.", "Legacy source: archived or no push within two years of selection. Retained for an established implementation; maintenance is not assumed."]
+
+[[repo]]
+name = "aptos-labs--aptos-core"
+url = "https://github.com/aptos-labs/aptos-core"
+sha = "860f9b7c8ab5fc4ef702db9780e8917f75ad39fe"
+language = "move"
+split = "train"
+languages = ["move"]
+coverage_languages = ["Move", "move"]
+path_suffixes = ["move"]
+domain = "Aptos is a layer 1 blockchain built to support the widespread use of blockchain through better technology and user experience."
+reason = "Aptos and Sui framework implementations use different Move dialects. Exclude their shared upstream compiler/tests and use dialect-appropriate handlers; do not pool oracle results without a dialect label. Alias of the Move suffix group; reuses its repository pair and dialect restrictions."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+evaluation_source_roots = ["aptos-move/framework/aptos-framework/sources/", "aptos-move/framework/aptos-stdlib/sources/"]
+
+[[repo]]
+name = "MystenLabs--sui"
+url = "https://github.com/MystenLabs/sui"
+sha = "5be216e39f252085f4721d0c11dcbf87b5484959"
+language = "move"
+split = "test"
+languages = ["move"]
+coverage_languages = ["Move", "move"]
+path_suffixes = ["move"]
+domain = "Sui, a next-generation smart contract platform with high throughput, low latency, and an asset-oriented programming model powered by the Move programming language"
+reason = "Aptos and Sui framework implementations use different Move dialects. Exclude their shared upstream compiler/tests and use dialect-appropriate handlers; do not pool oracle results without a dialect label. Alias of the Move suffix group; reuses its repository pair and dialect restrictions."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+evaluation_source_roots = ["crates/sui-framework/packages/sui-framework/sources/", "crates/sui-framework/packages/sui-system/sources/", "bridge/move/"]
+selection_exceptions = ["Move: 18,946 scoped raw lines; small correctness workload, not a latency workload.", "move: 18,946 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "DavidVine--amx-util-library"
+url = "https://github.com/DavidVine/amx-util-library"
+sha = "b73eca536390c90ee6c259df0932cac61ad18c25"
+language = "netlinx"
+split = "train"
+languages = ["netlinx"]
+coverage_languages = ["NetLinx"]
+path_suffixes = ["axb", "axi", "axs", "lib"]
+domain = "Various useful NetLinx include files and modules"
+reason = "Utility library and deployed automation source. AMX application is a legacy-source exception (last push 2017). Platform dependencies need a suitable oracle."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["NetLinx: 7,778 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "rverstappen--AMX"
+url = "https://github.com/rverstappen/AMX"
+sha = "f51a7770e767a8c77b4dead77314c410f23e125f"
+language = "netlinx"
+split = "test"
+languages = ["netlinx"]
+coverage_languages = ["NetLinx"]
+path_suffixes = ["axb", "axi", "axs", "lib"]
+domain = "AMX home automation using NetLinx with generalizations for easier reuse on many projects. Configuration files allow modules to be reused without code changes. I currently use this project in two homes with only the configuration files being different. Similarly, the same TP4 GUI front-ends (iPad and"
+reason = "Utility library and deployed automation source. AMX application is a legacy-source exception (last push 2017). Platform dependencies need a suitable oracle."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["NetLinx: 18,042 scoped raw lines; small correctness workload, not a latency workload.", "Legacy source: archived or no push within two years of selection. Retained for an established implementation; maintenance is not assumed."]
+
+[[repo]]
+name = "nim-lang--nimble"
+url = "https://github.com/nim-lang/nimble"
+sha = "8a6214f922a6382b8e287a695d1554c82fafc535"
+language = "nim"
+split = "train"
+languages = ["nim"]
+coverage_languages = ["Nim"]
+path_suffixes = ["nim", "nims"]
+domain = "Package manager for the Nim programming language."
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "zedeus--nitter"
+url = "https://github.com/zedeus/nitter"
+sha = "376f14908e27e095049bbbeb648e742501144010"
+language = "nim"
+split = "test"
+languages = ["nim"]
+coverage_languages = ["Nim"]
+path_suffixes = ["nim", "nims"]
+domain = "Alternative Twitter front-end"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Nim: 8,894 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "noir-lang--noir-bignum"
+url = "https://github.com/noir-lang/noir-bignum"
+sha = "dacecea946237c4e2e5b7d45f318fe9a1b9dd5f5"
+language = "noir"
+split = "train"
+languages = ["noir"]
+coverage_languages = ["Noir"]
+path_suffixes = ["nr"]
+domain = "bignum"
+reason = "Big-integer library and Aztec contract library; the latter is the official subtree mirror, not an independent second copy of aztec-packages in this corpus."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Noir: 6,405 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "AztecProtocol--aztec-nr"
+url = "https://github.com/AztecProtocol/aztec-nr"
+sha = "00e55071e004245d6d2890fa23eed0fc46cb9aca"
+language = "noir"
+split = "test"
+languages = ["noir"]
+coverage_languages = ["Noir"]
+path_suffixes = ["nr"]
+domain = "Mirror of AztecProtocol/aztec-packages/aztec-nr"
+reason = "Big-integer library and Aztec contract library; the latter is the official subtree mirror, not an independent second copy of aztec-packages in this corpus."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "intersystems--ipm"
+url = "https://github.com/intersystems/ipm"
+sha = "737d1a5eddb9720ea171e340623338bf7db40c2c"
+language = "objectscriptudl"
+split = "train"
+languages = ["objectscriptudl"]
+coverage_languages = ["ObjectscriptUdl"]
+path_suffixes = ["cls"]
+domain = "InterSystems ObjectScript Package Manager"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "intersystems-community--webterminal"
+url = "https://github.com/intersystems-community/webterminal"
+sha = "91b54afa0ef4c80d5ac2d114df55b07de72e3864"
+language = "objectscriptudl"
+split = "test"
+languages = ["objectscriptudl"]
+coverage_languages = ["ObjectscriptUdl"]
+path_suffixes = ["cls"]
+domain = "The first and the most powerful web-based terminal for InterSystems IRIS®, InterSystems Caché®, Ensemble®, HealthShare®, TrakCare® and other products built on top of InterSystems Data Platforms."
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["ObjectscriptUdl: 3,736 scoped raw lines; small correctness workload, not a latency workload.", "Legacy source: archived or no push within two years of selection. Retained for an established implementation; maintenance is not assumed."]
+
+[[repo]]
+name = "ocaml--dune"
+url = "https://github.com/ocaml/dune"
+sha = "bc9391869506962c80df0c488037c65c0cdbef18"
+language = "ocaml"
+split = "train"
+languages = ["ocaml", "ocaml-interface", "ocamllex"]
+coverage_languages = ["OCaml", "OCaml Interface", "OCamllex"]
+path_suffixes = ["ml", "mli", "mll"]
+domain = "A composable build system for OCaml."
+reason = "Companion .mli files reuse the OCaml projects and their repository-level split. Dune and Reason contain real lexical analyzers with named rules. Small companion-source workloads; this is parser implementation, not parser test fixtures."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["OCamllex: 1,446 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "mirage--mirage"
+url = "https://github.com/mirage/mirage"
+sha = "dccd7db3c3358587f52350cd7f4d412f6cec82bf"
+language = "ocaml"
+split = "test"
+languages = ["ocaml", "ocaml-interface"]
+coverage_languages = ["OCaml", "OCaml Interface"]
+path_suffixes = ["ml", "mli"]
+domain = "MirageOS is a library operating system that constructs unikernels"
+reason = "Companion .mli files reuse the OCaml projects and their repository-level split."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["OCaml: 8,349 scoped raw lines; small correctness workload, not a latency workload.", "OCaml Interface: 4,236 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "DanielGavin--ols"
+url = "https://github.com/DanielGavin/ols"
+sha = "110e63703db100e9cd5f381328bfde99fdb4b85f"
+language = "odin"
+split = "train"
+languages = ["odin"]
+coverage_languages = ["Odin"]
+path_suffixes = ["odin"]
+domain = "Language server for Odin"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "laytan--odin-http"
+url = "https://github.com/laytan/odin-http"
+sha = "fac113fbd828aad3d71479a534b5de4358b6a07b"
+language = "odin"
+split = "test"
+languages = ["odin"]
+coverage_languages = ["Odin"]
+path_suffixes = ["odin"]
+domain = "A HTTP/1.1 client/server implementation for Odin."
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Odin: 10,652 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "BelfrySCAD--BOSL2"
+url = "https://github.com/BelfrySCAD/BOSL2"
+sha = "a05de6da748830a3559ae035710a31c443e8c0c7"
+language = "openscad"
+split = "train"
+languages = ["openscad"]
+coverage_languages = ["OpenSCAD"]
+path_suffixes = ["scad"]
+domain = "The Belfry OpenScad Library, v2.0.  An OpenSCAD library of shapes, masks, and manipulators to make working with OpenSCAD easier.  BETA"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "nophead--NopSCADlib"
+url = "https://github.com/nophead/NopSCADlib"
+sha = "c9baa0ed0faa23e849141c3d8c6728545d6af910"
+language = "openscad"
+split = "test"
+languages = ["openscad"]
+coverage_languages = ["OpenSCAD"]
+path_suffixes = ["scad"]
+domain = "Library of parts modelled in OpenSCAD and a framework for making projects"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "p4lang--open-p4studio"
+url = "https://github.com/p4lang/open-p4studio"
+sha = "0e81a468930b6f29ddf7744250b472d709944dcc"
+language = "p4-language"
+split = "train"
+languages = ["p4-language"]
+coverage_languages = ["P4 Language"]
+path_suffixes = ["p4"]
+domain = "Himitsu secret-storage application"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+evaluation_source_roots = ["pkgsrc/switch-p4-16/p4src/"]
+
+[[repo]]
+name = "sonic-net--sonic-pins"
+url = "https://github.com/sonic-net/sonic-pins"
+sha = "e77250b8dcab96e6f0e6ba1a9643f66771caa46c"
+language = "p4-language"
+split = "test"
+languages = ["p4-language"]
+coverage_languages = ["P4 Language"]
+path_suffixes = ["p4"]
+domain = "P4 Integrated Network Stack (PINS)"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+evaluation_source_roots = ["sai_p4/"]
+selection_exceptions = ["P4 Language: 4,675 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "kadena-io--chainweb-node"
+url = "https://github.com/kadena-io/chainweb-node"
+sha = "5e46fa79f1cc4aa0a90a6c4aa32d32c90013ea4f"
+language = "pact"
+split = "train"
+languages = ["pact"]
+coverage_languages = ["Pact"]
+path_suffixes = ["pact", "repl"]
+domain = "Chainweb: A Proof-of-Work Parallel-Chain Architecture for Massive Throughput"
+reason = "Coin contracts and NFT marketplace contracts are archived legacy production sources. Exclude shared root interface files in the test project."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+evaluation_source_roots = ["pact/coin-contract/"]
+selection_exceptions = ["Pact: 11,286 scoped raw lines; small correctness workload, not a latency workload.", "Legacy source: archived or no push within two years of selection. Retained for an established implementation; maintenance is not assumed."]
+
+[[repo]]
+name = "kadena-io--marmalade"
+url = "https://github.com/kadena-io/marmalade"
+sha = "0404eb71ed980b37d07f569adbc3a740367c1632"
+language = "pact"
+split = "test"
+languages = ["pact"]
+coverage_languages = ["Pact"]
+path_suffixes = ["pact", "repl"]
+domain = "Decentralized Infrastructure for Poly-Fungibles and NFTs"
+reason = "Coin contracts and NFT marketplace contracts are archived legacy production sources. Exclude shared root interface files in the test project."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+evaluation_source_roots = ["pact/"]
+evaluation_exclude_paths = ["pact/root/fungible-v2.pact", "pact/root/fungible-xchain-v1.pact", "pact/root/gas-payer-v1.pact"]
+selection_exceptions = ["Pact: 9,049 scoped raw lines; small correctness workload, not a latency workload.", "Legacy source: archived or no push within two years of selection. Retained for an established implementation; maintenance is not assumed."]
+
+[[repo]]
+name = "MinLL--SkyrimNet-GamePlugin"
+url = "https://github.com/MinLL/SkyrimNet-GamePlugin"
+sha = "1493c44c4c829c15a780471c1c0087cb3baae2e0"
+language = "papyrus"
+split = "train"
+languages = ["papyrus"]
+coverage_languages = ["Papyrus"]
+path_suffixes = ["psc"]
+domain = "Public facing files for SkyrimNet"
+reason = "Separate Skyrim and Starfield mods. Small workloads; game-specific declarations and differing Papyrus dialects need separate readiness checks."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Papyrus: 7,934 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "Starfield-Community-Patch--Starfield-Community-Patch"
+url = "https://github.com/Starfield-Community-Patch/Starfield-Community-Patch"
+sha = "0ad97d3eb087dafb91afbc4bbb1588598212cc87"
+language = "papyrus"
+split = "test"
+languages = ["papyrus"]
+coverage_languages = ["Papyrus"]
+path_suffixes = ["psc"]
+domain = "The Community Patch project for Starfield."
+reason = "Separate Skyrim and Starfield mods. Small workloads; game-specific declarations and differing Papyrus dialects need separate readiness checks."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Papyrus: 5,732 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "ponylang--ponyc"
+url = "https://github.com/ponylang/ponyc"
+sha = "bfbf74e997ed553830bcabdfd7145801f6ac9cbf"
+language = "pony"
+split = "train"
+languages = ["pony"]
+coverage_languages = ["Pony"]
+path_suffixes = ["pony"]
+domain = "Pony is an open-source, actor-model, capabilities-secure, high performance programming language"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "WallarooLabs--wally"
+url = "https://github.com/WallarooLabs/wally"
+sha = "2b985a3e756786139316c72ebcca342346546ba7"
+language = "pony"
+split = "test"
+languages = ["pony"]
+coverage_languages = ["Pony"]
+path_suffixes = ["pony"]
+domain = "Distributed Stream Processing"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "purescript-halogen--purescript-halogen"
+url = "https://github.com/purescript-halogen/purescript-halogen"
+sha = "7354e1dd7a7fac253048c2a08c99d6720f5bd45b"
+language = "purescript"
+split = "train"
+languages = ["purescript"]
+coverage_languages = ["PureScript"]
+path_suffixes = ["purs"]
+domain = "A declarative, type-safe UI library for PureScript."
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["PureScript: 4,141 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "purescript--spago"
+url = "https://github.com/purescript/spago"
+sha = "6fe232842930a27f74c5722af3204791a99bbf9b"
+language = "purescript"
+split = "test"
+languages = ["purescript"]
+coverage_languages = ["PureScript"]
+path_suffixes = ["purs"]
+domain = "🍝 PureScript package manager and build tool"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["PureScript: 10,875 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "KDE--kirigami"
+url = "https://github.com/KDE/kirigami"
+sha = "436116ca5e5ace5f07c28d63d45f761dd36bd10b"
+language = "qml"
+split = "train"
+languages = ["qml"]
+coverage_languages = ["QML"]
+path_suffixes = ["qml"]
+domain = "A QtQuick based components set"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["QML: 18,625 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "Swordfish90--cool-retro-term"
+url = "https://github.com/Swordfish90/cool-retro-term"
+sha = "1394ce82fa53d2a87d5adc4d99f9eeba598ea53d"
+language = "qml"
+split = "test"
+languages = ["qml"]
+coverage_languages = ["QML"]
+path_suffixes = ["qml"]
+domain = "A good looking terminal emulator which mimics the old cathode display..."
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["QML: 3,723 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "xonotic--xonotic-data.pk3dir"
+url = "https://github.com/xonotic/xonotic-data.pk3dir"
+sha = "15655695cb1ce55867cd8d2f5a76c182a548daa6"
+language = "quakec"
+split = "train"
+languages = ["quakec"]
+coverage_languages = ["QuakeC"]
+path_suffixes = ["qc"]
+domain = "Mirror of https://gitlab.com/xonotic/xonotic-data.pk3dir - Xonotic assets and gamecode"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "fte-team--fteqw"
+url = "https://github.com/fte-team/fteqw"
+sha = "f937b9d88f71fc4429db5fe56c6a98d922711b2e"
+language = "quakec"
+split = "test"
+languages = ["quakec"]
+coverage_languages = ["QuakeC"]
+path_suffixes = ["qc"]
+domain = "This is the official GitHub mirror for the FTEQW project."
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "racket--typed-racket"
+url = "https://github.com/racket/typed-racket"
+sha = "57b7edab6074dbf4361354b546185f41e4a4c572"
+language = "racket"
+split = "train"
+languages = ["racket"]
+coverage_languages = ["Racket"]
+path_suffixes = ["rkt"]
+domain = "Typed Racket"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "greghendershott--frog"
+url = "https://github.com/greghendershott/frog"
+sha = "9009517a349c9353991c930cc256324041782584"
+language = "racket"
+split = "test"
+languages = ["racket"]
+coverage_languages = ["Racket"]
+path_suffixes = ["rkt"]
+domain = "Frog is a static blog generator implemented in Racket, targeting Bootstrap and able to use Pygments."
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Racket: 3,892 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "grain-lang--grain"
+url = "https://github.com/grain-lang/grain"
+sha = "d6ab36811236010bccb203cda4d93c9903ccb192"
+language = "reason"
+split = "train"
+languages = ["reason", "reason-interface"]
+coverage_languages = ["Reason", "Reason Interface"]
+path_suffixes = ["re", "rei"]
+domain = "The Grain compiler toolchain and CLI. Home of the modern web staple. 🌾"
+reason = "Companion .rei files reuse the Reason projects and their repository-level split."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Reason Interface: 5,492 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "esy--esy"
+url = "https://github.com/esy/esy"
+sha = "4afe7a5fba92ff1b7dc168bc63e6d06155ff1a7a"
+language = "reason"
+split = "test"
+languages = ["reason", "reason-interface"]
+coverage_languages = ["Reason", "Reason Interface"]
+path_suffixes = ["re", "rei"]
+domain = "package.json workflow for native development with Reason/OCaml"
+reason = "Companion .rei files reuse the Reason projects and their repository-level split."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Reason Interface: 4,027 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "red--red"
+url = "https://github.com/red/red"
+sha = "b492f75752cc6b3abb8136825e9448ced9a357f2"
+language = "red"
+split = "train"
+languages = ["red"]
+coverage_languages = ["Red"]
+path_suffixes = ["red", "reds"]
+domain = "Red is a next-generation programming language strongly inspired by Rebol, but with a broader field of usage thanks to its native-code compiler, from system programming to high-level scripting and cross-platform reactive GUI, while providing modern support for concurrency, all in a zero-install, zero"
+reason = "Compiler/runtime and curated complete applications/libraries. Exclude showcase/demo scripts in red/code. Red/System .reds files must not be attributed to Cyberpunk REDscript."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "red--code"
+url = "https://github.com/red/code"
+sha = "82b7bce0c4d0febd42f5179a7b2ad2792f3037b0"
+language = "red"
+split = "test"
+languages = ["red"]
+coverage_languages = ["Red"]
+path_suffixes = ["red", "reds"]
+domain = "This repository contains curated code written in Red and its dialects."
+reason = "Compiler/runtime and curated complete applications/libraries. Exclude showcase/demo scripts in red/code. Red/System .reds files must not be attributed to Cyberpunk REDscript."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+evaluation_exclude_paths = ["Scripts/", "ShowCase/"]
+
+[[repo]]
+name = "djkovrik--CP77Mods"
+url = "https://github.com/djkovrik/CP77Mods"
+sha = "be5834ca16f45b560f578c25121a359b385f5709"
+language = "redscript"
+split = "train"
+languages = ["redscript"]
+coverage_languages = ["REDscript"]
+path_suffixes = ["reds"]
+domain = "redscript mods for Cyberpunk 2077"
+reason = "Gameplay mods and Codeware UI/localization implementations. Exclude Codeware native import stubs; duplicate packaged mod releases are not evaluation source."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "psiberx--cp2077-codeware"
+url = "https://github.com/psiberx/cp2077-codeware"
+sha = "3a43182dbcfefc4c371bd1d3bc8d941d8628a0d1"
+language = "redscript"
+split = "test"
+languages = ["redscript"]
+coverage_languages = ["REDscript"]
+path_suffixes = ["reds"]
+domain = "Cyberpunk 2077 library and framework for creating script mods."
+reason = "Gameplay mods and Codeware UI/localization implementations. Exclude Codeware native import stubs; duplicate packaged mod releases are not evaluation source."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+evaluation_source_roots = ["scripts/UI/", "scripts/Localization/", "scripts/Engine/"]
+selection_exceptions = ["REDscript: 6,595 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "roc-lang--basic-webserver"
+url = "https://github.com/roc-lang/basic-webserver"
+sha = "7f9d81106247ea9f8f308594444744183a9c7c3f"
+language = "roc"
+split = "train"
+languages = ["roc"]
+coverage_languages = ["Roc"]
+path_suffixes = ["roc"]
+domain = "A basic webserver in Roc"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Roc: 8,739 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "smores56--weaver"
+url = "https://github.com/smores56/weaver"
+sha = "3e45d2f4013865e9c5516dd166da8a86fca8ecb8"
+language = "roc"
+split = "test"
+languages = ["roc"]
+coverage_languages = ["Roc"]
+path_suffixes = ["roc"]
+domain = "An ergonomic command-line argument parser for the Roc language."
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Roc: 5,332 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "typelevel--cats"
+url = "https://github.com/typelevel/cats"
+sha = "b26388c4152ed37e9669578f59317293218186b5"
+language = "scala"
+split = "train"
+languages = ["scala"]
+coverage_languages = ["Scala"]
+path_suffixes = ["mill", "sbt", "sc", "scala"]
+domain = "Lightweight, modular, and extensible library for functional programming."
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "http4s--http4s"
+url = "https://github.com/http4s/http4s"
+sha = "1a0a35b99a8ea3429db733a0b13a9ebb8f5c226a"
+language = "scala"
+split = "test"
+languages = ["scala"]
+coverage_languages = ["Scala"]
+path_suffixes = ["mill", "sbt", "sc", "scala"]
+domain = "A minimal, idiomatic Scala interface for HTTP"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "OpenZeppelin--openzeppelin-contracts"
+url = "https://github.com/OpenZeppelin/openzeppelin-contracts"
+sha = "bbf3600dc2fd09c7409c5e9d65e2faea36f35115"
+language = "solidity"
+split = "train"
+languages = ["solidity"]
+coverage_languages = ["Solidity"]
+path_suffixes = ["sol"]
+domain = "OpenZeppelin Contracts is a library for secure smart contract development."
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "Uniswap--v4-core"
+url = "https://github.com/Uniswap/v4-core"
+sha = "46c6834698c48bc4a463a86d8420f4eb1d7f3b75"
+language = "solidity"
+split = "test"
+languages = ["solidity"]
+coverage_languages = ["Solidity"]
+path_suffixes = ["sol"]
+domain = "🦄 🦄 🦄 🦄 Core smart contracts of Uniswap v4"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Solidity: 4,494 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "alliedmodders--sourcemod"
+url = "https://github.com/alliedmodders/sourcemod"
+sha = "73fd660ff44ac89348125e80c8816cc76fee5d60"
+language = "sourcepawn"
+split = "train"
+languages = ["sourcepawn"]
+coverage_languages = ["Sourcepawn"]
+path_suffixes = ["sp"]
+domain = "SourceMod - Source Engine Scripting and Administration"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Sourcepawn: 17,855 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "shavitush--bhoptimer"
+url = "https://github.com/shavitush/bhoptimer"
+sha = "e4382c4d32fd24fdefb9b3816636968aa2ee3cce"
+language = "sourcepawn"
+split = "test"
+languages = ["sourcepawn"]
+coverage_languages = ["Sourcepawn"]
+path_suffixes = ["sp"]
+domain = "A bunnyhop timer plugin for Counter-Strike: Source, Counter-Strike: Global Offensive and Team Fortress 2."
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "KelvinShadewing--supertux-advance"
+url = "https://github.com/KelvinShadewing/supertux-advance"
+sha = "cb51c39235b5bd99ad899ba9e14592292f517c75"
+language = "squirrel"
+split = "train"
+languages = ["squirrel"]
+coverage_languages = ["Squirrel"]
+path_suffixes = ["nut"]
+domain = "A SuperTux game made in Brux GDK with 16bit-style graphics."
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "R2Northstar--NorthstarMods"
+url = "https://github.com/R2Northstar/NorthstarMods"
+sha = "426ce10ac4bcd25df9e52442dc77598ec035bce6"
+language = "squirrel"
+split = "test"
+languages = ["squirrel"]
+coverage_languages = ["Squirrel"]
+path_suffixes = ["nut"]
+domain = "Squirrel scripts used to recreate server-side gamelogic and add custom content to the game."
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "stan-dev--rstanarm"
+url = "https://github.com/stan-dev/rstanarm"
+sha = "97fdba425ea0bd280c25928f118d247e617f43ae"
+language = "stan"
+split = "train"
+languages = ["stan"]
+coverage_languages = ["Stan"]
+path_suffixes = ["stan"]
+domain = "rstanarm R package for Bayesian applied regression modeling"
+reason = "Model and function implementations used by two statistical packages. Small correctness workloads with R-side model assembly and Stan includes to resolve."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Stan: 4,834 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "paul-buerkner--brms"
+url = "https://github.com/paul-buerkner/brms"
+sha = "2ebf3222f341ef616b1663534eca286e1e02ca00"
+language = "stan"
+split = "test"
+languages = ["stan"]
+coverage_languages = ["Stan"]
+path_suffixes = ["stan"]
+domain = "brms R package for Bayesian generalized multivariate non-linear multilevel models using Stan"
+reason = "Model and function implementations used by two statistical packages. Small correctness workloads with R-side model assembly and Stan includes to resolve."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Stan: 2,933 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "melsman--mlkit"
+url = "https://github.com/melsman/mlkit"
+sha = "3b3c501a483f8a44b429c47f16af7b7c2c6fb2ad"
+language = "standard-ml"
+split = "train"
+languages = ["standard-ml"]
+coverage_languages = ["Standard ML"]
+path_suffixes = ["fun", "sig", "sml"]
+domain = "Standard ML Compiler and Toolkit"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "diku-dk--smlpkg"
+url = "https://github.com/diku-dk/smlpkg"
+sha = "bfc9216f76ff38fa9d39c2e50667cb74a7a4084d"
+language = "standard-ml"
+split = "test"
+languages = ["standard-ml"]
+coverage_languages = ["Standard ML"]
+path_suffixes = ["fun", "sig", "sml"]
+domain = "Generic package manager for Standard ML libraries and programs"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Standard ML: 1,870 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "imputnet--cobalt"
+url = "https://github.com/imputnet/cobalt"
+sha = "a636575b09de1fc55d9b8cd98cac88f5f2f16b42"
+language = "svelte"
+split = "train"
+languages = ["svelte"]
+coverage_languages = ["Svelte"]
+path_suffixes = ["svelte"]
+domain = "best way to save what you love"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Svelte: 9,513 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "VERT-sh--VERT"
+url = "https://github.com/VERT-sh/VERT"
+sha = "cc7b5a54d5e9c797b377db47b9bdfbb561707783"
+language = "svelte"
+split = "test"
+languages = ["svelte"]
+coverage_languages = ["Svelte"]
+path_suffixes = ["svelte"]
+domain = "The next-generation file converter. Open source, fully local* and free forever."
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Svelte: 5,366 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "FuelLabs--sway"
+url = "https://github.com/FuelLabs/sway"
+sha = "dad95cc42b0383b4e3bacdeda9766565aa584a92"
+language = "sway"
+split = "train"
+languages = ["sway"]
+coverage_languages = ["Sway"]
+path_suffixes = ["sw"]
+domain = "🌴 Empowering everyone to build reliable and efficient smart contracts."
+reason = "Compiler checkout qualifies through sway-lib-std; pair with separate sway-libs implementations, excluding compiler fixtures."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+evaluation_source_roots = ["sway-lib-std/src/"]
+
+[[repo]]
+name = "FuelLabs--sway-libs"
+url = "https://github.com/FuelLabs/sway-libs"
+sha = "cd0b864c38bf6e98ea4736147707accbfcd8a56f"
+language = "sway"
+split = "test"
+languages = ["sway"]
+coverage_languages = ["Sway"]
+path_suffixes = ["sw"]
+domain = "Libraries for the Sway Language"
+reason = "Compiler checkout qualifies through sway-lib-std; pair with separate sway-libs implementations, excluding compiler fixtures."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+evaluation_source_roots = ["libs/"]
+selection_exceptions = ["Sway: 7,069 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "tact-lang--tact"
+url = "https://github.com/tact-lang/tact"
+sha = "e3d660568eca259b6ae653717e7414e5eac0830e"
+language = "tact"
+split = "train"
+languages = ["tact"]
+coverage_languages = ["Tact"]
+path_suffixes = ["tact"]
+domain = "⚡ Tact compiler for TON blockchain—build secure, efficient smart contracts with powerful tooling and seamless integration"
+reason = "Standard-library function implementations and jetton contracts. Deprecated/archived ecosystem accepted as legacy production source; exclude compiler fixtures and builtin stubs."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+evaluation_source_roots = ["src/stdlib/stdlib/std/internal/"]
+selection_exceptions = ["Tact: 5,128 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "tact-lang--jetton"
+url = "https://github.com/tact-lang/jetton"
+sha = "8b72747e48f203cd4dd4256a8e5cb468d47f4643"
+language = "tact"
+split = "test"
+languages = ["tact"]
+coverage_languages = ["Tact"]
+path_suffixes = ["tact"]
+domain = "TEP-compatible, gas-efficient Jetton implementation in Tact"
+reason = "Standard-library function implementations and jetton contracts. Deprecated/archived ecosystem accepted as legacy production source; exclude compiler fixtures and builtin stubs."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Tact: 2,144 scoped raw lines; small correctness workload, not a latency workload.", "Legacy source: archived or no push within two years of selection. Retained for an established implementation; maintenance is not assumed."]
+
+[[repo]]
+name = "tcltk--tklib"
+url = "https://github.com/tcltk/tklib"
+sha = "952c093c66d631dd87d81841beea26e7117ea344"
+language = "tcl"
+split = "train"
+languages = ["tcl"]
+coverage_languages = ["TCL"]
+path_suffixes = ["tcl", "tm"]
+domain = "tklib (Mirror of core.tcl-lang.org)"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "macports--macports-base"
+url = "https://github.com/macports/macports-base"
+sha = "c9797f69df0c00fd5fdbe0da51c86276e0698730"
+language = "tcl"
+split = "test"
+languages = ["tcl"]
+coverage_languages = ["TCL"]
+path_suffixes = ["tcl", "tm"]
+domain = "The MacPorts command-line client"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "svenvc--NeoJSON"
+url = "https://github.com/svenvc/NeoJSON"
+sha = "11e274dd96dc9636cab90929937b7cd09719de7c"
+language = "tonel-smalltalk"
+split = "train"
+languages = ["tonel-smalltalk"]
+coverage_languages = ["Tonel Smalltalk"]
+path_suffixes = ["st"]
+domain = "NeoJSON is an elegant and efficient standalone Smalltalk framework to read and write JSON converting to or from Smalltalk objects."
+reason = "JSON and visualization libraries use Tonel .class.st/.extension.st. Seaside was rejected because its .st files use another serialization format."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+evaluation_source_roots = ["repository/Neo-JSON-Core/"]
+selection_exceptions = ["Tonel Smalltalk: 2,337 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "ObjectProfile--Roassal3"
+url = "https://github.com/ObjectProfile/Roassal3"
+sha = "5da7e8ddd42f17a884d3b3e969d5ce5c03368254"
+language = "tonel-smalltalk"
+split = "test"
+languages = ["tonel-smalltalk"]
+coverage_languages = ["Tonel Smalltalk"]
+path_suffixes = ["st"]
+domain = "The Roassal Visualization Engine"
+reason = "JSON and visualization libraries use Tonel .class.st/.extension.st. Seaside was rejected because its .st files use another serialization format."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+evaluation_source_roots = ["src/"]
+selection_exceptions = ["Legacy source: archived or no push within two years of selection. Retained for an established implementation; maintenance is not assumed."]
+
+[[repo]]
+name = "openwrt--firewall4"
+url = "https://github.com/openwrt/firewall4"
+sha = "b6e5157527d361f99ad52eaa6da273cb0f2dfd59"
+language = "ucode"
+split = "train"
+languages = ["ucode"]
+coverage_languages = ["ucode"]
+path_suffixes = ["uc"]
+domain = "[MIRROR] OpenWrt nftables firewall"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["ucode: 4,378 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "aredn--aredn"
+url = "https://github.com/aredn/aredn"
+sha = "29033ba464d866a5cf803b7da21813d99b6c737d"
+language = "ucode"
+split = "test"
+languages = ["ucode"]
+coverage_languages = ["ucode"]
+path_suffixes = ["uc"]
+domain = "Amateur Radio Emergency Data Network (AREDN)"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["ucode: 5,980 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "GNOME--vala"
+url = "https://github.com/GNOME/vala"
+sha = "25ede52578acc706c07b8816eeceb914510505b3"
+language = "vala"
+split = "train"
+languages = ["vala"]
+coverage_languages = ["Vala"]
+path_suffixes = ["vala", "vapi"]
+domain = "Read-only mirror of https://gitlab.gnome.org/GNOME/vala"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "elementary--files"
+url = "https://github.com/elementary/files"
+sha = "527862d00249682049551c9aab894eb8a0e94345"
+language = "vala"
+split = "test"
+languages = ["vala"]
+coverage_languages = ["Vala"]
+path_suffixes = ["vala", "vapi"]
+domain = "File browser designed for elementary OS"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "stnolting--neorv32"
+url = "https://github.com/stnolting/neorv32"
+sha = "8bdbe48dfd8cbbb3f992f14812bde9c32bb97ea7"
+language = "vhdl"
+split = "train"
+languages = ["vhdl"]
+coverage_languages = ["VHDL"]
+path_suffixes = ["vhd", "vhdl"]
+domain = "🖥️ A small, customizable and extensible MCU-class 32-bit RISC-V soft-core CPU and microcontroller-like SoC written in platform-independent VHDL."
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "VUnit--vunit"
+url = "https://github.com/VUnit/vunit"
+sha = "bbbe9caba5278dd8057020edc3aeb5f223c0e037"
+language = "vhdl"
+split = "test"
+languages = ["vhdl"]
+coverage_languages = ["VHDL"]
+path_suffixes = ["vhd", "vhdl"]
+domain = "VUnit is a unit testing framework for VHDL/SystemVerilog"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "wren-lang--wren-cli"
+url = "https://github.com/wren-lang/wren-cli"
+sha = "18553636618a4d33f10af9b5ab92da6431784a8c"
+language = "wren"
+split = "train"
+languages = ["wren"]
+coverage_languages = ["Wren"]
+path_suffixes = ["wren"]
+domain = "A command line tool for the Wren programming language"
+reason = "CLI modules and a released puzzle game. Legacy, small-project exception; the single-file game cannot exercise cross-file references or indexing latency."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Wren: 1,932 scoped raw lines; small correctness workload, not a latency workload.", "Legacy source: archived or no push within two years of selection. Retained for an established implementation; maintenance is not assumed."]
+
+[[repo]]
+name = "UnicornsOfDeath--continuous-factory"
+url = "https://github.com/UnicornsOfDeath/continuous-factory"
+sha = "cf7b40a6cc8c695d9f3d426a6d1fd36d71092d88"
+language = "wren"
+split = "test"
+languages = ["wren"]
+coverage_languages = ["Wren"]
+path_suffixes = ["wren"]
+domain = "Puzzle game"
+reason = "CLI modules and a released puzzle game. Legacy, small-project exception; the single-file game cannot exercise cross-file references or indexing latency."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Wren: 3,158 scoped raw lines; small correctness workload, not a latency workload.", "Legacy source: archived or no push within two years of selection. Retained for an established implementation; maintenance is not assumed."]
+
+[[repo]]
+name = "apex-enterprise-patterns--fflib-apex-common"
+url = "https://github.com/apex-enterprise-patterns/fflib-apex-common"
+sha = "e6f3409eaa4228a261300a4bcbd0e30b2d2beddf"
+language = "apex"
+split = "train"
+languages = ["apex"]
+coverage_languages = ["Apex"]
+path_suffixes = ["apex", "apex-anon", "cls", "trigger"]
+domain = "Common Apex Library supporting Apex Enterprise Patterns and much more!"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+evaluation_source_roots = ["sfdx-source/apex-common/main/classes/"]
+selection_exceptions = ["Apex: 6,667 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "jongpie--NebulaLogger"
+url = "https://github.com/jongpie/NebulaLogger"
+sha = "b792ac8d8b4eb31b14a164a24951c3cb4125a616"
+language = "apex"
+split = "test"
+languages = ["apex"]
+coverage_languages = ["Apex"]
+path_suffixes = ["apex", "apex-anon", "cls", "trigger"]
+domain = "The most robust observability solution for Salesforce experts. Built 100% natively on the platform, and designed to work seamlessly with Apex, Lightning Components, Flow, OmniStudio, and integrations."
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+evaluation_source_roots = ["nebula-logger/"]
+selection_exceptions = ["Apex: 16,952 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "openharmony--applications_contacts"
+url = "https://github.com/openharmony/applications_contacts"
+sha = "6be5a44abb3e672355214d4fcf7fd00d8adce723"
+language = "arkts-language"
+split = "train"
+languages = ["arkts-language"]
+coverage_languages = ["ArkTS Language"]
+path_suffixes = ["ets"]
+domain = "暂无描述"
+reason = "Separate OpenHarmony contacts and messaging applications under one umbrella. Device SDK and declaration resolution remain unverified."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "openharmony--applications_mms"
+url = "https://github.com/openharmony/applications_mms"
+sha = "79298c9da3914247e47038f3fa790c7de22172be"
+language = "arkts-language"
+split = "test"
+languages = ["arkts-language"]
+coverage_languages = ["ArkTS Language"]
+path_suffixes = ["ets"]
+domain = "Mms system app | 系统信息应用"
+reason = "Separate OpenHarmony contacts and messaging applications under one umbrella. Device SDK and declaration resolution remain unverified."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["ArkTS Language: 15,374 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "reasonml--reason"
+url = "https://github.com/reasonml/reason"
+sha = "1a47c6813417f6cd384c2f2cbde1b75fe3144098"
+language = "ocamllex"
+split = "test"
+languages = ["ocamllex"]
+coverage_languages = ["OCamllex"]
+path_suffixes = ["mll"]
+domain = "Simple, fast & type safe code that leverages the JavaScript & OCaml ecosystems"
+reason = "Dune and Reason contain real lexical analyzers with named rules. Small companion-source workloads; this is parser implementation, not parser test fixtures."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["OCamllex: 1,023 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "zeek--zeek"
+url = "https://github.com/zeek/zeek"
+sha = "bb4f001ae4336cc788061c4ef5c3a6eef8ae6b24"
+language = "zeek"
+split = "train"
+languages = ["zeek"]
+coverage_languages = ["Zeek"]
+path_suffixes = ["zeek"]
+domain = "Zeek is a powerful network analysis framework that is much different from the typical IDS you may know."
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+evaluation_source_roots = ["scripts/"]
+
+[[repo]]
+name = "mitre-attack--bzar"
+url = "https://github.com/mitre-attack/bzar"
+sha = "59bae4a0e7849a75fa5ea86a206f10f3ce8dbe22"
+language = "zeek"
+split = "test"
+languages = ["zeek"]
+coverage_languages = ["Zeek"]
+path_suffixes = ["zeek"]
+domain = "A set of Zeek scripts to detect ATT&CK techniques."
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Zeek: 4,546 scoped raw lines; small correctness workload, not a latency workload.", "Legacy source: archived or no push within two years of selection. Retained for an established implementation; maintenance is not assumed."]
+
+[[repo]]
+name = "Mojo-Numerics-and-Algorithms-group--NuMojo"
+url = "https://github.com/Mojo-Numerics-and-Algorithms-group/NuMojo"
+sha = "515fb2856f0ecf3d2740a34d958fe168183e1129"
+language = "mojo"
+split = "train"
+languages = ["mojo"]
+coverage_languages = ["Mojo"]
+path_suffixes = ["mojo"]
+domain = "NuMojo is a library for numerical computing in Mojo 🔥 similar to numpy in Python."
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+
+[[repo]]
+name = "Lightbug-HQ--lightbug_http"
+url = "https://github.com/Lightbug-HQ/lightbug_http"
+sha = "04d303e6515ee6f35ca36643b8e1a879f54738cb"
+language = "mojo"
+split = "test"
+languages = ["mojo"]
+coverage_languages = ["Mojo"]
+path_suffixes = ["mojo"]
+domain = "Simple and fast HTTP framework for Mojo"
+reason = "Handwritten application or library source with named definitions and references; pinned archive and source paths reviewed."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+selection_exceptions = ["Mojo: 9,327 scoped raw lines; small correctness workload, not a latency workload.", "Legacy source: archived or no push within two years of selection. Retained for an established implementation; maintenance is not assumed."]
+
+[[repo]]
+name = "kunstmusik--csound-live-code"
+url = "https://github.com/kunstmusik/csound-live-code"
+sha = "556e36996a17ba17fb80eae19aec5df403b40c03"
+language = "csound"
+split = "train"
+languages = ["csound"]
+coverage_languages = ["Csound"]
+path_suffixes = ["csd", "orc", "sco", "udo"]
+domain = "Library and web application for live coding with Csound"
+reason = "Live-coding library and user-defined opcode library. Exclude live performance/practice snapshots, work-in-progress opcodes, and generated .udo aggregates. CSUDO intentionally keeps each handwritten opcode with a working example in .csd source."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+evaluation_source_roots = ["livecode.orc", "pat.orc", "start.orc", "livecode.csd"]
+selection_exceptions = ["Csound: 2,596 scoped raw lines; small correctness workload, not a latency workload."]
+
+[[repo]]
+name = "csudo--csudo"
+url = "https://github.com/csudo/csudo"
+sha = "2feaebbbf8dd325087be43c8b4d23923576d4132"
+language = "csound"
+split = "test"
+languages = ["csound"]
+coverage_languages = ["Csound"]
+path_suffixes = ["csd", "orc", "sco", "udo"]
+domain = "Himitsu secret-storage application"
+reason = "Live-coding library and user-defined opcode library. Exclude live performance/practice snapshots, work-in-progress opcodes, and generated .udo aggregates. CSUDO intentionally keeps each handwritten opcode with a working example in .csd source."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
+evaluation_exclude_paths = ["_atwork/", "*.udo", "**/*.udo"]
+selection_exceptions = ["Csound: 14,667 scoped raw lines; small correctness workload, not a latency workload."]
