@@ -1,0 +1,182 @@
+{
+  "fastapi-lsp": {
+    "name": "fastapi-lsp",
+    "url": "https://github.com/alex-oleshkevich/fastapi-lsp",
+    "sha": "dc0d01b70bbb8d4449091559a124f458d0ea46b9",
+    "references": [
+      {
+        "extension": "fastapi-lsp",
+        "ids": [
+          "fastapi-lsp"
+        ]
+      }
+    ],
+    "kind": "cargo",
+    "package": "fastapi-lsp",
+    "network_exception": "Public dependency preparation only; no credentials/private data; host egress rejects internal and metadata HTTP endpoints",
+    "repair_lock": true,
+    "repair_note": "Regenerate the stale upstream lockfile during preparation; preserve both locks."
+  },
+  "zed-package-json-upgrade": {
+    "name": "zed-package-json-upgrade",
+    "url": "https://github.com/Arthurmtro/zed-package-json-upgrade",
+    "sha": "eeeefa8bbcf6127889b9ad73bca3985a24500a83",
+    "references": [
+      {
+        "extension": "package-json-upgrade-lsp",
+        "ids": [
+          "package-json-upgrade"
+        ]
+      }
+    ],
+    "kind": "cargo",
+    "network_exception": "Public dependency preparation only; no credentials/private data; host egress rejects internal and metadata HTTP endpoints",
+    "directory": "lsp",
+    "repair_note": "Build the native lsp subproject; the root builds the Zed WASM adapter."
+  },
+  "shader-sense": {
+    "name": "shader-sense",
+    "url": "https://github.com/antaalt/shader-sense",
+    "sha": "8135499427b1cb14b28afcb5d1f9e96e8b8d32f9",
+    "references": [
+      {
+        "extension": "shader-ls",
+        "ids": [
+          "shader-language-server"
+        ]
+      }
+    ],
+    "kind": "cargo",
+    "network_exception": "Public dependency preparation only; no credentials/private data; host egress rejects internal and metadata HTTP endpoints",
+    "repair_lock": true,
+    "repair_note": "Regenerate the stale upstream lockfile during preparation."
+  },
+  "react-component-lens": {
+    "name": "react-component-lens",
+    "url": "https://github.com/dev-five-git/react-component-lens",
+    "sha": "5f20dd8ef78ade9ab860deee9e30c59f8be9d43a",
+    "references": [
+      {
+        "extension": "react-component-lens-lsp",
+        "ids": [
+          "rcl-lsp"
+        ]
+      }
+    ],
+    "kind": "cargo",
+    "network_exception": "Public dependency preparation only; no credentials/private data; host egress rejects internal and metadata HTTP endpoints",
+    "repair_lock": true,
+    "repair_note": "Regenerate the stale upstream lockfile during preparation."
+  },
+  "zed-unicode": {
+    "name": "zed-unicode",
+    "url": "https://github.com/aripiprazole/zed-unicode",
+    "sha": "17dcf416aa4208c806138ddbf0d332bdbbef6040",
+    "references": [
+      {
+        "extension": "unicode",
+        "ids": [
+          "unicode"
+        ]
+      }
+    ],
+    "kind": "cargo",
+    "network_exception": "Public dependency preparation only; no credentials/private data; host egress rejects internal and metadata HTTP endpoints",
+    "repair_lock": true,
+    "cargo_packages": [
+      "unicode-ls"
+    ],
+    "before_prepare": [
+      [
+        "python3",
+        "-c",
+        "from pathlib import Path; Path(\"Cargo.toml\").write_text('[workspace]\\nmembers = [\"unicode-ls\"]\\n[workspace.package]\\nversion = \"0.1.7\"\\n')"
+      ]
+    ],
+    "repair_note": "Resolve only the native workspace member, avoiding the unbuilt adapter dependency on a yanked zed_extension_api."
+  },
+  "magequery": {
+    "name": "magequery",
+    "url": "https://github.com/cresset-tools/magequery",
+    "sha": "af40dfab90a529d9ac8c5076c4903ff784755bf8",
+    "references": [
+      {
+        "extension": "magequery-lsp",
+        "ids": [
+          "magequery"
+        ]
+      }
+    ],
+    "kind": "cargo",
+    "network_exception": "Public dependency preparation only; no credentials/private data; host egress rejects internal and metadata HTTP endpoints",
+    "repair_note": "Use the native magequery-v release tag family, not the PHP launcher tags."
+  },
+  "quint": {
+    "name": "quint",
+    "url": "https://github.com/informalsystems/quint",
+    "sha": "fd772606588b40def9978d8c82da69c2db7a0e3b",
+    "references": [
+      {
+        "extension": "quint",
+        "ids": [
+          "quint-language-server"
+        ]
+      }
+    ],
+    "kind": "npm",
+    "directory": "vscode/quint-vscode",
+    "script": null,
+    "npm_install_directories": [
+      ".",
+      "server"
+    ],
+    "before_build": [
+      [
+        "npm",
+        "--prefix",
+        "server",
+        "run",
+        "compile"
+      ]
+    ],
+    "node_bins": {
+      "quint-language-server": "server/out/src/server.js"
+    },
+    "repair_note": "Install the parent editor package for its language-client types."
+  },
+  "spec42": {
+    "name": "spec42",
+    "url": "https://github.com/elan8/spec42",
+    "sha": "2183b21b63a8de619de4a4718847b6a5fb15c339",
+    "references": [
+      {
+        "extension": "sysml-v2",
+        "ids": [
+          "spec42"
+        ]
+      }
+    ],
+    "kind": "cargo",
+    "network_exception": "Public dependency preparation only; no credentials/private data; host egress rejects internal and metadata HTTP endpoints",
+    "cargo_packages": [
+      "spec42"
+    ],
+    "environment": {
+      "SPEC42_STDLIB_BUNDLE_ZIP": "/work/stdlib.zip",
+      "SPEC42_DOMAIN_LIBRARIES_BUNDLE_ZIP": "/work/domains.zip"
+    },
+    "prepare_commands": [
+      [
+        "python3",
+        "-c",
+        "import hashlib, shutil, urllib.request\nfrom pathlib import Path\npath = Path('/work/stdlib.zip')\nwith urllib.request.urlopen('https://github.com/Systems-Modeling/SysML-v2-Release/archive/refs/tags/2026-04.zip', timeout=120) as response, path.open('wb') as output:\n    shutil.copyfileobj(response, output)\nwith path.open('rb') as stream:\n    assert hashlib.file_digest(stream, 'sha256').hexdigest() == 'e8e4c1255910949d995f8fe1fb463b8ab23ba257e9d1ac5106b67843bee34a0d', 'Input checksum mismatch'\n"
+      ],
+      [
+        "python3",
+        "-c",
+        "import hashlib, shutil, urllib.request\nfrom pathlib import Path\npath = Path('/work/domains.zip')\nwith urllib.request.urlopen('https://github.com/elan8/sysml-domain-libraries/archive/dc378a9.zip', timeout=120) as response, path.open('wb') as output:\n    shutil.copyfileobj(response, output)\nwith path.open('rb') as stream:\n    assert hashlib.file_digest(stream, 'sha256').hexdigest() == '0784ec09fc30bf04224df7a06ac35fe9fbe0f3b0737f4269a8a5762a315a80d9', 'Input checksum mismatch'\n"
+      ]
+    ],
+    "repair_note": "Prepare checksum-pinned standard and domain library bundles before offline compilation."
+  }
+}
