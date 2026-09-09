@@ -698,5 +698,24 @@
       "./cmd"
     ],
     "repair_note": "Build the production cmd package, excluding the test-only root."
+  },
+  "zed-dependi": {
+    "name": "zed-dependi",
+    "url": "https://github.com/mpiton/zed-dependi",
+    "sha": "24445b1f94ceaf5c27c85a4d14c0a0c0f5893fd4",
+    "references": [
+      {
+        "extension": "dependi",
+        "ids": [
+          "dependi"
+        ]
+      }
+    ],
+    "kind": "cargo",
+    "directory": "dependi-lsp",
+    "cargo_packages": [
+      "dependi-lsp"
+    ],
+    "repair_note": "Build the renamed dependi-lsp subproject."
   }
 }
