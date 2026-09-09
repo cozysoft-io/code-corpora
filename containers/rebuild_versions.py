@@ -74,6 +74,10 @@ def prepare(plan, directory):
                      'server-recipes-jvm.json', 'server-recipes-resumed-fixes.json'):
         for row in read(previous/filename, []):
             recipes[row['name']] = row
+    pins = {row['name']:row['sha'] for row in plan['repositories']}
+    for name, recipe in read(ROOT/'repo/containers/recipes.local-fixes.json', {}).items():
+        if recipe['sha'] == pins.get(name):
+            recipes[name] = recipe
     changed = [row for row in plan['repositories'] if row['changed']]
     source_results = {}
     with ThreadPoolExecutor(max_workers=6) as pool:

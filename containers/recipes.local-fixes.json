@@ -487,5 +487,77 @@
       "PATH": "/opt/toolchains/cabal:/usr/bin:/bin"
     },
     "repair_note": "Use the builder base GHC 9.4 and Cabal, not the incompatible supplemental GHC 9.10."
+  },
+  "deno": {
+    "name": "deno",
+    "url": "https://github.com/denoland/deno",
+    "sha": "e518fbd66dda5debcbdefc0beb0b3756b37b64fa",
+    "references": [
+      {
+        "extension": "deno",
+        "ids": [
+          "deno"
+        ]
+      }
+    ],
+    "kind": "cargo",
+    "network_exception": "Public dependency preparation only; no credentials/private data; host egress rejects internal and metadata HTTP endpoints",
+    "cargo_packages": [
+      "deno"
+    ],
+    "environment": {
+      "RUSTY_V8_ARCHIVE": "/work/librusty_v8.a.gz"
+    },
+    "prepare_commands": [
+      [
+        "python3",
+        "-c",
+        "import hashlib, shutil, urllib.request\nfrom pathlib import Path\npath = Path('/work/librusty_v8.a.gz')\nwith urllib.request.urlopen('https://github.com/denoland/rusty_v8/releases/download/v150.4.0/librusty_v8_simdutf_release_x86_64-unknown-linux-gnu.a.gz', timeout=120) as response, path.open('wb') as output:\n    shutil.copyfileobj(response, output)\nwith path.open('rb') as stream:\n    assert hashlib.file_digest(stream, 'sha256').hexdigest() == 'f48762ca10d1f1fc605a441c5ae430ec8ce1e9e80f14d78fbc42cb878c30b476', 'Input checksum mismatch'\n"
+      ]
+    ],
+    "repair_note": "Prepare the release-pinned precompiled Rusty V8 dependency; local release compilation needs --memory 12g.",
+    "memory": "12g"
+  },
+  "tsgo": {
+    "name": "tsgo",
+    "url": "https://github.com/Effect-TS/tsgo",
+    "sha": "9a82ef8361927cef9ca1caeeb3d8077ed4d4f6f5",
+    "references": [
+      {
+        "extension": "effect-language-service-tsgo",
+        "ids": [
+          "effect-tsgo"
+        ]
+      }
+    ],
+    "kind": "go",
+    "fetch_git": true,
+    "submodules": true,
+    "go_packages": [
+      "./typescript/tsc/cmd/tsc"
+    ],
+    "before_build": [
+      [
+        "python3",
+        "-c",
+        "from pathlib import Path\nimport subprocess\nsubprocess.run(['git', 'init', 'typescript'], check=True)\nfor patch in sorted(Path('_patches/typescript').glob('*.patch')):\n    subprocess.run(['git', '-C', 'typescript', 'apply', '--check', str(patch.resolve())], check=True)\n    subprocess.run(['git', '-C', 'typescript', 'apply', str(patch.resolve())], check=True)\n"
+      ],
+      [
+        "env",
+        "GOWORK=off",
+        "go",
+        "-C",
+        "typescript/tsc/internal/diagnostics",
+        "run",
+        "generate.go",
+        "-diagnostics",
+        "./diagnostics_generated.go",
+        "-loc",
+        "./loc_generated.go",
+        "-locdir",
+        "./loc"
+      ]
+    ],
+    "repair_note": "Apply the release TypeScript patches and regenerate diagnostics; build only the production command, excluding test fixtures."
   }
 }
