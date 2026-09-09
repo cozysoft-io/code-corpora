@@ -71,7 +71,7 @@ corpus_root = "."
 # `.tsx` files live inside the typescript repositories.
 # Expansion identifiers are selection filters until their language handlers
 # exist; path_suffixes records the actual registered filename matching.
-languages = ["c", "cpp", "csharp", "dart", "elixir", "go", "java", "javascript", "kotlin", "lua", "php", "python", "ruby", "rust", "swift", "typescript", "zig", "actionscript", "ada", "agda", "aiken", "al", "applescript", "arduino", "autohotkey", "awk", "bluespec-systemverilog", "bqn", "bsl", "c3", "cadence", "cairo", "cfml-tag", "circom", "clarity", "clojure", "cobol", "crystal", "curry", "cython", "dafny", "daml", "dylan", "elisp", "elm", "erlang", "fish", "fortran", "fsharp", "func", "gdscript", "gdshader", "gleam", "gren", "hare", "haskell", "haxe", "hlsl", "hoon", "idris-2", "jai", "jq", "julia", "koka", "lean-4", "liquidsoap", "luau", "metal", "moonbit", "motoko", "move", "netlinx", "nim", "noir", "objectscriptudl", "ocaml", "ocaml-interface", "ocamllex", "odin", "openscad", "p4-language", "pact", "papyrus", "pony", "purescript", "qml", "quakec", "racket", "reason", "reason-interface", "red", "redscript", "roc", "scala", "solidity", "sourcepawn", "squirrel", "stan", "standard-ml", "svelte", "sway", "tact", "tcl", "tonel-smalltalk", "ucode", "vala", "vhdl", "wren", "apex", "arkts-language", "zeek", "mojo", "csound"]
+languages = ["c", "cpp", "csharp", "dart", "elixir", "go", "java", "javascript", "kotlin", "lua", "php", "python", "ruby", "rust", "swift", "typescript", "zig", "actionscript", "ada", "agda", "aiken", "al", "applescript", "arduino", "autohotkey", "awk", "bluespec-systemverilog", "bqn", "bsl", "c3", "cadence", "cairo", "cfml-tag", "circom", "clarity", "clojure", "cobol", "crystal", "curry", "cython", "dafny", "daml", "dylan", "elisp", "elm", "erlang", "fish", "fortran", "fsharp", "func", "gdscript", "gdshader", "gleam", "gren", "hare", "haskell", "haxe", "hlsl", "hoon", "idris-2", "jai", "jq", "julia", "koka", "lean-4", "liquidsoap", "luau", "metal", "moonbit", "motoko", "move", "netlinx", "nim", "noir", "objectscriptudl", "ocaml", "ocaml-interface", "ocamllex", "odin", "openscad", "p4-language", "pact", "papyrus", "pony", "purescript", "qml", "quakec", "racket", "reason", "reason-interface", "red", "redscript", "roc", "scala", "solidity", "sourcepawn", "squirrel", "stan", "standard-ml", "svelte", "sway", "tact", "tcl", "tonel-smalltalk", "ucode", "vala", "vhdl", "wren", "apex", "arkts-language", "zeek", "mojo", "csound", "polyglot", "arturo", "uiua", "simula", "minizinc", "brainfuck", "cfengine", "lilypond", "inko", "nsis", "sagemath", "unison", "xquery"]
 
 # Selection criteria, recorded so the manifest states what the repositories
 # were chosen *for* rather than only what was chosen.
@@ -7420,3 +7420,23 @@ evaluation_ready = false
 dependencies = "Unverified. Follow the pinned upstream build instructions, apply the source scope in repo-selection.json, and verify imports with the language-specific oracle before evaluation."
 evaluation_exclude_paths = ["_atwork/", "*.udo", "**/*.udo"]
 selection_exceptions = ["Csound: 14,667 scoped raw lines; small correctness workload, not a latency workload."]
+
+# Rosetta Code: the full collection stays in training.
+
+[[repo]]
+name = "acmeism--RosettaCodeData"
+url = "https://github.com/acmeism/RosettaCodeData"
+sha = "1d475861d7141ef2fafff293d9339f56e4b0f5db"
+language = "polyglot"
+split = "train"
+languages = ["polyglot", "arturo", "uiua", "simula", "minizinc", "brainfuck", "cfengine", "lilypond", "inko", "nsis", "sagemath", "unison", "xquery"]
+coverage_languages = ["Arturo", "Uiua", "Simula", "MiniZinc", "Brainfuck", "CFEngine", "LilyPond", "Inko", "NSIS", "SageMath", "Unison", "XQuery"]
+path_suffixes = ["SIM", "SIm", "SiM", "Sim", "art", "arturo", "bf", "cf", "cf.sub", "cf3", "cfengine", "cfengine3", "ily", "inko", "ly", "mzn", "nsh", "nsi", "sIM", "sIm", "sage", "siM", "sim", "simula", "u", "ua", "uiua", "xq", "xql", "xqm", "xquery", "xqy"]
+domain = "Programming task solutions across many languages"
+reason = "Broad syntax and local-reference examples, including Arturo, Uiua and Simula. Keep the entire collection in training; task variants and mirrors are not independent held-out data. Selection evidence is in DATA-PROPOSALS.md."
+evaluation_ready = false
+dependencies = "Unverified. Samples are independent programs with language-specific requirements; no project-wide build or reference oracle is established."
+evaluation_source_roots = ["Task/"]
+evaluation_exclude_paths = ["Lang/"]
+selection_exceptions = ["Allow an aggregated example collection and one training source without an independent test repository.", "Samples may include transcripts or output; inspect task language labels and source contents before evaluation."]
+band_exception = "Polyglot collection of small examples; aggregate size is not a whole-project latency workload."

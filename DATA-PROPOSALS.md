@@ -1,6 +1,10 @@
 # Proposals for the remaining language data
 
-The current census has **302 language names** below 21 files or 2,000 raw lines combined. This is a proposal, with archive measurements and a per-language route in [`data-proposals.json`](data-proposals.json). No new corpus entries or split assignments are made here.
+The proposal baseline has **302 language names** below 21 files or 2,000 raw lines combined. Archive measurements and a per-language route are in [`data-proposals.json`](data-proposals.json).
+
+RosettaCodeData has since been pinned and fetched into `train/acmeism--RosettaCodeData` at the commit below. Its filenames are preserved, and the census skips the alternate `Lang/` links. The remaining sources below are proposals.
+
+The checkout adds **75,148 matching UTF-8 files and 2,681,031 raw lines**. The filename census now reports **298 remaining names**. Arturo, Uiua and Simula clear both thresholds; Brainfuck also appears to clear them because `.bf` includes Befunge. The reviewed Brainfuck subset remains below the line target. Test counts are unchanged.
 
 ## Recommended first batch
 
@@ -28,11 +32,11 @@ I inspected [`acmeism/RosettaCodeData`](https://github.com/acmeism/RosettaCodeDa
 | Unison | 5 | 44 | .u | partial |
 | XQuery | 25 | 360 | .xquery | partial |
 
-**Arturo, Uiua and Simula would clear both thresholds once imported.** The coverage tool accepts their longer export suffixes `.arturo`, `.uiua` and `.simula` alongside the registered suffixes `.art`, `.ua` and case variants of `.sim`. These files can keep their original names.
+**Arturo, Uiua and Simula have enough imported samples to clear both thresholds.** The coverage tool accepts their longer export suffixes `.arturo`, `.uiua` and `.simula` alongside the registered suffixes `.art`, `.ua` and case variants of `.sim`. These files keep their original names.
 
 This needs content-aware curation: some samples contain shell transcripts or output, rather than only source. Directory labels also prevent misleading suffix matches: `.bf` includes Befunge, `.ps` is PostScript rather than Pine Script, `.k` is K rather than KCL, and S-lang is not the Slang shading language. The raw scanner incorrectly suggests that Brainfuck clears the line target; the reviewed Brainfuck subset has only 1,227 lines.
 
-For a first import, keep this collection in training. If a held-out dataset is later needed, create an explicit dataset split by **task family**, grouping every language implementation and solution variant of a task together. Never randomly split individual files or treat another Rosetta mirror as independent held-out data. Small Rosetta programs provide syntax and local-reference examples; most do not provide whole-project import or indexing workloads.
+The entire collection stays in training. Task variants and other Rosetta mirrors are not independent held-out data. Small Rosetta programs provide syntax and local-reference examples; most do not provide whole-project import or indexing workloads.
 
 ## Reuse local grammars and broad sample collections
 

@@ -6204,3 +6204,17 @@ source_files = 155
 tracked_files = 178
 clone = "depth 1, single branch, no tags, LFS smudge skipped"
 added = "2026-09-08"
+
+[[repo]]
+name = "acmeism--RosettaCodeData"
+language = "polyglot"
+split = "train"
+url = "https://github.com/acmeism/RosettaCodeData"
+sha = "1d475861d7141ef2fafff293d9339f56e4b0f5db"
+branch = "HEAD"
+lines = 27378
+lines_nonblank = 24013
+source_files = 1773
+tracked_files = 258623
+clone = "depth 1, single branch, no tags, LFS smudge skipped"
+added = "2026-09-09"

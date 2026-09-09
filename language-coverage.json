@@ -7128,10 +7128,10 @@
   "splits": {
     "training": {
       "total": {
-        "files": 997484,
-        "lines": 243903498,
+        "files": 1072632,
+        "lines": 246584529,
         "invalid_utf8": 975,
-        "unmatched_files": 246648,
+        "unmatched_files": 320491,
         "symlinks_skipped": 1812
       },
       "suffixes": {
@@ -7181,8 +7181,8 @@
           "invalid_utf8": 0
         },
         ".gitignore": {
-          "files": 1499,
-          "lines": 34268,
+          "files": 1500,
+          "lines": 34278,
           "invalid_utf8": 0
         },
         ".gitignore_global": {
@@ -7491,8 +7491,8 @@
           "invalid_utf8": 0
         },
         "Makefile": {
-          "files": 798,
-          "lines": 51357,
+          "files": 799,
+          "lines": 51376,
           "invalid_utf8": 0
         },
         "Matchfile": {
@@ -7671,8 +7671,8 @@
           "invalid_utf8": 0
         },
         "adb": {
-          "files": 353,
-          "lines": 81472,
+          "files": 1984,
+          "lines": 153672,
           "invalid_utf8": 0
         },
         "adoc": {
@@ -7686,13 +7686,13 @@
           "invalid_utf8": 0
         },
         "agda": {
-          "files": 1263,
-          "lines": 149161,
+          "files": 1291,
+          "lines": 149854,
           "invalid_utf8": 0
         },
         "ahk": {
-          "files": 33,
-          "lines": 11134,
+          "files": 1044,
+          "lines": 39749,
           "invalid_utf8": 0
         },
         "ak": {
@@ -7736,8 +7736,8 @@
           "invalid_utf8": 0
         },
         "apex": {
-          "files": 0,
-          "lines": 0,
+          "files": 52,
+          "lines": 497,
           "invalid_utf8": 0
         },
         "apex-anon": {
@@ -7751,8 +7751,8 @@
           "invalid_utf8": 0
         },
         "applescript": {
-          "files": 13,
-          "lines": 14455,
+          "files": 1129,
+          "lines": 73991,
           "invalid_utf8": 0
         },
         "apt": {
@@ -7776,13 +7776,13 @@
           "invalid_utf8": 0
         },
         "arturo": {
-          "files": 0,
-          "lines": 0,
+          "files": 827,
+          "lines": 13550,
           "invalid_utf8": 0
         },
         "as": {
-          "files": 192,
-          "lines": 43100,
+          "files": 326,
+          "lines": 46347,
           "invalid_utf8": 0
         },
         "asa": {
@@ -7801,13 +7801,13 @@
           "invalid_utf8": 0
         },
         "asm": {
-          "files": 96,
-          "lines": 45951,
+          "files": 158,
+          "lines": 56129,
           "invalid_utf8": 0
         },
         "asp": {
-          "files": 0,
-          "lines": 0,
+          "files": 1,
+          "lines": 103,
           "invalid_utf8": 0
         },
         "ass": {
@@ -7816,8 +7816,8 @@
           "invalid_utf8": 0
         },
         "astro": {
-          "files": 230,
-          "lines": 5034,
+          "files": 256,
+          "lines": 5799,
           "invalid_utf8": 0
         },
         "automount": {
@@ -7831,8 +7831,8 @@
           "invalid_utf8": 0
         },
         "awk": {
-          "files": 36,
-          "lines": 10651,
+          "files": 919,
+          "lines": 34450,
           "invalid_utf8": 0
         },
         "aww": {
@@ -7906,8 +7906,8 @@
           "invalid_utf8": 0
         },
         "bat": {
-          "files": 147,
-          "lines": 10466,
+          "files": 482,
+          "lines": 18703,
           "invalid_utf8": 7
         },
         "bats": {
@@ -7951,8 +7951,8 @@
           "invalid_utf8": 0
         },
         "bf": {
-          "files": 0,
-          "lines": 0,
+          "files": 226,
+          "lines": 2197,
           "invalid_utf8": 0
         },
         "bfb": {
@@ -8001,8 +8001,8 @@
           "invalid_utf8": 0
         },
         "bqn": {
-          "files": 52,
-          "lines": 7056,
+          "files": 513,
+          "lines": 9582,
           "invalid_utf8": 0
         },
         "bru": {
@@ -8066,8 +8066,8 @@
           "invalid_utf8": 0
         },
         "c": {
-          "files": 5572,
-          "lines": 50927094,
+          "files": 7832,
+          "lines": 51047619,
           "invalid_utf8": 8
         },
         "c++": {
@@ -8081,8 +8081,8 @@
           "invalid_utf8": 0
         },
         "c3": {
-          "files": 1436,
-          "lines": 143564,
+          "files": 1486,
+          "lines": 144518,
           "invalid_utf8": 0
         },
         "c3i": {
@@ -8161,8 +8161,8 @@
           "invalid_utf8": 0
         },
         "cf": {
-          "files": 2,
-          "lines": 8,
+          "files": 5,
+          "lines": 130,
           "invalid_utf8": 1
         },
         "cf.sub": {
@@ -8181,8 +8181,8 @@
           "invalid_utf8": 0
         },
         "cfengine": {
-          "files": 0,
-          "lines": 0,
+          "files": 7,
+          "lines": 153,
           "invalid_utf8": 0
         },
         "cfengine3": {
@@ -8196,8 +8196,8 @@
           "invalid_utf8": 1
         },
         "cfm": {
-          "files": 123,
-          "lines": 4140,
+          "files": 209,
+          "lines": 5226,
           "invalid_utf8": 0
         },
         "cfml": {
@@ -8246,8 +8246,8 @@
           "invalid_utf8": 0
         },
         "clj": {
-          "files": 91,
-          "lines": 19085,
+          "files": 1038,
+          "lines": 33049,
           "invalid_utf8": 0
         },
         "cljc": {
@@ -8271,8 +8271,8 @@
           "invalid_utf8": 0
         },
         "cmake": {
-          "files": 212,
-          "lines": 22621,
+          "files": 253,
+          "lines": 23172,
           "invalid_utf8": 0
         },
         "cmd": {
@@ -8291,13 +8291,13 @@
           "invalid_utf8": 0
         },
         "cob": {
-          "files": 206,
-          "lines": 29442,
+          "files": 736,
+          "lines": 66059,
           "invalid_utf8": 0
         },
         "coffee": {
-          "files": 170,
-          "lines": 7348,
+          "files": 463,
+          "lines": 13454,
           "invalid_utf8": 0
         },
         "coi": {
@@ -8376,8 +8376,8 @@
           "invalid_utf8": 0
         },
         "cpp": {
-          "files": 5208,
-          "lines": 2917874,
+          "files": 7161,
+          "lines": 3033871,
           "invalid_utf8": 1
         },
         "cpp2": {
@@ -8396,8 +8396,8 @@
           "invalid_utf8": 0
         },
         "cr": {
-          "files": 96,
-          "lines": 15879,
+          "files": 756,
+          "lines": 31415,
           "invalid_utf8": 0
         },
         "crv": {
@@ -8406,8 +8406,8 @@
           "invalid_utf8": 0
         },
         "cs": {
-          "files": 6158,
-          "lines": 838886,
+          "files": 7623,
+          "lines": 916389,
           "invalid_utf8": 0
         },
         "csd": {
@@ -8456,8 +8456,8 @@
           "invalid_utf8": 0
         },
         "curry": {
-          "files": 83,
-          "lines": 9088,
+          "files": 95,
+          "lines": 9521,
           "invalid_utf8": 0
         },
         "cxx": {
@@ -8486,8 +8486,8 @@
           "invalid_utf8": 0
         },
         "d": {
-          "files": 3582,
-          "lines": 57112,
+          "files": 4944,
+          "lines": 115732,
           "invalid_utf8": 0
         },
         "d.coi": {
@@ -8516,8 +8516,8 @@
           "invalid_utf8": 0
         },
         "dart": {
-          "files": 5288,
-          "lines": 951816,
+          "files": 5580,
+          "lines": 966385,
           "invalid_utf8": 2
         },
         "dbml": {
@@ -8686,8 +8686,8 @@
           "invalid_utf8": 0
         },
         "dylan": {
-          "files": 62,
-          "lines": 12387,
+          "files": 88,
+          "lines": 12735,
           "invalid_utf8": 0
         },
         "dzn": {
@@ -8746,13 +8746,13 @@
           "invalid_utf8": 0
         },
         "el": {
-          "files": 81,
-          "lines": 45189,
+          "files": 366,
+          "lines": 50369,
           "invalid_utf8": 0
         },
         "elm": {
-          "files": 119,
-          "lines": 25787,
+          "files": 178,
+          "lines": 29727,
           "invalid_utf8": 0
         },
         "ems": {
@@ -8781,8 +8781,8 @@
           "invalid_utf8": 0
         },
         "erl": {
-          "files": 197,
-          "lines": 46080,
+          "files": 819,
+          "lines": 62065,
           "invalid_utf8": 0
         },
         "erlang": {
@@ -8816,8 +8816,8 @@
           "invalid_utf8": 0
         },
         "ex": {
-          "files": 1644,
-          "lines": 331273,
+          "files": 2292,
+          "lines": 346677,
           "invalid_utf8": 0
         },
         "example": {
@@ -8836,8 +8836,8 @@
           "invalid_utf8": 0
         },
         "f": {
-          "files": 2,
-          "lines": 53,
+          "files": 1282,
+          "lines": 106198,
           "invalid_utf8": 0
         },
         "f03": {
@@ -8861,8 +8861,8 @@
           "invalid_utf8": 0
         },
         "fan": {
-          "files": 0,
-          "lines": 0,
+          "files": 5,
+          "lines": 266,
           "invalid_utf8": 0
         },
         "fbs": {
@@ -8926,8 +8926,8 @@
           "invalid_utf8": 0
         },
         "fish": {
-          "files": 1634,
-          "lines": 95248,
+          "files": 1679,
+          "lines": 95537,
           "invalid_utf8": 0
         },
         "flake.lock": {
@@ -8951,8 +8951,8 @@
           "invalid_utf8": 0
         },
         "fs": {
-          "files": 423,
-          "lines": 95187,
+          "files": 1680,
+          "lines": 111733,
           "invalid_utf8": 1
         },
         "fsh": {
@@ -9046,8 +9046,8 @@
           "invalid_utf8": 0
         },
         "gd": {
-          "files": 261,
-          "lines": 59576,
+          "files": 291,
+          "lines": 60269,
           "invalid_utf8": 0
         },
         "gdextension": {
@@ -9121,13 +9121,13 @@
           "invalid_utf8": 0
         },
         "gleam": {
-          "files": 54,
-          "lines": 19758,
+          "files": 140,
+          "lines": 21319,
           "invalid_utf8": 0
         },
         "glsl": {
-          "files": 16,
-          "lines": 1692,
+          "files": 25,
+          "lines": 1883,
           "invalid_utf8": 0
         },
         "gn": {
@@ -9141,8 +9141,8 @@
           "invalid_utf8": 0
         },
         "go": {
-          "files": 4686,
-          "lines": 1110805,
+          "files": 6777,
+          "lines": 1241026,
           "invalid_utf8": 0
         },
         "go.sum": {
@@ -9226,8 +9226,8 @@
           "invalid_utf8": 0
         },
         "groovy": {
-          "files": 7,
-          "lines": 214,
+          "files": 840,
+          "lines": 14935,
           "invalid_utf8": 0
         },
         "groq": {
@@ -9356,8 +9356,8 @@
           "invalid_utf8": 0
         },
         "hoon": {
-          "files": 828,
-          "lines": 173495,
+          "files": 863,
+          "lines": 174194,
           "invalid_utf8": 0
         },
         "hosts": {
@@ -9381,8 +9381,8 @@
           "invalid_utf8": 0
         },
         "hs": {
-          "files": 1147,
-          "lines": 356013,
+          "files": 3451,
+          "lines": 412293,
           "invalid_utf8": 0
         },
         "htm": {
@@ -9471,8 +9471,8 @@
           "invalid_utf8": 0
         },
         "hx": {
-          "files": 370,
-          "lines": 97998,
+          "files": 450,
+          "lines": 99891,
           "invalid_utf8": 0
         },
         "hxml": {
@@ -9546,8 +9546,8 @@
           "invalid_utf8": 0
         },
         "inf": {
-          "files": 2,
-          "lines": 56,
+          "files": 77,
+          "lines": 1119,
           "invalid_utf8": 0
         },
         "ini": {
@@ -9561,8 +9561,8 @@
           "invalid_utf8": 0
         },
         "inko": {
-          "files": 0,
-          "lines": 0,
+          "files": 1,
+          "lines": 3,
           "invalid_utf8": 0
         },
         "inl": {
@@ -9636,13 +9636,13 @@
           "invalid_utf8": 1
         },
         "janet": {
-          "files": 0,
-          "lines": 0,
+          "files": 34,
+          "lines": 425,
           "invalid_utf8": 0
         },
         "java": {
-          "files": 7907,
-          "lines": 1105018,
+          "files": 10212,
+          "lines": 1229248,
           "invalid_utf8": 0
         },
         "jbuilder": {
@@ -9661,8 +9661,8 @@
           "invalid_utf8": 0
         },
         "jinja": {
-          "files": 1,
-          "lines": 120,
+          "files": 10,
+          "lines": 145,
           "invalid_utf8": 0
         },
         "jinja2": {
@@ -9671,8 +9671,8 @@
           "invalid_utf8": 0
         },
         "jl": {
-          "files": 258,
-          "lines": 32765,
+          "files": 2322,
+          "lines": 102555,
           "invalid_utf8": 0
         },
         "jms": {
@@ -9686,13 +9686,13 @@
           "invalid_utf8": 1
         },
         "jq": {
-          "files": 56,
-          "lines": 4779,
+          "files": 2344,
+          "lines": 53222,
           "invalid_utf8": 0
         },
         "js": {
-          "files": 395078,
-          "lines": 74428584,
+          "files": 397063,
+          "lines": 74529725,
           "invalid_utf8": 4
         },
         "js.erb": {
@@ -9771,8 +9771,8 @@
           "invalid_utf8": 0
         },
         "k": {
-          "files": 0,
-          "lines": 0,
+          "files": 308,
+          "lines": 1934,
           "invalid_utf8": 0
         },
         "kdl": {
@@ -9806,8 +9806,8 @@
           "invalid_utf8": 0
         },
         "kts": {
-          "files": 442,
-          "lines": 22381,
+          "files": 1697,
+          "lines": 82259,
           "invalid_utf8": 0
         },
         "kube": {
@@ -9816,8 +9816,8 @@
           "invalid_utf8": 0
         },
         "lang": {
-          "files": 2,
-          "lines": 216,
+          "files": 99,
+          "lines": 1469,
           "invalid_utf8": 0
         },
         "latex": {
@@ -9856,8 +9856,8 @@
           "invalid_utf8": 0
         },
         "lean": {
-          "files": 468,
-          "lines": 93031,
+          "files": 479,
+          "lines": 93139,
           "invalid_utf8": 0
         },
         "ledger": {
@@ -9961,8 +9961,8 @@
           "invalid_utf8": 0
         },
         "lua": {
-          "files": 3338,
-          "lines": 709494,
+          "files": 4595,
+          "lines": 752671,
           "invalid_utf8": 1
         },
         "lua.txt": {
@@ -9986,8 +9986,8 @@
           "invalid_utf8": 0
         },
         "m": {
-          "files": 604,
-          "lines": 92530,
+          "files": 1496,
+          "lines": 108343,
           "invalid_utf8": 0
         },
         "mac": {
@@ -10041,8 +10041,8 @@
           "invalid_utf8": 0
         },
         "md": {
-          "files": 53804,
-          "lines": 8669133,
+          "files": 53805,
+          "lines": 8669222,
           "invalid_utf8": 1
         },
         "mdc": {
@@ -10106,8 +10106,8 @@
           "invalid_utf8": 0
         },
         "min": {
-          "files": 0,
-          "lines": 0,
+          "files": 122,
+          "lines": 583,
           "invalid_utf8": 0
         },
         "mix.lock": {
@@ -10136,8 +10136,8 @@
           "invalid_utf8": 0
         },
         "ml": {
-          "files": 2729,
-          "lines": 358069,
+          "files": 4216,
+          "lines": 390921,
           "invalid_utf8": 0
         },
         "mld": {
@@ -10146,8 +10146,8 @@
           "invalid_utf8": 0
         },
         "mli": {
-          "files": 1124,
-          "lines": 61749,
+          "files": 1151,
+          "lines": 62352,
           "invalid_utf8": 0
         },
         "mlir": {
@@ -10196,8 +10196,8 @@
           "invalid_utf8": 0
         },
         "mojo": {
-          "files": 129,
-          "lines": 50571,
+          "files": 135,
+          "lines": 51688,
           "invalid_utf8": 0
         },
         "mount": {
@@ -10331,8 +10331,8 @@
           "invalid_utf8": 0
         },
         "nim": {
-          "files": 296,
-          "lines": 49648,
+          "files": 2167,
+          "lines": 130420,
           "invalid_utf8": 0
         },
         "nim_format_string": {
@@ -10351,8 +10351,8 @@
           "invalid_utf8": 0
         },
         "nix": {
-          "files": 132,
-          "lines": 9713,
+          "files": 141,
+          "lines": 9805,
           "invalid_utf8": 0
         },
         "njk": {
@@ -10386,13 +10386,13 @@
           "invalid_utf8": 0
         },
         "nu": {
-          "files": 120,
-          "lines": 15066,
+          "files": 281,
+          "lines": 15940,
           "invalid_utf8": 0
         },
         "num": {
-          "files": 0,
-          "lines": 0,
+          "files": 10,
+          "lines": 229,
           "invalid_utf8": 0
         },
         "numscript": {
@@ -10406,8 +10406,8 @@
           "invalid_utf8": 0
         },
         "nut": {
-          "files": 71,
-          "lines": 52309,
+          "files": 74,
+          "lines": 52345,
           "invalid_utf8": 0
         },
         "nv": {
@@ -10426,8 +10426,8 @@
           "invalid_utf8": 0
         },
         "odin": {
-          "files": 148,
-          "lines": 65298,
+          "files": 233,
+          "lines": 67978,
           "invalid_utf8": 0
         },
         "oml": {
@@ -10466,8 +10466,8 @@
           "invalid_utf8": 0
         },
         "pas": {
-          "files": 5,
-          "lines": 7832,
+          "files": 2626,
+          "lines": 156753,
           "invalid_utf8": 0
         },
         "patch": {
@@ -10526,8 +10526,8 @@
           "invalid_utf8": 0
         },
         "php": {
-          "files": 5968,
-          "lines": 924508,
+          "files": 6613,
+          "lines": 939999,
           "invalid_utf8": 0
         },
         "phpt": {
@@ -10576,8 +10576,8 @@
           "invalid_utf8": 0
         },
         "pl": {
-          "files": 87,
-          "lines": 22848,
+          "files": 2326,
+          "lines": 81994,
           "invalid_utf8": 0
         },
         "plantuml": {
@@ -10621,8 +10621,8 @@
           "invalid_utf8": 0
         },
         "pony": {
-          "files": 1040,
-          "lines": 155304,
+          "files": 1062,
+          "lines": 156283,
           "invalid_utf8": 0
         },
         "pory": {
@@ -10666,8 +10666,8 @@
           "invalid_utf8": 0
         },
         "pro": {
-          "files": 53,
-          "lines": 1030,
+          "files": 848,
+          "lines": 25462,
           "invalid_utf8": 0
         },
         "profile": {
@@ -10701,13 +10701,13 @@
           "invalid_utf8": 0
         },
         "ps": {
-          "files": 1,
-          "lines": 41,
+          "files": 133,
+          "lines": 1946,
           "invalid_utf8": 0
         },
         "ps1": {
-          "files": 245,
-          "lines": 13713,
+          "files": 1194,
+          "lines": 31641,
           "invalid_utf8": 0
         },
         "psc": {
@@ -10756,8 +10756,8 @@
           "invalid_utf8": 0
         },
         "py": {
-          "files": 8823,
-          "lines": 2799237,
+          "files": 11877,
+          "lines": 2926052,
           "invalid_utf8": 0
         },
         "pyi": {
@@ -10806,8 +10806,8 @@
           "invalid_utf8": 0
         },
         "r": {
-          "files": 134,
-          "lines": 72714,
+          "files": 1345,
+          "lines": 98141,
           "invalid_utf8": 0
         },
         "rabl": {
@@ -10836,8 +10836,8 @@
           "invalid_utf8": 0
         },
         "rb": {
-          "files": 5651,
-          "lines": 729718,
+          "files": 7415,
+          "lines": 767300,
           "invalid_utf8": 0
         },
         "rbs": {
@@ -10881,8 +10881,8 @@
           "invalid_utf8": 0
         },
         "red": {
-          "files": 203,
-          "lines": 75331,
+          "files": 511,
+          "lines": 86800,
           "invalid_utf8": 0
         },
         "reds": {
@@ -10921,8 +10921,8 @@
           "invalid_utf8": 0
         },
         "res": {
-          "files": 52,
-          "lines": 13456,
+          "files": 90,
+          "lines": 13921,
           "invalid_utf8": 4
         },
         "resi": {
@@ -10951,8 +10951,8 @@
           "invalid_utf8": 0
         },
         "rkt": {
-          "files": 1876,
-          "lines": 128924,
+          "files": 3268,
+          "lines": 166018,
           "invalid_utf8": 0
         },
         "rmiss": {
@@ -10976,8 +10976,8 @@
           "invalid_utf8": 0
         },
         "roc": {
-          "files": 75,
-          "lines": 15415,
+          "files": 77,
+          "lines": 15428,
           "invalid_utf8": 0
         },
         "rol": {
@@ -11001,8 +11001,8 @@
           "invalid_utf8": 0
         },
         "rs": {
-          "files": 9775,
-          "lines": 3015860,
+          "files": 11256,
+          "lines": 3108138,
           "invalid_utf8": 0
         },
         "rs.html": {
@@ -11056,13 +11056,13 @@
           "invalid_utf8": 0
         },
         "sage": {
-          "files": 0,
-          "lines": 0,
+          "files": 6,
+          "lines": 107,
           "invalid_utf8": 0
         },
         "sass": {
-          "files": 19,
-          "lines": 343,
+          "files": 24,
+          "lines": 424,
           "invalid_utf8": 0
         },
         "sbp": {
@@ -11076,18 +11076,18 @@
           "invalid_utf8": 0
         },
         "sc": {
-          "files": 1,
-          "lines": 19,
+          "files": 64,
+          "lines": 905,
           "invalid_utf8": 0
         },
         "scad": {
-          "files": 77,
-          "lines": 87488,
+          "files": 95,
+          "lines": 87712,
           "invalid_utf8": 0
         },
         "scala": {
-          "files": 1024,
-          "lines": 130784,
+          "files": 2311,
+          "lines": 167614,
           "invalid_utf8": 0
         },
         "schema": {
@@ -11096,8 +11096,8 @@
           "invalid_utf8": 0
         },
         "scm": {
-          "files": 2075,
-          "lines": 117234,
+          "files": 2730,
+          "lines": 139731,
           "invalid_utf8": 0
         },
         "sco": {
@@ -11136,8 +11136,8 @@
           "invalid_utf8": 0
         },
         "sh": {
-          "files": 2023,
-          "lines": 170102,
+          "files": 2676,
+          "lines": 181045,
           "invalid_utf8": 0
         },
         "shtml": {
@@ -11176,8 +11176,8 @@
           "invalid_utf8": 0
         },
         "simula": {
-          "files": 0,
-          "lines": 0,
+          "files": 107,
+          "lines": 6990,
           "invalid_utf8": 0
         },
         "sk": {
@@ -11191,8 +11191,8 @@
           "invalid_utf8": 0
         },
         "slang": {
-          "files": 2,
-          "lines": 157,
+          "files": 54,
+          "lines": 791,
           "invalid_utf8": 0
         },
         "slice": {
@@ -11296,8 +11296,8 @@
           "invalid_utf8": 0
         },
         "sql": {
-          "files": 272,
-          "lines": 14692,
+          "files": 541,
+          "lines": 21540,
           "invalid_utf8": 1
         },
         "ss": {
@@ -11321,8 +11321,8 @@
           "invalid_utf8": 0
         },
         "st": {
-          "files": 53,
-          "lines": 5367,
+          "files": 678,
+          "lines": 12726,
           "invalid_utf8": 0
         },
         "stan": {
@@ -11416,8 +11416,8 @@
           "invalid_utf8": 0
         },
         "swift": {
-          "files": 4506,
-          "lines": 573604,
+          "files": 5328,
+          "lines": 606543,
           "invalid_utf8": 0
         },
         "swiftinterface": {
@@ -11491,8 +11491,8 @@
           "invalid_utf8": 0
         },
         "tcl": {
-          "files": 457,
-          "lines": 175570,
+          "files": 2000,
+          "lines": 217552,
           "invalid_utf8": 0
         },
         "tcn": {
@@ -11531,8 +11531,8 @@
           "invalid_utf8": 0
         },
         "tex": {
-          "files": 84,
-          "lines": 28875,
+          "files": 122,
+          "lines": 29334,
           "invalid_utf8": 0
         },
         "textpb": {
@@ -11661,8 +11661,8 @@
           "invalid_utf8": 0
         },
         "ts": {
-          "files": 149406,
-          "lines": 18704115,
+          "files": 149472,
+          "lines": 18706904,
           "invalid_utf8": 83
         },
         "tscn": {
@@ -11716,8 +11716,8 @@
           "invalid_utf8": 0
         },
         "txt": {
-          "files": 11953,
-          "lines": 4224492,
+          "files": 14712,
+          "lines": 4303917,
           "invalid_utf8": 47
         },
         "txt.gotmpl": {
@@ -11756,8 +11756,8 @@
           "invalid_utf8": 0
         },
         "u": {
-          "files": 6,
-          "lines": 18,
+          "files": 11,
+          "lines": 62,
           "invalid_utf8": 0
         },
         "ua": {
@@ -11776,8 +11776,8 @@
           "invalid_utf8": 0
         },
         "uiua": {
-          "files": 0,
-          "lines": 0,
+          "files": 566,
+          "lines": 3852,
           "invalid_utf8": 0
         },
         "um": {
@@ -11821,13 +11821,13 @@
           "invalid_utf8": 0
         },
         "v": {
-          "files": 943,
-          "lines": 1914465,
+          "files": 1795,
+          "lines": 1941974,
           "invalid_utf8": 0
         },
         "vala": {
-          "files": 1180,
-          "lines": 147965,
+          "files": 1305,
+          "lines": 150331,
           "invalid_utf8": 0
         },
         "vapi": {
@@ -11871,8 +11871,8 @@
           "invalid_utf8": 0
         },
         "vhd": {
-          "files": 89,
-          "lines": 32562,
+          "files": 103,
+          "lines": 33107,
           "invalid_utf8": 0
         },
         "vhdl": {
@@ -12001,8 +12001,8 @@
           "invalid_utf8": 0
         },
         "wren": {
-          "files": 111,
-          "lines": 3129,
+          "files": 2066,
+          "lines": 106690,
           "invalid_utf8": 0
         },
         "wsd": {
@@ -12016,8 +12016,8 @@
           "invalid_utf8": 0
         },
         "x": {
-          "files": 9,
-          "lines": 804,
+          "files": 10,
+          "lines": 919,
           "invalid_utf8": 0
         },
         "x12": {
@@ -12066,8 +12066,8 @@
           "invalid_utf8": 0
         },
         "xquery": {
-          "files": 0,
-          "lines": 0,
+          "files": 25,
+          "lines": 360,
           "invalid_utf8": 0
         },
         "xqy": {
@@ -12086,8 +12086,8 @@
           "invalid_utf8": 0
         },
         "yaml": {
-          "files": 2637,
-          "lines": 560741,
+          "files": 5398,
+          "lines": 567685,
           "invalid_utf8": 0
         },
         "yaml.erb": {
@@ -12156,8 +12156,8 @@
           "invalid_utf8": 0
         },
         "zed": {
-          "files": 0,
-          "lines": 0,
+          "files": 4,
+          "lines": 1415,
           "invalid_utf8": 0
         },
         "zeek": {
@@ -12176,8 +12176,8 @@
           "invalid_utf8": 0
         },
         "zig": {
-          "files": 2251,
-          "lines": 789607,
+          "files": 2656,
+          "lines": 826509,
           "invalid_utf8": 0
         },
         "ziggy": {
@@ -12302,8 +12302,8 @@
           "suffixes": [
             ".gitignore"
           ],
-          "files": 1499,
-          "lines": 34268
+          "files": 1500,
+          "lines": 34278
         },
         {
           "suffixes": [
@@ -12527,8 +12527,8 @@
           "suffixes": [
             "Makefile"
           ],
-          "files": 798,
-          "lines": 51357
+          "files": 799,
+          "lines": 51376
         },
         {
           "suffixes": [
@@ -12634,8 +12634,8 @@
           "suffixes": [
             "adb"
           ],
-          "files": 353,
-          "lines": 81472
+          "files": 1984,
+          "lines": 153672
         },
         {
           "suffixes": [
@@ -12655,15 +12655,15 @@
           "suffixes": [
             "agda"
           ],
-          "files": 1263,
-          "lines": 149161
+          "files": 1291,
+          "lines": 149854
         },
         {
           "suffixes": [
             "ahk"
           ],
-          "files": 33,
-          "lines": 11134
+          "files": 1044,
+          "lines": 39749
         },
         {
           "suffixes": [
@@ -12681,10 +12681,17 @@
         },
         {
           "suffixes": [
+            "apex"
+          ],
+          "files": 52,
+          "lines": 497
+        },
+        {
+          "suffixes": [
             "applescript"
           ],
-          "files": 13,
-          "lines": 14455
+          "files": 1129,
+          "lines": 73991
         },
         {
           "suffixes": [
@@ -12695,10 +12702,17 @@
         },
         {
           "suffixes": [
+            "arturo"
+          ],
+          "files": 827,
+          "lines": 13550
+        },
+        {
+          "suffixes": [
             "as"
           ],
-          "files": 192,
-          "lines": 43100
+          "files": 326,
+          "lines": 46347
         },
         {
           "suffixes": [
@@ -12718,22 +12732,29 @@
           "suffixes": [
             "asm"
           ],
-          "files": 96,
-          "lines": 45951
+          "files": 158,
+          "lines": 56129
+        },
+        {
+          "suffixes": [
+            "asp"
+          ],
+          "files": 1,
+          "lines": 103
         },
         {
           "suffixes": [
             "astro"
           ],
-          "files": 230,
-          "lines": 5034
+          "files": 256,
+          "lines": 5799
         },
         {
           "suffixes": [
             "awk"
           ],
-          "files": 36,
-          "lines": 10651
+          "files": 919,
+          "lines": 34450
         },
         {
           "suffixes": [
@@ -12767,8 +12788,8 @@
           "suffixes": [
             "bat"
           ],
-          "files": 147,
-          "lines": 10466
+          "files": 482,
+          "lines": 18703
         },
         {
           "suffixes": [
@@ -12783,6 +12804,13 @@
           ],
           "files": 50,
           "lines": 292
+        },
+        {
+          "suffixes": [
+            "bf"
+          ],
+          "files": 226,
+          "lines": 2197
         },
         {
           "suffixes": [
@@ -12838,8 +12866,8 @@
           "suffixes": [
             "bqn"
           ],
-          "files": 52,
-          "lines": 7056
+          "files": 513,
+          "lines": 9582
         },
         {
           "suffixes": [
@@ -12902,15 +12930,15 @@
           "suffixes": [
             "c"
           ],
-          "files": 5572,
-          "lines": 50927094
+          "files": 7832,
+          "lines": 51047619
         },
         {
           "suffixes": [
             "c3"
           ],
-          "files": 1436,
-          "lines": 143564
+          "files": 1486,
+          "lines": 144518
         },
         {
           "suffixes": [
@@ -12972,8 +13000,8 @@
           "suffixes": [
             "cf"
           ],
-          "files": 2,
-          "lines": 8
+          "files": 5,
+          "lines": 130
         },
         {
           "suffixes": [
@@ -12981,6 +13009,13 @@
           ],
           "files": 534,
           "lines": 89325
+        },
+        {
+          "suffixes": [
+            "cfengine"
+          ],
+          "files": 7,
+          "lines": 153
         },
         {
           "suffixes": [
@@ -12993,8 +13028,8 @@
           "suffixes": [
             "cfm"
           ],
-          "files": 123,
-          "lines": 4140
+          "files": 209,
+          "lines": 5226
         },
         {
           "suffixes": [
@@ -13035,8 +13070,8 @@
           "suffixes": [
             "clj"
           ],
-          "files": 91,
-          "lines": 19085
+          "files": 1038,
+          "lines": 33049
         },
         {
           "suffixes": [
@@ -13063,8 +13098,8 @@
           "suffixes": [
             "cmake"
           ],
-          "files": 212,
-          "lines": 22621
+          "files": 253,
+          "lines": 23172
         },
         {
           "suffixes": [
@@ -13077,15 +13112,15 @@
           "suffixes": [
             "cob"
           ],
-          "files": 206,
-          "lines": 29442
+          "files": 736,
+          "lines": 66059
         },
         {
           "suffixes": [
             "coffee"
           ],
-          "files": 170,
-          "lines": 7348
+          "files": 463,
+          "lines": 13454
         },
         {
           "suffixes": [
@@ -13167,8 +13202,8 @@
           "suffixes": [
             "cpp"
           ],
-          "files": 5208,
-          "lines": 2917874
+          "files": 7161,
+          "lines": 3033871
         },
         {
           "suffixes": [
@@ -13188,15 +13223,15 @@
           "suffixes": [
             "cr"
           ],
-          "files": 96,
-          "lines": 15879
+          "files": 756,
+          "lines": 31415
         },
         {
           "suffixes": [
             "cs"
           ],
-          "files": 6158,
-          "lines": 838886
+          "files": 7623,
+          "lines": 916389
         },
         {
           "suffixes": [
@@ -13258,8 +13293,8 @@
           "suffixes": [
             "curry"
           ],
-          "files": 83,
-          "lines": 9088
+          "files": 95,
+          "lines": 9521
         },
         {
           "suffixes": [
@@ -13279,8 +13314,8 @@
           "suffixes": [
             "d"
           ],
-          "files": 3582,
-          "lines": 57112
+          "files": 4944,
+          "lines": 115732
         },
         {
           "suffixes": [
@@ -13300,8 +13335,8 @@
           "suffixes": [
             "dart"
           ],
-          "files": 5288,
-          "lines": 951816
+          "files": 5580,
+          "lines": 966385
         },
         {
           "suffixes": [
@@ -13429,8 +13464,8 @@
           "suffixes": [
             "dylan"
           ],
-          "files": 62,
-          "lines": 12387
+          "files": 88,
+          "lines": 12735
         },
         {
           "suffixes": [
@@ -13493,15 +13528,15 @@
           "suffixes": [
             "el"
           ],
-          "files": 81,
-          "lines": 45189
+          "files": 366,
+          "lines": 50369
         },
         {
           "suffixes": [
             "elm"
           ],
-          "files": 119,
-          "lines": 25787
+          "files": 178,
+          "lines": 29727
         },
         {
           "suffixes": [
@@ -13544,8 +13579,8 @@
           "suffixes": [
             "erl"
           ],
-          "files": 197,
-          "lines": 46080
+          "files": 819,
+          "lines": 62065
         },
         {
           "suffixes": [
@@ -13579,8 +13614,8 @@
           "suffixes": [
             "ex"
           ],
-          "files": 1644,
-          "lines": 331273
+          "files": 2292,
+          "lines": 346677
         },
         {
           "suffixes": [
@@ -13600,8 +13635,8 @@
           "suffixes": [
             "f"
           ],
-          "files": 2,
-          "lines": 53
+          "files": 1282,
+          "lines": 106198
         },
         {
           "suffixes": [
@@ -13616,6 +13651,13 @@
           ],
           "files": 413,
           "lines": 34917
+        },
+        {
+          "suffixes": [
+            "fan"
+          ],
+          "files": 5,
+          "lines": 266
         },
         {
           "suffixes": [
@@ -13656,8 +13698,8 @@
           "suffixes": [
             "fish"
           ],
-          "files": 1634,
-          "lines": 95248
+          "files": 1679,
+          "lines": 95537
         },
         {
           "suffixes": [
@@ -13677,8 +13719,8 @@
           "suffixes": [
             "fs"
           ],
-          "files": 423,
-          "lines": 95187
+          "files": 1680,
+          "lines": 111733
         },
         {
           "suffixes": [
@@ -13705,8 +13747,8 @@
           "suffixes": [
             "gd"
           ],
-          "files": 261,
-          "lines": 59576
+          "files": 291,
+          "lines": 60269
         },
         {
           "suffixes": [
@@ -13754,15 +13796,15 @@
           "suffixes": [
             "gleam"
           ],
-          "files": 54,
-          "lines": 19758
+          "files": 140,
+          "lines": 21319
         },
         {
           "suffixes": [
             "glsl"
           ],
-          "files": 16,
-          "lines": 1692
+          "files": 25,
+          "lines": 1883
         },
         {
           "suffixes": [
@@ -13775,8 +13817,8 @@
           "suffixes": [
             "go"
           ],
-          "files": 4686,
-          "lines": 1110805
+          "files": 6777,
+          "lines": 1241026
         },
         {
           "suffixes": [
@@ -13854,8 +13896,8 @@
           "suffixes": [
             "groovy"
           ],
-          "files": 7,
-          "lines": 214
+          "files": 840,
+          "lines": 14935
         },
         {
           "suffixes": [
@@ -13953,8 +13995,8 @@
           "suffixes": [
             "hoon"
           ],
-          "files": 828,
-          "lines": 173495
+          "files": 863,
+          "lines": 174194
         },
         {
           "suffixes": [
@@ -13981,8 +14023,8 @@
           "suffixes": [
             "hs"
           ],
-          "files": 1147,
-          "lines": 356013
+          "files": 3451,
+          "lines": 412293
         },
         {
           "suffixes": [
@@ -14048,8 +14090,8 @@
           "suffixes": [
             "hx"
           ],
-          "files": 370,
-          "lines": 97998
+          "files": 450,
+          "lines": 99891
         },
         {
           "suffixes": [
@@ -14083,8 +14125,8 @@
           "suffixes": [
             "inf"
           ],
-          "files": 2,
-          "lines": 56
+          "files": 77,
+          "lines": 1119
         },
         {
           "suffixes": [
@@ -14107,6 +14149,13 @@
           ],
           "files": 4,
           "lines": 2214
+        },
+        {
+          "suffixes": [
+            "inko"
+          ],
+          "files": 1,
+          "lines": 3
         },
         {
           "suffixes": [
@@ -14173,10 +14222,17 @@
         },
         {
           "suffixes": [
+            "janet"
+          ],
+          "files": 34,
+          "lines": 425
+        },
+        {
+          "suffixes": [
             "java"
           ],
-          "files": 7907,
-          "lines": 1105018
+          "files": 10212,
+          "lines": 1229248
         },
         {
           "suffixes": [
@@ -14189,8 +14245,8 @@
           "suffixes": [
             "jinja"
           ],
-          "files": 1,
-          "lines": 120
+          "files": 10,
+          "lines": 145
         },
         {
           "suffixes": [
@@ -14203,22 +14259,22 @@
           "suffixes": [
             "jl"
           ],
-          "files": 258,
-          "lines": 32765
+          "files": 2322,
+          "lines": 102555
         },
         {
           "suffixes": [
             "jq"
           ],
-          "files": 56,
-          "lines": 4779
+          "files": 2344,
+          "lines": 53222
         },
         {
           "suffixes": [
             "js"
           ],
-          "files": 395078,
-          "lines": 74428584
+          "files": 397063,
+          "lines": 74529725
         },
         {
           "suffixes": [
@@ -14300,6 +14356,13 @@
         },
         {
           "suffixes": [
+            "k"
+          ],
+          "files": 308,
+          "lines": 1934
+        },
+        {
+          "suffixes": [
             "kdl"
           ],
           "files": 20,
@@ -14330,15 +14393,15 @@
           "suffixes": [
             "kts"
           ],
-          "files": 2,
-          "lines": 201
+          "files": 1257,
+          "lines": 60079
         },
         {
           "suffixes": [
             "lang"
           ],
-          "files": 2,
-          "lines": 216
+          "files": 99,
+          "lines": 1469
         },
         {
           "suffixes": [
@@ -14358,8 +14421,8 @@
           "suffixes": [
             "lean"
           ],
-          "files": 468,
-          "lines": 93031
+          "files": 479,
+          "lines": 93139
         },
         {
           "suffixes": [
@@ -14428,8 +14491,8 @@
           "suffixes": [
             "lua"
           ],
-          "files": 3338,
-          "lines": 709494
+          "files": 4595,
+          "lines": 752671
         },
         {
           "suffixes": [
@@ -14457,8 +14520,8 @@
           "suffixes": [
             "m"
           ],
-          "files": 604,
-          "lines": 92530
+          "files": 1496,
+          "lines": 108343
         },
         {
           "suffixes": [
@@ -14506,8 +14569,8 @@
           "suffixes": [
             "md"
           ],
-          "files": 53804,
-          "lines": 8669133
+          "files": 53805,
+          "lines": 8669222
         },
         {
           "suffixes": [
@@ -14547,6 +14610,13 @@
         },
         {
           "suffixes": [
+            "min"
+          ],
+          "files": 122,
+          "lines": 583
+        },
+        {
+          "suffixes": [
             "mix.lock"
           ],
           "files": 18,
@@ -14577,8 +14647,8 @@
           "suffixes": [
             "ml"
           ],
-          "files": 2729,
-          "lines": 358069
+          "files": 4216,
+          "lines": 390921
         },
         {
           "suffixes": [
@@ -14591,8 +14661,8 @@
           "suffixes": [
             "mli"
           ],
-          "files": 1124,
-          "lines": 61749
+          "files": 1151,
+          "lines": 62352
         },
         {
           "suffixes": [
@@ -14647,8 +14717,8 @@
           "suffixes": [
             "mojo"
           ],
-          "files": 129,
-          "lines": 50571
+          "files": 135,
+          "lines": 51688
         },
         {
           "suffixes": [
@@ -14717,8 +14787,8 @@
           "suffixes": [
             "nim"
           ],
-          "files": 296,
-          "lines": 49648
+          "files": 2167,
+          "lines": 130420
         },
         {
           "suffixes": [
@@ -14731,8 +14801,8 @@
           "suffixes": [
             "nix"
           ],
-          "files": 132,
-          "lines": 9713
+          "files": 141,
+          "lines": 9805
         },
         {
           "suffixes": [
@@ -14766,22 +14836,29 @@
           "suffixes": [
             "nu"
           ],
-          "files": 120,
-          "lines": 15066
+          "files": 281,
+          "lines": 15940
+        },
+        {
+          "suffixes": [
+            "num"
+          ],
+          "files": 10,
+          "lines": 229
         },
         {
           "suffixes": [
             "nut"
           ],
-          "files": 71,
-          "lines": 52309
+          "files": 74,
+          "lines": 52345
         },
         {
           "suffixes": [
             "odin"
           ],
-          "files": 148,
-          "lines": 65298
+          "files": 233,
+          "lines": 67978
         },
         {
           "suffixes": [
@@ -14829,8 +14906,8 @@
           "suffixes": [
             "pas"
           ],
-          "files": 5,
-          "lines": 7832
+          "files": 2626,
+          "lines": 156753
         },
         {
           "suffixes": [
@@ -14871,8 +14948,8 @@
           "suffixes": [
             "php"
           ],
-          "files": 5770,
-          "lines": 922083
+          "files": 6415,
+          "lines": 937574
         },
         {
           "suffixes": [
@@ -14906,8 +14983,8 @@
           "suffixes": [
             "pl"
           ],
-          "files": 87,
-          "lines": 22848
+          "files": 2326,
+          "lines": 81994
         },
         {
           "suffixes": [
@@ -14948,8 +15025,8 @@
           "suffixes": [
             "pony"
           ],
-          "files": 1040,
-          "lines": 155304
+          "files": 1062,
+          "lines": 156283
         },
         {
           "suffixes": [
@@ -14990,8 +15067,8 @@
           "suffixes": [
             "pro"
           ],
-          "files": 53,
-          "lines": 1030
+          "files": 848,
+          "lines": 25462
         },
         {
           "suffixes": [
@@ -15032,15 +15109,15 @@
           "suffixes": [
             "ps"
           ],
-          "files": 1,
-          "lines": 41
+          "files": 133,
+          "lines": 1946
         },
         {
           "suffixes": [
             "ps1"
           ],
-          "files": 245,
-          "lines": 13713
+          "files": 1194,
+          "lines": 31641
         },
         {
           "suffixes": [
@@ -15095,8 +15172,8 @@
           "suffixes": [
             "py"
           ],
-          "files": 8823,
-          "lines": 2799237
+          "files": 11877,
+          "lines": 2926052
         },
         {
           "suffixes": [
@@ -15137,8 +15214,8 @@
           "suffixes": [
             "r"
           ],
-          "files": 134,
-          "lines": 72714
+          "files": 1345,
+          "lines": 98141
         },
         {
           "suffixes": [
@@ -15151,8 +15228,8 @@
           "suffixes": [
             "rb"
           ],
-          "files": 5651,
-          "lines": 729718
+          "files": 7415,
+          "lines": 767300
         },
         {
           "suffixes": [
@@ -15172,8 +15249,8 @@
           "suffixes": [
             "red"
           ],
-          "files": 203,
-          "lines": 75331
+          "files": 511,
+          "lines": 86800
         },
         {
           "suffixes": [
@@ -15215,15 +15292,15 @@
           "suffixes": [
             "res"
           ],
-          "files": 52,
-          "lines": 13456
+          "files": 90,
+          "lines": 13921
         },
         {
           "suffixes": [
             "rkt"
           ],
-          "files": 1876,
-          "lines": 128924
+          "files": 3268,
+          "lines": 166018
         },
         {
           "suffixes": [
@@ -15244,8 +15321,8 @@
           "suffixes": [
             "roc"
           ],
-          "files": 75,
-          "lines": 15415
+          "files": 77,
+          "lines": 15428
         },
         {
           "suffixes": [
@@ -15258,8 +15335,8 @@
           "suffixes": [
             "rs"
           ],
-          "files": 9775,
-          "lines": 3015860
+          "files": 11256,
+          "lines": 3108138
         },
         {
           "suffixes": [
@@ -15306,10 +15383,17 @@
         },
         {
           "suffixes": [
+            "sage"
+          ],
+          "files": 6,
+          "lines": 107
+        },
+        {
+          "suffixes": [
             "sass"
           ],
-          "files": 19,
-          "lines": 343
+          "files": 24,
+          "lines": 424
         },
         {
           "suffixes": [
@@ -15322,29 +15406,29 @@
           "suffixes": [
             "sc"
           ],
-          "files": 1,
-          "lines": 19
+          "files": 64,
+          "lines": 905
         },
         {
           "suffixes": [
             "scad"
           ],
-          "files": 77,
-          "lines": 87488
+          "files": 95,
+          "lines": 87712
         },
         {
           "suffixes": [
             "scala"
           ],
-          "files": 1024,
-          "lines": 130784
+          "files": 2311,
+          "lines": 167614
         },
         {
           "suffixes": [
             "scm"
           ],
-          "files": 2075,
-          "lines": 117234
+          "files": 2730,
+          "lines": 139731
         },
         {
           "suffixes": [
@@ -15371,8 +15455,8 @@
           "suffixes": [
             "sh"
           ],
-          "files": 2023,
-          "lines": 170102
+          "files": 2676,
+          "lines": 181045
         },
         {
           "suffixes": [
@@ -15397,10 +15481,17 @@
         },
         {
           "suffixes": [
+            "simula"
+          ],
+          "files": 107,
+          "lines": 6990
+        },
+        {
+          "suffixes": [
             "slang"
           ],
-          "files": 2,
-          "lines": 157
+          "files": 54,
+          "lines": 791
         },
         {
           "suffixes": [
@@ -15483,8 +15574,8 @@
           "suffixes": [
             "sql"
           ],
-          "files": 272,
-          "lines": 14692
+          "files": 541,
+          "lines": 21540
         },
         {
           "suffixes": [
@@ -15504,8 +15595,8 @@
           "suffixes": [
             "st"
           ],
-          "files": 53,
-          "lines": 5367
+          "files": 678,
+          "lines": 12726
         },
         {
           "suffixes": [
@@ -15588,8 +15679,8 @@
           "suffixes": [
             "swift"
           ],
-          "files": 4506,
-          "lines": 573604
+          "files": 5328,
+          "lines": 606543
         },
         {
           "suffixes": [
@@ -15637,8 +15728,8 @@
           "suffixes": [
             "tcl"
           ],
-          "files": 457,
-          "lines": 175570
+          "files": 2000,
+          "lines": 217552
         },
         {
           "suffixes": [
@@ -15665,8 +15756,8 @@
           "suffixes": [
             "tex"
           ],
-          "files": 84,
-          "lines": 28875
+          "files": 122,
+          "lines": 29334
         },
         {
           "suffixes": [
@@ -15750,8 +15841,8 @@
           "suffixes": [
             "ts"
           ],
-          "files": 149406,
-          "lines": 18704115
+          "files": 149472,
+          "lines": 18706904
         },
         {
           "suffixes": [
@@ -15785,8 +15876,8 @@
           "suffixes": [
             "txt"
           ],
-          "files": 10907,
-          "lines": 4132542
+          "files": 13666,
+          "lines": 4211967
         },
         {
           "suffixes": [
@@ -15806,8 +15897,8 @@
           "suffixes": [
             "u"
           ],
-          "files": 6,
-          "lines": 18
+          "files": 11,
+          "lines": 62
         },
         {
           "suffixes": [
@@ -15815,6 +15906,13 @@
           ],
           "files": 17,
           "lines": 5077
+        },
+        {
+          "suffixes": [
+            "uiua"
+          ],
+          "files": 566,
+          "lines": 3852
         },
         {
           "suffixes": [
@@ -15834,15 +15932,15 @@
           "suffixes": [
             "v"
           ],
-          "files": 943,
-          "lines": 1914465
+          "files": 1795,
+          "lines": 1941974
         },
         {
           "suffixes": [
             "vala"
           ],
-          "files": 1180,
-          "lines": 147965
+          "files": 1305,
+          "lines": 150331
         },
         {
           "suffixes": [
@@ -15862,8 +15960,8 @@
           "suffixes": [
             "vhd"
           ],
-          "files": 89,
-          "lines": 32562
+          "files": 103,
+          "lines": 33107
         },
         {
           "suffixes": [
@@ -15932,15 +16030,15 @@
           "suffixes": [
             "wren"
           ],
-          "files": 111,
-          "lines": 3129
+          "files": 2066,
+          "lines": 106690
         },
         {
           "suffixes": [
             "x"
           ],
-          "files": 9,
-          "lines": 804
+          "files": 10,
+          "lines": 919
         },
         {
           "suffixes": [
@@ -15955,6 +16053,13 @@
           ],
           "files": 2479,
           "lines": 290990
+        },
+        {
+          "suffixes": [
+            "xquery"
+          ],
+          "files": 25,
+          "lines": 360
         },
         {
           "suffixes": [
@@ -15974,8 +16079,8 @@
           "suffixes": [
             "yaml"
           ],
-          "files": 2630,
-          "lines": 560173
+          "files": 5391,
+          "lines": 567117
         },
         {
           "suffixes": [
@@ -16014,6 +16119,13 @@
         },
         {
           "suffixes": [
+            "zed"
+          ],
+          "files": 4,
+          "lines": 1415
+        },
+        {
+          "suffixes": [
             "zeek"
           ],
           "files": 2593,
@@ -16023,8 +16135,8 @@
           "suffixes": [
             "zig"
           ],
-          "files": 2251,
-          "lines": 789607
+          "files": 2656,
+          "lines": 826509
         },
         {
           "suffixes": [
@@ -24118,8 +24230,8 @@
         "actionscript"
       ],
       "training": {
-        "files": 192,
-        "lines": 43100
+        "files": 326,
+        "lines": 46347
       },
       "test": {
         "files": 478,
@@ -24139,8 +24251,8 @@
         "ada"
       ],
       "training": {
-        "files": 499,
-        "lines": 105185
+        "files": 2130,
+        "lines": 177385
       },
       "test": {
         "files": 479,
@@ -24159,8 +24271,8 @@
         "agda"
       ],
       "training": {
-        "files": 1263,
-        "lines": 149161
+        "files": 1291,
+        "lines": 149854
       },
       "test": {
         "files": 1205,
@@ -24240,8 +24352,8 @@
         "haskell"
       ],
       "training": {
-        "files": 9,
-        "lines": 804
+        "files": 10,
+        "lines": 919
       },
       "test": {
         "files": 2,
@@ -24342,8 +24454,8 @@
         "answer-set-programming"
       ],
       "training": {
-        "files": 0,
-        "lines": 0
+        "files": 1,
+        "lines": 103
       },
       "test": {
         "files": 1,
@@ -24385,8 +24497,8 @@
         "salesforce"
       ],
       "training": {
-        "files": 428,
-        "lines": 67810
+        "files": 480,
+        "lines": 68307
       },
       "test": {
         "files": 278,
@@ -24406,8 +24518,8 @@
         "applescript"
       ],
       "training": {
-        "files": 13,
-        "lines": 14455
+        "files": 1129,
+        "lines": 73991
       },
       "test": {
         "files": 30,
@@ -24467,14 +24579,14 @@
         "arturo"
       ],
       "training": {
-        "files": 2,
-        "lines": 4
+        "files": 829,
+        "lines": 13554
       },
       "test": {
         "files": 0,
         "lines": 0
       },
-      "below_threshold": true
+      "below_threshold": false
     },
     "AsciiDoc": {
       "suffixes": [
@@ -24549,8 +24661,8 @@
         "asp-classic"
       ],
       "training": {
-        "files": 0,
-        "lines": 0
+        "files": 1,
+        "lines": 103
       },
       "test": {
         "files": 1,
@@ -24592,8 +24704,8 @@
         "assembly"
       ],
       "training": {
-        "files": 461,
-        "lines": 101236
+        "files": 523,
+        "lines": 111414
       },
       "test": {
         "files": 199,
@@ -24612,8 +24724,8 @@
         "astro"
       ],
       "training": {
-        "files": 230,
-        "lines": 5034
+        "files": 256,
+        "lines": 5799
       },
       "test": {
         "files": 0,
@@ -24632,8 +24744,8 @@
         "autohotkey"
       ],
       "training": {
-        "files": 33,
-        "lines": 11134
+        "files": 1044,
+        "lines": 39749
       },
       "test": {
         "files": 27,
@@ -24652,8 +24764,8 @@
         "awk"
       ],
       "training": {
-        "files": 36,
-        "lines": 10651
+        "files": 919,
+        "lines": 34450
       },
       "test": {
         "files": 3,
@@ -24734,8 +24846,8 @@
         "windows-batch"
       ],
       "training": {
-        "files": 206,
-        "lines": 12316
+        "files": 541,
+        "lines": 20553
       },
       "test": {
         "files": 104,
@@ -25002,8 +25114,8 @@
         "bqn"
       ],
       "training": {
-        "files": 52,
-        "lines": 7056
+        "files": 513,
+        "lines": 9582
       },
       "test": {
         "files": 8,
@@ -25022,14 +25134,14 @@
         "brainfuck"
       ],
       "training": {
-        "files": 0,
-        "lines": 0
+        "files": 226,
+        "lines": 2197
       },
       "test": {
         "files": 0,
         "lines": 0
       },
-      "below_threshold": true
+      "below_threshold": false
     },
     "Bruno": {
       "suffixes": [
@@ -25123,8 +25235,8 @@
         "zed"
       ],
       "training": {
-        "files": 5572,
-        "lines": 50927094
+        "files": 7832,
+        "lines": 51047619
       },
       "test": {
         "files": 3061,
@@ -25204,8 +25316,8 @@
         "zed"
       ],
       "training": {
-        "files": 43372,
-        "lines": 19671556
+        "files": 45325,
+        "lines": 19787553
       },
       "test": {
         "files": 10971,
@@ -25225,8 +25337,8 @@
         "c3"
       ],
       "training": {
-        "files": 1440,
-        "lines": 143579
+        "files": 1490,
+        "lines": 144533
       },
       "test": {
         "files": 52,
@@ -25450,8 +25562,8 @@
         "cfengine"
       ],
       "training": {
-        "files": 2,
-        "lines": 8
+        "files": 12,
+        "lines": 283
       },
       "test": {
         "files": 0,
@@ -25510,8 +25622,8 @@
         "cfml"
       ],
       "training": {
-        "files": 657,
-        "lines": 93465
+        "files": 743,
+        "lines": 94551
       },
       "test": {
         "files": 305,
@@ -25615,8 +25727,8 @@
         "clojure"
       ],
       "training": {
-        "files": 356,
-        "lines": 77992
+        "files": 1303,
+        "lines": 91956
       },
       "test": {
         "files": 83,
@@ -25636,8 +25748,8 @@
         "neocmake"
       ],
       "training": {
-        "files": 1158,
-        "lines": 99858
+        "files": 1199,
+        "lines": 100409
       },
       "test": {
         "files": 289,
@@ -25657,8 +25769,8 @@
         "cobol"
       ],
       "training": {
-        "files": 206,
-        "lines": 29442
+        "files": 736,
+        "lines": 66059
       },
       "test": {
         "files": 5,
@@ -25698,8 +25810,8 @@
         "coffeescript"
       ],
       "training": {
-        "files": 170,
-        "lines": 7348
+        "files": 463,
+        "lines": 13454
       },
       "test": {
         "files": 142,
@@ -25858,8 +25970,8 @@
         "crystal"
       ],
       "training": {
-        "files": 96,
-        "lines": 15879
+        "files": 756,
+        "lines": 31415
       },
       "test": {
         "files": 251,
@@ -25878,8 +25990,8 @@
         "csharp"
       ],
       "training": {
-        "files": 6158,
-        "lines": 838886
+        "files": 7623,
+        "lines": 916389
       },
       "test": {
         "files": 2181,
@@ -26003,8 +26115,8 @@
         "curry"
       ],
       "training": {
-        "files": 83,
-        "lines": 9088
+        "files": 95,
+        "lines": 9521
       },
       "test": {
         "files": 151,
@@ -26089,8 +26201,8 @@
         "d"
       ],
       "training": {
-        "files": 3582,
-        "lines": 57112
+        "files": 4944,
+        "lines": 115732
       },
       "test": {
         "files": 2868,
@@ -26189,8 +26301,8 @@
         "dart"
       ],
       "training": {
-        "files": 5288,
-        "lines": 951816
+        "files": 5580,
+        "lines": 966385
       },
       "test": {
         "files": 984,
@@ -26252,8 +26364,8 @@
         "defold"
       ],
       "training": {
-        "files": 3345,
-        "lines": 714614
+        "files": 4602,
+        "lines": 757791
       },
       "test": {
         "files": 4054,
@@ -26505,8 +26617,8 @@
         "duckyscript"
       ],
       "training": {
-        "files": 11953,
-        "lines": 4224492
+        "files": 14712,
+        "lines": 4303917
       },
       "test": {
         "files": 4308,
@@ -26588,8 +26700,8 @@
         "open-dylan"
       ],
       "training": {
-        "files": 78,
-        "lines": 12481
+        "files": 104,
+        "lines": 12829
       },
       "test": {
         "files": 14,
@@ -26808,8 +26920,8 @@
         "elisp"
       ],
       "training": {
-        "files": 81,
-        "lines": 45189
+        "files": 366,
+        "lines": 50369
       },
       "test": {
         "files": 32,
@@ -26830,8 +26942,8 @@
         "elixir"
       ],
       "training": {
-        "files": 2980,
-        "lines": 688103
+        "files": 3628,
+        "lines": 703507
       },
       "test": {
         "files": 2754,
@@ -26870,8 +26982,8 @@
         "elm"
       ],
       "training": {
-        "files": 119,
-        "lines": 25787
+        "files": 178,
+        "lines": 29727
       },
       "test": {
         "files": 481,
@@ -26911,8 +27023,8 @@
         "emmylua"
       ],
       "training": {
-        "files": 3341,
-        "lines": 710309
+        "files": 4598,
+        "lines": 753486
       },
       "test": {
         "files": 4050,
@@ -27003,8 +27115,8 @@
         "erlang"
       ],
       "training": {
-        "files": 201,
-        "lines": 46780
+        "files": 823,
+        "lines": 62765
       },
       "test": {
         "files": 398,
@@ -27145,8 +27257,8 @@
         "fish"
       ],
       "training": {
-        "files": 1634,
-        "lines": 95248
+        "files": 1679,
+        "lines": 95537
       },
       "test": {
         "files": 124,
@@ -27234,8 +27346,8 @@
         "fortran"
       ],
       "training": {
-        "files": 421,
-        "lines": 38136
+        "files": 1701,
+        "lines": 144281
       },
       "test": {
         "files": 64,
@@ -27339,8 +27451,8 @@
         "fsharp"
       ],
       "training": {
-        "files": 462,
-        "lines": 98053
+        "files": 1719,
+        "lines": 114599
       },
       "test": {
         "files": 217,
@@ -27450,8 +27562,8 @@
         "gcode"
       ],
       "training": {
-        "files": 3088,
-        "lines": 257260
+        "files": 4107,
+        "lines": 273922
       },
       "test": {
         "files": 421,
@@ -27490,8 +27602,8 @@
         "gdscript"
       ],
       "training": {
-        "files": 261,
-        "lines": 59576
+        "files": 291,
+        "lines": 60269
       },
       "test": {
         "files": 146,
@@ -27695,8 +27807,8 @@
         "git-firefly"
       ],
       "training": {
-        "files": 2536,
-        "lines": 41902
+        "files": 2537,
+        "lines": 41912
       },
       "test": {
         "files": 1526,
@@ -27753,8 +27865,8 @@
         "gleam"
       ],
       "training": {
-        "files": 54,
-        "lines": 19758
+        "files": 140,
+        "lines": 21319
       },
       "test": {
         "files": 80,
@@ -27828,8 +27940,8 @@
         "zed"
       ],
       "training": {
-        "files": 125,
-        "lines": 5807
+        "files": 134,
+        "lines": 5998
       },
       "test": {
         "files": 162,
@@ -27871,8 +27983,8 @@
         "zed"
       ],
       "training": {
-        "files": 4686,
-        "lines": 1110805
+        "files": 6777,
+        "lines": 1241026
       },
       "test": {
         "files": 1030,
@@ -28208,8 +28320,8 @@
         "groovy"
       ],
       "training": {
-        "files": 72,
-        "lines": 6221
+        "files": 905,
+        "lines": 20942
       },
       "test": {
         "files": 306,
@@ -28330,8 +28442,8 @@
         "haskell"
       ],
       "training": {
-        "files": 1147,
-        "lines": 356013
+        "files": 3451,
+        "lines": 412293
       },
       "test": {
         "files": 87,
@@ -28350,8 +28462,8 @@
         "haxe"
       ],
       "training": {
-        "files": 370,
-        "lines": 97998
+        "files": 450,
+        "lines": 99891
       },
       "test": {
         "files": 595,
@@ -28555,8 +28667,8 @@
         "hoon"
       ],
       "training": {
-        "files": 828,
-        "lines": 173495
+        "files": 863,
+        "lines": 174194
       },
       "test": {
         "files": 6,
@@ -28616,8 +28728,8 @@
         "hql"
       ],
       "training": {
-        "files": 370,
-        "lines": 97998
+        "files": 450,
+        "lines": 99891
       },
       "test": {
         "files": 595,
@@ -28701,8 +28813,8 @@
         "html-jinja"
       ],
       "training": {
-        "files": 6,
-        "lines": 266
+        "files": 15,
+        "lines": 291
       },
       "test": {
         "files": 52,
@@ -28968,8 +29080,8 @@
         "inform6"
       ],
       "training": {
-        "files": 32725,
-        "lines": 15249911
+        "files": 32800,
+        "lines": 15250974
       },
       "test": {
         "files": 6079,
@@ -29008,8 +29120,8 @@
         "ini"
       ],
       "training": {
-        "files": 751,
-        "lines": 62543
+        "files": 826,
+        "lines": 63606
       },
       "test": {
         "files": 375,
@@ -29048,8 +29160,8 @@
         "inko"
       ],
       "training": {
-        "files": 0,
-        "lines": 0
+        "files": 1,
+        "lines": 3
       },
       "test": {
         "files": 0,
@@ -29148,8 +29260,8 @@
         "janet"
       ],
       "training": {
-        "files": 0,
-        "lines": 0
+        "files": 34,
+        "lines": 425
       },
       "test": {
         "files": 99,
@@ -29169,8 +29281,8 @@
         "java-eclipse-jdtls"
       ],
       "training": {
-        "files": 7907,
-        "lines": 1105018
+        "files": 10212,
+        "lines": 1229248
       },
       "test": {
         "files": 4759,
@@ -29192,8 +29304,8 @@
         "zed"
       ],
       "training": {
-        "files": 439210,
-        "lines": 80777485
+        "files": 441195,
+        "lines": 80878626
       },
       "test": {
         "files": 336966,
@@ -29273,8 +29385,8 @@
         "jinja2"
       ],
       "training": {
-        "files": 5,
-        "lines": 226
+        "files": 14,
+        "lines": 251
       },
       "test": {
         "files": 49,
@@ -29311,8 +29423,8 @@
         "jq"
       ],
       "training": {
-        "files": 56,
-        "lines": 4779
+        "files": 2344,
+        "lines": 53222
       },
       "test": {
         "files": 2,
@@ -29509,8 +29621,8 @@
         "julia"
       ],
       "training": {
-        "files": 258,
-        "lines": 32765
+        "files": 2322,
+        "lines": 102555
       },
       "test": {
         "files": 96,
@@ -29552,8 +29664,8 @@
         "kcl"
       ],
       "training": {
-        "files": 0,
-        "lines": 0
+        "files": 308,
+        "lines": 1934
       },
       "test": {
         "files": 0,
@@ -29633,8 +29745,8 @@
         "kotlin"
       ],
       "training": {
-        "files": 6494,
-        "lines": 817034
+        "files": 7749,
+        "lines": 876912
       },
       "test": {
         "files": 4407,
@@ -29696,8 +29808,8 @@
         "latex"
       ],
       "training": {
-        "files": 535,
-        "lines": 103777
+        "files": 573,
+        "lines": 104236
       },
       "test": {
         "files": 434,
@@ -29736,8 +29848,8 @@
         "lean4"
       ],
       "training": {
-        "files": 468,
-        "lines": 93031
+        "files": 479,
+        "lines": 93139
       },
       "test": {
         "files": 250,
@@ -30100,8 +30212,8 @@
         "lua"
       ],
       "training": {
-        "files": 3338,
-        "lines": 709494
+        "files": 4595,
+        "lines": 752671
       },
       "test": {
         "files": 4050,
@@ -30165,8 +30277,8 @@
         "make"
       ],
       "training": {
-        "files": 919,
-        "lines": 67597
+        "files": 920,
+        "lines": 67616
       },
       "test": {
         "files": 654,
@@ -30210,8 +30322,8 @@
         "zed"
       ],
       "training": {
-        "files": 54870,
-        "lines": 8871008
+        "files": 54871,
+        "lines": 8871097
       },
       "test": {
         "files": 36438,
@@ -30286,8 +30398,8 @@
         "matlab"
       ],
       "training": {
-        "files": 604,
-        "lines": 92530
+        "files": 1496,
+        "lines": 108343
       },
       "test": {
         "files": 118,
@@ -30494,8 +30606,8 @@
         "rockide-language-server"
       ],
       "training": {
-        "files": 2,
-        "lines": 216
+        "files": 99,
+        "lines": 1469
       },
       "test": {
         "files": 0,
@@ -30594,8 +30706,8 @@
         "mojo"
       ],
       "training": {
-        "files": 129,
-        "lines": 50571
+        "files": 135,
+        "lines": 51688
       },
       "test": {
         "files": 62,
@@ -30903,8 +31015,8 @@
         "nim"
       ],
       "training": {
-        "files": 303,
-        "lines": 49718
+        "files": 2174,
+        "lines": 130490
       },
       "test": {
         "files": 73,
@@ -30963,8 +31075,8 @@
         "nix"
       ],
       "training": {
-        "files": 132,
-        "lines": 9713
+        "files": 141,
+        "lines": 9805
       },
       "test": {
         "files": 40,
@@ -31190,8 +31302,8 @@
         "nu"
       ],
       "training": {
-        "files": 120,
-        "lines": 15066
+        "files": 281,
+        "lines": 15940
       },
       "test": {
         "files": 3,
@@ -31211,8 +31323,8 @@
         "numscript"
       ],
       "training": {
-        "files": 0,
-        "lines": 0
+        "files": 10,
+        "lines": 229
       },
       "test": {
         "files": 0,
@@ -31295,8 +31407,8 @@
         "objective-c"
       ],
       "training": {
-        "files": 33417,
-        "lines": 15358780
+        "files": 34309,
+        "lines": 15374593
       },
       "test": {
         "files": 6501,
@@ -31396,8 +31508,8 @@
         "ocaml"
       ],
       "training": {
-        "files": 2729,
-        "lines": 358069
+        "files": 4216,
+        "lines": 390921
       },
       "test": {
         "files": 234,
@@ -31416,8 +31528,8 @@
         "ocaml"
       ],
       "training": {
-        "files": 1124,
-        "lines": 61749
+        "files": 1151,
+        "lines": 62352
       },
       "test": {
         "files": 111,
@@ -31476,8 +31588,8 @@
         "odin"
       ],
       "training": {
-        "files": 148,
-        "lines": 65298
+        "files": 233,
+        "lines": 67978
       },
       "test": {
         "files": 41,
@@ -31596,8 +31708,8 @@
         "openscad"
       ],
       "training": {
-        "files": 77,
-        "lines": 87488
+        "files": 95,
+        "lines": 87712
       },
       "test": {
         "files": 389,
@@ -31763,8 +31875,8 @@
         "pascal"
       ],
       "training": {
-        "files": 434,
-        "lines": 105865
+        "files": 3055,
+        "lines": 254786
       },
       "test": {
         "files": 414,
@@ -31845,8 +31957,8 @@
         "perl"
       ],
       "training": {
-        "files": 3119,
-        "lines": 451273
+        "files": 5358,
+        "lines": 510419
       },
       "test": {
         "files": 140,
@@ -31907,8 +32019,8 @@
         "php"
       ],
       "training": {
-        "files": 6058,
-        "lines": 933334
+        "files": 6703,
+        "lines": 948825
       },
       "test": {
         "files": 2841,
@@ -31985,8 +32097,8 @@
         "pine-script"
       ],
       "training": {
-        "files": 1,
-        "lines": 41
+        "files": 133,
+        "lines": 1946
       },
       "test": {
         "files": 0,
@@ -32044,8 +32156,8 @@
         "zed"
       ],
       "training": {
-        "files": 11953,
-        "lines": 4224492
+        "files": 14712,
+        "lines": 4303917
       },
       "test": {
         "files": 4308,
@@ -32169,8 +32281,8 @@
         "pony"
       ],
       "training": {
-        "files": 1040,
-        "lines": 155304
+        "files": 1062,
+        "lines": 156283
       },
       "test": {
         "files": 299,
@@ -32210,8 +32322,8 @@
         "powershell"
       ],
       "training": {
-        "files": 251,
-        "lines": 14886
+        "files": 1200,
+        "lines": 32814
       },
       "test": {
         "files": 93,
@@ -32292,8 +32404,8 @@
         "prolog"
       ],
       "training": {
-        "files": 140,
-        "lines": 23878
+        "files": 3174,
+        "lines": 107456
       },
       "test": {
         "files": 36,
@@ -32418,8 +32530,8 @@
         "zed"
       ],
       "training": {
-        "files": 9031,
-        "lines": 2808888
+        "files": 12085,
+        "lines": 2935703
       },
       "test": {
         "files": 4018,
@@ -32644,8 +32756,8 @@
         "r"
       ],
       "training": {
-        "files": 384,
-        "lines": 108634
+        "files": 1595,
+        "lines": 134061
       },
       "test": {
         "files": 138,
@@ -32664,8 +32776,8 @@
         "racket"
       ],
       "training": {
-        "files": 1876,
-        "lines": 128924
+        "files": 3268,
+        "lines": 166018
       },
       "test": {
         "files": 43,
@@ -32862,8 +32974,8 @@
         "red"
       ],
       "training": {
-        "files": 909,
-        "lines": 338683
+        "files": 1217,
+        "lines": 350152
       },
       "test": {
         "files": 7518,
@@ -32962,8 +33074,8 @@
         "rescript"
       ],
       "training": {
-        "files": 52,
-        "lines": 13456
+        "files": 90,
+        "lines": 13921
       },
       "test": {
         "files": 6,
@@ -33082,8 +33194,8 @@
         "roc"
       ],
       "training": {
-        "files": 75,
-        "lines": 15415
+        "files": 77,
+        "lines": 15428
       },
       "test": {
         "files": 19,
@@ -33239,8 +33351,8 @@
         "sorbet"
       ],
       "training": {
-        "files": 5945,
-        "lines": 738284
+        "files": 7709,
+        "lines": 775866
       },
       "test": {
         "files": 4138,
@@ -33259,8 +33371,8 @@
         "zed"
       ],
       "training": {
-        "files": 9775,
-        "lines": 3015860
+        "files": 11256,
+        "lines": 3108138
       },
       "test": {
         "files": 4822,
@@ -33299,8 +33411,8 @@
         "sagemath"
       ],
       "training": {
-        "files": 0,
-        "lines": 0
+        "files": 6,
+        "lines": 107
       },
       "test": {
         "files": 0,
@@ -33340,8 +33452,8 @@
         "scss"
       ],
       "training": {
-        "files": 19,
-        "lines": 343
+        "files": 24,
+        "lines": 424
       },
       "test": {
         "files": 18,
@@ -33381,8 +33493,8 @@
         "scala"
       ],
       "training": {
-        "files": 1030,
-        "lines": 131391
+        "files": 2380,
+        "lines": 169107
       },
       "test": {
         "files": 1553,
@@ -33402,8 +33514,8 @@
         "scheme"
       ],
       "training": {
-        "files": 2079,
-        "lines": 127290
+        "files": 2734,
+        "lines": 149787
       },
       "test": {
         "files": 23,
@@ -33464,8 +33576,8 @@
         "zed"
       ],
       "training": {
-        "files": 2168,
-        "lines": 180734
+        "files": 2821,
+        "lines": 191677
       },
       "test": {
         "files": 1132,
@@ -33533,14 +33645,14 @@
         "simula"
       ],
       "training": {
-        "files": 0,
-        "lines": 0
+        "files": 107,
+        "lines": 6990
       },
       "test": {
         "files": 0,
         "lines": 0
       },
-      "below_threshold": true
+      "below_threshold": false
     },
     "Skir": {
       "suffixes": [
@@ -33593,8 +33705,8 @@
         "slang"
       ],
       "training": {
-        "files": 2,
-        "lines": 157
+        "files": 54,
+        "lines": 791
       },
       "test": {
         "files": 0,
@@ -33837,8 +33949,8 @@
         "authzed"
       ],
       "training": {
-        "files": 0,
-        "lines": 0
+        "files": 4,
+        "lines": 1415
       },
       "test": {
         "files": 0,
@@ -33899,8 +34011,8 @@
         "sql"
       ],
       "training": {
-        "files": 272,
-        "lines": 14692
+        "files": 541,
+        "lines": 21540
       },
       "test": {
         "files": 461,
@@ -33919,8 +34031,8 @@
         "squirrel"
       ],
       "training": {
-        "files": 71,
-        "lines": 52309
+        "files": 74,
+        "lines": 52345
       },
       "test": {
         "files": 146,
@@ -34116,8 +34228,8 @@
         "structured-text"
       ],
       "training": {
-        "files": 53,
-        "lines": 5367
+        "files": 678,
+        "lines": 12726
       },
       "test": {
         "files": 944,
@@ -34237,8 +34349,8 @@
         "swift"
       ],
       "training": {
-        "files": 4506,
-        "lines": 573604
+        "files": 5328,
+        "lines": 606543
       },
       "test": {
         "files": 1906,
@@ -34300,8 +34412,8 @@
         "verilog"
       ],
       "training": {
-        "files": 943,
-        "lines": 1914465
+        "files": 1795,
+        "lines": 1941974
       },
       "test": {
         "files": 57,
@@ -34385,8 +34497,8 @@
         "tcl"
       ],
       "training": {
-        "files": 457,
-        "lines": 175570
+        "files": 2000,
+        "lines": 217552
       },
       "test": {
         "files": 1267,
@@ -34755,8 +34867,8 @@
         "todotxt"
       ],
       "training": {
-        "files": 11953,
-        "lines": 4224492
+        "files": 14712,
+        "lines": 4303917
       },
       "test": {
         "files": 4308,
@@ -34818,8 +34930,8 @@
         "tonel-smalltalk"
       ],
       "training": {
-        "files": 53,
-        "lines": 5367
+        "files": 678,
+        "lines": 12726
       },
       "test": {
         "files": 944,
@@ -34878,8 +34990,8 @@
         "tree-sitter-query"
       ],
       "training": {
-        "files": 2075,
-        "lines": 117234
+        "files": 2730,
+        "lines": 139731
       },
       "test": {
         "files": 22,
@@ -35003,8 +35115,8 @@
         "zed"
       ],
       "training": {
-        "files": 170951,
-        "lines": 19986414
+        "files": 171017,
+        "lines": 19989203
       },
       "test": {
         "files": 137774,
@@ -35106,14 +35218,14 @@
         "uiua"
       ],
       "training": {
-        "files": 0,
-        "lines": 0
+        "files": 566,
+        "lines": 3852
       },
       "test": {
         "files": 0,
         "lines": 0
       },
-      "below_threshold": true
+      "below_threshold": false
     },
     "Umka": {
       "suffixes": [
@@ -35186,8 +35298,8 @@
         "unison"
       ],
       "training": {
-        "files": 6,
-        "lines": 18
+        "files": 11,
+        "lines": 62
       },
       "test": {
         "files": 0,
@@ -35270,8 +35382,8 @@
         "v"
       ],
       "training": {
-        "files": 1202,
-        "lines": 1926765
+        "files": 2054,
+        "lines": 1954274
       },
       "test": {
         "files": 47,
@@ -35291,8 +35403,8 @@
         "vala"
       ],
       "training": {
-        "files": 1367,
-        "lines": 338788
+        "files": 1492,
+        "lines": 341154
       },
       "test": {
         "files": 123,
@@ -35394,8 +35506,8 @@
         "vhdl"
       ],
       "training": {
-        "files": 89,
-        "lines": 32562
+        "files": 103,
+        "lines": 33107
       },
       "test": {
         "files": 331,
@@ -35817,8 +35929,8 @@
         "wren"
       ],
       "training": {
-        "files": 111,
-        "lines": 3129
+        "files": 2066,
+        "lines": 106690
       },
       "test": {
         "files": 1,
@@ -35921,8 +36033,8 @@
         "xquery"
       ],
       "training": {
-        "files": 0,
-        "lines": 0
+        "files": 25,
+        "lines": 360
       },
       "test": {
         "files": 0,
@@ -35946,8 +36058,8 @@
         "zed"
       ],
       "training": {
-        "files": 11267,
-        "lines": 1101747
+        "files": 14028,
+        "lines": 1108691
       },
       "test": {
         "files": 8142,
@@ -36147,8 +36259,8 @@
         "zig"
       ],
       "training": {
-        "files": 3285,
-        "lines": 813064
+        "files": 3690,
+        "lines": 849966
       },
       "test": {
         "files": 473,

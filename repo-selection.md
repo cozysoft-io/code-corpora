@@ -9,8 +9,9 @@ Selections and immutable pins are in [`selected-repos.toml`](selected-repos.toml
 The source scope excludes known fixtures, copied libraries and stubs. Exact Git-blob comparisons found no matching scoped files over 300 bytes between the GitHub candidates or with the existing corpus checkouts. This does not detect near copies. Apply the recorded source scopes and audit dependencies before evaluating; the fetch tool clones whole repositories.
 
 The current census requires at least **21 files and 2,000 raw lines** combined.
-After recounting, **302 language names** remain below threshold; all 97 language
-names with selected pairs now meet it. File and line totals are unchanged.
+After the expansion recount, **302 language names** remained below threshold;
+all 97 language names with selected pairs met it. This is the baseline before
+the subsequent Rosetta Code addition; see the current [coverage census](language-coverage.md).
 
 ## Coverage after fetching (original 50-file threshold)
 

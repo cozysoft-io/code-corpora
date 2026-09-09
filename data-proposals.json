@@ -1,5 +1,5 @@
 {
-  "status": "proposal; no corpus selections or checkouts changed",
+  "status": "RosettaCodeData fetched into training; other sources remain proposals",
   "baseline_coverage_sha256": "c2db1e44a8b993a2855334af375ee548f516e01045e31856fa183305a7aa5852",
   "threshold": {
     "files": 21,
@@ -15771,6 +15771,29 @@
           "action": "Inspect the registered extension and grammar examples/documentation, follow the author upstream, and extract labelled examples. If none exist, add explicitly synthetic minimal cases; retain the gap rather than pretending these are production data."
         }
       ]
+    }
+  },
+  "implemented": {
+    "acmeism/RosettaCodeData": {
+      "sha": "1d475861d7141ef2fafff293d9339f56e4b0f5db",
+      "path": "train/acmeism--RosettaCodeData",
+      "source_root": "Task/",
+      "evaluation_ready": false,
+      "checkout_verified": true,
+      "coverage_contribution": {
+        "files": 75148,
+        "lines": 2681031,
+        "invalid_utf8": 0,
+        "unmatched_files": 73843,
+        "symlinks_skipped": 0
+      },
+      "remaining_after_filename_census": 298,
+      "verified_target_languages_clearing_threshold": [
+        "Arturo",
+        "Uiua",
+        "Simula"
+      ],
+      "filename_census_caveat": "Brainfuck also clears the raw filename threshold because .bf includes Befunge. The reviewed Brainfuck subset remains below 2,000 lines."
     }
   }
 }

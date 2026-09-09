@@ -106,6 +106,12 @@ apply this scope before approving readiness.
 
 ## Readiness for heuristic-jump evaluation
 
+RosettaCodeData is an explicit example-collection exception to the production
+source and paired-repository criteria above. The entire pinned collection stays
+in training. Its canonical source tree is `Task/`; `Lang/` is an alternate view.
+Language directory labels guide source review because some export suffixes are
+guessed. Selection evidence is in [`DATA-PROPOSALS.md`](DATA-PROPOSALS.md).
+
 Selecting and pinning source does not establish an LSP oracle. Before collecting
 ground truth, the language needs a grammar, a supported heuristic-jump handler,
 and a usable language server or a separately specified reference oracle.
