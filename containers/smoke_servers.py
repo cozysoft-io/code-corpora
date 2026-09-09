@@ -93,7 +93,7 @@ for directory in [Path('/opt/corpus/servers')/sys.argv[1]]:
     executables = sorted((b for b in meta['executables'] if not b['name'].startswith(('python', 'pip'))), key=rank)
     for entry in executables[:3]:
         command = ([entry['interpreter']] if entry.get('interpreter') else [])+[str(directory/entry['path'])]
-        for arguments in ([], ['--stdio'], ['--lsp'], ['lsp'], ['server'], ['language-server'], ['move-analyzer'], ['serve'], ['lsp-proxy'], ['start', '--stdio']):
+        for arguments in ([], ['--stdio'], ['--lsp'], ['--lsp', '--stdio'], ['lsp'], ['server'], ['language-server'], ['move-analyzer'], ['serve'], ['lsp-proxy'], ['start', '--stdio']):
             record['attempts'].append([entry['name'], *arguments])
             diagnostic = {'command': [entry['name'], *arguments]}
             try: passed = probe(command+arguments, diagnostic, initialization_options)
