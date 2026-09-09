@@ -69,11 +69,18 @@ map IDs directly to repositories. This includes optional alternatives and extens
 that implement editor features through an LSP server.
 
 Repositories were traced from pinned adapter source, installation commands,
-README references, and package registry repository metadata. Server selection SHAs freeze
-source HEAD observed during this snapshot, except Zed's fixed ESLint
-`release/3.0.24` tag. These source snapshots are **not** a binary version lock for
-Zed: adapters commonly select latest releases, package versions, local toolchains,
-or user-configured executables at runtime.
+README references, and package registry repository metadata. Server selections
+were updated on 2026-09-09: extension version pins take precedence, followed by
+the highest stable numbered tag in the server's release family. Prereleases or
+dated releases are used when no stable version exists; repositories without
+version tags retain an observed HEAD SHA. Prisma uses the adapter's latest default,
+rather than its optional v6 setting. These source pins do not control Zed's managed
+downloads or user-configured executables.
+
+[server-version-pins.md](server-version-pins.md) records the adapter constraint
+audit against the original HEAD snapshots. [server-releases.json](server-releases.json)
+records all 432 selections and their previous commits; 315 changed.
+[servers-using-head.md](servers-using-head.md) lists the 27 HEAD fallbacks.
 
 `role` distinguishes actual source repositories from documentation, release
 repositories, public toolchain components, and launchers. Intelephense and PHP Tools

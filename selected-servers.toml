@@ -2,21 +2,27 @@
 # URLs and SHAs used by ./corpus clone --set servers.
 
 schema_version = 1
-snapshot_date = "2026-09-08"
+snapshot_date = "2026-09-09"
 
 [[repo]]
 name = "tree-sitter-hp42s"
 url = "https://codeberg.org/brechanbech/tree-sitter-hp42s"
-sha = "ac4e84f0f90b42f1af8a55b6cd448f851f8c0d3a"
+sha = "eeefd0962f7a7a921930253ffcd703cfdcffc9d3"
 sources = ["hp42s"]
 role = "source"
+selection = "version-tag"
+version = "v0.1.0"
+upstream_ref = "refs/tags/v0.1.0"
 
 [[repo]]
 name = "zed-arturo"
 url = "https://codeberg.org/DaZhi-the-Revelator/zed-arturo"
-sha = "12fab78dceafa9d003fe00e1d7c9eb49fd6c865f"
+sha = "8b4eaf35b50c22811c83264656d041684740433f"
 sources = ["arturo"]
 role = "source"
+selection = "version-tag"
+version = "v1.0.3"
+upstream_ref = "refs/tags/v1.0.3"
 
 [[repo]]
 name = "dang"
@@ -24,13 +30,18 @@ url = "https://codeberg.org/vito/dang"
 sha = "acc64672d7540cb2f6804ac2b1f68ab5efd46f99"
 sources = ["dang"]
 role = "source"
+selection = "head"
+upstream_ref = "refs/heads/main"
 
 [[repo]]
 name = "nu-lint"
 url = "https://codeberg.org/wvhulle/nu-lint"
-sha = "f15c04bcd02c943a9187947a0f90a32b7af6fa95"
+sha = "dac135c744b11a1ac952a4d0d0dfd4b1df4fdee9"
 sources = ["nu-lint"]
 role = "source"
+selection = "version-tag"
+version = "v1.3.0"
+upstream_ref = "refs/tags/v1.3.0"
 
 [[repo]]
 name = "bqnlsp"
@@ -38,27 +49,38 @@ url = "https://git.sr.ht/~detegr/bqnlsp"
 sha = "13dfae2687b482d55ff679eb905951267c7b00b0"
 sources = ["bqn"]
 role = "source"
+selection = "head"
+upstream_ref = "refs/heads/master"
 
 [[repo]]
 name = "muon"
 url = "https://git.sr.ht/~lattis/muon"
-sha = "3ee54382d463bec09647edc6bd834a8f50f34458"
+sha = "1c825e41e2266be1bead999f7f65d9c763a7ca18"
 sources = ["meson"]
 role = "source"
+selection = "extension-version"
+version = "0.6.0"
+upstream_ref = "refs/tags/0.6.0"
 
 [[repo]]
 name = "zed-highlight"
 url = "https://github.com/0xdea/zed-highlight"
-sha = "e6718de4cc65eeb87c2b7c3e28785e0f722001dc"
+sha = "9a4d61245167fda13a090768fa791e2f99c6c5d3"
 sources = ["word-highlight-lsp"]
 role = "source"
+selection = "version-tag"
+version = "v0.1.4"
+upstream_ref = "refs/tags/v0.1.4"
 
 [[repo]]
 name = "luau-lsp-proxy"
 url = "https://github.com/4teapo/luau-lsp-proxy"
-sha = "7a3a5861c8f8261a4118f08c4c3c25ffc3085339"
+sha = "2d626e9080a2502e72726024e3cfac648fc40d09"
 sources = ["luau"]
 role = "source"
+selection = "extension-version"
+version = "0.1.0"
+upstream_ref = "refs/tags/v0.1.0"
 
 [[repo]]
 name = "zed-bookmark"
@@ -66,6 +88,8 @@ url = "https://github.com/A-23187/zed-bookmark"
 sha = "a8effebb481b9c7b96af3c2fc1d4f73409dcf74d"
 sources = ["bookmark"]
 role = "source"
+selection = "head"
+upstream_ref = "refs/heads/main"
 
 [[repo]]
 name = "zed-hexpeek"
@@ -73,13 +97,18 @@ url = "https://github.com/A-23187/zed-hexpeek"
 sha = "fedc038fae5ce56586a1cc3c6e0a995b42b239b1"
 sources = ["hexpeek"]
 role = "source"
+selection = "head"
+upstream_ref = "refs/heads/main"
 
 [[repo]]
 name = "templ"
 url = "https://github.com/a-h/templ"
-sha = "04abee5364c6fab2bde8c00d215fdcb630ad6a94"
+sha = "09d6b02946f54492f3d3dcb9729f5b792f220b40"
 sources = ["templ"]
 role = "source"
+selection = "version-tag"
+version = "v0.3.1020"
+upstream_ref = "refs/tags/v0.3.1020"
 
 [[repo]]
 name = "eclipse.jdt.ls"
@@ -87,13 +116,19 @@ url = "https://github.com/ABckh/eclipse.jdt.ls"
 sha = "f458e369db03def374a28e7b05df6993c5e52c11"
 sources = ["java-eclipse-jdtls"]
 role = "source"
+selection = "version-tag"
+version = "v0.0.9"
+upstream_ref = "refs/tags/v0.0.9"
 
 [[repo]]
 name = "smalisp"
 url = "https://github.com/AbhiTheModder/smalisp"
-sha = "1b98650a7d22b58395cd22be4c276feb29f5ec28"
+sha = "07efb845049f6bd8754493265024272b14741042"
 sources = ["smalisp"]
 role = "source"
+selection = "version-tag"
+version = "v0.1.0"
+upstream_ref = "refs/tags/v0.1.0"
 
 [[repo]]
 name = "elle"
@@ -101,48 +136,68 @@ url = "https://github.com/acquitelol/elle"
 sha = "0e218ec645a9307363ef5b85bf0122e10f9125a6"
 sources = ["elle"]
 role = "source"
+selection = "head"
+upstream_ref = "refs/heads/rewrite"
 
 [[repo]]
 name = "ada_language_server"
 url = "https://github.com/AdaCore/ada_language_server"
-sha = "630e927501126235a830e5bd7ec7e2a820de0c82"
+sha = "4a2d3d5e67bb52160d9fc17fbc52d3293274469a"
 sources = ["ada"]
 role = "source"
+selection = "version-tag"
+version = "2026.3.202607051"
+upstream_ref = "refs/tags/2026.3.202607051"
 
 [[repo]]
 name = "agda-language-server"
 url = "https://github.com/agda/agda-language-server"
-sha = "109517c4438ebcef4d95574498ebc96f81598201"
+sha = "36c9612afff81dd9b0657805d3e636ce7c8355e5"
 sources = ["agda"]
 role = "source"
+selection = "version-tag"
+version = "v6"
+upstream_ref = "refs/tags/v6"
 
 [[repo]]
 name = "agnix"
 url = "https://github.com/agent-sh/agnix"
-sha = "e557022f0943a010f0dd4a634da4991cfffaf604"
+sha = "3d33085ca55b609e657d0b08cd4caa145bf9d1de"
 sources = ["agnix"]
 role = "source"
+selection = "version-tag"
+version = "v0.52.2"
+upstream_ref = "refs/tags/v0.52.2"
 
 [[repo]]
 name = "emoji-completions-zed"
 url = "https://github.com/ahockersten/emoji-completions-zed"
-sha = "78cb190b949df45514dfec105512970209cc08a9"
+sha = "ddcd74ca832ba30f3f4ebacb9abb31dd0fe1f9d2"
 sources = ["emoji-completions"]
 role = "source"
+selection = "extension-version"
+version = "1.1.1"
+upstream_ref = "refs/tags/1.1.1"
 
 [[repo]]
 name = "aiken"
 url = "https://github.com/aiken-lang/aiken"
-sha = "bd0e4e30c6d8f51221bd9aabf22cfeb794d72884"
+sha = "8949565a9969278846ffefe30bc3b892029dd318"
 sources = ["aiken"]
 role = "source"
+selection = "version-tag"
+version = "v1.1.23"
+upstream_ref = "refs/tags/v1.1.23"
 
 [[repo]]
 name = "gregorio-lsp"
 url = "https://github.com/aiscgre-br/gregorio-lsp"
-sha = "5fe102992cb82ac6b0f29323ff57169f5a8bb890"
+sha = "e3a934b375701e2d125dcd035abeca065431a8a5"
 sources = ["gregorio"]
 role = "source"
+selection = "version-tag"
+version = "v0.11.0"
+upstream_ref = "refs/tags/v0.11.0"
 
 [[repo]]
 name = "pyatlas"
@@ -150,13 +205,19 @@ url = "https://github.com/Akamine2001/pyatlas"
 sha = "661be90fd6cdced7a6ddd38ef947206af5df27f3"
 sources = ["pyatlas-lsp"]
 role = "source"
+selection = "version-tag"
+version = "v0.1.0"
+upstream_ref = "refs/tags/v0.1.0"
 
 [[repo]]
 name = "cqlls"
 url = "https://github.com/Akzestia/cqlls"
-sha = "04aeb114499ad5cd0c27b556574349a41374c782"
+sha = "177a424056c61514f59a8eda7fe61cd376b718aa"
 sources = ["cql"]
 role = "source"
+selection = "version-tag"
+version = "v4.1.0"
+upstream_ref = "refs/tags/v4.1.0"
 
 [[repo]]
 name = "gitlab-ci-ls"
@@ -164,34 +225,49 @@ url = "https://github.com/alesbrelih/gitlab-ci-ls"
 sha = "ccb5d915c3881ad58e8786d2a1f007ef03e82e85"
 sources = ["gitlab-ci-ls"]
 role = "source"
+selection = "version-tag"
+version = "1.4.0"
+upstream_ref = "refs/tags/1.4.0"
 
 [[repo]]
 name = "babel-lsp"
 url = "https://github.com/alex-oleshkevich/babel-lsp"
-sha = "cc819f68ddf35af09433870adab86f2d90b7986f"
+sha = "f4db8a7c4feffd4b03eae57dcd89953c506cb094"
 sources = ["babel-lsp"]
 role = "source"
+selection = "version-tag"
+version = "v0.2.1"
+upstream_ref = "refs/tags/v0.2.1"
 
 [[repo]]
 name = "fastapi-lsp"
 url = "https://github.com/alex-oleshkevich/fastapi-lsp"
-sha = "f8c2abccc05821f5c98079dab7d6f52779a4cb36"
+sha = "dc0d01b70bbb8d4449091559a124f458d0ea46b9"
 sources = ["fastapi-lsp"]
 role = "source"
+selection = "version-tag"
+version = "v0.1.6"
+upstream_ref = "refs/tags/v0.1.6"
 
 [[repo]]
 name = "sqlalchemy-lsp"
 url = "https://github.com/alex-oleshkevich/sqlalchemy-lsp"
-sha = "ee5b63e80dac3c0d95924aeb5ebdec83fcd77fe3"
+sha = "e8b6963b7b5e3ae25e37fe784ade3cbab476d0ad"
 sources = ["sqlalchemy-lsp"]
 role = "source"
+selection = "version-tag"
+version = "v0.2.1"
+upstream_ref = "refs/tags/v0.2.1"
 
 [[repo]]
 name = "vscode-autohotkey"
 url = "https://github.com/alfredomtx/vscode-autohotkey"
-sha = "bbd429675c5c5b73dbad306ef4693bcbe763f5d8"
+sha = "16fa748fe73d9e9f736b197cc13ec9515b6183f6"
 sources = ["autohotkey"]
 role = "source"
+selection = "extension-version"
+version = "0.4.0"
+upstream_ref = "refs/tags/lsp-v0.4.0"
 
 [[repo]]
 name = "amber-lsp"
@@ -199,62 +275,89 @@ url = "https://github.com/amber-lang/amber-lsp"
 sha = "3096b1191944bd7e14112443264dea4312f2c9d8"
 sources = ["amber"]
 role = "source"
+selection = "version-tag"
+version = "v0.3.0"
+upstream_ref = "refs/tags/v0.3.0"
 
 [[repo]]
 name = "angular"
 url = "https://github.com/angular/angular"
-sha = "9a58353b1b680f162a55969965ae6a90ae20316d"
+sha = "468b65b74566537456c192ac4281795c5a1e1a5e"
 sources = ["angular"]
 role = "source"
+selection = "version-tag"
+version = "v22.1.5"
+upstream_ref = "refs/tags/v22.1.5"
 
 [[repo]]
 name = "vscode-ansible"
 url = "https://github.com/ansible/vscode-ansible"
-sha = "5065da01bc457efd6a84271d6dd258d318923829"
+sha = "baac2f28ddbe3fcd58d2c52ee92eb95cfdfefc7b"
 sources = ["ansible"]
 role = "source"
+selection = "version-tag"
+version = "v26.8.2"
+upstream_ref = "refs/tags/v26.8.2"
 
 [[repo]]
 name = "shader-sense"
 url = "https://github.com/antaalt/shader-sense"
-sha = "22941639ccb1746279547d5bbf1c4a1789ef8f8e"
+sha = "8135499427b1cb14b28afcb5d1f9e96e8b8d32f9"
 sources = ["shader-ls"]
 role = "source"
+selection = "version-tag"
+version = "v1.5.0"
+upstream_ref = "refs/tags/v1.5.0"
 
 [[repo]]
 name = "pkl-lsp"
 url = "https://github.com/apple/pkl-lsp"
-sha = "47d5d5531b96072920d06d05c238f8898ba3e748"
+sha = "2a364e145629d3a2caa8ed9cf9b76b93db944241"
 sources = ["pkl"]
 role = "source"
+selection = "version-tag"
+version = "0.8.0"
+upstream_ref = "refs/tags/0.8.0"
 
 [[repo]]
 name = "aptos-core"
 url = "https://github.com/aptos-labs/aptos-core"
-sha = "6137e8f7ee8e8b944568a3faf86c2064440edf17"
+sha = "6d836beedc56fc70c54f3b3046d1d248d850c64b"
 sources = ["move-aptos"]
 role = "source"
+selection = "version-tag"
+version = "aptos-cli-v9.5.1"
+upstream_ref = "refs/tags/aptos-cli-v9.5.1"
 
 [[repo]]
 name = "move-vscode-extension"
 url = "https://github.com/aptos-labs/move-vscode-extension"
-sha = "8f3b94a25f29c17a8c10605d33eb5aa70b1f22d0"
+sha = "81efbf96573f331d0e2db9c7d384dbb8d29cbb78"
 sources = ["aptos-move"]
 role = "source"
+selection = "version-tag"
+version = "2026-06-24"
+upstream_ref = "refs/tags/2026-06-24"
 
 [[repo]]
 name = "arduino-language-server"
 url = "https://github.com/arduino/arduino-language-server"
-sha = "dec72c89e8838e115457d208767bf401ca7141e7"
+sha = "9945da32e7fa19145453c95237c42ea7fdb5a40a"
 sources = ["arduino"]
 role = "source"
+selection = "version-tag"
+version = "0.7.7"
+upstream_ref = "refs/tags/0.7.7"
 
 [[repo]]
 name = "zed-unicode"
 url = "https://github.com/aripiprazole/zed-unicode"
-sha = "e2ed7dca9daeadead613f1946c2ff89c00bb8d23"
+sha = "17dcf416aa4208c806138ddbf0d332bdbbef6040"
 sources = ["unicode"]
 role = "source"
+selection = "version-tag"
+version = "0.1.7"
+upstream_ref = "refs/tags/0.1.7"
 
 [[repo]]
 name = "marksman"
@@ -262,6 +365,9 @@ url = "https://github.com/artempyanykh/marksman"
 sha = "4340227338f8d2b369bf38d19f029f1effb532f6"
 sources = ["marksman"]
 role = "source"
+selection = "version-tag"
+version = "2026-02-08"
+upstream_ref = "refs/tags/2026-02-08"
 
 [[repo]]
 name = "rovo"
@@ -269,13 +375,19 @@ url = "https://github.com/Arthurdw/rovo"
 sha = "7bb6253e2b720d55e80b55f5e4861a3d449320c5"
 sources = ["rovo-lsp"]
 role = "source"
+selection = "version-tag"
+version = "v0.4.9"
+upstream_ref = "refs/tags/v0.4.9"
 
 [[repo]]
 name = "zed-package-json-upgrade"
 url = "https://github.com/Arthurmtro/zed-package-json-upgrade"
-sha = "5e481cd1a7cdf6829c5ef6b95bef45a28723b95c"
+sha = "eeeefa8bbcf6127889b9ad73bca3985a24500a83"
 sources = ["package-json-upgrade-lsp"]
 role = "source"
+selection = "version-tag"
+version = "v0.1.5"
+upstream_ref = "refs/tags/v0.1.5"
 
 [[repo]]
 name = "svelte-effect-runtime"
@@ -283,83 +395,119 @@ url = "https://github.com/artisanstreet/svelte-effect-runtime"
 sha = "67e3f6ca8b92312da026a21f268dea1e7c87850e"
 sources = ["svelte-effect-runtime-language-server"]
 role = "source"
+selection = "version-tag"
+version = "v4.2.6"
+upstream_ref = "refs/tags/v4.2.6"
 
 [[repo]]
 name = "sieve-language-server"
 url = "https://github.com/arustydev/sieve-language-server"
-sha = "e0d53d7ffda3cf21849844c3c4c442fb40a8b55e"
+sha = "779a7e7e38e3827e29062a504c9175ad5d15f265"
 sources = ["sieve"]
 role = "source"
+selection = "version-tag"
+version = "v0.1.1"
+upstream_ref = "refs/tags/v0.1.1"
 
 [[repo]]
 name = "ast-grep"
 url = "https://github.com/ast-grep/ast-grep"
-sha = "fc2b1530db74de49131b725221de98036a552a9f"
+sha = "979c143639e3588c31f563091e69398683ed34f0"
 sources = ["ast-grep"]
 role = "source"
+selection = "version-tag"
+version = "0.45.3"
+upstream_ref = "refs/tags/0.45.3"
 
 [[repo]]
 name = "ruff"
 url = "https://github.com/astral-sh/ruff"
-sha = "d38008443d04b3d0e7953328362b7d712f682ed8"
+sha = "22f65a2ab5052990503985c7c794de37598d531e"
 sources = ["zed-core/ruff"]
 role = "source"
+selection = "version-tag"
+version = "0.16.6"
+upstream_ref = "refs/tags/0.16.6"
 
 [[repo]]
 name = "ty"
 url = "https://github.com/astral-sh/ty"
-sha = "5cde40f5cb83f1cb164b91282e6a72f3dfe4580c"
+sha = "b4cd79275b7ce22c4cf4208f8b005adb53e92523"
 sources = ["ty", "zed-core/ty"]
 role = "source"
+selection = "version-tag"
+version = "0.0.79"
+upstream_ref = "refs/tags/0.0.79"
 
 [[repo]]
 name = "spicedb"
 url = "https://github.com/authzed/spicedb"
-sha = "9b5cdc1e849249ecd31cfeca82149767dbb8760f"
+sha = "96ab9662469d94061e57cd8c591339ce27c902bd"
 sources = ["authzed"]
 role = "source"
+selection = "version-tag"
+version = "v1.56.1"
+upstream_ref = "refs/tags/v1.56.1"
 
 [[repo]]
 name = "harper"
 url = "https://github.com/Automattic/harper"
-sha = "c34d5c0b095de2e224813655d3631007dd0e64fa"
+sha = "1a4b5db72a941119f37f92097d71a51d1a3e739c"
 sources = ["harper"]
 role = "source"
+selection = "version-tag"
+version = "v2.9.1"
+upstream_ref = "refs/tags/v2.9.1"
 
 [[repo]]
 name = "yls"
 url = "https://github.com/avast/yls"
-sha = "37c71528e5fb6435d2d33b798865551aff02f352"
+sha = "76ca31415bf5e63ed9a0669e3e1708525b100539"
 sources = ["yara"]
 role = "source"
+selection = "version-tag"
+version = "v1.4.4"
+upstream_ref = "refs/tags/v1.4.4"
 
 [[repo]]
 name = "cloudformation-languageserver"
 url = "https://github.com/aws-cloudformation/cloudformation-languageserver"
-sha = "d83ae6a02a7e91260b65f47c4f11d0a26a37b61c"
+sha = "2a9940dd3f8390d2bdcbbdd19f8bc1152c207df1"
 sources = ["cloudformation-language-server"]
 role = "source"
+selection = "version-tag"
+version = "v1.10.0"
+upstream_ref = "refs/tags/v1.10.0"
 
 [[repo]]
 name = "awsum"
 url = "https://github.com/awsum-lang/awsum"
-sha = "fd7abdf701be2ae08277563c58da94efdfa1bcf1"
+sha = "264f4ab5631c3baf0b2d829732e1109ad2cb4f2e"
 sources = ["awsum"]
 role = "source"
+selection = "extension-version"
+version = "0.0.7"
+upstream_ref = "refs/tags/v0.0.7"
 
 [[repo]]
 name = "millet"
 url = "https://github.com/azdavis/millet"
-sha = "4df3186429d1f7822d66a44114eac973f4e1e6df"
+sha = "fade6f5742b02bdfba9ca67bf8b556756099d214"
 sources = ["sml"]
 role = "source"
+selection = "version-tag"
+version = "v0.15.2"
+upstream_ref = "refs/tags/v0.15.2"
 
 [[repo]]
 name = "bicep"
 url = "https://github.com/Azure/bicep"
-sha = "5c2bb74535d899bf97982521c2e3ee356b81a69a"
+sha = "3f73e1a234fcdf3907d606504aa2ff546921da03"
 sources = ["bicep"]
 role = "source"
+selection = "version-tag"
+version = "v0.47.16"
+upstream_ref = "refs/tags/v0.47.16"
 
 [[repo]]
 name = "unocss-language-server"
@@ -367,62 +515,89 @@ url = "https://github.com/bajrangCoder/unocss-language-server"
 sha = "5ade18b8700a57f97e09c545da69d730d2256437"
 sources = ["unocss"]
 role = "source"
+selection = "version-tag"
+version = "v0.1.7"
+upstream_ref = "refs/tags/v0.1.7"
 
 [[repo]]
 name = "bash-language-server"
 url = "https://github.com/bash-lsp/bash-language-server"
-sha = "12914eadae74f78e7f1b0f0cbc052883330ac7cb"
+sha = "2fb9b33b6f40b508bf3b54233ff4efef0cb08206"
 sources = ["basher", "zed-core/bash-language-server"]
 role = "source"
+selection = "version-tag"
+version = "server-5.6.0"
+upstream_ref = "refs/tags/server-5.6.0"
 
 [[repo]]
 name = "styx"
 url = "https://github.com/bearcove/styx"
-sha = "5a8e4669562e560937c27308e2ece70de63e0ba8"
+sha = "51feb2a67f211e806e5e2764bc5c06738a6c40d7"
 sources = ["styx"]
 role = "source"
+selection = "version-tag"
+version = "styx-lsp-v4.0.0"
+upstream_ref = "refs/tags/styx-lsp-v4.0.0"
 
 [[repo]]
 name = "pytest-language-server"
 url = "https://github.com/bellini666/pytest-language-server"
-sha = "5766d6347dc3efe8cacceb67c95942ceb43b7b91"
+sha = "3c4cf0fcdaa90447ea18d3a7e8e27ca96b5c7564"
 sources = ["pytest-language-server"]
 role = "source"
+selection = "version-tag"
+version = "v0.24.0"
+upstream_ref = "refs/tags/v0.24.0"
 
 [[repo]]
 name = "asimonim"
 url = "https://github.com/bennypowers/asimonim"
-sha = "34504a1f7c31f087b656cb3881cea5ae70942eeb"
+sha = "43a779aa0acd32f6b90ed857c49e468195410cba"
 sources = ["design-tokens"]
 role = "source"
+selection = "version-tag"
+version = "v0.3.2"
+upstream_ref = "refs/tags/v0.3.2"
 
 [[repo]]
 name = "cem"
 url = "https://github.com/bennypowers/cem"
-sha = "86fe4b4f8fcee97fd86f182f636e0e4197b07a5b"
+sha = "4e1730e6be40efa7ff9d173fe069e7abd4153ca9"
 sources = ["cem"]
 role = "source"
+selection = "version-tag"
+version = "v0.11.0"
+upstream_ref = "refs/tags/v0.11.0"
 
 [[repo]]
 name = "asm-lsp"
 url = "https://github.com/bergercookie/asm-lsp"
-sha = "ebc00fd4c1368370783afe91159b41370f79f52e"
+sha = "bacbe5eedfbfc202afe8f517faef2d5b9152bf95"
 sources = ["assembly"]
 role = "source"
+selection = "version-tag"
+version = "v0.10.1"
+upstream_ref = "refs/tags/v0.10.1"
 
 [[repo]]
 name = "ungrammar-language-features"
 url = "https://github.com/binhtran432k/ungrammar-language-features"
-sha = "8e089c4fb2b5933751f4088f7235da16c9bbea91"
+sha = "5c9a26c29221a59088adb3e6f66c0a2b95d72eb6"
 sources = ["ungrammar"]
 role = "source"
+selection = "version-tag"
+version = "v0.0.5"
+upstream_ref = "refs/tags/v0.0.5"
 
 [[repo]]
 name = "biome"
 url = "https://github.com/biomejs/biome"
-sha = "353cbae47056f8e03b27d1d9b69e165b5b72f122"
+sha = "0a31d7c4e1f6cc1b3e08af4aef2ad4b97f6b4f1c"
 sources = ["biome"]
 role = "source"
+selection = "version-tag"
+version = "@biomejs/biome@2.5.12"
+upstream_ref = "refs/tags/@biomejs/biome@2.5.12"
 
 [[repo]]
 name = "fswiki-lsp"
@@ -430,13 +605,19 @@ url = "https://github.com/blank71/fswiki-lsp"
 sha = "dd8f2fa3f45885d468d01e03160f196b11414813"
 sources = ["fswiki"]
 role = "source"
+selection = "extension-version"
+version = "1.0.1"
+upstream_ref = "refs/tags/v1.0.1"
 
 [[repo]]
 name = "codebook"
 url = "https://github.com/blopker/codebook"
-sha = "f6e4840ce1c6b9ffd53fe95d1265830058dfc9dc"
+sha = "b5f4c418c8d81ced46e0b7192f1acc1aa4f4bde7"
 sources = ["codebook"]
 role = "source"
+selection = "version-tag"
+version = "v0.3.43"
+upstream_ref = "refs/tags/v0.3.43"
 
 [[repo]]
 name = "intelephense-docs"
@@ -444,69 +625,98 @@ url = "https://github.com/bmewburn/intelephense-docs"
 sha = "3e810bc2823754096710863d2d0c30382c0bee55"
 sources = ["blade", "php"]
 role = "documentation"
+selection = "head"
+upstream_ref = "refs/heads/master"
 
 [[repo]]
 name = "baml"
 url = "https://github.com/BoundaryML/baml"
-sha = "92c9d1e4c0e9135a5590b4a34839b40f0fb0ef14"
+sha = "d9c0bc720d813821cdd00c90a774bf6f71e4e572"
 sources = ["baml"]
 role = "source"
+selection = "extension-version"
+version = "0.226.2"
+upstream_ref = "refs/tags/0.226.2"
 
 [[repo]]
 name = "vscode-as3mxml"
 url = "https://github.com/BowlerHatLLC/vscode-as3mxml"
-sha = "e4783d33b512c428e8d0d2916afb7f9871dbe304"
+sha = "63b020f5cf25a94dff6c0444f0608618e1ff69f0"
 sources = ["actionscript"]
 role = "source"
+selection = "version-tag"
+version = "v1.24.0"
+upstream_ref = "refs/tags/v1.24.0"
 
 [[repo]]
 name = "mach-lsp"
 url = "https://github.com/briar-systems/mach-lsp"
-sha = "75cfad591fabbd326c9533bea92cd0aad83c62fa"
+sha = "5f561fa97353028cf4da1e3563e6a721cf8bdbd4"
 sources = ["mach"]
 role = "source"
+selection = "version-tag"
+version = "v0.17.0"
+upstream_ref = "refs/tags/v0.17.0"
 
 [[repo]]
 name = "wdl-ide"
 url = "https://github.com/broadinstitute/wdl-ide"
-sha = "7808a6bd40bdadd9f5cb713ee34b69a53a7e4322"
+sha = "28d8509020c69c31a5228fdb2b73079eb8519a78"
 sources = ["wdl"]
 role = "source"
+selection = "version-tag"
+version = "0.0.90"
+upstream_ref = "refs/tags/0.0.90"
 
 [[repo]]
 name = "perlnavigator"
 url = "https://github.com/bscan/PerlNavigator"
-sha = "60360a31913316f58e196e8986dcc1447415d6cf"
+sha = "aed11540c3f4cb0bc26b8450b449c163c156b3b5"
 sources = ["perl"]
 role = "source"
+selection = "version-tag"
+version = "v0.8.20"
+upstream_ref = "refs/tags/v0.8.20"
 
 [[repo]]
 name = "buf"
 url = "https://github.com/bufbuild/buf"
-sha = "45b101d7666ab9aff304c01bd8db4dd620428324"
+sha = "7d6f05675219fa077f776e9f05b7c7d1a9882e0c"
 sources = ["proto", "zed/proto"]
 role = "source"
+selection = "version-tag"
+version = "v1.72.0"
+upstream_ref = "refs/tags/v1.72.0"
 
 [[repo]]
 name = "deps-lsp"
 url = "https://github.com/bug-ops/deps-lsp"
-sha = "f1e04b7721761d3b3c600fc3a01a7ce3c9cddbbd"
+sha = "0963cd15038d083826fe99987fa33a41a34584b3"
 sources = ["deps-language-server"]
 role = "source"
+selection = "version-tag"
+version = "v0.13.0"
+upstream_ref = "refs/tags/v0.13.0"
 
 [[repo]]
 name = "vscode-motoko"
 url = "https://github.com/caffeinelabs/vscode-motoko"
-sha = "3ce2856765875963c9fa25d8906184d01159adbc"
+sha = "d185d1ed17492f39dfbdcf9f89c389b21ad60e03"
 sources = ["motoko"]
 role = "source"
+selection = "version-tag"
+version = "v0.23.0"
+upstream_ref = "refs/tags/v0.23.0"
 
 [[repo]]
 name = "shapels"
 url = "https://github.com/carrascomj/shapels"
-sha = "5cbcc9e04a5555852b525aac3521504bf0784be8"
+sha = "2a25d224f3bdfe2ed3119d68d9a2c224b4202331"
 sources = ["shapels"]
 role = "source"
+selection = "version-tag"
+version = "0.5.0"
+upstream_ref = "refs/tags/0.5.0"
 
 [[repo]]
 name = "whim"
@@ -514,6 +724,9 @@ url = "https://github.com/carthage-software/whim"
 sha = "3b1b7ebc9dcb2683dad8c21cdf126beb20780c79"
 sources = ["whim-lang"]
 role = "source"
+selection = "version-tag"
+version = "0.5.0"
+upstream_ref = "refs/tags/0.5.0"
 
 [[repo]]
 name = "solargraph"
@@ -521,6 +734,9 @@ url = "https://github.com/castwide/solargraph"
 sha = "6dcb73338b372b25935406656e696c3ec1179e23"
 sources = ["ruby"]
 role = "source"
+selection = "version-tag"
+version = "v0.60.4"
+upstream_ref = "refs/tags/v0.60.4"
 
 [[repo]]
 name = "cfmleditor-lsp"
@@ -528,20 +744,29 @@ url = "https://github.com/cfmleditor/cfmleditor-lsp"
 sha = "abc7adac1036d94c53a3de32c605651f8cefac82"
 sources = ["cfml"]
 role = "source"
+selection = "version-tag"
+version = "v0.2.8"
+upstream_ref = "refs/tags/v0.2.8"
 
 [[repo]]
 name = "rlsp"
 url = "https://github.com/chdalski/rlsp"
-sha = "814fd9f440e259f07a802341a996192977001785"
+sha = "7aaccb4a54de633b913f041155264184db43a045"
 sources = ["rlsp-yaml"]
 role = "source"
+selection = "version-tag"
+version = "rlsp-yaml-v0.13.0"
+upstream_ref = "refs/tags/rlsp-yaml-v0.13.0"
 
 [[repo]]
 name = "verible"
 url = "https://github.com/chipsalliance/verible"
-sha = "b975d9d903f7a60510393d438a086294ab086dea"
+sha = "a0a8d8eb8cfa9fd8969c9d646454d363b48aa449"
 sources = ["verilog"]
 role = "source"
+selection = "extension-version"
+version = "0.0-4080-ga0a8d8eb"
+upstream_ref = "refs/tags/v0.0-4080-ga0a8d8eb"
 
 [[repo]]
 name = "poryscript-ls"
@@ -549,34 +774,49 @@ url = "https://github.com/chris-wilson-1/poryscript-ls"
 sha = "d05dfe0c6f0a0f37de530ee8125ff3a67c62e564"
 sources = ["poryscript"]
 role = "source"
+selection = "version-tag"
+version = "v0.2.1"
+upstream_ref = "refs/tags/v0.2.1"
 
 [[repo]]
 name = "ledger-language-server"
 url = "https://github.com/claytonrcarter/ledger-language-server"
-sha = "8a583cd1de5b87834abe224200eceb4efabcc74d"
+sha = "864dd7fd2ed0676b5275d96065100b0cd18de3d5"
 sources = ["ledger"]
 role = "source"
+selection = "version-tag"
+version = "v0.0.8"
+upstream_ref = "refs/tags/v0.0.8"
 
 [[repo]]
 name = "clice"
 url = "https://github.com/clice-io/clice"
-sha = "88774cc2f1cfaa0a462626c0f55c99a533c442e4"
+sha = "9e6e00b6f06c400feb9e474ac9baa0a2d328e778"
 sources = ["clice"]
 role = "source"
+selection = "version-tag"
+version = "v0.1.2026090707"
+upstream_ref = "refs/tags/v0.1.2026090707"
 
 [[repo]]
 name = "clojure-lsp"
 url = "https://github.com/clojure-lsp/clojure-lsp"
-sha = "855f03b91fd21c74728a9f1917744a5e590031af"
+sha = "de66293956c057b6ef02601594f196d048684683"
 sources = ["clojure"]
 role = "source"
+selection = "version-tag"
+version = "2026.07.06-14.34.19"
+upstream_ref = "refs/tags/2026.07.06-14.34.19"
 
 [[repo]]
 name = "protols"
 url = "https://github.com/coder3101/protols"
-sha = "c9d5ee5e93f7282800c22280c0e5a6dc190196c0"
+sha = "96b5483d72fc04e2339947f7ee9e48f5c62ded6a"
 sources = ["proto", "zed/proto"]
 role = "source"
+selection = "version-tag"
+version = "0.14.1"
+upstream_ref = "refs/tags/0.14.1"
 
 [[repo]]
 name = "metal-analyzer"
@@ -584,6 +824,9 @@ url = "https://github.com/computer-graphics-tools/metal-analyzer"
 sha = "f74c533b68351b4e58c286ca53d8ecc6ea92205a"
 sources = ["metal"]
 role = "source"
+selection = "version-tag"
+version = "0.1.22"
+upstream_ref = "refs/tags/0.1.22"
 
 [[repo]]
 name = "conl-lsp"
@@ -591,6 +834,9 @@ url = "https://github.com/ConradIrwin/conl-lsp"
 sha = "732cc197991c4efd5a359a3d45ed391f0a7288e2"
 sources = ["conl"]
 role = "source"
+selection = "version-tag"
+version = "build-20251231-025630"
+upstream_ref = "refs/tags/build-20251231-025630"
 
 [[repo]]
 name = "xmake_ls"
@@ -598,20 +844,29 @@ url = "https://github.com/CppCXY/xmake_ls"
 sha = "bf577a8ab547391b9fcce281b548a27bf267166d"
 sources = ["xmake"]
 role = "source"
+selection = "version-tag"
+version = "0.5.0"
+upstream_ref = "refs/tags/0.5.0"
 
 [[repo]]
 name = "magequery"
 url = "https://github.com/cresset-tools/magequery"
-sha = "dc04b766665af828241be850fd5d89b1276c42cd"
+sha = "765294ac3f527b35fd1cc5752a64357d29104ba5"
 sources = ["magequery-lsp"]
 role = "source"
+selection = "version-tag"
+version = "v0.17.5"
+upstream_ref = "refs/tags/v0.17.5"
 
 [[repo]]
 name = "ameba-ls"
 url = "https://github.com/crystal-lang-tools/ameba-ls"
-sha = "4cb0359437ef128bbbe7d93e4f22ddd95828df95"
+sha = "5d1f02c6321e8c4d9a41063901973d835ca964ba"
 sources = ["crystal"]
 role = "source"
+selection = "version-tag"
+version = "v0.2.0"
+upstream_ref = "refs/tags/v0.2.0"
 
 [[repo]]
 name = "plaintasks-zed"
@@ -619,34 +874,48 @@ url = "https://github.com/cseelus/plaintasks-zed"
 sha = "a80c6e5a70276c6a8f1f372b3ae7861ad6859d37"
 sources = ["plaintasks"]
 role = "source"
+selection = "head"
+upstream_ref = "refs/heads/main"
 
 [[repo]]
 name = "csskit"
 url = "https://github.com/csskit/csskit"
-sha = "a2ac16581d472324cce9556ebe94bdf599efbf6a"
+sha = "ff15f9cd60ef38a703cc7f46785837024f2f8c52"
 sources = ["csskit-lsp"]
 role = "source"
+selection = "version-tag"
+version = "v0.0.31"
+upstream_ref = "refs/tags/v0.0.31"
 
 [[repo]]
 name = "language-server"
 url = "https://github.com/cucumber/language-server"
-sha = "92569b75d720e539251c1799bde2bbf0811818d8"
+sha = "c68c2033d91e72b0b15965e2f1f417e9f9b5917a"
 sources = ["cucumber"]
 role = "source"
+selection = "version-tag"
+version = "v1.7.0"
+upstream_ref = "refs/tags/v1.7.0"
 
 [[repo]]
 name = "cue"
 url = "https://github.com/cue-lang/cue"
-sha = "eb886ed07a0864cc6bbc081bb8f1efa9fb834944"
+sha = "fc6c0b2ecd3666da92f7053d13fcfbf009b7d7a3"
 sources = ["cue"]
 role = "source"
+selection = "version-tag"
+version = "v0.17.1"
+upstream_ref = "refs/tags/v0.17.1"
 
 [[repo]]
 name = "skill-language-server"
 url = "https://github.com/CyrusNuevoDia/skill-language-server"
-sha = "d64db88d39e0cc1f46328ef33e013065b02308b2"
+sha = "9afcf592dd67e8043e52ce2590c2893d2698f14b"
 sources = ["skill-language-server"]
 role = "source"
+selection = "version-tag"
+version = "v0.8.0"
+upstream_ref = "refs/tags/v0.8.0"
 
 [[repo]]
 name = "scls"
@@ -654,13 +923,19 @@ url = "https://github.com/d1y/scls"
 sha = "a15284cee7a697c616d0ea71495e4eb018723e4a"
 sources = ["scls"]
 role = "source"
+selection = "version-tag"
+version = "v1.0.5"
+upstream_ref = "refs/tags/v1.0.5"
 
 [[repo]]
 name = "dafny"
 url = "https://github.com/dafny-lang/dafny"
-sha = "98ac8c0a443e1ca4348d0d01bda618894dee0d1e"
+sha = "fcb2042d6d043a2634f0854338c08feeaaaf4ae2"
 sources = ["dafny"]
 role = "source"
+selection = "version-tag"
+version = "v4.11.0"
+upstream_ref = "refs/tags/v4.11.0"
 
 [[repo]]
 name = "skriptzed"
@@ -668,34 +943,49 @@ url = "https://github.com/DaisyCatTs/SkriptZed"
 sha = "c580169f1b0ba9b9c5f3205599364fb6b479f4e2"
 sources = ["skript"]
 role = "source"
+selection = "version-tag"
+version = "v0.2.5"
+upstream_ref = "refs/tags/v0.2.5"
 
 [[repo]]
 name = "svls"
 url = "https://github.com/dalance/svls"
-sha = "d8ea9a8340f24688d8c4987eb5a0a7e0f4110104"
+sha = "698aba81a43c63ebcbfa9abe9d1d7a2b955f7ee8"
 sources = ["verilog"]
 role = "source"
+selection = "extension-version"
+version = "0.2.14"
+upstream_ref = "refs/tags/v0.2.14"
 
 [[repo]]
 name = "ols"
 url = "https://github.com/DanielGavin/ols"
-sha = "df1636b698c9eba8ed92e5b55edfb07c9781a87d"
+sha = "4f4377078d9e6121d26d87a3342b7d1db3c25a4b"
 sources = ["odin"]
 role = "source"
+selection = "version-tag"
+version = "dev-2026-08"
+upstream_ref = "refs/tags/dev-2026-08"
 
 [[repo]]
 name = "civet"
 url = "https://github.com/DanielXMoore/Civet"
-sha = "10a55dd4b311303a827984fbe15962e991af0abb"
+sha = "04c2692e79b1d7868e01cb2aba4aa3c4009af3ea"
 sources = ["civet"]
 role = "source"
+selection = "version-tag"
+version = "v0.11.15"
+upstream_ref = "refs/tags/v0.11.15"
 
 [[repo]]
 name = "sdk"
 url = "https://github.com/dart-lang/sdk"
-sha = "39709625f81218d664a31954b5812acb90b7f49b"
+sha = "1d1a730ef918d602aedafc939a4cf5940e7589ab"
 sources = ["dart"]
 role = "source"
+selection = "version-tag"
+version = "3.13.3"
+upstream_ref = "refs/tags/3.13.3"
 
 [[repo]]
 name = "vacuum"
@@ -703,6 +993,9 @@ url = "https://github.com/daveshanley/vacuum"
 sha = "7362dab4b5904eb4ab6b0d58e7fe559d7ab417b8"
 sources = ["vacuum"]
 role = "source"
+selection = "version-tag"
+version = "v0.30.3"
+upstream_ref = "refs/tags/v0.30.3"
 
 [[repo]]
 name = "norminette_lsp"
@@ -710,6 +1003,9 @@ url = "https://github.com/DavidLee18/norminette_lsp"
 sha = "ef4fe590a1a65458932944711da9efbbd8436532"
 sources = ["norminette"]
 role = "source"
+selection = "version-tag"
+version = "v0.0.48"
+upstream_ref = "refs/tags/v0.0.48"
 
 [[repo]]
 name = "bruno-language-server"
@@ -717,55 +1013,78 @@ url = "https://github.com/davitostes/bruno-language-server"
 sha = "236cbe5092aa63d025049caf6b0aaad84d7bc06a"
 sources = ["bruno"]
 role = "source"
+selection = "head"
+upstream_ref = "refs/heads/master"
 
 [[repo]]
 name = "rpm-spec-language-server"
 url = "https://github.com/dcermak/rpm-spec-language-server"
-sha = "52bce4b0d01c5b596504dda3f19cfeb718044c3f"
+sha = "f64d20da0c90bf1027bb704036795466f1c53c56"
 sources = ["rpmspec"]
 role = "source"
+selection = "version-tag"
+version = "0.0.2"
+upstream_ref = "refs/tags/0.0.2"
 
 [[repo]]
 name = "k8s-crd-lsp"
 url = "https://github.com/decade-eng/k8s-crd-lsp"
-sha = "0824efd238dcf13d0d5d242b2249322350b92529"
+sha = "f92de18286aecd92903b02c8c9f0fe13013191a8"
 sources = ["k8s-crd-lsp"]
 role = "source"
+selection = "version-tag"
+version = "v0.1.3"
+upstream_ref = "refs/tags/v0.1.3"
 
 [[repo]]
 name = "deno"
 url = "https://github.com/denoland/deno"
-sha = "336da420f4343cbb1dcbd5eed9d075ff555ed6ee"
+sha = "e518fbd66dda5debcbdefc0beb0b3756b37b64fa"
 sources = ["deno"]
 role = "source"
+selection = "version-tag"
+version = "v2.9.6"
+upstream_ref = "refs/tags/v2.9.6"
 
 [[repo]]
 name = "odoo-lsp"
 url = "https://github.com/Desdaemon/odoo-lsp"
-sha = "894e1de95b16a0ca68e17025a70342f13c0370a3"
+sha = "7e1aacacbd92fe691696a3bf80d4efcd78e8eb14"
 sources = ["odoo-lsp"]
 role = "source"
+selection = "version-tag"
+version = "v0.6.2"
+upstream_ref = "refs/tags/v0.6.2"
 
 [[repo]]
 name = "basedpyright"
 url = "https://github.com/DetachHead/basedpyright"
-sha = "a9826211f1fb42f246d3811a01d9ee31f267b04f"
+sha = "d64b2274480bc64c146f5b387127d4bb35eb403e"
 sources = ["zed-core/basedpyright"]
 role = "source"
+selection = "version-tag"
+version = "v1.40.0"
+upstream_ref = "refs/tags/v1.40.0"
 
 [[repo]]
 name = "view.tree"
 url = "https://github.com/Dev-cmyser/view.tree"
-sha = "3a681c56ebbd4dadb2d6ea83fcfe78bcfd3fb88a"
+sha = "297a3cd3ab2e9c586d53d9e953026ac0ee08d49a"
 sources = ["viewtree"]
 role = "source"
+selection = "version-tag"
+version = "v1.2.0"
+upstream_ref = "refs/tags/v1.2.0"
 
 [[repo]]
 name = "react-component-lens"
 url = "https://github.com/dev-five-git/react-component-lens"
-sha = "9a3c82dfd8db3b69935a8f42a38e796c3a0656c6"
+sha = "5f20dd8ef78ade9ab860deee9e30c59f8be9d43a"
 sources = ["react-component-lens-lsp"]
 role = "source"
+selection = "version-tag"
+version = "rcl-lsp(packages/lsp/Cargo.toml)@1.0.5"
+upstream_ref = "refs/tags/rcl-lsp(packages/lsp/Cargo.toml)@1.0.5"
 
 [[repo]]
 name = "phptools-docs"
@@ -773,27 +1092,38 @@ url = "https://github.com/DEVSENSE/phptools-docs"
 sha = "cbd57d88aac201e5fd821071106a625755da2c3b"
 sources = ["blade", "php"]
 role = "documentation"
+selection = "head"
+upstream_ref = "refs/heads/master"
 
 [[repo]]
 name = "dhall-haskell"
 url = "https://github.com/dhall-lang/dhall-haskell"
-sha = "d823006f717caaa735aeab10aeb4212d0c9caa33"
+sha = "addf2bae80bc1b2d38536fd6555f8e829d8f8b2b"
 sources = ["dhall"]
 role = "source"
+selection = "version-tag"
+version = "1.42.2"
+upstream_ref = "refs/tags/1.42.2"
 
 [[repo]]
 name = "daml"
 url = "https://github.com/digital-asset/daml"
-sha = "66a1e6d93f4a9b54bfe226097f81d2309792b2e0"
+sha = "de513339189206e5bcae77b2cfc68afda9b05ef5"
 sources = ["daml"]
 role = "source"
+selection = "version-tag"
+version = "v3.4.11"
+upstream_ref = "refs/tags/v3.4.11"
 
 [[repo]]
 name = "docker-language-server"
 url = "https://github.com/docker/docker-language-server"
-sha = "5187ff578db630f5df5b5922a10d8415a5bb7d32"
+sha = "cb62b8b3710e81988521238c89232e95ef728111"
 sources = ["dockerfile"]
 role = "source"
+selection = "version-tag"
+version = "v0.20.1"
+upstream_ref = "refs/tags/v0.20.1"
 
 [[repo]]
 name = "fuzzy_ruby_server"
@@ -801,34 +1131,48 @@ url = "https://github.com/doompling/fuzzy_ruby_server"
 sha = "9a439496ae0666b1cee0213031a6dcc3e74662cd"
 sources = ["ruby"]
 role = "source"
+selection = "head"
+upstream_ref = "refs/heads/master"
 
 [[repo]]
 name = "roslyn"
 url = "https://github.com/dotnet/roslyn"
-sha = "44dfd2066f2f9fe5f7ca081276f2f99a8716b768"
+sha = "3a38d0c1ca5f8d11dcbb01400ec26eff6d51f609"
 sources = ["csharp"]
 role = "source"
+selection = "version-tag"
+version = "v11.0.100"
+upstream_ref = "refs/tags/v11.0.100"
 
 [[repo]]
 name = "dprint"
 url = "https://github.com/dprint/dprint"
-sha = "16a1175d49a4f8de16f41d7eb8dd5a827e96e1c7"
+sha = "abd996b4a1f48f70e78a21451e523de9458ce8ab"
 sources = ["dprint"]
 role = "source"
+selection = "version-tag"
+version = "0.57.4"
+upstream_ref = "refs/tags/0.57.4"
 
 [[repo]]
 name = "duso"
 url = "https://github.com/duso-org/duso"
-sha = "2fc8b28bd3032ffad67ee2e9e519bb9521644d9f"
+sha = "3fd4b68b283d0d77ea7c745be464e5385a42613e"
 sources = ["duso"]
 role = "source"
+selection = "version-tag"
+version = "v1.7.23-568"
+upstream_ref = "refs/tags/v1.7.23-568"
 
 [[repo]]
 name = "lsp-dylan"
 url = "https://github.com/dylan-lang/lsp-dylan"
-sha = "0cb7e0f276c4c419a6c650770871163f97a3bd08"
+sha = "c3aa79f1c3115b844ca69caddb3a41faf0c1668a"
 sources = ["open-dylan"]
 role = "source"
+selection = "version-tag"
+version = "v0.2.0"
+upstream_ref = "refs/tags/v0.2.0"
 
 [[repo]]
 name = "zed-npm-update-checker"
@@ -836,41 +1180,59 @@ url = "https://github.com/e-simpson/zed-npm-update-checker"
 sha = "cbb81ae51bbc983180e6fec95bc738b3555dfc12"
 sources = ["npm-package-json-checker"]
 role = "source"
+selection = "version-tag"
+version = "v1.0.7"
+upstream_ref = "refs/tags/v1.0.7"
 
 [[repo]]
 name = "zed-python-autodoc"
 url = "https://github.com/eallender/zed-python-autodoc"
-sha = "8d97c03037382f86158f457aecccf61d4656da08"
+sha = "2e280337d4bf603ebf65d3cdb6e59886d936df04"
 sources = ["python-autodoc-lsp"]
 role = "source"
+selection = "extension-version"
+version = "0.1.1"
+upstream_ref = "refs/tags/v0.1.1"
 
 [[repo]]
 name = "che-che4z-lsp-for-cobol"
 url = "https://github.com/eclipse-che4z/che-che4z-lsp-for-cobol"
-sha = "96818ab80d8f3bbe47e61669d557220c3377b938"
+sha = "664f3d9e4e7d346a0e7e4ef9443597d7ea60a01a"
 sources = ["cobol"]
 role = "source"
+selection = "extension-version"
+version = "2.4.3"
+upstream_ref = "refs/tags/2.4.3"
 
 [[repo]]
 name = "eclipse.jdt.ls--eclipse-jdtls"
 url = "https://github.com/eclipse-jdtls/eclipse.jdt.ls"
-sha = "1d02453818deabf9260b9d04f14f6a0a48001cb6"
+sha = "08eafe6ff60c7159ef88571d47b6a9ef82fef94e"
 sources = ["java"]
 role = "source"
+selection = "version-tag"
+version = "v1.61.0"
+upstream_ref = "refs/tags/v1.61.0"
 
 [[repo]]
 name = "tsgo"
 url = "https://github.com/Effect-TS/tsgo"
-sha = "63331b6649b8ec5149fa40f8f8b89a36fa986191"
+sha = "9a82ef8361927cef9ca1caeeb3d8077ed4d4f6f5"
 sources = ["effect-language-service-tsgo"]
 role = "source"
+selection = "version-tag"
+version = "@effect/tsgo@0.43.0"
+upstream_ref = "refs/tags/@effect/tsgo@0.43.0"
 
 [[repo]]
 name = "spec42"
 url = "https://github.com/elan8/spec42"
-sha = "31a8b7bb4b64c668df6c0b54d8e8a9044d9b9902"
+sha = "2183b21b63a8de619de4a4718847b6a5fb15c339"
 sources = ["sysml-v2"]
 role = "source"
+selection = "extension-version"
+version = "0.30.0"
+upstream_ref = "refs/tags/v0.30.0"
 
 [[repo]]
 name = "crystalline"
@@ -878,6 +1240,9 @@ url = "https://github.com/elbywan/crystalline"
 sha = "d8e8cacf8a8843a722200900e3fb4b090deb51fc"
 sources = ["crystal"]
 role = "source"
+selection = "version-tag"
+version = "v0.19.0"
+upstream_ref = "refs/tags/v0.19.0"
 
 [[repo]]
 name = "ellsp"
@@ -885,55 +1250,79 @@ url = "https://github.com/elisp-lsp/ellsp"
 sha = "36580dd6e6f29a73c8a9ac53966d450b0399679b"
 sources = ["ellsp"]
 role = "source"
+selection = "version-tag"
+version = "0.2.0"
+upstream_ref = "refs/tags/0.2.0"
 
 [[repo]]
 name = "elixir-ls"
 url = "https://github.com/elixir-lsp/elixir-ls"
-sha = "68df44b681ee0dbef91b8008b0354003a9a451fa"
+sha = "256ec7787dc14fa666817199ec6aa5dc64787e37"
 sources = ["elixir"]
 role = "source"
+selection = "version-tag"
+version = "v0.31.1"
+upstream_ref = "refs/tags/v0.31.1"
 
 [[repo]]
 name = "next-ls"
 url = "https://github.com/elixir-tools/next-ls"
-sha = "eb47c98eef92ffe2b369c7c2bf56ce63b837f949"
+sha = "0a5c4dc7d1a90c2b0ada029893456b03df35447a"
 sources = ["elixir"]
 role = "source"
+selection = "version-tag"
+version = "v0.23.4"
+upstream_ref = "refs/tags/v0.23.4"
 
 [[repo]]
 name = "elm-language-server"
 url = "https://github.com/elm-tooling/elm-language-server"
-sha = "ccf762b3bbaf60d3567dadb564f1e94d54bb301e"
+sha = "28cd2fdad10cbb6f15f01155971922548f873c35"
 sources = ["elm"]
 role = "source"
+selection = "version-tag"
+version = "2.8.0"
+upstream_ref = "refs/tags/2.8.0"
 
 [[repo]]
 name = "ghostty-zed-extension"
 url = "https://github.com/Else00/ghostty-zed-extension"
-sha = "d027129cfd45000ef061e59ae3d8c236a20ddb11"
+sha = "968afadc3e38d4851deb73528a724db899cab967"
 sources = ["ghostty"]
 role = "source"
+selection = "version-tag"
+version = "v0.3.2"
+upstream_ref = "refs/tags/v0.3.2"
 
 [[repo]]
 name = "emmylua-analyzer-rust"
 url = "https://github.com/EmmyLuaLs/emmylua-analyzer-rust"
-sha = "aaaca68425d9362876228649b0b8d92f07654daa"
+sha = "6f8b4246634aa24c140bd7abb78f0a3083d67e73"
 sources = ["emmylua"]
 role = "source"
+selection = "version-tag"
+version = "0.25.1"
+upstream_ref = "refs/tags/0.25.1"
 
 [[repo]]
 name = "duper"
 url = "https://github.com/EpicEric/duper"
-sha = "e6deb0cd99b7970f16e8d63629b2d6c243e3a8bf"
+sha = "74f459e082f256a474548a70e2b3d12a3dae44b8"
 sources = ["duper"]
 role = "source"
+selection = "version-tag"
+version = "duper_lsp@0.1.4"
+upstream_ref = "refs/tags/duper_lsp@0.1.4"
 
 [[repo]]
 name = "erlang_ls"
 url = "https://github.com/erlang-ls/erlang_ls"
-sha = "3a791859ef6a9216f96b8a1f19b38be6d8ba51d3"
+sha = "ed1daaa4d94d2dc9c9d3f934c704ee4dafb176c6"
 sources = ["erlang"]
 role = "source"
+selection = "version-tag"
+version = "1.1.0"
+upstream_ref = "refs/tags/1.1.0"
 
 [[repo]]
 name = "vale-ls"
@@ -941,6 +1330,9 @@ url = "https://github.com/errata-ai/vale-ls"
 sha = "52a2cb2fb194aff9e011587a211d169040360b06"
 sources = ["vale"]
 role = "source"
+selection = "version-tag"
+version = "v0.5.1"
+upstream_ref = "refs/tags/v0.5.1"
 
 [[repo]]
 name = "zed-hackatime"
@@ -948,83 +1340,119 @@ url = "https://github.com/espcaa/zed-hackatime"
 sha = "9621a3025e68bd4b8f18b969a5918457631fe3fe"
 sources = ["hackatime"]
 role = "source"
+selection = "version-tag"
+version = "v0.4.0"
+upstream_ref = "refs/tags/v0.4.0"
 
 [[repo]]
 name = "jarl"
 url = "https://github.com/etiennebacher/jarl"
-sha = "a557236825af00e0fe1a7c927c5f1f20678c35c6"
+sha = "7ac3b8d0b510abbb51102d74263e639c2ea2aad6"
 sources = ["jarl"]
 role = "source"
+selection = "version-tag"
+version = "0.6.0"
+upstream_ref = "refs/tags/0.6.0"
 
 [[repo]]
 name = "expert"
 url = "https://github.com/expert-lsp/expert"
-sha = "eb0ac70c67a9dbeeb4d0cc14f558b076bed72e58"
+sha = "1a74fe98762fde17409434fdfc64c4dae1e67537"
 sources = ["elixir"]
 role = "source"
+selection = "version-tag"
+version = "v0.1.10"
+upstream_ref = "refs/tags/v0.1.10"
 
 [[repo]]
 name = "buck2"
 url = "https://github.com/facebook/buck2"
-sha = "418358e8c188a9c8e285418feb7a6b6bf9af0763"
+sha = "be6971d47dcc835b7356e1698b23039ffee4f4c2"
 sources = ["starlark"]
 role = "source"
+selection = "version-tag"
+version = "2026-09-01"
+upstream_ref = "refs/tags/2026-09-01"
 
 [[repo]]
 name = "flow"
 url = "https://github.com/facebook/flow"
-sha = "ba2b70b8db56f556125a32eeab8fa828c8b16217"
+sha = "28ebb8819f8f032d469e108ea2458a0442844a47"
 sources = ["flow"]
 role = "source"
+selection = "version-tag"
+version = "v0.331.0"
+upstream_ref = "refs/tags/v0.331.0"
 
 [[repo]]
 name = "pyrefly"
 url = "https://github.com/facebook/pyrefly"
-sha = "caf405b1f2ba521cda638a1c623a95fc926fea76"
+sha = "1933169ad8ee9e4d4114112eb56ef0811fb0a094"
 sources = ["pyrefly"]
 role = "source"
+selection = "version-tag"
+version = "1.2.0"
+upstream_ref = "refs/tags/1.2.0"
 
 [[repo]]
 name = "relay"
 url = "https://github.com/facebook/relay"
-sha = "ccc12bcfc49bb4e28d31a64b05e6c7bc8c52f2e5"
+sha = "43eaa2587adad2fb10dbac402d900d035fae2f81"
 sources = ["relay"]
 role = "source"
+selection = "version-tag"
+version = "v21.0.1"
+upstream_ref = "refs/tags/v21.0.1"
 
 [[repo]]
 name = "fallow"
 url = "https://github.com/fallow-rs/fallow"
-sha = "147004e79ecb8cbe0b8059036021c09596942fae"
+sha = "c55ba1ba3c98c6e4ad48f0aed0e0f256c256d959"
 sources = ["fallow"]
 role = "source"
+selection = "version-tag"
+version = "v3.23.0"
+upstream_ref = "refs/tags/v3.23.0"
 
 [[repo]]
 name = "coverage-lsp"
 url = "https://github.com/fargies/coverage-lsp"
-sha = "4c06e527055ac5a6d05d7dce8fcf1a5a120b0476"
+sha = "3e598d00610cb6b4445bd4bcf485ebb1683d4ac1"
 sources = ["coverage-lsp"]
 role = "source"
+selection = "version-tag"
+version = "coverage-lsp-v1.1.2"
+upstream_ref = "refs/tags/coverage-lsp-v1.1.2"
 
 [[repo]]
 name = "markdown-oxide"
 url = "https://github.com/feel-ix-343/markdown-oxide"
-sha = "7ebca709123506322ca478dc2ef9de4bae503995"
+sha = "5cae0e03f022d93869f70f99609184db619bb23a"
 sources = ["markdown-oxide"]
 role = "source"
+selection = "version-tag"
+version = "v0.25.12"
+upstream_ref = "refs/tags/v0.25.12"
 
 [[repo]]
 name = "bloc"
 url = "https://github.com/felangel/bloc"
-sha = "8fcf54dfea7ba51ef04c091d1a27e0da498b29f0"
+sha = "9d7163e2c114afd70a9f440d2bd791e2c835098d"
 sources = ["bloc"]
 role = "source"
+selection = "extension-version"
+version = "0.1.0-dev.22"
+upstream_ref = "refs/tags/bloc_tools-v0.1.0-dev.22"
 
 [[repo]]
 name = "ferret"
 url = "https://github.com/Ferret-Language/Ferret"
-sha = "3763299e9e9e6f987fa41a464cbf52a412c711c6"
+sha = "71a440d4713bc396e93231ec67361e77c9306256"
 sources = ["ferret"]
 role = "source"
+selection = "version-tag"
+version = "v0.0.12"
+upstream_ref = "refs/tags/v0.0.12"
 
 [[repo]]
 name = "deputy"
@@ -1032,13 +1460,19 @@ url = "https://github.com/filiptibell/deputy"
 sha = "174e94a062fbefc90e844272c27748d22f64251d"
 sources = ["deputy"]
 role = "source"
+selection = "version-tag"
+version = "v0.8.0"
+upstream_ref = "refs/tags/v0.8.0"
 
 [[repo]]
 name = "fortls"
 url = "https://github.com/fortran-lang/fortls"
-sha = "fc68d915b70914f089b4a99c48f7bc9a04b6723a"
+sha = "72d07b1155b5ec2d0469e0f281d4d76907deda7c"
 sources = ["fortran"]
 role = "source"
+selection = "version-tag"
+version = "v3.2.2"
+upstream_ref = "refs/tags/v3.2.2"
 
 [[repo]]
 name = "django-template-lsp"
@@ -1046,20 +1480,29 @@ url = "https://github.com/fourdigits/django-template-lsp"
 sha = "b2f58df71cc2f6db7091934619566fc4423b7e31"
 sources = ["django"]
 role = "source"
+selection = "version-tag"
+version = "1.3.1"
+upstream_ref = "refs/tags/1.3.1"
 
 [[repo]]
 name = "cargotom"
 url = "https://github.com/frederik-uni/cargotom"
-sha = "d2f49604f997fcd57a42d0a42e84f20e8f862851"
+sha = "229d2aeae19edb39f8770e2fd0ddbd4b62689421"
 sources = ["cargo-tom"]
 role = "source"
+selection = "version-tag"
+version = "2.3.13"
+upstream_ref = "refs/tags/2.3.13"
 
 [[repo]]
 name = "live-server-lsp"
 url = "https://github.com/frederik-uni/live-server-lsp"
-sha = "278fe95c03a0c243d1163db95adc301263aec447"
+sha = "75d0b8d574016f79fd9b77146ee199de94e4da42"
 sources = ["live-server"]
 role = "source"
+selection = "version-tag"
+version = "0.3.14"
+upstream_ref = "refs/tags/0.3.14"
 
 [[repo]]
 name = "haxe-language-server"
@@ -1067,13 +1510,19 @@ url = "https://github.com/frixuu/haxe-language-server"
 sha = "1fb9a224e20801ece23510118f7960566b1470a7"
 sources = ["haxe"]
 role = "source"
+selection = "version-tag"
+version = "v2025-11-03_17-14-01"
+upstream_ref = "refs/tags/v2025-11-03_17-14-01"
 
 [[repo]]
 name = "fsautocomplete"
 url = "https://github.com/fsharp/FsAutoComplete"
-sha = "2a5b152d09a0accfdf68196710657e1a58c986b4"
+sha = "3a4757d01e5d1beb58b6d44d62369b13bf3c28ea"
 sources = ["fsharp"]
 role = "source"
+selection = "version-tag"
+version = "v0.84.0"
+upstream_ref = "refs/tags/v0.84.0"
 
 [[repo]]
 name = "sway"
@@ -1081,20 +1530,29 @@ url = "https://github.com/FuelLabs/sway"
 sha = "dad95cc42b0383b4e3bacdeda9766565aa584a92"
 sources = ["sway"]
 role = "source"
+selection = "version-tag"
+version = "v0.72.1"
+upstream_ref = "refs/tags/v0.72.1"
 
 [[repo]]
 name = "kotlin-language-server"
 url = "https://github.com/fwcd/kotlin-language-server"
-sha = "6d9e61b79d4631e75516def7ab7ff0d8b9310467"
+sha = "f532bcc9c6578f5a35009a8b5f281f93d4d131ba"
 sources = ["kotlin"]
 role = "source"
+selection = "version-tag"
+version = "1.3.13"
+upstream_ref = "refs/tags/1.3.13"
 
 [[repo]]
 name = "wasm-language-tools"
 url = "https://github.com/g-plane/wasm-language-tools"
-sha = "5056b93f8bdbfd3db97c50e1f18e5313db19c0d6"
+sha = "c70d75c478c4c9aaff55a3479290bc5ba9757233"
 sources = ["wat"]
 role = "source"
+selection = "version-tag"
+version = "v0.11.0"
+upstream_ref = "refs/tags/v0.11.0"
 
 [[repo]]
 name = "valse"
@@ -1102,6 +1560,8 @@ url = "https://github.com/gavr123456789/vaLSe"
 sha = "bcfbdd0995b81307a0c2a7e64eef2ed362a514c2"
 sources = ["niva"]
 role = "source"
+selection = "head"
+upstream_ref = "refs/heads/main"
 
 [[repo]]
 name = "zed-import-cost"
@@ -1109,48 +1569,69 @@ url = "https://github.com/gcampes/zed-import-cost"
 sha = "694b4fabe71ff23b2caee262ed5d4e688d40dac4"
 sources = ["import-cost-lsp"]
 role = "source"
+selection = "version-tag"
+version = "import-cost-server-v0.1.0"
+upstream_ref = "refs/tags/import-cost-server-v0.1.0"
 
 [[repo]]
 name = "zed-phpmd-lsp"
 url = "https://github.com/GeneaLabs/zed-phpmd-lsp"
-sha = "9c090ae2443cf4cb13d9c883a842e1f0992b4e29"
+sha = "c497da1cb99b706aea0de13ac0237d0a1e9fbf9c"
 sources = ["phpmd"]
 role = "source"
+selection = "extension-version"
+version = "0.1.5"
+upstream_ref = "refs/tags/0.1.5"
 
 [[repo]]
 name = "gleam"
 url = "https://github.com/gleam-lang/gleam"
-sha = "19bf207ebb7d953ea1391f041da48c214ee1440a"
+sha = "4a83802ca33a8a96227a1b332768725f232f9779"
 sources = ["gleam", "zed/test-extension"]
 role = "source"
+selection = "version-tag"
+version = "v1.18.1"
+upstream_ref = "refs/tags/v1.18.1"
 
 [[repo]]
 name = "earthlyls"
 url = "https://github.com/glehmann/earthlyls"
-sha = "24a8f03cdf99555bd0a289a01312788233477215"
+sha = "da12603d8f9c8974641857c054106bbecfb98082"
 sources = ["earthfile"]
 role = "source"
+selection = "version-tag"
+version = "0.5.5"
+upstream_ref = "refs/tags/0.5.5"
 
 [[repo]]
 name = "godot"
 url = "https://github.com/godotengine/godot"
-sha = "9552dfb6859a1aaba1e570b8e0ef5c599b830f19"
+sha = "ed1daf0bf001b61586d9930840f2f1394092c079"
 sources = ["gdscript"]
 role = "source"
+selection = "version-tag"
+version = "4.7.2-stable"
+upstream_ref = "refs/tags/4.7.2-stable"
 
 [[repo]]
 name = "pathy"
 url = "https://github.com/gokulp01/pathy"
-sha = "f9578378ee9e5eaa969dbb3ad6395909c167eefa"
+sha = "1ebd8a090087259cb59d192e600acaa602d96f7d"
 sources = ["pathy"]
 role = "source"
+selection = "version-tag"
+version = "v0.1.0"
+upstream_ref = "refs/tags/v0.1.0"
 
 [[repo]]
 name = "tools"
 url = "https://github.com/golang/tools"
-sha = "9427efe18c5dde7d42cc44c03043135da81f2664"
+sha = "014f87ff5c01915bc90f4f11a6bb8aea3e0edbd7"
 sources = ["zed-core/gopls"]
 role = "source"
+selection = "version-tag"
+version = "gopls/v0.23.0"
+upstream_ref = "refs/tags/gopls/v0.23.0"
 
 [[repo]]
 name = "gn-language-server"
@@ -1158,34 +1639,49 @@ url = "https://github.com/google/gn-language-server"
 sha = "405d3781ad5f806b7baddc35e863f7170f6d3519"
 sources = ["gn"]
 role = "source"
+selection = "version-tag"
+version = "v1.17.1"
+upstream_ref = "refs/tags/v1.17.1"
 
 [[repo]]
 name = "jsonnet-language-server"
 url = "https://github.com/grafana/jsonnet-language-server"
-sha = "28afd48ac651851113a442086159267d15ebfc7e"
+sha = "b12ce99959cc50eeaa44b38db7c731e19457f5d8"
 sources = ["jsonnet"]
 role = "source"
+selection = "version-tag"
+version = "v0.17.0"
+upstream_ref = "refs/tags/v0.17.0"
 
 [[repo]]
 name = "graphiql"
 url = "https://github.com/graphql/graphiql"
-sha = "fd32cea3e191eb6eb41b785e157403308d787b12"
+sha = "5f000ed0afe41da3e64ec18268ab638325bbef1f"
 sources = ["graphql"]
 role = "source"
+selection = "version-tag"
+version = "graphql-language-service-cli@3.5.0"
+upstream_ref = "refs/tags/graphql-language-service-cli@3.5.0"
 
 [[repo]]
 name = "terraform-ls"
 url = "https://github.com/hashicorp/terraform-ls"
-sha = "23826d210e6d19e83cd441a03fff4dc6ab40e3e4"
+sha = "40b6758355e8d8c255787ba7b4ad788c0b119cd7"
 sources = ["terraform"]
 role = "source"
+selection = "version-tag"
+version = "v0.39.0"
+upstream_ref = "refs/tags/v0.39.0"
 
 [[repo]]
 name = "haskell-language-server"
 url = "https://github.com/haskell/haskell-language-server"
-sha = "89a5e12ad4d05f9ddf9a10ad9fc482a1679eea12"
+sha = "1b4b3c6bdd2bf8d1e1182e2e770f5dea9198db80"
 sources = ["haskell"]
 role = "source"
+selection = "version-tag"
+version = "2.15.0.0"
+upstream_ref = "refs/tags/2.15.0.0"
 
 [[repo]]
 name = "edge-language-server"
@@ -1193,6 +1689,8 @@ url = "https://github.com/Hexacker/edge-language-server"
 sha = "41a41c77eb5d901b9ed8b01085bd9fe815942939"
 sources = ["edge"]
 role = "source"
+selection = "head"
+upstream_ref = "refs/heads/main"
 
 [[repo]]
 name = "vscode-langservers-extracted"
@@ -1200,13 +1698,19 @@ url = "https://github.com/hrsh7th/vscode-langservers-extracted"
 sha = "0a7a86dd080ec1adfb61732c17ba59492719c001"
 sources = ["html", "less", "rshtml", "scss", "zed/html", "zed-core/vscode-css-language-server", "zed-core/vscode-json-language-server"]
 role = "source"
+selection = "version-tag"
+version = "v4.10.0"
+upstream_ref = "refs/tags/v4.10.0"
 
 [[repo]]
 name = "autocorrect"
 url = "https://github.com/huacnlee/autocorrect"
-sha = "e1a75da3faa9b1f005db97b77f47eb67abe1395e"
+sha = "f7b76763a0ed78b088ac2bf45a18192e6e58bc03"
 sources = ["autocorrect"]
 role = "source"
+selection = "version-tag"
+version = "v2.16.3"
+upstream_ref = "refs/tags/v2.16.3"
 
 [[repo]]
 name = "color-lsp"
@@ -1214,34 +1718,49 @@ url = "https://github.com/huacnlee/color-lsp"
 sha = "4164d764c06f0598bd5881d80a4d73f5729d29fb"
 sources = ["color-highlight"]
 role = "source"
+selection = "version-tag"
+version = "v0.3.0"
+upstream_ref = "refs/tags/v0.3.0"
 
 [[repo]]
 name = "slang-server"
 url = "https://github.com/hudson-trading/slang-server"
-sha = "a4ab2a4d66693dde153848f14116b6d909698a1a"
+sha = "4f33c99d8d41f254450e7396260861d55e6243b6"
 sources = ["verilog"]
 role = "source"
+selection = "extension-version"
+version = "0.2.9"
+upstream_ref = "refs/tags/v0.2.9"
 
 [[repo]]
 name = "hyprls"
 url = "https://github.com/hyprland-community/hyprls"
-sha = "3f385b35e1108d0ef0275b23066ba3ead45a60b5"
+sha = "46f66c02571a962e58d18dca507408f5b1ee5cff"
 sources = ["hyprlang"]
 role = "source"
+selection = "version-tag"
+version = "v0.14.0"
+upstream_ref = "refs/tags/v0.14.0"
 
 [[repo]]
 name = "zed-test-coverage-highlight"
 url = "https://github.com/hyyan/zed-test-coverage-highlight"
-sha = "368b7141c2495bfbab0f985f851f6a11a598e873"
+sha = "541948d28e890b412cd488659791bc719779ae0e"
 sources = ["test-coverage-highlight-lsp"]
 role = "source"
+selection = "version-tag"
+version = "v0.1.2"
+upstream_ref = "refs/tags/v0.1.2"
 
 [[repo]]
 name = "quarkdown"
 url = "https://github.com/iamgio/quarkdown"
-sha = "57e8674bef193dbf1334639f491ba6c2212095c4"
+sha = "22f3c1169d0b1356fb51d8f43e1833d3d815aab1"
 sources = ["quarkdown"]
 role = "source"
+selection = "version-tag"
+version = "v2.6.0"
+upstream_ref = "refs/tags/v2.6.0"
 
 [[repo]]
 name = "flow--ianm199"
@@ -1249,13 +1768,19 @@ url = "https://github.com/ianm199/flow"
 sha = "829b574a7bdbb143a794874b5fca798cc4713b56"
 sources = ["bubble-lsp"]
 role = "source"
+selection = "version-tag"
+version = "v0.3.5"
+upstream_ref = "refs/tags/v0.3.5"
 
 [[repo]]
 name = "nsis-lsp"
 url = "https://github.com/idleberg/nsis-lsp"
-sha = "95dac5cf0dfdf4447efa93ea9272a29bd995544e"
+sha = "a87ea40b71f75c8b14b334261eecd6574e7e032a"
 sources = ["nsis"]
 role = "source"
+selection = "version-tag"
+version = "v0.5.5"
+upstream_ref = "refs/tags/v0.5.5"
 
 [[repo]]
 name = "idris2-lsp"
@@ -1263,62 +1788,88 @@ url = "https://github.com/idris-community/idris2-lsp"
 sha = "9a2f0ad6a95815fe3ed438ddba08c95574a4de54"
 sources = ["idris2"]
 role = "source"
+selection = "head"
+upstream_ref = "refs/heads/main"
 
 [[repo]]
 name = "dts-lsp"
 url = "https://github.com/igor-prusov/dts-lsp"
-sha = "e43331e09a4a2e6a8f770194cce2f4bb58507f1a"
+sha = "4eb0e1eb1f0b2b4cb4fa7e16c671ebf6a8353db5"
 sources = ["devicetree"]
 role = "source"
+selection = "version-tag"
+version = "0.1.5"
+upstream_ref = "refs/tags/0.1.5"
 
 [[repo]]
 name = "quint"
 url = "https://github.com/informalsystems/quint"
-sha = "6fb2924e00707cef6dbc5e30db606d555c447123"
+sha = "fd772606588b40def9978d8c82da69c2db7a0e3b"
 sources = ["quint"]
 role = "source"
+selection = "version-tag"
+version = "v0.32.0"
+upstream_ref = "refs/tags/v0.32.0"
 
 [[repo]]
 name = "bsl-analyzer"
 url = "https://github.com/itrous/bsl-analyzer"
-sha = "edc78e22f3efbfe51ffd8e6dfd05b457976195ca"
+sha = "feecb9eeeaa432a0e01a9b2344ee48f018ceb0d8"
 sources = ["bsl"]
 role = "source"
+selection = "version-tag"
+version = "v0.2.77"
+upstream_ref = "refs/tags/v0.2.77"
 
 [[repo]]
 name = "lisette"
 url = "https://github.com/ivov/lisette"
-sha = "21b76fd1fcd3f04dcf0ae8ebe40000ea4448c0f4"
+sha = "3c316497707e481913089b2e53fe5e0de69f5016"
 sources = ["lisette"]
 role = "source"
+selection = "version-tag"
+version = "lisette-v0.12.1"
+upstream_ref = "refs/tags/lisette-v0.12.1"
 
 [[repo]]
 name = "iwe"
 url = "https://github.com/iwe-org/iwe"
-sha = "7f0e3fae0c08ca9d8a1a884e606c2b7cb0f30652"
+sha = "64676e70b699dc15ecef9bf1190be04f77697108"
 sources = ["iwe"]
 role = "source"
+selection = "version-tag"
+version = "iwes-v0.24.0"
+upstream_ref = "refs/tags/iwes-v0.24.0"
 
 [[repo]]
 name = "dbt-language-server"
 url = "https://github.com/j-clemons/dbt-language-server"
-sha = "724b0f233dee65ad4676966fbf8b7b825d993966"
+sha = "f0f0488b0a0cc4ee54e4c720ea56ba2c9e87ea5f"
 sources = ["dbt"]
 role = "source"
+selection = "version-tag"
+version = "v0.4.2"
+upstream_ref = "refs/tags/v0.4.2"
 
 [[repo]]
 name = "redscript-ide"
 url = "https://github.com/jac3km4/redscript-ide"
-sha = "64f77703b3e1e86eefe5b43352efc37c1b561c62"
+sha = "b37a3dc40f439eadf12bfc00d4420025fac50800"
 sources = ["redscript"]
 role = "source"
+selection = "version-tag"
+version = "v0.2.25"
+upstream_ref = "refs/tags/v0.2.25"
 
 [[repo]]
 name = "mesonlsp"
 url = "https://github.com/JCWasmx86/mesonlsp"
-sha = "b84e3bad7978d2ec53ca6a0105800e03a78782f6"
+sha = "794f967441fd4a7286919e09b88caf53b5dae918"
 sources = ["meson"]
 role = "source"
+selection = "version-tag"
+version = "v5.0.4"
+upstream_ref = "refs/tags/v5.0.4"
 
 [[repo]]
 name = "souffle-lsp-plugin"
@@ -1326,6 +1877,9 @@ url = "https://github.com/jdaridis/souffle-lsp-plugin"
 sha = "4e036ff5d925950ba1176ee2ee97ed678995b558"
 sources = ["souffle"]
 role = "source"
+selection = "version-tag"
+version = "v0.3.8"
+upstream_ref = "refs/tags/v0.3.8"
 
 [[repo]]
 name = "racket-langserver"
@@ -1333,41 +1887,58 @@ url = "https://github.com/jeapostrophe/racket-langserver"
 sha = "d84878a099140c5afaaf70c9593d09e82dd8655a"
 sources = ["racket"]
 role = "source"
+selection = "head"
+upstream_ref = "refs/heads/master"
 
 [[repo]]
 name = "jerry-lang"
 url = "https://github.com/jeffscottbrown/jerry-lang"
-sha = "f821c2a4d751e002641b9f04ad83c48f6d94b04e"
+sha = "5a4eda89f5119b9413395353263cbbcb015086f6"
 sources = ["jerry"]
 role = "source"
+selection = "version-tag"
+version = "v0.8.7"
+upstream_ref = "refs/tags/v0.8.7"
 
 [[repo]]
 name = "luau-lsp"
 url = "https://github.com/JohnnyMorganz/luau-lsp"
-sha = "265acd8962be133315ac0a07f866e238e794726b"
+sha = "2f42ede46764cfcc6ad569a395c38bbfd3878342"
 sources = ["luau"]
 role = "source"
+selection = "version-tag"
+version = "1.69.0"
+upstream_ref = "refs/tags/1.69.0"
 
 [[repo]]
 name = "fatou"
 url = "https://github.com/jolars/fatou"
-sha = "6afec19479d72ff1a009e3f340b1efff27dfb664"
+sha = "5941ce31c182f375c033ceeebec0353f7c92999f"
 sources = ["fatou-language-server"]
 role = "source"
+selection = "version-tag"
+version = "v0.18.0"
+upstream_ref = "refs/tags/v0.18.0"
 
 [[repo]]
 name = "panache"
 url = "https://github.com/jolars/panache"
-sha = "61ef55f645b3e5988951dc30d20edb7bec862b0b"
+sha = "df8e3253ca68605f1543096f710403e75e391b14"
 sources = ["panache-language-server"]
 role = "source"
+selection = "version-tag"
+version = "v3.9.0"
+upstream_ref = "refs/tags/v3.9.0"
 
 [[repo]]
 name = "django-language-server"
 url = "https://github.com/joshuadavidthomas/django-language-server"
-sha = "c3b71981a5dc3de0ee03c6a311f55cb063af89e4"
+sha = "ac0770304d9b0d85bf6ecbf09ff02f6d10b45385"
 sources = ["django"]
 role = "source"
+selection = "version-tag"
+version = "v6.1.0"
+upstream_ref = "refs/tags/v6.1.0"
 
 [[repo]]
 name = "elixir-hex-lens-lsp"
@@ -1375,6 +1946,9 @@ url = "https://github.com/jotaviobiondo/elixir-hex-lens-lsp"
 sha = "4c19ad5779c84f58d1f9626b7b1dd7c6f7e99f83"
 sources = ["elixir-hex-lens"]
 role = "source"
+selection = "version-tag"
+version = "v0.1.0"
+upstream_ref = "refs/tags/v0.1.0"
 
 [[repo]]
 name = "thrift-ls"
@@ -1382,6 +1956,9 @@ url = "https://github.com/joyme123/thrift-ls"
 sha = "6d1a4664c0f61b7d296c7cb22c3628abcf86ee78"
 sources = ["thrift"]
 role = "source"
+selection = "version-tag"
+version = "v0.2.12"
+upstream_ref = "refs/tags/v0.2.12"
 
 [[repo]]
 name = "hledger-lsp"
@@ -1389,20 +1966,29 @@ url = "https://github.com/juev/hledger-lsp"
 sha = "829317653690851e0da5dbe8cd1453558169fd90"
 sources = ["hledger"]
 role = "source"
+selection = "version-tag"
+version = "v0.2.56"
+upstream_ref = "refs/tags/v0.2.56"
 
 [[repo]]
 name = "languageserver.jl"
 url = "https://github.com/julia-vscode/LanguageServer.jl"
-sha = "48362e8d68a9210d300f80cba2e2e20a16d7a2f4"
+sha = "7f6092e6f4cfc163a1e64e948e494e813283cfb5"
 sources = ["julia"]
 role = "source"
+selection = "version-tag"
+version = "v5.0.0"
+upstream_ref = "refs/tags/v5.0.0"
 
 [[repo]]
 name = "pact-5"
 url = "https://github.com/kadena-io/pact-5"
-sha = "bfc5310c462aaefabe7c512407ac6dab87fc8c42"
+sha = "6c81f4cf0631a4087f8350230bd9b7c3714f9751"
 sources = ["pact"]
 role = "source"
+selection = "version-tag"
+version = "5.4"
+upstream_ref = "refs/tags/5.4"
 
 [[repo]]
 name = "package-swift-lsp"
@@ -1410,13 +1996,19 @@ url = "https://github.com/kattouf/package-swift-lsp"
 sha = "324a4cb02ee23642b49108bcf8a8133ed14893d7"
 sources = ["package-swift-lsp"]
 role = "source"
+selection = "version-tag"
+version = "1.6.1"
+upstream_ref = "refs/tags/1.6.1"
 
 [[repo]]
 name = "kcl"
 url = "https://github.com/kcl-lang/kcl"
-sha = "07b88a373c7cc37db0d08ad252730e14a1bd496f"
+sha = "48c6244163dedf2d10fc7cdb1545b7afba0168e4"
 sources = ["kcl"]
 role = "source"
+selection = "version-tag"
+version = "v0.11.2"
+upstream_ref = "refs/tags/v0.11.2"
 
 [[repo]]
 name = "tex-japanese-formatter-for-zed"
@@ -1424,76 +2016,109 @@ url = "https://github.com/keufcp/tex-japanese-formatter-for-zed"
 sha = "9dc6cf309e3ec445d5387221b11742e819831c71"
 sources = ["tex-japanese-formatter"]
 role = "source"
+selection = "version-tag"
+version = "v1.0.0"
+upstream_ref = "refs/tags/v1.0.0"
 
 [[repo]]
 name = "koka"
 url = "https://github.com/koka-lang/koka"
-sha = "3ac4f001ab7277b484d661fdbada1aaf8d01ecbf"
+sha = "49dede749f9eb77c717077c00fe52039b3183b5f"
 sources = ["koka"]
 role = "source"
+selection = "version-tag"
+version = "v3.2.3"
+upstream_ref = "refs/tags/v3.2.3"
 
 [[repo]]
 name = "kotlin-lsp"
 url = "https://github.com/Kotlin/kotlin-lsp"
-sha = "f14b4042614b6b5d890fc401e1ff35a8766f0022"
+sha = "3f14bfa6803ae80c9e71e325635aa1307969395b"
 sources = ["kotlin"]
 role = "source"
+selection = "version-tag"
+version = "kotlin-lsp/v262.9593.0"
+upstream_ref = "refs/tags/kotlin-lsp/v262.9593.0"
 
 [[repo]]
 name = "koto-ls"
 url = "https://github.com/koto-lang/koto-ls"
-sha = "ffc0390bee7305d83a92fae02788da3d81376470"
+sha = "696dae864ebe7ae772fd3cbb1f92a009021c782a"
 sources = ["koto"]
 role = "source"
+selection = "version-tag"
+version = "v0.16.1"
+upstream_ref = "refs/tags/v0.16.1"
 
 [[repo]]
 name = "zed-hyperlinks-server"
 url = "https://github.com/krawitzzZ/zed-hyperlinks-server"
-sha = "bc5556250b5d7aa3496b2087cde92edd73ecda61"
+sha = "ebbb71489ee328e8cc709982ffb9c975d99712e3"
 sources = ["hyperlinks-lsp"]
 role = "source"
+selection = "version-tag"
+version = "v0.0.2"
+upstream_ref = "refs/tags/v0.0.2"
 
 [[repo]]
 name = "superhtml"
 url = "https://github.com/kristoff-it/superhtml"
-sha = "23ef2f44ca0df2d2e05a0be3874370553c5b591d"
+sha = "0ee7c967efa17321b5b054140e58d9e8e83a521a"
 sources = ["superhtml"]
 role = "source"
+selection = "version-tag"
+version = "v0.7.0"
+upstream_ref = "refs/tags/v0.7.0"
 
 [[repo]]
 name = "ziggy"
 url = "https://github.com/kristoff-it/ziggy"
-sha = "be51f4dfd95590eae7c8674d660c1f16edef116b"
+sha = "8e1334d4cfa945848c1d4bcd116be4d7c4041de0"
 sources = ["ziggy"]
 role = "source"
+selection = "version-tag"
+version = "v0.2.0"
+upstream_ref = "refs/tags/v0.2.0"
 
 [[repo]]
 name = "path-server"
 url = "https://github.com/kunlinglio/path-server"
-sha = "7b25d961c15b78d4d5e737cbba0ba1d1895a405a"
+sha = "0b0bd32468acb66a7f99bfd523953af88c1f2770"
 sources = ["path-server-lsp"]
 role = "source"
+selection = "version-tag"
+version = "v1.4.1"
+upstream_ref = "refs/tags/v1.4.1"
 
 [[repo]]
 name = "syntaqlite"
 url = "https://github.com/LalitMaganti/syntaqlite"
-sha = "d7d78546eea19db726c597e87996563216e51060"
+sha = "c3a2850f60360d3906588a0875a6e477e6a38030"
 sources = ["syntaqlite-lsp"]
 role = "source"
+selection = "version-tag"
+version = "v0.9.0"
+upstream_ref = "refs/tags/v0.9.0"
 
 [[repo]]
 name = "lexington"
 url = "https://github.com/LaPingvino/lexington"
-sha = "b573e3686d56d9d534bc6b74b9028b10581fbbe2"
+sha = "acbafc1d71392775ad3b25c674b7b36154788ab4"
 sources = ["fountain"]
 role = "source"
+selection = "version-tag"
+version = "v1.2.1"
+upstream_ref = "refs/tags/v1.2.1"
 
 [[repo]]
 name = "lsp"
 url = "https://github.com/laravel/lsp"
-sha = "30cc72d5d20a0a70304c40ee68c8bdc0145cf08c"
+sha = "6739481f9c16aa628582c69014c083b9abf3987f"
 sources = ["laravel-official"]
 role = "source"
+selection = "version-tag"
+version = "v0.0.31"
+upstream_ref = "refs/tags/v0.0.31"
 
 [[repo]]
 name = "protobuf-language-server"
@@ -1501,20 +2126,29 @@ url = "https://github.com/lasorda/protobuf-language-server"
 sha = "0215145a91b43d487a0e07285f668b08f8f10088"
 sources = ["proto", "zed/proto"]
 role = "source"
+selection = "version-tag"
+version = "v0.1.8"
+upstream_ref = "refs/tags/v0.1.8"
 
 [[repo]]
 name = "texlab"
 url = "https://github.com/latex-lsp/texlab"
-sha = "4cc18b37c0b46baf39189f173d1bd7468d3f56e1"
+sha = "45c3ced6790b508a12a2aab1938e58023173017e"
 sources = ["latex"]
 role = "source"
+selection = "version-tag"
+version = "v5.26.0"
+upstream_ref = "refs/tags/v5.26.0"
 
 [[repo]]
 name = "lean4"
 url = "https://github.com/leanprover/lean4"
-sha = "0ec0b26ebf2412e1792c8a07a577c8a9bccec868"
+sha = "819816b2e0a3bf405af45ae5c7af2491d8f5bee6"
 sources = ["lean4"]
 role = "source"
+selection = "version-tag"
+version = "v4.33.1"
+upstream_ref = "refs/tags/v4.33.1"
 
 [[repo]]
 name = "lexical"
@@ -1522,13 +2156,19 @@ url = "https://github.com/lexical-lsp/lexical"
 sha = "477e8b418b27960710109d0014167bb371b0cade"
 sources = ["elixir"]
 role = "source"
+selection = "version-tag"
+version = "v0.7.3"
+upstream_ref = "refs/tags/v0.7.3"
 
 [[repo]]
 name = "likec4"
 url = "https://github.com/likec4/likec4"
-sha = "14685a7322324b128276823852479ee08dc29145"
+sha = "43f0b705d668a56055a14755f7564c36d1bb2e5a"
 sources = ["likec4"]
 role = "source"
+selection = "version-tag"
+version = "v1.59.3"
+upstream_ref = "refs/tags/v1.59.3"
 
 [[repo]]
 name = "zed-php-mago"
@@ -1536,13 +2176,19 @@ url = "https://github.com/LirimSakura/zed-php-mago"
 sha = "b1e135ab1813dfcaa429a12ffdacb8726c225d16"
 sources = ["phpmago-lsp"]
 role = "source"
+selection = "version-tag"
+version = "v0.1.0"
+upstream_ref = "refs/tags/v0.1.0"
 
 [[repo]]
 name = "llvm-project"
 url = "https://github.com/llvm/llvm-project"
-sha = "41d4aa7de68ed551010f27ff04ffc54e7616292a"
+sha = "6dfe1677ab8dffbc6ec13d53a1e0215d75147689"
 sources = ["mlir-tablegen", "objective-c", "zed-core/clangd"]
 role = "source"
+selection = "version-tag"
+version = "llvmorg-23.1.1"
+upstream_ref = "refs/tags/llvmorg-23.1.1"
 
 [[repo]]
 name = "css-lsp"
@@ -1550,13 +2196,19 @@ url = "https://github.com/lmn451/css-lsp"
 sha = "a991f04c452ed324647a64fc4670d1ce7e894b56"
 sources = ["css-variables"]
 role = "source"
+selection = "version-tag"
+version = "v1.0.21"
+upstream_ref = "refs/tags/v1.0.21"
 
 [[repo]]
 name = "css-lsp-rust"
 url = "https://github.com/lmn451/css-lsp-rust"
-sha = "334a52899ec93a24e430beffc52404b62a765b08"
+sha = "166fcc2ee8d0c3b3c7faa52234dfe236f984cfb0"
 sources = ["css-variables"]
 role = "source"
+selection = "version-tag"
+version = "v0.3.6"
+upstream_ref = "refs/tags/v0.3.6"
 
 [[repo]]
 name = "texpresso"
@@ -1564,20 +2216,28 @@ url = "https://github.com/lnay/texpresso"
 sha = "47cd92e4619cc32f2499223e966dd09700836d6e"
 sources = ["texpresso"]
 role = "source"
+selection = "head"
+upstream_ref = "refs/heads/main"
 
 [[repo]]
 name = "nomad-ls"
 url = "https://github.com/loczek/nomad-ls"
-sha = "aefde58fe5e3af48eeb9b6330f2ef2b5b4949f22"
+sha = "6edf67c0ee53470d708d56b61bcb4deed53e9b5f"
 sources = ["nomad"]
 role = "source"
+selection = "version-tag"
+version = "v0.0.8"
+upstream_ref = "refs/tags/v0.0.8"
 
 [[repo]]
 name = "ltex-ls-plus"
 url = "https://github.com/ltex-plus/ltex-ls-plus"
-sha = "516a1e7d1c2d04d8715a59eecc738c900409d040"
+sha = "a2ceee821e04c8240545aaa0c75e0d6869e498d1"
 sources = ["ltex"]
 role = "source"
+selection = "version-tag"
+version = "18.7.0"
+upstream_ref = "refs/tags/18.7.0"
 
 [[repo]]
 name = "gh-actions-language-server"
@@ -1585,13 +2245,18 @@ url = "https://github.com/lttb/gh-actions-language-server"
 sha = "dcbb17fc6c6af3484f59c75959c6b132760d9f5d"
 sources = ["github-actions"]
 role = "source"
+selection = "head"
+upstream_ref = "refs/heads/main"
 
 [[repo]]
 name = "lua-language-server"
 url = "https://github.com/LuaLS/lua-language-server"
-sha = "7a73c7889c1ec981dfd76fba38f5096379f62f99"
+sha = "d11e79dc2745b5bfe654490eff234c6be2f6606f"
 sources = ["defold", "lua"]
 role = "source"
+selection = "version-tag"
+version = "3.19.1"
+upstream_ref = "refs/tags/3.19.1"
 
 [[repo]]
 name = "vls"
@@ -1599,55 +2264,78 @@ url = "https://github.com/lv37/vls"
 sha = "244aca64071177ab4d40cb28b2fa1f7bb5a223f4"
 sources = ["v"]
 role = "source"
+selection = "head"
+upstream_ref = "refs/heads/main"
 
 [[repo]]
 name = "maho"
 url = "https://github.com/MahoCommerce/maho"
-sha = "82f95b93686cae90b56af586bd9afa53e0c9804f"
+sha = "c0a5691cab47b3f7ffec80996c4d94de39e65ca2"
 sources = ["maho-lsp"]
 role = "source"
+selection = "version-tag"
+version = "26.7.5"
+upstream_ref = "refs/tags/26.7.5"
 
 [[repo]]
 name = "gem"
 url = "https://github.com/mantou132/gem"
-sha = "167e99ea474f9a2d73affca5acd386df99b61637"
+sha = "2e57e624c05a2474ee9422a50f8d3210a82f7924"
 sources = ["gem"]
 role = "source"
+selection = "version-tag"
+version = "vscode-gem-languageservice@0.0.15"
+upstream_ref = "refs/tags/vscode-gem-languageservice@0.0.15"
 
 [[repo]]
 name = "herb"
 url = "https://github.com/marcoroth/herb"
-sha = "061d026796048524d8e8aea36d0ef5b54d689fb4"
+sha = "0172f0fd599349fbbe2e701cf979ef34138157d8"
 sources = ["ruby"]
 role = "source"
+selection = "version-tag"
+version = "v0.10.3"
+upstream_ref = "refs/tags/v0.10.3"
 
 [[repo]]
 name = "stimulus-lsp"
 url = "https://github.com/marcoroth/stimulus-lsp"
-sha = "c00429135fc2feac0759982c3ceed3a37c1d73be"
+sha = "949e7d85bfcf8b6f2fc99d4a2eaad87cac5b5526"
 sources = ["stimulus"]
 role = "source"
+selection = "version-tag"
+version = "v1.1.2"
+upstream_ref = "refs/tags/v1.1.2"
 
 [[repo]]
 name = "language-server--marko-js"
 url = "https://github.com/marko-js/language-server"
-sha = "2c894cbfae17429c6cd595e202f32d5d683a134d"
+sha = "9e1981005f0dc883e0c2244f182359f41f599b63"
 sources = ["marko"]
 role = "source"
+selection = "version-tag"
+version = "@marko/language-server@3.4.0"
+upstream_ref = "refs/tags/@marko/language-server@3.4.0"
 
 [[repo]]
 name = "carve-lsp"
 url = "https://github.com/markup-carve/carve-lsp"
-sha = "de9e6592f899b62e4a1a5d918e1d1c1b9df6b067"
+sha = "305ebbd87d332e6e14d1cbbaf28f177ca49400cb"
 sources = ["carve"]
 role = "source"
+selection = "version-tag"
+version = "v0.1.4"
+upstream_ref = "refs/tags/v0.1.4"
 
 [[repo]]
 name = "crates-lsp"
 url = "https://github.com/MathiasPius/crates-lsp"
-sha = "d760064cf3cf5d9fa503a4f284bc29cb7f0fa81b"
+sha = "4a28db4fc5e03e4b1ef42277b807d823e28a4b09"
 sources = ["crates-lsp"]
 role = "source"
+selection = "version-tag"
+version = "v0.4.3"
+upstream_ref = "refs/tags/v0.4.3"
 
 [[repo]]
 name = "matlab-language-server"
@@ -1655,6 +2343,9 @@ url = "https://github.com/mathworks/MATLAB-language-server"
 sha = "3997ef66d0ca3b9e4099e33e1014cfa03029898f"
 sources = ["matlab"]
 role = "source"
+selection = "version-tag"
+version = "v1.3.13"
+upstream_ref = "refs/tags/v1.3.13"
 
 [[repo]]
 name = "code-stats-ls"
@@ -1662,41 +2353,59 @@ url = "https://github.com/maxdeviant/code-stats-ls"
 sha = "f1925bc13ec7255cf5d39403c302dca19a8049b1"
 sources = ["code-stats"]
 role = "source"
+selection = "version-tag"
+version = "v0.4.5"
+upstream_ref = "refs/tags/v0.4.5"
 
 [[repo]]
 name = "mdx-analyzer"
 url = "https://github.com/mdx-js/mdx-analyzer"
-sha = "c56a13d565c98cafcc28411332822caa445123cf"
+sha = "21154a1da47ed34fe90a771c03a10a8fa523f8b5"
 sources = ["mdx"]
 role = "source"
+selection = "version-tag"
+version = "@mdx-js/language-server@0.6.4"
+upstream_ref = "refs/tags/@mdx-js/language-server@0.6.4"
 
 [[repo]]
 name = "vibescript"
 url = "https://github.com/mgomes/vibescript"
-sha = "a1fb44d4ec8685665ffebfc7d6f56aa7261e8911"
+sha = "94e8cc650a9bc3e5ec172bdb715545ec70fd154e"
 sources = ["vibescript"]
 role = "source"
+selection = "version-tag"
+version = "v0.60.0"
+upstream_ref = "refs/tags/v0.60.0"
 
 [[repo]]
 name = "alzed"
 url = "https://github.com/mhensberg2003/ALzed"
-sha = "2317b3999669aee1eca32d0f50e33527318598f9"
+sha = "699e0451d2b1e8674fc5b4a6e531333deb74f89c"
 sources = ["al-business-central"]
 role = "source"
+selection = "version-tag"
+version = "v0.1.0"
+upstream_ref = "refs/tags/v0.1.0"
 
 [[repo]]
 name = "mpls"
 url = "https://github.com/mhersson/mpls"
-sha = "7f6de29b3cff8f469db40b97de1e3fa3c9403956"
+sha = "a91bf97139e0870713a80635c8bf7069bd935244"
 sources = ["mpls"]
 role = "source"
+selection = "version-tag"
+version = "v0.22.0"
+upstream_ref = "refs/tags/v0.22.0"
 
 [[repo]]
 name = "wit-lsp"
 url = "https://github.com/Michael-F-Bryan/wit-lsp"
-sha = "c90addb21d37f2bd62a9474adca1dd8f6320d437"
+sha = "03f1691c99dec153b380a5190f8c52371652a432"
 sources = ["wit"]
 role = "source"
+selection = "version-tag"
+version = "wit-language-server-v0.2.0"
+upstream_ref = "refs/tags/wit-language-server-v0.2.0"
 
 [[repo]]
 name = "al"
@@ -1704,34 +2413,48 @@ url = "https://github.com/microsoft/AL"
 sha = "179d3edf6605559cf146f514b7580b3c18212741"
 sources = ["al-business-central"]
 role = "distribution"
+selection = "head"
+upstream_ref = "refs/heads/master"
 
 [[repo]]
 name = "pyright"
 url = "https://github.com/microsoft/pyright"
-sha = "10f9e773c012d3ae15fd3232915a86ffda64d371"
+sha = "789d8275fef25f347ffef7b847305fefd8a3e363"
 sources = ["zed-core/pyright"]
 role = "source"
+selection = "version-tag"
+version = "1.1.413"
+upstream_ref = "refs/tags/1.1.413"
 
 [[repo]]
 name = "typescript-go"
 url = "https://github.com/microsoft/typescript-go"
-sha = "89d5d5b2849a0db0957065889ca58536fa6d2e4a"
+sha = "2bd066d87f5bafd315be9f40889d0a60b9e58e0b"
 sources = ["tsgo"]
 role = "source"
+selection = "version-tag"
+version = "typescript/v7.0.2"
+upstream_ref = "refs/tags/typescript/v7.0.2"
 
 [[repo]]
 name = "typespec"
 url = "https://github.com/microsoft/typespec"
-sha = "0bb43acf22ed94aab8e721466923d48b1f474b86"
+sha = "f30cd352f93997e04c75d48c7ace6947a1d5d07a"
 sources = ["typespec"]
 role = "source"
+selection = "version-tag"
+version = "typespec-stable@1.15.0"
+upstream_ref = "refs/tags/typespec-stable@1.15.0"
 
 [[repo]]
 name = "vscode-containers"
 url = "https://github.com/microsoft/vscode-containers"
-sha = "a14f6453d0a535d070d18813ea75692de247119d"
+sha = "9aac5ff96bcbd9d9db458bd37f3c6944128f1f94"
 sources = ["docker-compose"]
 role = "source"
+selection = "version-tag"
+version = "v2.5.0"
+upstream_ref = "refs/tags/v2.5.0"
 
 [[repo]]
 name = "vscode-eslint"
@@ -1739,27 +2462,39 @@ url = "https://github.com/microsoft/vscode-eslint"
 sha = "395c7bd36f2a81f3271bf2e303949d4358c231a1"
 sources = ["zed-core/eslint"]
 role = "source"
+selection = "extension-version"
+version = "3.0.24"
+upstream_ref = "refs/tags/release/3.0.24"
 
 [[repo]]
 name = "vscode-gradle"
 url = "https://github.com/microsoft/vscode-gradle"
-sha = "627e9eae0582a849dbf7029786d9f704b99ef3d4"
+sha = "2864656bcb12114b392174d2dc333f49c983b38d"
 sources = ["java"]
 role = "source"
+selection = "extension-version"
+version = "3.18.0"
+upstream_ref = "refs/tags/3.18.0"
 
 [[repo]]
 name = "pgfmt"
 url = "https://github.com/middle-management/pgfmt"
-sha = "e38e211c445372ec5d2eb2d2b69b9168a8f7f228"
+sha = "76e468b3ee7c48779f35b19e4bdd0cce23b89c11"
 sources = ["pgfmt-lsp"]
 role = "source"
+selection = "extension-version"
+version = "0.4.0"
+upstream_ref = "refs/tags/v0.4.0"
 
 [[repo]]
 name = "zed-laravel"
 url = "https://github.com/mike-bronner/zed-laravel"
-sha = "83d79d5072a4be87c0059688b5b09736db5c0ae4"
+sha = "c164f7e834cf2cc1730878f9d0657539fd451fbc"
 sources = ["laravel"]
 role = "source"
+selection = "extension-version"
+version = "0.7.6"
+upstream_ref = "refs/tags/0.7.6"
 
 [[repo]]
 name = "zed-phpcs-lsp"
@@ -1767,6 +2502,9 @@ url = "https://github.com/mike-bronner/zed-phpcs-lsp"
 sha = "10c40a7861b388cafc8fc5e2908ac7e4734b3ea3"
 sources = ["phpcs"]
 role = "source"
+selection = "extension-version"
+version = "0.4.5"
+upstream_ref = "refs/tags/0.4.5"
 
 [[repo]]
 name = "kulala-ls"
@@ -1774,13 +2512,19 @@ url = "https://github.com/mistweaverco/kulala-ls"
 sha = "e03926151ba13023fc8c546b1d0c532c6e2ecf3f"
 sources = ["kulala-http"]
 role = "source"
+selection = "version-tag"
+version = "v1.11.1"
+upstream_ref = "refs/tags/v1.11.1"
 
 [[repo]]
 name = "css-modules-kit"
 url = "https://github.com/mizdra/css-modules-kit"
-sha = "cc5b46c836f0cd9899ad6858723a16242b08c6b0"
+sha = "e87339251d6dcf935d314522268d0fae843b37df"
 sources = ["css-modules-kit"]
 role = "source"
+selection = "version-tag"
+version = "@css-modules-kit/ts-plugin@1.4.0"
+upstream_ref = "refs/tags/@css-modules-kit/ts-plugin@1.4.0"
 
 [[repo]]
 name = "squirrel-lsp"
@@ -1788,41 +2532,58 @@ url = "https://github.com/mnshdw/squirrel-lsp"
 sha = "f0dfcec1425179ce740235e000754bedd45b6d24"
 sources = ["squirrel"]
 role = "source"
+selection = "version-tag"
+version = "v0.49.0"
+upstream_ref = "refs/tags/v0.49.0"
 
 [[repo]]
 name = "modular"
 url = "https://github.com/modular/modular"
-sha = "2b47eeef01fd2d85269184ced847dc75d2c5040a"
+sha = "b4497b7ce9ba96331c72c637ad41b44bab374f33"
 sources = ["mojo"]
 role = "public-toolchain-components"
+selection = "version-tag"
+version = "max/v26.5.0"
+upstream_ref = "refs/tags/max/v26.5.0"
 
 [[repo]]
 name = "twiggy"
 url = "https://github.com/moetelo/twiggy"
-sha = "198f402052fafdad81e563ee9b151712cf8f501c"
+sha = "acb08b4ec353dafb709e2b6ef5847990582ceb8c"
 sources = ["twig"]
 role = "source"
+selection = "extension-version"
+version = "0.17.0"
+upstream_ref = "refs/tags/v0.17.0"
 
 [[repo]]
 name = "yulang"
 url = "https://github.com/momota1029/yulang"
-sha = "a58eefc31e22141574b6f20c6a5748151c6d79f1"
+sha = "525377157eca41af3199c9350fe24902068f70df"
 sources = ["yulang"]
 role = "source"
+selection = "version-tag"
+version = "v0.1.0-alpha.10"
+upstream_ref = "refs/tags/v0.1.0-alpha.10"
 
 [[repo]]
 name = "papyrus-language-server"
 url = "https://github.com/monster-cookie/papyrus-language-server"
-sha = "db79ab22f4e6e1935aa18d5f59ff162a29165bfa"
+sha = "f4baf7da54ed6fca79ff81ae211b3364282630b6"
 sources = ["papyrus"]
 role = "source"
+selection = "extension-version"
+version = "0.1.0"
+upstream_ref = "refs/tags/v0.1.0"
 
 [[repo]]
 name = "moon"
 url = "https://github.com/moonbitlang/moon"
-sha = "29039787a567977feeeb7ba8fb44caaa0afe3867"
+sha = "5257d96a6414eff4ee50bf19efcb55c700f40642"
 sources = ["moonbit"]
 role = "toolchain-launcher"
+selection = "head"
+upstream_ref = "refs/heads/main"
 
 [[repo]]
 name = "zed-urdf"
@@ -1830,13 +2591,19 @@ url = "https://github.com/MorningFrog/zed-urdf"
 sha = "3b5e645201bf4fb2545afba8cacdfd6742955f81"
 sources = ["urdf"]
 role = "source"
+selection = "extension-version"
+version = "0.1.0"
+upstream_ref = "refs/tags/v0.1.0"
 
 [[repo]]
 name = "zed-dependi"
 url = "https://github.com/mpiton/zed-dependi"
-sha = "57790d92105dad183a1337d1cad957f955792643"
+sha = "24445b1f94ceaf5c27c85a4d14c0a0c0f5893fd4"
 sources = ["dependi"]
 role = "source"
+selection = "extension-version"
+version = "1.11.0"
+upstream_ref = "refs/tags/v1.11.0"
 
 [[repo]]
 name = "zed-depsy"
@@ -1844,34 +2611,49 @@ url = "https://github.com/mpiton/zed-depsy"
 sha = "57790d92105dad183a1337d1cad957f955792643"
 sources = ["depsy-lsp"]
 role = "source"
+selection = "version-tag"
+version = "v2.0.2"
+upstream_ref = "refs/tags/v2.0.2"
 
 [[repo]]
 name = "zed-auto-file-header"
 url = "https://github.com/MrAMS/zed-auto-file-header"
-sha = "7f629711575c77d13fd5fd5ceab3966645575509"
+sha = "424f1f2ecf8bb02b57171158ef9f6d31781c14d5"
 sources = ["auto-file-header"]
 role = "source"
+selection = "version-tag"
+version = "v0.3.0"
+upstream_ref = "refs/tags/v0.3.0"
 
 [[repo]]
 name = "zed-firrtl-source-locator"
 url = "https://github.com/MrAMS/zed-firrtl-source-locator"
-sha = "afa0915caf42d4cd2fc68e6ed9f03178bc991d57"
+sha = "76e71c5344baac995863e7f134fda5290105a5ef"
 sources = ["firrtl-source-locator"]
 role = "source"
+selection = "extension-version"
+version = "0.1.0"
+upstream_ref = "refs/tags/v0.1.0"
 
 [[repo]]
 name = "helm-ls"
 url = "https://github.com/mrjosh/helm-ls"
-sha = "73b4828f7a1926103e83f8ec03491788c7ece338"
+sha = "ffae6053017dda12227fea9a7a4624934dae27f9"
 sources = ["helm"]
 role = "source"
+selection = "version-tag"
+version = "v0.5.4"
+upstream_ref = "refs/tags/v0.5.4"
 
 [[repo]]
 name = "elsa-lsp"
 url = "https://github.com/MrPoloGit/elsa-lsp"
-sha = "797b1b7779aef3a907b3ea21c6e05843fe1799d7"
+sha = "047dc2113c57a8d823cd54060cf192d38ffdbfe8"
 sources = ["elsa-lang"]
 role = "source"
+selection = "extension-version"
+version = "0.1.0"
+upstream_ref = "refs/tags/v0.1.0"
 
 [[repo]]
 name = "tonel-smalltalk-language-server"
@@ -1879,6 +2661,9 @@ url = "https://github.com/mumez/tonel-smalltalk-language-server"
 sha = "c133acd0151dbf79273d4666e49a632e56f89646"
 sources = ["tonel-smalltalk"]
 role = "source"
+selection = "version-tag"
+version = "v1.4.4"
+upstream_ref = "refs/tags/v1.4.4"
 
 [[repo]]
 name = "tinymist"
@@ -1886,20 +2671,29 @@ url = "https://github.com/Myriad-Dreamin/tinymist"
 sha = "32f908199ee17ea295512bbc27166e890c438175"
 sources = ["typst"]
 role = "source"
+selection = "version-tag"
+version = "v0.15.8"
+upstream_ref = "refs/tags/v0.15.8"
 
 [[repo]]
 name = "sui"
 url = "https://github.com/MystenLabs/sui"
-sha = "2d2337cbd828d702c7b91b952e9eedb66269e051"
+sha = "6f6f095c246733e7b155abebb63a4e64d64e17b9"
 sources = ["move"]
 role = "source"
+selection = "version-tag"
+version = "mainnet-v1.78.1"
+upstream_ref = "refs/tags/mainnet-v1.78.1"
 
 [[repo]]
 name = "devglobe-extension"
 url = "https://github.com/Nako0/devglobe-extension"
-sha = "5c5cbc04d53c34ff6b2051763eb6bfb0f6ec6bcb"
+sha = "07ac5678dcf62636fc3416198c5d01e7c0bb6a33"
 sources = ["devglobe-activity-ls"]
 role = "source"
+selection = "extension-version"
+version = "2.0.0"
+upstream_ref = "refs/tags/core-v2.0.0"
 
 [[repo]]
 name = "golangci-lint-langserver"
@@ -1907,27 +2701,39 @@ url = "https://github.com/nametake/golangci-lint-langserver"
 sha = "1c94317d7b8436cd2d4eb44212ceac7fd8949234"
 sources = ["golangci-lint"]
 role = "source"
+selection = "version-tag"
+version = "v0.0.12"
+upstream_ref = "refs/tags/v0.0.12"
 
 [[repo]]
 name = "navi"
 url = "https://github.com/navi-language/navi"
-sha = "315b6f2d7a1a1f4a683f75e79d68075913803752"
+sha = "6ed9e177de10705f2650a23f465c1ef4db27b72e"
 sources = ["navi"]
 role = "source"
+selection = "version-tag"
+version = "v0.16.0"
+upstream_ref = "refs/tags/v0.16.0"
 
 [[repo]]
 name = "liger"
 url = "https://github.com/navid-m/liger"
-sha = "47ec860cec52b330dd24e0ca239e13c262f98204"
+sha = "6cee7e1555e7b291cc2d1f8a27862a6b0c3d1a36"
 sources = ["crystal"]
 role = "source"
+selection = "version-tag"
+version = "v0.1.2"
+upstream_ref = "refs/tags/v0.1.2"
 
 [[repo]]
 name = "code-translate"
 url = "https://github.com/nazzeDe/code-translate"
-sha = "b53b9e644e5354996e8bf3499a8e03d8ac144922"
+sha = "c754ece78473026acf0c53d9e585011c9fa0c8e0"
 sources = ["code-translate-lsp"]
 role = "source"
+selection = "extension-version"
+version = "0.1.0"
+upstream_ref = "refs/tags/v0.1.0"
 
 [[repo]]
 name = "inlang-language-server"
@@ -1935,13 +2741,19 @@ url = "https://github.com/NEKOYASAN/inlang-language-server"
 sha = "dfcbdb024a4a9f017b64036813ae83538d2cb1b7"
 sources = ["inlang-language-server"]
 role = "source"
+selection = "version-tag"
+version = "v0.0.7"
+upstream_ref = "refs/tags/v0.0.7"
 
 [[repo]]
 name = "neocmakelsp"
 url = "https://github.com/neocmakelsp/neocmakelsp"
-sha = "569e3a7a0d472ba64eaf27415638858b68d08ac2"
+sha = "43e729cfb6d9fa32fe19ee43a42bf941bd0536b0"
 sources = ["neocmake"]
 role = "source"
+selection = "version-tag"
+version = "v0.11.1"
+upstream_ref = "refs/tags/v0.11.1"
 
 [[repo]]
 name = "ifc-language-server"
@@ -1949,13 +2761,19 @@ url = "https://github.com/NepomukWolf/IFC-Language-Server"
 sha = "2c844088661c6bef32b9c26b2dab7aba60d0dc89"
 sources = ["ifc"]
 role = "source"
+selection = "version-tag"
+version = "v0.6.0"
+upstream_ref = "refs/tags/v0.6.0"
 
 [[repo]]
 name = "ctags-lsp"
 url = "https://github.com/netmute/ctags-lsp"
-sha = "fe3d1f8490c5e7db38725b6e847472b9a63bacfc"
+sha = "81903ebfe20fb723b04ea919e2f33633e9484bb5"
 sources = ["ctags"]
 role = "source"
+selection = "extension-version"
+version = "0.8.1"
+upstream_ref = "refs/tags/v0.8.1"
 
 [[repo]]
 name = "intl-lens"
@@ -1963,6 +2781,9 @@ url = "https://github.com/nguyenphutrong/intl-lens"
 sha = "8ee8231da9931404201b7eb90f175cc1970796aa"
 sources = ["intl-lens"]
 role = "source"
+selection = "version-tag"
+version = "v0.1.10"
+upstream_ref = "refs/tags/v0.1.10"
 
 [[repo]]
 name = "silverstripe-language-server"
@@ -1970,41 +2791,58 @@ url = "https://github.com/nicolas-cusan/silverstripe-language-server"
 sha = "1e807d927e46e781a6d4dcd27924679cb582d383"
 sources = ["silverstripe"]
 role = "source"
+selection = "head"
+upstream_ref = "refs/heads/main"
 
 [[repo]]
 name = "dot-language-server"
 url = "https://github.com/nikeee/dot-language-server"
-sha = "c9a17d63174a3a8f566bfc9a7be1c6beb39fb7f1"
+sha = "27decb36291efeb3e0e135878bf0151ec2221ded"
 sources = ["graphviz"]
 role = "source"
+selection = "version-tag"
+version = "v3.2.0"
+upstream_ref = "refs/tags/v3.2.0"
 
 [[repo]]
 name = "jj-lsp"
 url = "https://github.com/nilskch/jj-lsp"
-sha = "775b0ac7e4c3e9e5b77dc04688d462269d274dc6"
+sha = "ab0b0ba4301ad56f17dd4f762d23615f38c25485"
 sources = ["jj-lsp"]
 role = "source"
+selection = "version-tag"
+version = "0.1.0"
+upstream_ref = "refs/tags/0.1.0"
 
 [[repo]]
 name = "langserver"
 url = "https://github.com/nim-lang/langserver"
-sha = "0a8046fa98adaf1f5a841d8658cb90291bdfb654"
+sha = "64239660c8ee4484b16e0ef0d1c0bf2e58b0bd2c"
 sources = ["nim"]
 role = "source"
+selection = "version-tag"
+version = "v1.14.0"
+upstream_ref = "refs/tags/v1.14.0"
 
 [[repo]]
 name = "nixd"
 url = "https://github.com/nix-community/nixd"
-sha = "6f05dff83ff291d23867a03c03c5577aad452be0"
+sha = "2307b620d3ba35fe4b0131ecbf70aea63b63e82e"
 sources = ["nix"]
 role = "source"
+selection = "version-tag"
+version = "2.9.2"
+upstream_ref = "refs/tags/2.9.2"
 
 [[repo]]
 name = "noir"
 url = "https://github.com/noir-lang/noir"
-sha = "a195103dbe8cadc7ddd9f750d9d96bcd78738f75"
+sha = "9ae9ef8347ddc608659563050edb6752f5dfb87d"
 sources = ["noir"]
 role = "source"
+selection = "version-tag"
+version = "v0.39.0"
+upstream_ref = "refs/tags/v0.39.0"
 
 [[repo]]
 name = "glsl_analyzer"
@@ -2012,20 +2850,29 @@ url = "https://github.com/nolanderc/glsl_analyzer"
 sha = "d595fb18c165f9e6c0c99a39dd457b993cfdd9aa"
 sources = ["glsl", "zed/glsl"]
 role = "source"
+selection = "version-tag"
+version = "v1.7.1"
+upstream_ref = "refs/tags/v1.7.1"
 
 [[repo]]
 name = "hardhat-vscode"
 url = "https://github.com/NomicFoundation/hardhat-vscode"
-sha = "3e365818f0f8fafdaa6f74d62c48b72b75e32dca"
+sha = "03d942869dd9601df65db37efc65ac3bb5c21d7d"
 sources = ["solidity"]
 role = "source"
+selection = "version-tag"
+version = "v0.8.29"
+upstream_ref = "refs/tags/v0.8.29"
 
 [[repo]]
 name = "nushell"
 url = "https://github.com/nushell/nushell"
-sha = "9d3157963241cf89447119d34d6e887859f5e7e8"
+sha = "798c55d19505fd52f205d7eb32a571b9d06ec9e6"
 sources = ["nu"]
 role = "source"
+selection = "version-tag"
+version = "0.115.1"
+upstream_ref = "refs/tags/0.115.1"
 
 [[repo]]
 name = "purescript-language-server"
@@ -2033,20 +2880,29 @@ url = "https://github.com/nwolverson/purescript-language-server"
 sha = "d84c175ecd9398d2a89699688fc1db46ce6a2233"
 sources = ["purescript"]
 role = "source"
+selection = "version-tag"
+version = "v0.18.5"
+upstream_ref = "refs/tags/v0.18.5"
 
 [[repo]]
 name = "ocaml-lsp"
 url = "https://github.com/ocaml/ocaml-lsp"
-sha = "d434ebd9bbf699e9512b78a582cae5184597e138"
+sha = "b90cbe7cdfb096eaf32df92b8db6681c428a5643"
 sources = ["ocaml"]
 role = "source"
+selection = "version-tag"
+version = "1.27.0"
+upstream_ref = "refs/tags/1.27.0"
 
 [[repo]]
 name = "aer-dist"
 url = "https://github.com/octoberswimmer/aer-dist"
-sha = "9efcd626b402d65b05449358426a0c167bea5134"
+sha = "63143c14a683cbd7f00c196fac44ea7748df99e8"
 sources = ["salesforce"]
 role = "distribution"
+selection = "version-tag"
+version = "v1.5.1"
+upstream_ref = "refs/tags/v1.5.1"
 
 [[repo]]
 name = "odoo-ls"
@@ -2054,6 +2910,9 @@ url = "https://github.com/odoo/odoo-ls"
 sha = "1b54aeb358e96825389192d334f230a2430e96a7"
 sources = ["odoo"]
 role = "source"
+selection = "extension-version"
+version = "1.4.0"
+upstream_ref = "refs/tags/1.4.0"
 
 [[repo]]
 name = "arkts"
@@ -2061,13 +2920,19 @@ url = "https://github.com/ohosvscode/arkTS"
 sha = "25fda87a6677c3e92f3b7ed41adbab82c3847929"
 sources = ["arkts"]
 role = "source"
+selection = "version-tag"
+version = "@arkts/language-server@1.3.10"
+upstream_ref = "refs/tags/@arkts/language-server@1.3.10"
 
 [[repo]]
 name = "emmet-language-server"
 url = "https://github.com/olrtg/emmet-language-server"
-sha = "728abf0dd188cab89c42f922128aa0f942b970fd"
+sha = "279be108725fb391c167690b697ce154fd32657b"
 sources = ["blade", "emmet", "latte"]
 role = "source"
+selection = "version-tag"
+version = "v2.8.0"
+upstream_ref = "refs/tags/v2.8.0"
 
 [[repo]]
 name = "omnisharp-roslyn"
@@ -2075,55 +2940,79 @@ url = "https://github.com/OmniSharp/omnisharp-roslyn"
 sha = "83fd615eafff33e297a9f59280d929cf09ec0d3c"
 sources = ["csharp"]
 role = "source"
+selection = "version-tag"
+version = "v1.39.15"
+upstream_ref = "refs/tags/v1.39.15"
 
 [[repo]]
 name = "flow-cli"
 url = "https://github.com/onflow/flow-cli"
-sha = "d6883e4435423bc04049087129d2d114b4e96358"
+sha = "3df6c515e971dfb7a933c5c63938a99dbfe0dc2a"
 sources = ["cadence"]
 role = "source"
+selection = "version-tag"
+version = "v2.18.0"
+upstream_ref = "refs/tags/v2.18.0"
 
 [[repo]]
 name = "quadlet-lsp"
 url = "https://github.com/onlyati/quadlet-lsp"
-sha = "dd29f8639250ac10305f60ecff2223a664b5d9f5"
+sha = "26a3fb91dd524f0e340f416239ef4dc8b8c058fe"
 sources = ["quadlet"]
 role = "source"
+selection = "version-tag"
+version = "v0.8.0"
+upstream_ref = "refs/tags/v0.8.0"
 
 [[repo]]
 name = "regal"
 url = "https://github.com/open-policy-agent/regal"
-sha = "f4b817f5d1f9cb2d88ec1cb8d9a50bfea7ea84b5"
+sha = "ecf4652a41582c4aa75741c5643cfd19c9d3db23"
 sources = ["rego"]
 role = "source"
+selection = "version-tag"
+version = "v2.2.3"
+upstream_ref = "refs/tags/v2.2.3"
 
 [[repo]]
 name = "tofu-ls"
 url = "https://github.com/opentofu/tofu-ls"
-sha = "c37a827b28fc4c244cabee14f77bab786477dd27"
+sha = "fcf0b93ae4b1bf5739c505ff11040f9e9c2dc042"
 sources = ["opentofu"]
 role = "source"
+selection = "version-tag"
+version = "v0.5.3"
+upstream_ref = "refs/tags/v0.5.3"
 
 [[repo]]
 name = "oso"
 url = "https://github.com/osohq/oso"
-sha = "7292df01679c8b3d7c92fbc08754bbb66647c1cc"
+sha = "b545cf5dc7ba3304b1206b315ab421e84256815c"
 sources = ["oso"]
 role = "source"
+selection = "version-tag"
+version = "v0.27.3"
+upstream_ref = "refs/tags/v0.27.3"
 
 [[repo]]
 name = "nil"
 url = "https://github.com/oxalica/nil"
-sha = "205c8ba65a7f956d7837a710794001b3515c65ff"
+sha = "dbbb5c24f9215476992aa1bd305f8e5398e89654"
 sources = ["nix"]
 role = "source"
+selection = "version-tag"
+version = "2026-07-23"
+upstream_ref = "refs/tags/2026-07-23"
 
 [[repo]]
 name = "oxc"
 url = "https://github.com/oxc-project/oxc"
-sha = "d198982c084e92e7c923d8a57f6b8ab87baefdda"
+sha = "b4da00b621ec2f6f67ed218f5366c45ed325331b"
 sources = ["oxc"]
 role = "source"
+selection = "version-tag"
+version = "oxlint_v1.82.0"
+upstream_ref = "refs/tags/oxlint_v1.82.0"
 
 [[repo]]
 name = "nginx-language-server"
@@ -2131,6 +3020,9 @@ url = "https://github.com/pappasam/nginx-language-server"
 sha = "b6c31a5d68c2d024089a41cd044d6a0472c19dc6"
 sources = ["nginx"]
 role = "source"
+selection = "version-tag"
+version = "v0.9.0"
+upstream_ref = "refs/tags/v0.9.0"
 
 [[repo]]
 name = "csound-lsp"
@@ -2138,27 +3030,39 @@ url = "https://github.com/PasqualeMainolfi/csound-lsp"
 sha = "24a75b4508cb65d477fac2972a43f3559e9c18ed"
 sources = ["csound"]
 role = "source"
+selection = "version-tag"
+version = "v1.7.0"
+upstream_ref = "refs/tags/v1.7.0"
 
 [[repo]]
 name = "zed-mjml"
 url = "https://github.com/pataruco/zed-mjml"
-sha = "1e12191c2aab74b5deb7c6536b043f2fb569af39"
+sha = "6e1867f37873fc0648cc58d24eb779de2f85d0ae"
 sources = ["mjml"]
 role = "source"
+selection = "version-tag"
+version = "zed-mjml-v0.2.0"
+upstream_ref = "refs/tags/zed-mjml-v0.2.0"
 
 [[repo]]
 name = "pest-ide-tools"
 url = "https://github.com/pest-parser/pest-ide-tools"
-sha = "8e968eacad1f9e54949cc0e13c5b4a022a7a7d4f"
+sha = "8b64c5ff59ec77945484e5ed0982bd847760f79c"
 sources = ["pest"]
 role = "source"
+selection = "version-tag"
+version = "v0.13.2"
+upstream_ref = "refs/tags/v0.13.2"
 
 [[repo]]
 name = "c3-lsp"
 url = "https://github.com/pherrymason/c3-lsp"
-sha = "f8fb4325fd43ea8b89d36c2f5142699105c9bada"
+sha = "a75a5fa6ed668b9767db696d56eed9f2ef509bba"
 sources = ["c3"]
 role = "source"
+selection = "version-tag"
+version = "v0.4.0"
+upstream_ref = "refs/tags/v0.4.0"
 
 [[repo]]
 name = "coffeesense"
@@ -2166,27 +3070,38 @@ url = "https://github.com/phil294/coffeesense"
 sha = "793ea901b7ef5c1528400ae9a589365589085cdc"
 sources = ["coffeescript"]
 role = "source"
+selection = "head"
+upstream_ref = "refs/heads/master"
 
 [[repo]]
 name = "phpactor"
 url = "https://github.com/phpactor/phpactor"
-sha = "ec564f09bd36de643ce38d7ab442288fe8d44084"
+sha = "1b3b0f3abfce8771d7cbc04eb73bf89294329994"
 sources = ["blade", "php"]
 role = "source"
+selection = "version-tag"
+version = "2026.07.22.0"
+upstream_ref = "refs/tags/2026.07.22.0"
 
 [[repo]]
 name = "phpantom_lsp"
 url = "https://github.com/PHPantom-dev/phpantom_lsp"
-sha = "7ecf35e1ca386e54c5088092717daab582f060b6"
+sha = "533ef884630924b774a2d74ac3d6050f7b3fbce0"
 sources = ["php"]
 role = "source"
+selection = "version-tag"
+version = "0.10.0"
+upstream_ref = "refs/tags/0.10.0"
 
 [[repo]]
 name = "fortitude"
 url = "https://github.com/PlasmaFAIR/fortitude"
-sha = "5a52edc192dd5cce08a1cab1d6d0209c925ee8b3"
+sha = "eb0f0c464859c6a6c4f91e4f97e36d26ddcb6947"
 sources = ["fortitude"]
 role = "source"
+selection = "version-tag"
+version = "v0.9.2"
+upstream_ref = "refs/tags/v0.9.2"
 
 [[repo]]
 name = "batch-language-server"
@@ -2194,41 +3109,59 @@ url = "https://github.com/PleahMaCaka/batch-language-server"
 sha = "3f140335e640ceb533d8f8540c58f92d83bb838b"
 sources = ["windows-batch"]
 role = "source"
+selection = "version-tag"
+version = "v0.0.26"
+upstream_ref = "refs/tags/v0.0.26"
 
 [[repo]]
 name = "beancount-language-server"
 url = "https://github.com/polarmutex/beancount-language-server"
-sha = "55416109fcd93fb3604488ae6a980f74eeda6376"
+sha = "8dff73d3db5e76a7cf478b5c55885efce6a8f2e6"
 sources = ["beancount"]
 role = "source"
+selection = "version-tag"
+version = "1.9.2"
+upstream_ref = "refs/tags/1.9.2"
 
 [[repo]]
 name = "zwirnzi-release"
 url = "https://github.com/polymorphicengine/zwirnzi-release"
-sha = "8ae544d768dcae571261d5a09208c7675843a6dc"
+sha = "e51b2bb15b236ae5f1f372882d904597c0abf1d8"
 sources = ["zwirn"]
 role = "distribution"
+selection = "version-tag"
+version = "0.2.2.1"
+upstream_ref = "refs/tags/0.2.2.1"
 
 [[repo]]
 name = "ponyc"
 url = "https://github.com/ponylang/ponyc"
-sha = "5b9031b38fb4908823c26951c0b55e1d1151c799"
+sha = "a0a717d0a1435b077cf130b51b233a0ee49aaf13"
 sources = ["pony"]
 role = "source"
+selection = "version-tag"
+version = "0.71.0"
+upstream_ref = "refs/tags/0.71.0"
 
 [[repo]]
 name = "air"
 url = "https://github.com/posit-dev/air"
-sha = "3c25bc68e88df84c2e8f13c6efbb29ffd920aa7e"
+sha = "1398662406e596d85d7e3481d17d44bdeceaa6d7"
 sources = ["air"]
 role = "source"
+selection = "version-tag"
+version = "0.11.0"
+upstream_ref = "refs/tags/0.11.0"
 
 [[repo]]
 name = "powershelleditorservices"
 url = "https://github.com/PowerShell/PowerShellEditorServices"
-sha = "ba8b42071c097536d240e857b2b1cf3dcd1e1fbc"
+sha = "e124c135c6bcb95e94ca1ea7bc4ca032249e4572"
 sources = ["powershell"]
 role = "source"
+selection = "version-tag"
+version = "v4.7.0"
+upstream_ref = "refs/tags/v4.7.0"
 
 [[repo]]
 name = "language-tools"
@@ -2236,13 +3169,19 @@ url = "https://github.com/prisma/language-tools"
 sha = "3c526c3ca6f6fbe869230130a21836f62776a774"
 sources = ["prisma"]
 role = "source"
+selection = "version-tag"
+version = "31.12.8"
+upstream_ref = "refs/tags/31.12.8"
 
 [[repo]]
 name = "processing4"
 url = "https://github.com/processing/processing4"
-sha = "0d8bde55f71764f4c6091beab7881fcb00738d20"
+sha = "b022247808bad26e823b55213037f5c654521edc"
 sources = ["processing"]
 role = "source"
+selection = "version-tag"
+version = "processing-1434-4.5.6"
+upstream_ref = "refs/tags/processing-1434-4.5.6"
 
 [[repo]]
 name = "leo"
@@ -2250,20 +3189,29 @@ url = "https://github.com/ProvableHQ/leo"
 sha = "f3578da035676364817aa7dffa9d21ecc3cd9dc4"
 sources = ["leo"]
 role = "source"
+selection = "version-tag"
+version = "leo-lsp-v4.4.2"
+upstream_ref = "refs/tags/leo-lsp-v4.4.2"
 
 [[repo]]
 name = "puppet-editor-services"
 url = "https://github.com/puppetlabs/puppet-editor-services"
-sha = "b1bc8ee92e7913c47578adb1cee102e986096963"
+sha = "976a92a9b68b8673d26432840bcfe4707aa052f5"
 sources = ["puppet"]
 role = "source"
+selection = "version-tag"
+version = "v2.0.4"
+upstream_ref = "refs/tags/v2.0.4"
 
 [[repo]]
 name = "serve-d"
 url = "https://github.com/Pure-D/serve-d"
-sha = "b04be10a20a4cbc2aa107e1a5ebf5f876c447460"
+sha = "fc9df495aa828dd3a9b107afdeef36910945b029"
 sources = ["d"]
 role = "source"
+selection = "version-tag"
+version = "v0.7.6"
+upstream_ref = "refs/tags/v0.7.6"
 
 [[repo]]
 name = "python-lsp-server"
@@ -2271,27 +3219,39 @@ url = "https://github.com/python-lsp/python-lsp-server"
 sha = "a3620069a607a63ed52569fde188e9301feae93a"
 sources = ["pylsp", "zed-core/pylsp"]
 role = "source"
+selection = "version-tag"
+version = "v1.15.0"
+upstream_ref = "refs/tags/v1.15.0"
 
 [[repo]]
 name = "qtdeclarative"
 url = "https://github.com/qt/qtdeclarative"
-sha = "02adb073a928a2c0db8b5ec19f9401d7700213c7"
+sha = "4e3399c26ec57246c08de019cfcbda8d23604cfa"
 sources = ["qml"]
 role = "source"
+selection = "version-tag"
+version = "v6.11.2"
+upstream_ref = "refs/tags/v6.11.2"
 
 [[repo]]
 name = "red-lsp"
 url = "https://github.com/qtxie/red-lsp"
-sha = "d38108ab91ef17f6b6fd9dccea76fd19383cebaf"
+sha = "864b95fe73da30bbc55e2c66d394d1f73c57bb93"
 sources = ["red"]
 role = "source"
+selection = "version-tag"
+version = "v0.1.2"
+upstream_ref = "refs/tags/v0.1.2"
 
 [[repo]]
 name = "csharp-language-server"
 url = "https://github.com/razzmatazz/csharp-language-server"
-sha = "e0562fd562225ed9fe0d7bf4301d5e255b7dc26f"
+sha = "d48ab7781176d2d369ceeb31d986503c2ad493e2"
 sources = ["csharp"]
 role = "source"
+selection = "version-tag"
+version = "0.27.0"
+upstream_ref = "refs/tags/0.27.0"
 
 [[repo]]
 name = "dockerfile-language-server-nodejs"
@@ -2299,48 +3259,69 @@ url = "https://github.com/rcjsuen/dockerfile-language-server-nodejs"
 sha = "98a7c2987f6acfcfb0b32a7f31ca3f2c35bf05b3"
 sources = ["dockerfile"]
 role = "source"
+selection = "version-tag"
+version = "v0.15.0"
+upstream_ref = "refs/tags/v0.15.0"
 
 [[repo]]
 name = "yaml-language-server"
 url = "https://github.com/redhat-developer/yaml-language-server"
-sha = "72ac1190764ec02070fd07634e7d6958630acf33"
+sha = "95ef21be3c25bc38338542afa643b8d30bebd298"
 sources = ["zed-core/yaml-language-server"]
 role = "source"
+selection = "version-tag"
+version = "1.24.0"
+upstream_ref = "refs/tags/1.24.0"
 
 [[repo]]
 name = "languageserver"
 url = "https://github.com/REditorSupport/languageserver"
-sha = "8441674f194a23b47b27ea18b6da026a46a4530b"
+sha = "abd00c9b0aa9d50d20a5ae11a2fff5fea20261bc"
 sources = ["r"]
 role = "source"
+selection = "version-tag"
+version = "v0.3.17"
+upstream_ref = "refs/tags/v0.3.17"
 
 [[repo]]
 name = "dexter"
 url = "https://github.com/remoteoss/dexter"
-sha = "c3e0a5b70f691bbb1a46500eb3ad43dce8c6219c"
+sha = "5e7b86e12a2e6f15dbc350518713345bdd9c7bac"
 sources = ["elixir"]
 role = "source"
+selection = "version-tag"
+version = "v0.7.1"
+upstream_ref = "refs/tags/v0.7.1"
 
 [[repo]]
 name = "rescript-vscode"
 url = "https://github.com/rescript-lang/rescript-vscode"
-sha = "f29d6a09b69d73c7759ca18adddcfe26b7c1f6d0"
+sha = "f0681e94b02a46e8a4b6b299e66f9c3eb77256f8"
 sources = ["rescript"]
 role = "source"
+selection = "version-tag"
+version = "1.74.0"
+upstream_ref = "refs/tags/1.74.0"
 
 [[repo]]
 name = "ts_query_ls"
 url = "https://github.com/ribru17/ts_query_ls"
-sha = "305587adaf39719152866012edd700c53036c7a6"
+sha = "5a64db5393c9e87af8c2da8a32c3f74cb9471594"
 sources = ["tree-sitter-query"]
 role = "source"
+selection = "version-tag"
+version = "v3.16.0"
+upstream_ref = "refs/tags/v3.16.0"
 
 [[repo]]
 name = "roc"
 url = "https://github.com/roc-lang/roc"
-sha = "b29a029a33489afae782791cdb6c8ff1b70513b7"
+sha = "5d6895908bcd2fd4c94633ab7b338ae3cdcbf8db"
 sources = ["roc"]
 role = "source"
+selection = "version-tag"
+version = "0.0.0-alpha2-rolling"
+upstream_ref = "refs/tags/0.0.0-alpha2-rolling"
 
 [[repo]]
 name = "language-server--rockide"
@@ -2348,13 +3329,19 @@ url = "https://github.com/rockide/language-server"
 sha = "9214b00a335eba3929785f239c9bc4401b582518"
 sources = ["rockide-language-server"]
 role = "source"
+selection = "version-tag"
+version = "0.4.0"
+upstream_ref = "refs/tags/0.4.0"
 
 [[repo]]
 name = "cst-lsp"
 url = "https://github.com/rowillia/cst-lsp"
-sha = "ca64a6dfd269edfceda95403a9afe4603fb973f4"
+sha = "67df7b26560c9b2fc34238cfce804be63386fec0"
 sources = ["python-refactoring"]
 role = "source"
+selection = "version-tag"
+version = "v0.1.1"
+upstream_ref = "refs/tags/v0.1.1"
 
 [[repo]]
 name = "rshtml-analyzer"
@@ -2362,41 +3349,59 @@ url = "https://github.com/rshtml/rshtml-analyzer"
 sha = "1b247ea2cde7315748f680888b95c09ae3064e52"
 sources = ["rshtml"]
 role = "source"
+selection = "version-tag"
+version = "v0.1.7"
+upstream_ref = "refs/tags/v0.1.7"
 
 [[repo]]
 name = "rubocop"
 url = "https://github.com/rubocop/rubocop"
-sha = "a72221af175f130bba9ccfb8f1eb2f0f43a21dd0"
+sha = "f1b25e1040416a1c4599273eeb6544679c3d68a0"
 sources = ["ruby"]
 role = "source"
+selection = "version-tag"
+version = "v1.90.0"
+upstream_ref = "refs/tags/v1.90.0"
 
 [[repo]]
 name = "circom-lsp"
 url = "https://github.com/rubydusa/circom-lsp"
-sha = "33be1179cc19f617f0a37f87f31d6f26aa557601"
+sha = "777f10037bd5bc50034de89a631b5438b8b02e35"
 sources = ["circom"]
 role = "source"
+selection = "version-tag"
+version = "v0.1.3"
+upstream_ref = "refs/tags/v0.1.3"
 
 [[repo]]
 name = "rust-glancer"
 url = "https://github.com/rust-glancer/rust-glancer"
-sha = "c81f62d04188e67b5c97976723208b1ad6dadb8c"
+sha = "7737db379d16f0de8c6d917335f288780ad6d26d"
 sources = ["rust-glancer"]
 role = "source"
+selection = "extension-version"
+version = "0.2.0"
+upstream_ref = "refs/tags/v0.2.0"
 
 [[repo]]
 name = "rust-analyzer"
 url = "https://github.com/rust-lang/rust-analyzer"
-sha = "f3120321073d8046795c6824976be8b0ae92c999"
+sha = "9074e9b4c6bc31d7986ccf4e22d18af70e5508da"
 sources = ["zed-core/rust-analyzer"]
 role = "source"
+selection = "version-tag"
+version = "2026-09-07"
+upstream_ref = "refs/tags/2026-09-07"
 
 [[repo]]
 name = "rumdl"
 url = "https://github.com/rvben/rumdl"
-sha = "5e4a387e7360f6f3f8bd3de4403276da30d5fc80"
+sha = "993b5b10feca512e07d017ba4550fe690cd08c51"
 sources = ["rumdl"]
 role = "source"
+selection = "version-tag"
+version = "v0.2.69"
+upstream_ref = "refs/tags/v0.2.69"
 
 [[repo]]
 name = "kanayago"
@@ -2404,27 +3409,39 @@ url = "https://github.com/S-H-GAMELINKS/kanayago"
 sha = "2b40c02c767a00ae3421cefb33d223b465f454ba"
 sources = ["ruby"]
 role = "source"
+selection = "version-tag"
+version = "v0.9.0"
+upstream_ref = "refs/tags/v0.9.0"
 
 [[repo]]
 name = "aw-watcher-zed"
 url = "https://github.com/sachk/aw-watcher-zed"
-sha = "c1e0368dd398c08bfc519a101315a1f2aa3ca52b"
+sha = "7182bfb10275d10442ee9f97e8c4aee2d82f0395"
 sources = ["activitywatch"]
 role = "source"
+selection = "version-tag"
+version = "v0.1.2"
+upstream_ref = "refs/tags/v0.1.2"
 
 [[repo]]
 name = "dep-beacon"
 url = "https://github.com/santi020k/dep-beacon"
-sha = "fd0cdc1640b8876ef09e8cbe6ac146127b258694"
+sha = "8098ea73173ce4a765b9357db8990f086f54c724"
 sources = ["dep-beacon-lsp"]
 role = "source"
+selection = "version-tag"
+version = "@santi020k/dep-beacon-lsp@1.1.1"
+upstream_ref = "refs/tags/@santi020k/dep-beacon-lsp@1.1.1"
 
 [[repo]]
 name = "sourcepawn-studio"
 url = "https://github.com/Sarrus1/sourcepawn-studio"
-sha = "5d94885707e75f7fc7ae931424c83e1dd2208328"
+sha = "69ca16152b27d5734c2e5a876911021900b29f19"
 sources = ["sourcepawn"]
 role = "source"
+selection = "version-tag"
+version = "v8.1.8"
+upstream_ref = "refs/tags/v8.1.8"
 
 [[repo]]
 name = "jsonl-tools"
@@ -2432,20 +3449,28 @@ url = "https://github.com/sarvagnan/jsonl-tools"
 sha = "073cec243a57ffba6885d882e5ab8ccf3187326e"
 sources = ["jsonl-lsp"]
 role = "source"
+selection = "head"
+upstream_ref = "refs/heads/main"
 
 [[repo]]
 name = "metals"
 url = "https://github.com/scalameta/metals"
-sha = "ee0e9da84e2f0b5156a11710befc9bc6118654be"
+sha = "c7402f4b05aada79b2c84959d551cd6a658ebc1a"
 sources = ["scala"]
 role = "source"
+selection = "version-tag"
+version = "v1.6.8"
+upstream_ref = "refs/tags/v1.6.8"
 
 [[repo]]
 name = "schemalock"
 url = "https://github.com/schemalock/schemalock"
-sha = "07ef8b01fa7af7a64ff1dcd030e03a9c0a4357cc"
+sha = "3ae7f7945894a02b188d40a62591b7d567f0f46f"
 sources = ["schemalock-lsp"]
 role = "source"
+selection = "extension-version"
+version = "0.3.2"
+upstream_ref = "refs/tags/v0.3.2"
 
 [[repo]]
 name = "sage-lsp"
@@ -2453,20 +3478,29 @@ url = "https://github.com/SeanDictionary/sage-lsp"
 sha = "e0d469d7b6c914fb4082bedc6e1ec688b158d0f1"
 sources = ["sagemath"]
 role = "source"
+selection = "version-tag"
+version = "1.1.2"
+upstream_ref = "refs/tags/1.1.2"
 
 [[repo]]
 name = "semgrep"
 url = "https://github.com/semgrep/semgrep"
-sha = "ad20f09ece0b652f4e532803ce3bcf0e1586c618"
+sha = "5bdaec16e18e33c520426dc1e4417161219daf35"
 sources = ["semgrep"]
 role = "source"
+selection = "version-tag"
+version = "v1.176.0"
+upstream_ref = "refs/tags/v1.176.0"
 
 [[repo]]
 name = "slang"
 url = "https://github.com/shader-slang/slang"
-sha = "42c22679e6ee8a75514d5d50e656b642c100df06"
+sha = "5bcb1c031b7873444f745b757a35e25567bbe043"
 sources = ["slang"]
 role = "source"
+selection = "version-tag"
+version = "v2026.17"
+upstream_ref = "refs/tags/v2026.17"
 
 [[repo]]
 name = "zed-todo-highlight"
@@ -2474,34 +3508,49 @@ url = "https://github.com/shionit/zed-todo-highlight"
 sha = "a5885f34f322479d8f3559d11eec260a8b642f95"
 sources = ["todo-highlight-language-server"]
 role = "source"
+selection = "extension-version"
+version = "0.3.0"
+upstream_ref = "refs/tags/v0.3.0"
 
 [[repo]]
 name = "cli"
 url = "https://github.com/Shopify/cli"
-sha = "23f1c3a05334551330acaf4a5d209abfcef2c503"
+sha = "ec353e22fb32c5edbd37d196d844a777466629e4"
 sources = ["liquid"]
 role = "source"
+selection = "version-tag"
+version = "4.7.1"
+upstream_ref = "refs/tags/4.7.1"
 
 [[repo]]
 name = "ruby-lsp"
 url = "https://github.com/Shopify/ruby-lsp"
-sha = "c0c741221a974980d66d14dbc6ba9b8890e9a5f0"
+sha = "6745c162fce98b1738f8f602fbca38806c6863aa"
 sources = ["ruby"]
 role = "source"
+selection = "version-tag"
+version = "v0.26.11"
+upstream_ref = "refs/tags/v0.26.11"
 
 [[repo]]
 name = "tree-sitter-structurizr"
 url = "https://github.com/sinon/tree-sitter-structurizr"
-sha = "301152e1207534e792c0cd0aaea3436e2e26984c"
+sha = "fb5c3f7ce09cf95e264ab464ac848487a079910d"
 sources = ["structurizr"]
 role = "source"
+selection = "version-tag"
+version = "v0.0.1-alpha"
+upstream_ref = "refs/tags/v0.0.1-alpha"
 
 [[repo]]
 name = "slint"
 url = "https://github.com/slint-ui/slint"
-sha = "f9363d7bdf5e026074c7d3a2e7aef1912b691e5f"
+sha = "cf62c975c311e7036d599ed8ed0b7e6a8386a934"
 sources = ["slint"]
 role = "source"
+selection = "extension-version"
+version = "1.17.1"
+upstream_ref = "refs/tags/v1.17.1"
 
 [[repo]]
 name = "flatbuffers-language-server"
@@ -2509,34 +3558,49 @@ url = "https://github.com/smpanaro/flatbuffers-language-server"
 sha = "02ba5b38fcc34931e321914ce9a2183d9f9233f4"
 sources = ["flatbuffers"]
 role = "source"
+selection = "version-tag"
+version = "0.0.2"
+upstream_ref = "refs/tags/0.0.2"
 
 [[repo]]
 name = "cairols"
 url = "https://github.com/software-mansion/cairols"
-sha = "a131d68e954cf8be52e80902c0be9216cea9ed9b"
+sha = "10126985738abd14f6607d8a0104cb9bd71523eb"
 sources = ["cairo"]
 role = "source"
+selection = "version-tag"
+version = "v2.19.1"
+upstream_ref = "refs/tags/v2.19.1"
 
 [[repo]]
 name = "jails"
 url = "https://github.com/SogoCZE/Jails"
-sha = "685c1d19ab52ee8eab29e76185ed8400640249d0"
+sha = "764ca85d150693a1c2a4939da023475e7c8c71c5"
 sources = ["jai"]
 role = "source"
+selection = "version-tag"
+version = "v0.2.22"
+upstream_ref = "refs/tags/v0.2.22"
 
 [[repo]]
 name = "sorbet"
 url = "https://github.com/sorbet/sorbet"
-sha = "e8f0eb82de923877387fa02fd6bbb2aac4801a66"
+sha = "16cee66cc7c90c0a48b1bd6d46177b49ced46f9f"
 sources = ["ruby", "sorbet"]
 role = "source"
+selection = "version-tag"
+version = "0.6.13490.20260908204645-16cee66cc"
+upstream_ref = "refs/tags/0.6.13490.20260908204645-16cee66cc"
 
 [[repo]]
 name = "steep"
 url = "https://github.com/soutaro/steep"
-sha = "b7c044359f1ac151118446ebb042024b3c17dbff"
+sha = "3b75b367c9ad3d07f8f053c0c1f28e4bab560f5d"
 sources = ["ruby"]
 role = "source"
+selection = "version-tag"
+version = "v2.1.0"
+upstream_ref = "refs/tags/v2.1.0"
 
 [[repo]]
 name = "soma"
@@ -2544,6 +3608,8 @@ url = "https://github.com/SrGaabriel/soma"
 sha = "b8be70dfbdb687f73b72f140dfa9fa75d1b221e5"
 sources = ["soma"]
 role = "source"
+selection = "head"
+upstream_ref = "refs/heads/main"
 
 [[repo]]
 name = "stardog-language-servers"
@@ -2551,69 +3617,96 @@ url = "https://github.com/stardog-union/stardog-language-servers"
 sha = "d3e39c4c876ff276da9e36e73f9f6376b36da849"
 sources = ["turtle"]
 role = "source"
+selection = "head"
+upstream_ref = "refs/heads/master"
 
 [[repo]]
 name = "vscode-antlers-language-server"
 url = "https://github.com/Stillat/vscode-antlers-language-server"
-sha = "d1c2a2d99d936cd4b54bdcfda41aaa552d9c16cd"
+sha = "bb19f62ecee45b55ea5cc580b4b9f92bdd3a643e"
 sources = ["statamic-antlers"]
 role = "source"
+selection = "extension-version"
+version = "1.3.14"
 
 [[repo]]
 name = "clarinet"
 url = "https://github.com/stx-labs/clarinet"
-sha = "fe0a7d3f4ea8e4e046bba90013b0504f5cfca305"
+sha = "0f56629a1351dddd2f8a844f28a356befebfab07"
 sources = ["clarity"]
 role = "source"
+selection = "version-tag"
+version = "v3.23.2"
+upstream_ref = "refs/tags/v3.23.2"
 
 [[repo]]
 name = "vscode-stylelint"
 url = "https://github.com/stylelint/vscode-stylelint"
-sha = "12ce1b26c552ba55ffae12a7e330c9af3e1317e4"
+sha = "190845e848f1c0a935aee355a2fc1b5bbba9d219"
 sources = ["stylelint"]
 role = "source"
+selection = "version-tag"
+version = "@stylelint/language-server@1.1.1"
+upstream_ref = "refs/tags/@stylelint/language-server@1.1.1"
 
 [[repo]]
 name = "postgres-language-server"
 url = "https://github.com/supabase-community/postgres-language-server"
-sha = "c2ca25802d63833faccf9fb136a4b89bd270e6da"
+sha = "6586ebfd9db3e20b3da3ea94111a100381aebb78"
 sources = ["postgres-language-server"]
 role = "source"
+selection = "version-tag"
+version = "0.25.7"
+upstream_ref = "refs/tags/0.25.7"
 
 [[repo]]
 name = "language-tools--sveltejs"
 url = "https://github.com/sveltejs/language-tools"
-sha = "2cfcc15b4c44dfc1128432e20ca663fe20bdd12e"
+sha = "f436ec070aa88eaac9efbbbe6131c6658d4d87eb"
 sources = ["svelte"]
 role = "source"
+selection = "version-tag"
+version = "svelte-language-server@0.18.4"
+upstream_ref = "refs/tags/svelte-language-server@0.18.4"
 
 [[repo]]
 name = "sourcekit-lsp"
 url = "https://github.com/swiftlang/sourcekit-lsp"
-sha = "a463483aba304581bad19a0d96d80091af3c8b52"
+sha = "11994a4c6a469173066bb4b2eb653ecc9570302e"
 sources = ["swift"]
 role = "source"
+selection = "version-tag"
+version = "swift-6.3.3-RELEASE"
+upstream_ref = "refs/tags/swift-6.3.3-RELEASE"
 
 [[repo]]
 name = "esbonio"
 url = "https://github.com/swyddfa/esbonio"
-sha = "85cfd59ca9244deb07343aef71ea50cb6efc4c9f"
+sha = "5e2b886aae8ab80d77262fe485015a4e3807329e"
 sources = ["rst"]
 role = "source"
+selection = "version-tag"
+version = "esbonio-language-server-v2.1.0"
+upstream_ref = "refs/tags/esbonio-language-server-v2.1.0"
 
 [[repo]]
 name = "tabby"
 url = "https://github.com/TabbyML/tabby"
-sha = "21b29048d7bcf6b94f9f482f2d0fd05efadfd19f"
+sha = "e5fc90af54e0886678d1f9b16350a3393522bd2a"
 sources = ["zabby"]
 role = "source"
+selection = "extension-version"
+version = "1.7.0"
 
 [[repo]]
 name = "tact-language-server"
 url = "https://github.com/tact-lang/tact-language-server"
-sha = "98df4ab2229229d1ce7b0825c5ade73c80b19723"
+sha = "fd645e0fbe378870b9441633022d2b8c6ce9436f"
 sources = ["tact", "ton"]
 role = "source"
+selection = "version-tag"
+version = "v0.9.0"
+upstream_ref = "refs/tags/v0.9.0"
 
 [[repo]]
 name = "tailwindcss-intellisense"
@@ -2621,6 +3714,9 @@ url = "https://github.com/tailwindlabs/tailwindcss-intellisense"
 sha = "5067ff7ec0b4b8bb5c3325a69c1f3410eb5b350a"
 sources = ["zed-core/tailwindcss-language-server", "zed-core/tailwindcss-intellisense-css"]
 role = "source"
+selection = "version-tag"
+version = "v0.16.0"
+upstream_ref = "refs/tags/v0.16.0"
 
 [[repo]]
 name = "canipls"
@@ -2628,6 +3724,9 @@ url = "https://github.com/taylorplewe/canipls"
 sha = "952342f5ec60d6e541b9a3b2498b3101d7c31b5e"
 sources = ["canipls-lint"]
 role = "source"
+selection = "version-tag"
+version = "v1.0.5"
+upstream_ref = "refs/tags/v1.0.5"
 
 [[repo]]
 name = "asn1-lsp"
@@ -2635,41 +3734,59 @@ url = "https://github.com/tdanner/asn1-lsp"
 sha = "9a4fce627377031172aee6dde8b19b17f5b57142"
 sources = ["asn1"]
 role = "source"
+selection = "version-tag"
+version = "v0.2.0"
+upstream_ref = "refs/tags/v0.2.0"
 
 [[repo]]
 name = "typos-lsp"
 url = "https://github.com/tekumara/typos-lsp"
-sha = "3a11f3d47b979f8178f8ce968bd5c06203b8674f"
+sha = "09f208999a2831980bd276f9204317941a9adf28"
 sources = ["typos"]
 role = "source"
+selection = "version-tag"
+version = "v0.1.56"
+upstream_ref = "refs/tags/v0.1.56"
 
 [[repo]]
 name = "termux-language-server"
 url = "https://github.com/termux/termux-language-server"
-sha = "36ad323d7d7bf4ca7c55643eda00b9dbb3875b9a"
+sha = "e2298d6e90ad63057424ea0857db5a19795cb361"
 sources = ["termux"]
 role = "source"
+selection = "version-tag"
+version = "0.1.9"
+upstream_ref = "refs/tags/0.1.9"
 
 [[repo]]
 name = "tflint"
 url = "https://github.com/terraform-linters/tflint"
-sha = "5aaf04b7a310ed736c211f20159b3dc1c142d6ed"
+sha = "15c65a33b322750f6131e286cd9597896299ba32"
 sources = ["tflint"]
 role = "source"
+selection = "version-tag"
+version = "v0.64.0"
+upstream_ref = "refs/tags/v0.64.0"
 
 [[repo]]
 name = "just-lsp"
 url = "https://github.com/terror/just-lsp"
-sha = "85bd39c7d4b65e4692b1410c1ed1fb94dcaca56f"
+sha = "d5ecc8fd9537b0c8b3d29ed95723e6b8c0f93fbc"
 sources = ["just"]
 role = "source"
+selection = "version-tag"
+version = "0.8.0"
+upstream_ref = "refs/tags/0.8.0"
 
 [[repo]]
 name = "tilt"
 url = "https://github.com/tilt-dev/tilt"
-sha = "4b9845ed68e766b7a92217993f2d78673b90e872"
+sha = "2b3a4064c6ba84e86c93258c085b498e5364a44b"
 sources = ["starlark"]
 role = "source"
+selection = "version-tag"
+version = "v0.37.7"
+upstream_ref = "refs/tags/v0.37.7"
 
 [[repo]]
 name = "sqlmesh"
@@ -2677,83 +3794,119 @@ url = "https://github.com/TobikoData/sqlmesh"
 sha = "0c89897ac62ce280232a132fc8047d646704d0e0"
 sources = ["sqlmesh"]
 role = "source"
+selection = "version-tag"
+version = "v0.236.2"
+upstream_ref = "refs/tags/v0.236.2"
 
 [[repo]]
 name = "stan-language-server"
 url = "https://github.com/tomatitito/stan-language-server"
-sha = "2285087cea1701885d9662c5b87a66139373ab2a"
+sha = "db98727e3392c928b4280a757f95ff91b48d78a1"
 sources = ["stan"]
 role = "source"
+selection = "version-tag"
+version = "v0.4.10"
+upstream_ref = "refs/tags/v0.4.10"
 
 [[repo]]
 name = "tombi"
 url = "https://github.com/tombi-toml/tombi"
-sha = "466ce9c09a3328453e5f964a9a6f8271b1116bd7"
+sha = "0ddfc9e77b8612f61f012a3ec6fb8d909d9910d4"
 sources = ["tombi"]
 role = "source"
+selection = "version-tag"
+version = "v1.5.3"
+upstream_ref = "refs/tags/v1.5.3"
 
 [[repo]]
 name = "zed-custom-code-folding"
 url = "https://github.com/tomchor/zed-custom-code-folding"
-sha = "20b27858a3455ac4f21a4dbdc17237040f31b582"
+sha = "f1ea46c683301bb35b0fc095a22c5ea5d3f325ff"
 sources = ["custom-code-folding-lsp"]
 role = "source"
+selection = "version-tag"
+version = "v0.1.2"
+upstream_ref = "refs/tags/v0.1.2"
 
 [[repo]]
 name = "ton-language-server"
 url = "https://github.com/ton-blockchain/ton-language-server"
-sha = "342d87c26b5fab1e300015bf2831cafa59fda457"
+sha = "bf697cc162779ac1797cfbc7f4806cc5991ae09b"
 sources = ["ton"]
 role = "source"
+selection = "version-tag"
+version = "v1.0.0"
+upstream_ref = "refs/tags/v1.0.0"
 
 [[repo]]
 name = "perl-tree-sitter-lsp"
 url = "https://github.com/tree-sitter-perl/perl-tree-sitter-lsp"
-sha = "edf2b6744f68f10191d494d2deb24e8597879e28"
+sha = "fc9553d71f868f090fe6f81d8119b42eab3bc00a"
 sources = ["perl"]
 role = "source"
+selection = "version-tag"
+version = "v0.7.0"
+upstream_ref = "refs/tags/v0.7.0"
 
 [[repo]]
 name = "ts-macro"
 url = "https://github.com/ts-macro/ts-macro"
-sha = "af6028901ac94a5c58f1af303b53c52bc5368bde"
+sha = "5942147dfc2801bcf570bff60279ea4d886ba052"
 sources = ["ts-macro"]
 role = "source"
+selection = "version-tag"
+version = "@ts-macro/language-server@0.1.19"
+upstream_ref = "refs/tags/@ts-macro/language-server@0.1.19"
 
 [[repo]]
 name = "tsrx"
 url = "https://github.com/tsrx-org/tsrx"
-sha = "c88c913c21f9c61bf34c58724b7a00d95b423d85"
+sha = "04c99ffbbeb4c0ce7f4b4309cc611a187ce8d163"
 sources = ["tsrx"]
 role = "source"
+selection = "extension-version"
+version = "0.3.132"
+upstream_ref = "refs/tags/@tsrx/language-server@0.3.132"
 
 [[repo]]
 name = "naive-ui-intellisense"
 url = "https://github.com/tu6ge/naive-ui-intellisense"
-sha = "c3d33c595a324d8d1bdff51d204f4521fec6edcf"
+sha = "fb1f91dccdd0f025b411e133b96245de6f030644"
 sources = ["naive-ui-intellisense"]
 role = "source"
+selection = "version-tag"
+version = "v0.2.0"
+upstream_ref = "refs/tags/v0.2.0"
 
 [[repo]]
 name = "nickel"
 url = "https://github.com/tweag/nickel"
-sha = "6a0a41e678023e69d500be8573a92438098f2403"
+sha = "1320a983e6c3d1e2fb53dd2464b084b4903b1426"
 sources = ["nickel"]
 role = "source"
+selection = "version-tag"
+version = "1.17.0"
+upstream_ref = "refs/tags/1.17.0"
 
 [[repo]]
 name = "yang-lsp"
 url = "https://github.com/TypeFox/yang-lsp"
-sha = "75ab716942112c88337a0986b27588435604c169"
+sha = "bee8f493e2e0ef1570e8007e3736a392036a6045"
 sources = ["yang"]
 role = "source"
+selection = "version-tag"
+version = "v0.7.6"
+upstream_ref = "refs/tags/v0.7.6"
 
 [[repo]]
 name = "typescript-language-server"
 url = "https://github.com/typescript-language-server/typescript-language-server"
-sha = "19fce01d47963b0e24a77682bc41cc71171f6a83"
+sha = "1c0f224eb44c626d96dae07aaf5d78654de0e1f2"
 sources = ["zed-core/typescript-language-server"]
 role = "source"
+selection = "version-tag"
+version = "v6.0.0"
+upstream_ref = "refs/tags/v6.0.0"
 
 [[repo]]
 name = "px-to-rem"
@@ -2761,13 +3914,19 @@ url = "https://github.com/ugi-dev/px-to-rem"
 sha = "3b74d45123ea5da36774ea8ecf0cf3bdf26fa83a"
 sources = ["px-to-rem"]
 role = "source"
+selection = "version-tag"
+version = "v0.1.0"
+upstream_ref = "refs/tags/v0.1.0"
 
 [[repo]]
 name = "uiua"
 url = "https://github.com/uiua-lang/uiua"
-sha = "1645ab26683e2b4312a6329093b5cb7752dd4288"
+sha = "face052446efdf2b0c31c3fb44a838fe793a0f83"
 sources = ["uiua"]
 role = "source"
+selection = "version-tag"
+version = "0.19.1"
+upstream_ref = "refs/tags/0.19.1"
 
 [[repo]]
 name = "umple-lsp"
@@ -2775,6 +3934,8 @@ url = "https://github.com/umple/umple-lsp"
 sha = "1771d55d7e00a720b97c0f2422971efa26e110f6"
 sources = ["umple"]
 role = "source"
+selection = "head"
+upstream_ref = "refs/heads/master"
 
 [[repo]]
 name = "unison"
@@ -2782,13 +3943,19 @@ url = "https://github.com/unisonweb/unison"
 sha = "84b95a623711b57b9ff7163f124b214d626b81e4"
 sources = ["unison"]
 role = "source"
+selection = "version-tag"
+version = "release/1.4.0"
+upstream_ref = "refs/tags/release/1.4.0"
 
 [[repo]]
 name = "vala-language-server"
 url = "https://github.com/vala-lang/vala-language-server"
-sha = "7ff53bee87fa47a40e6ea7d68e4765ee541a57b0"
+sha = "76e38dc9c8db359dfb9f1196387ae475b33fdd6f"
 sources = ["vala"]
 role = "source"
+selection = "version-tag"
+version = "0.48.7"
+upstream_ref = "refs/tags/0.48.7"
 
 [[repo]]
 name = "groovy-language-server"
@@ -2796,27 +3963,38 @@ url = "https://github.com/valentinegb/groovy-language-server"
 sha = "d6ec7d7f12bce86c96ba2cde11cc5c964a07ad6d"
 sources = ["groovy"]
 role = "source"
+selection = "head"
+upstream_ref = "refs/heads/master"
 
 [[repo]]
 name = "veryl"
 url = "https://github.com/veryl-lang/veryl"
-sha = "06eaa3c9f53cfd1fc19107866e34ee1272cdc119"
+sha = "2e32d53f056eef323225a91079af92574d18f726"
 sources = ["veryl"]
 role = "source"
+selection = "version-tag"
+version = "v0.21.0"
+upstream_ref = "refs/tags/v0.21.0"
 
 [[repo]]
 name = "rust_hdl"
 url = "https://github.com/VHDL-LS/rust_hdl"
-sha = "5f60921dd3d7e587699db04c731adc3f3bfc1e75"
+sha = "399acfe1761610b7b5ffb987414d4c115b275101"
 sources = ["vhdl"]
 role = "source"
+selection = "version-tag"
+version = "v0.88.0"
+upstream_ref = "refs/tags/v0.88.0"
 
 [[repo]]
 name = "psalm"
 url = "https://github.com/vimeo/psalm"
-sha = "7385c402699026d000ccce5f96415257c0ccc0d0"
+sha = "f1f5de594dc76faf8784e02d3dc4716c91c6f6ac"
 sources = ["psalm"]
 role = "source"
+selection = "version-tag"
+version = "6.16.1"
+upstream_ref = "refs/tags/6.16.1"
 
 [[repo]]
 name = "markdownlint-lsp"
@@ -2824,6 +4002,9 @@ url = "https://github.com/vitallium/markdownlint-lsp"
 sha = "5801ccf9e755af3e3fa390fd41d224215638239f"
 sources = ["markdownlint"]
 role = "source"
+selection = "version-tag"
+version = "v0.9.2"
+upstream_ref = "refs/tags/v0.9.2"
 
 [[repo]]
 name = "veridian"
@@ -2831,13 +4012,18 @@ url = "https://github.com/vivekmalneedi/veridian"
 sha = "0c5776a4a4e08fd00b90d91ad3cd2ec10315d2bd"
 sources = ["verilog"]
 role = "source"
+selection = "head"
+upstream_ref = "refs/heads/master"
 
 [[repo]]
 name = "cspell-lsp"
 url = "https://github.com/vlabo/cspell-lsp"
-sha = "6c8fbacfbf2d2ccc750661cca0656125c0f9a3e1"
+sha = "7e27b4433997da35e654e6c56f49936249700ff7"
 sources = ["cspell"]
 role = "source"
+selection = "version-tag"
+version = "v1.1.5"
+upstream_ref = "refs/tags/v1.1.5"
 
 [[repo]]
 name = "tyranoscript-lsp"
@@ -2845,20 +4031,29 @@ url = "https://github.com/void2610/tyranoscript-lsp"
 sha = "a09456ddc22815985be81d4cea8d779bd02b5a4d"
 sources = ["tyranoscript"]
 role = "source"
+selection = "version-tag"
+version = "v0.8.4"
+upstream_ref = "refs/tags/v0.8.4"
 
 [[repo]]
 name = "language-tools--vuejs"
 url = "https://github.com/vuejs/language-tools"
-sha = "88e8500c1e5f1b29d80f42c8ca065cc9cbd56899"
+sha = "f521b39b402ebaaa9ee70faf5a60a895544ed9e9"
 sources = ["vue"]
 role = "source"
+selection = "version-tag"
+version = "v3.3.11"
+upstream_ref = "refs/tags/v3.3.11"
 
 [[repo]]
 name = "zed-wakatime"
 url = "https://github.com/wakatime/zed-wakatime"
-sha = "c545607bd07c73b6917ee3dfafd2ab06cb77ac6b"
+sha = "32c1caa07aadcaa2d34c4d1fa08393eb83d829e3"
 sources = ["wakatime"]
 role = "source"
+selection = "version-tag"
+version = "v0.1.10"
+upstream_ref = "refs/tags/v0.1.10"
 
 [[repo]]
 name = "cargo-appraiser"
@@ -2866,48 +4061,69 @@ url = "https://github.com/washanhanzi/cargo-appraiser"
 sha = "647ecb4ffd1a70bef1166123158c2e78731de01b"
 sources = ["cargo-appraiser"]
 role = "source"
+selection = "version-tag"
+version = "v1.1.5"
+upstream_ref = "refs/tags/v1.1.5"
 
 [[repo]]
 name = "wc-language-server"
 url = "https://github.com/wc-toolkit/wc-language-server"
-sha = "281cb2715bc6bc5dc83eaeaed70c9dfa0f99374a"
+sha = "432df4f90b6b54c611b7d5360b33a24aceda5c7a"
 sources = ["wc-language-server"]
 role = "source"
+selection = "version-tag"
+version = "@wc-toolkit/language-server@0.0.7"
+upstream_ref = "refs/tags/@wc-toolkit/language-server@0.0.7"
 
 [[repo]]
 name = "wgsl-analyzer"
 url = "https://github.com/wgsl-analyzer/wgsl-analyzer"
-sha = "412b807bdf3fcc22da13898111e0180b58b6a36f"
+sha = "9c94f5b7c9d14e0b2abd4b9e8d35263696199f1d"
 sources = ["wgsl-wesl"]
 role = "source"
+selection = "version-tag"
+version = "2026-04-26"
+upstream_ref = "refs/tags/2026-04-26"
 
 [[repo]]
 name = "erlang-language-platform"
 url = "https://github.com/WhatsApp/erlang-language-platform"
-sha = "b36a64300e07b23a295ac6cd76b37997e647ca30"
+sha = "81ddb608598ff652a44a362f7a65cf2516bf6d1e"
 sources = ["erlang"]
 role = "source"
+selection = "version-tag"
+version = "2026-08-10"
+upstream_ref = "refs/tags/2026-08-10"
 
 [[repo]]
 name = "astro"
 url = "https://github.com/withastro/astro"
-sha = "e294953aa8aadd98d5be92e60a03037b05dbdfd4"
+sha = "2fdf731428aa738d5dcf3041b4e78eb9d036968c"
 sources = ["astro"]
 role = "source"
+selection = "version-tag"
+version = "@astrojs/language-server@2.16.16"
+upstream_ref = "refs/tags/@astrojs/language-server@2.16.16"
 
 [[repo]]
 name = "starpls"
 url = "https://github.com/withered-magic/starpls"
-sha = "ac25eca3dbbed6347fbca5fbf14d3a027d46bcab"
+sha = "7f266929e7422304e3fdfc9d1e97cca008731565"
 sources = ["starlark"]
 role = "source"
+selection = "version-tag"
+version = "v0.1.22"
+upstream_ref = "refs/tags/v0.1.22"
 
 [[repo]]
 name = "some-sass"
 url = "https://github.com/wkillerud/some-sass"
-sha = "64f88c7f93b11a04049f6800144eb04168165697"
+sha = "f87e94f8763eedb4ac426c83d6098b786bf1435f"
 sources = ["scss"]
 role = "source"
+selection = "version-tag"
+version = "some-sass-language-server@2.3.8"
+upstream_ref = "refs/tags/some-sass-language-server@2.3.8"
 
 [[repo]]
 name = "wplabs-lsp"
@@ -2915,27 +4131,39 @@ url = "https://github.com/wp-labs/wplabs-lsp"
 sha = "81eaf8483098853c8165604262316d96068ac9a2"
 sources = ["warplabs"]
 role = "source"
+selection = "version-tag"
+version = "v0.1.7"
+upstream_ref = "refs/tags/v0.1.7"
 
 [[repo]]
 name = "zed-json-tool"
 url = "https://github.com/xgfone/zed-json-tool"
-sha = "94ebb3d28430a481ec7efa41e3bd8558ed516ad3"
+sha = "12e5a2b90e78c4290709a8878bc7d87c0eb96b65"
 sources = ["json-tool-lsp"]
 role = "source"
+selection = "version-tag"
+version = "v0.0.3"
+upstream_ref = "refs/tags/v0.0.3"
 
 [[repo]]
 name = "zed-discord-presence"
 url = "https://github.com/xhyrom/zed-discord-presence"
-sha = "fe1375373c28a183dd92dc2fb196f00fa3ca6106"
+sha = "d6f8d8601c081999fd3a959760dfecbabc2f6825"
 sources = ["discord-presence"]
 role = "source"
+selection = "version-tag"
+version = "v0.12.0"
+upstream_ref = "refs/tags/v0.12.0"
 
 [[repo]]
 name = "nautilus"
 url = "https://github.com/y0gm4/nautilus"
-sha = "f081dbb271ee2cf2d12d0d6e49b3f1a5402d8e74"
+sha = "903d377ef4e73625761261208124bd85b2c7c102"
 sources = ["nautilus"]
 role = "source"
+selection = "version-tag"
+version = "v1.4.1"
+upstream_ref = "refs/tags/v1.4.1"
 
 [[repo]]
 name = "hl7_v2_lsp"
@@ -2943,13 +4171,19 @@ url = "https://github.com/Yes25/hl7_v2_lsp"
 sha = "5bb0319204eb45e6af79f97e837a8558d7a8d122"
 sources = ["hl7v2"]
 role = "source"
+selection = "extension-version"
+version = "0.1.0"
+upstream_ref = "refs/tags/v0.1.0"
 
 [[repo]]
 name = "vtsls"
 url = "https://github.com/yioneko/vtsls"
-sha = "b02907b310ec4690b95b2c347fbbe6be33467b00"
+sha = "53e86731a40885ad786addbf0cc949f3a70c444f"
 sources = ["zed-core/vtsls"]
 role = "source"
+selection = "version-tag"
+version = "server-v0.3.0"
+upstream_ref = "refs/tags/server-v0.3.0"
 
 [[repo]]
 name = "zed-i18n-lens"
@@ -2957,6 +4191,9 @@ url = "https://github.com/yizixu/zed-i18n-lens"
 sha = "887bb26d130e7846034a251fdab60f654a460ce3"
 sources = ["i18n-lens-language-server"]
 role = "source"
+selection = "version-tag"
+version = "v0.11.1"
+upstream_ref = "refs/tags/v0.11.1"
 
 [[repo]]
 name = "vscode-bitbake"
@@ -2964,6 +4201,9 @@ url = "https://github.com/yoctoproject/vscode-bitbake"
 sha = "3010afc5ca0ce2d395265773479b3b4f32fbabd4"
 sources = ["bitbake"]
 role = "source"
+selection = "version-tag"
+version = "v2.10.0"
+upstream_ref = "refs/tags/v2.10.0"
 
 [[repo]]
 name = "ink-lsp"
@@ -2971,13 +4211,19 @@ url = "https://github.com/yuna0x0/ink-lsp"
 sha = "2955886217222f5affa8fdc85b1f284cfa2b0265"
 sources = ["ink"]
 role = "source"
+selection = "version-tag"
+version = "v1.0.0-lsp"
+upstream_ref = "refs/tags/v1.0.0-lsp"
 
 [[repo]]
 name = "yarnspinner"
 url = "https://github.com/yuna0x0/YarnSpinner"
-sha = "aa22bf0134668685abd9e73da68dd0f0107f14b7"
+sha = "0740cc2126e191f3f9dd4042370a98f7a60278cf"
 sources = ["yarn-spinner"]
 role = "source"
+selection = "version-tag"
+version = "v3.0.2"
+upstream_ref = "refs/tags/v3.0.2"
 
 [[repo]]
 name = "package-version-server"
@@ -2985,45 +4231,66 @@ url = "https://github.com/zed-industries/package-version-server"
 sha = "4d9cad808364a048e0115b5d0eba309bf69e238b"
 sources = ["zed-core/package-version-server"]
 role = "source"
+selection = "version-tag"
+version = "v0.0.10"
+upstream_ref = "refs/tags/v0.0.10"
 
 [[repo]]
 name = "zls"
 url = "https://github.com/zigtools/zls"
-sha = "3df042851351abdcfcdab9e133f3e144fe37b783"
+sha = "494486203c3a48927f2383aa3d5ce5fca112186d"
 sources = ["zig"]
 role = "source"
+selection = "version-tag"
+version = "0.16.0"
+upstream_ref = "refs/tags/0.16.0"
 
 [[repo]]
 name = "zizmor"
 url = "https://github.com/zizmorcore/zizmor"
-sha = "4cdfcca80dbef21d76773992a8ad8c6ab42ab661"
+sha = "fb814d6687450fc8e0b0fba8d958b1ac40c0647f"
 sources = ["zizmor"]
 role = "source"
+selection = "version-tag"
+version = "v1.30.0"
+upstream_ref = "refs/tags/v1.30.0"
 
 [[repo]]
 name = "zk"
 url = "https://github.com/zk-org/zk"
-sha = "e8bf4b3e2b611d10c611a9634cdc94a83df72a95"
+sha = "929ed3cf7ca6a3fea78b70398bb51fca6d347427"
 sources = ["zk"]
 role = "source"
+selection = "version-tag"
+version = "v0.15.6"
+upstream_ref = "refs/tags/v0.15.6"
 
 [[repo]]
 name = "zubanls-python"
 url = "https://github.com/zubanls/zubanls-python"
-sha = "439714c0c6690d626a61b220f8ea0cf472a4e9ba"
+sha = "dac8980466b40502940f9ffedba7cdf87382329b"
 sources = ["zuban"]
 role = "source"
+selection = "version-tag"
+version = "v0.9.3"
+upstream_ref = "refs/tags/v0.9.3"
 
 [[repo]]
 name = "cron-sense"
 url = "https://github.com/zxcodes/cron-sense"
-sha = "08a3732731f9777c5776169c1603d0328339e5e1"
+sha = "a4b153692e6b21848f1b70beb7fa75c2ee179795"
 sources = ["cron-sense-lsp"]
 role = "source"
+selection = "version-tag"
+version = "v0.3.0"
+upstream_ref = "refs/tags/v0.3.0"
 
 [[repo]]
 name = "blueprint-compiler"
 url = "https://gitlab.gnome.org/jwestman/blueprint-compiler"
-sha = "8eca521ae720655c837fd1885940ed91f7517e6f"
+sha = "ed35ac74de0c1bb1f5e852410b97edd1f08904c9"
 sources = ["blueprint"]
 role = "source"
+selection = "version-tag"
+version = "v0.22.2"
+upstream_ref = "refs/tags/v0.22.2"
