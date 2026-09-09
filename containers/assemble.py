@@ -32,6 +32,7 @@ def append_servers(image, tag):
     base = subprocess.check_output([*PODMAN, 'image', 'inspect', '--format={{.Id}}', image], text=True).strip()
     context = ROOT/'images'/('servers-append-'+uuid.uuid4().hex)
     context.mkdir()
+    os.chown(context, USER.pw_uid, USER.pw_gid)
     container = 'corpus-append-'+uuid.uuid4().hex
     call([*PODMAN, 'create', '--name='+container, '--network=none', base])
     try:

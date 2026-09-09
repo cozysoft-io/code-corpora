@@ -1,6 +1,7 @@
 """Check incremental-image integrity without a VM or container execution."""
 import importlib.util
 import json
+import os
 from pathlib import Path
 import tempfile
 from types import SimpleNamespace
@@ -30,7 +31,7 @@ class AppendServersTest(unittest.TestCase):
         self.catalog = [self.records['old'], {'name':'new', 'sha':'new-pin', 'status':'failed'}]
         def atomic_json(path, value):
             path.write_text(json.dumps(value))
-        fake = SimpleNamespace(ROOT=self.root, USER=SimpleNamespace(pw_uid=1000, pw_gid=1000),
+        fake = SimpleNamespace(ROOT=self.root, USER=SimpleNamespace(pw_uid=os.getuid(), pw_gid=os.getgid()),
                                PODMAN=['podman'], atomic_json=atomic_json)
         spec = importlib.util.spec_from_file_location('append_test_assemble', Path(__file__).with_name('assemble.py'))
         self.module = importlib.util.module_from_spec(spec)
