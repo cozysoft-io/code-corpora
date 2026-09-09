@@ -14,6 +14,8 @@ import tomllib
 import unittest
 from unittest.mock import patch
 
+import corpus_coverage
+
 TOOL = Path(__file__).with_name("corpus")
 loader = importlib.machinery.SourceFileLoader("corpus_tool", str(TOOL))
 spec = importlib.util.spec_from_loader(loader.name, loader)
@@ -301,6 +303,58 @@ class CorpusTests(unittest.TestCase):
                 with contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit):
                     corpus.load_sources(kind)
 
+
+
+class CoverageTests(unittest.TestCase):
+    def test_registered_suffixes_match_filenames_and_compound_extensions(self):
+        suffixes = {"ts", "d.ts", "Dockerfile", "env", "yml", ".github/workflows/build.yml"}
+        self.assertEqual(corpus_coverage.matching_suffixes("repo/source.d.ts", suffixes), {"ts", "d.ts"})
+        self.assertEqual(corpus_coverage.matching_suffixes("repo/Dockerfile", suffixes), {"Dockerfile"})
+        self.assertEqual(corpus_coverage.matching_suffixes("repo/.env", suffixes), {"env"})
+        self.assertEqual(corpus_coverage.matching_suffixes("repo/source.TS", suffixes), set())
+        self.assertEqual(corpus_coverage.matching_suffixes("repo/notts", suffixes), set())
+
+    def test_utf8_raw_lines_and_overlapping_suffixes(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary)
+            (directory / "source.d.ts").write_bytes("// comment\r\n\nλ".encode())
+            (directory / "empty.ts").write_bytes(b"")
+            (directory / ".hidden.ts").write_bytes(b"one\n")
+            (directory / "invalid.ts").write_bytes(b"\xff\n")
+            (directory / "other.bin").write_bytes(b"text\n")
+            (directory / "link.ts").symlink_to(directory / "source.d.ts")
+            (directory / ".git").mkdir()
+            (directory / ".git" / "ignored.ts").write_bytes(b"ignored\n")
+            result = corpus_coverage.count_split(directory, {"ts", "d.ts"})
+            self.assertEqual(result["total"], dict(files=3, lines=4, invalid_utf8=1,
+                                                  unmatched_files=1, symlinks_skipped=1))
+            self.assertEqual(result["suffixes"]["ts"], dict(files=3, lines=4, invalid_utf8=1))
+            self.assertEqual(result["suffixes"]["d.ts"], dict(files=1, lines=3, invalid_utf8=0))
+            self.assertEqual(result["errors"], [])
+
+    def test_language_counts_deduplicate_overlapping_suffixes(self):
+        document = dict(snapshot_date="2026-09-08", registrations=[dict(name="TypeScript", grammar="typescript",
+                        source="zed", path_suffixes=["ts", "d.ts"])], unavailable_extensions=[], splits={})
+        for split in ["training", "test"]:
+            document["splits"][split] = dict(total=dict(files=1, lines=2000, invalid_utf8=0, unmatched_files=0),
+                match_groups=[dict(suffixes=["ts", "d.ts"], files=1, lines=2000)])
+        corpus_coverage.report(document)
+        self.assertEqual(document["languages"]["TypeScript"]["training"], dict(files=1, lines=2000))
+        self.assertTrue(document["languages"]["TypeScript"]["below_threshold"])
+
+    def test_coverage_requires_more_than_twenty_files_and_two_thousand_lines(self):
+        for files, lines, below in [(20, 2000, True), (21, 1999, True), (21, 2000, False)]:
+            with self.subTest(files=files, lines=lines):
+                document = dict(snapshot_date="2026-09-08", unavailable_extensions=[],
+                                registrations=[dict(name="Example", grammar="example", source="zed",
+                                                    path_suffixes=["example"])], splits={})
+                for split, count in [("training", 10), ("test", files - 10)]:
+                    raw_lines = 1000 if split == "training" else lines - 1000
+                    document["splits"][split] = dict(
+                        total=dict(files=count, lines=raw_lines, invalid_utf8=0, unmatched_files=0),
+                        match_groups=[dict(suffixes=["example"], files=count, lines=raw_lines)])
+                corpus_coverage.report(document)
+                self.assertEqual(document["languages"]["Example"]["below_threshold"], below)
 
 
 if __name__ == "__main__":

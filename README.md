@@ -26,6 +26,23 @@ for two [Cozysoft](https://cozysoft.io) projects:
 * `.corpus/` is bind mounted in to the container(s) and holds build outputs.
 
 
+# Language coverage
+
+[`language-coverage.md`](language-coverage.md) lists registered Zed language
+suffixes and UTF-8 file/raw-line counts in `training/` and `test/`.
+The census also accepts RosettaCodeData's `.arturo`, `.uiua`, and `.simula` aliases.
+[`language-coverage.json`](language-coverage.json) retains registration pins,
+per-suffix measurements, ambiguous suffixes, and unavailable extensions.
+
+```sh
+python3 corpus_coverage.py               # recount using the saved inventory
+python3 corpus_coverage.py --refresh     # reread pinned extension configs
+```
+
+The census includes hidden and ignored files, skips Git metadata and symlinks,
+and counts blanks and comments as ordinary lines. Shared suffixes can contribute
+to several languages; split totals count each matching file once.
+
 # Containers
 
 `ghcr.io/cozysoft-io/code-corpora-build`: dependencies needed to build grammars and servers
