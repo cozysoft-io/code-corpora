@@ -27,6 +27,8 @@ jobs:
       CORPUS_RELEASE: ${{ inputs.release }}
       CORPUS_KIND: ${{ matrix.kind }}
     steps:
+      - name: Make room for the saved image
+        run: sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache
       - name: Install registry transport
         run: sudo apt-get update && sudo apt-get install -y --no-install-recommends skopeo
       - name: Read the publisher at this workflow commit

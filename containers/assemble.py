@@ -10,6 +10,7 @@ from pathlib import Path
 import shutil
 import subprocess
 import tomllib
+import uuid
 from build_grammars import ROOT, USER, PODMAN, atomic_json
 from runtime_layers import stage_layers
 
@@ -24,6 +25,79 @@ def check_server_pin(record, selection):
         raise ValueError('Artifact does not match selected server commit: '+record['name'])
 
 
+def append_servers(image, tag):
+    """Add new distributions without copying the existing runtime layers."""
+    selection = {row['name']: row for row in tomllib.loads(
+        (ROOT/'repo/selected-servers.toml').read_text())['repo']}
+    base = subprocess.check_output([*PODMAN, 'image', 'inspect', '--format={{.Id}}', image], text=True).strip()
+    context = ROOT/'images'/('servers-append-'+uuid.uuid4().hex)
+    context.mkdir()
+    container = 'corpus-append-'+uuid.uuid4().hex
+    call([*PODMAN, 'create', '--name='+container, '--network=none', base])
+    try:
+        call([*PODMAN, 'cp', container+':/opt/corpus/server-catalog.json', str(context/'server-catalog.json')])
+    finally:
+        call([*PODMAN, 'rm', container])
+    rows = {row['name']: row for row in json.loads((context/'server-catalog.json').read_text())}
+    if set(rows) != set(selection):
+        raise ValueError('Base image has a different server selection')
+    source = ROOT/'artifacts/servers'
+    additions = []
+    for name, row in rows.items():
+        check_server_pin(row, selection)
+        record = source/name/'build.json'
+        if row.get('artifact'):
+            # Appending cannot remove an old distribution or its commands.
+            if not record.is_file() or json.loads(record.read_text()) != row:
+                raise ValueError('Base distribution changed; full assembly required: '+name)
+        elif record.is_file():
+            current = json.loads(record.read_text())
+            check_server_pin(current, selection)
+            rows[name] = current
+            additions.append(name)
+    if not additions:
+        raise ValueError('No new server distributions')
+    staged = context/'servers'
+    staged.mkdir()
+    for name in additions:
+        shutil.copytree(source/name, staged/name, symlinks=True)
+    commands = defaultdict(list)
+    for name, row in rows.items():
+        if not row.get('artifact'): continue
+        for entry in row['artifact']['executables']:
+            command_name = entry['name']
+            if not re.fullmatch(r'[A-Za-z0-9_.+-]+', command_name):
+                raise ValueError('Unsafe executable name')
+            if command_name.startswith(('python', 'pip')): continue
+            path = source/name/entry['path']
+            if not path.resolve(strict=True).is_relative_to((source/name).resolve()):
+                raise ValueError('Escaping executable')
+            command = ([entry['interpreter']] if entry.get('interpreter') else [])+[
+                '/opt/corpus/servers/'+name+'/'+entry['path']]
+            commands[command_name].append(command)
+    bin_directory = context/'bin'
+    bin_directory.mkdir()
+    for name, candidates in commands.items():
+        if len(candidates) != 1: continue
+        launcher = bin_directory/name
+        launcher.write_text('#!/bin/sh\nexec '+shlex.join(candidates[0])+' "$@"\n')
+        launcher.chmod(0o755)
+    atomic_json(context/'server-catalog.json', sorted(rows.values(), key=lambda row:row['name']))
+    layers = stage_layers(staged, context/'server-layers')
+    copies = '\n'.join('COPY '+str(layer.relative_to(context))+'/ /opt/corpus/servers/' for layer in layers)
+    (context/'Containerfile').write_text('FROM '+base+'\n'+copies+
+        '\nCOPY server-catalog.json /opt/corpus/server-catalog.json\n'
+        'RUN rm -rf /opt/corpus/bin\nCOPY bin /opt/corpus/bin\n')
+    (context/'.containerignore').write_text('servers/\n')
+    call(['chown', '-hR', f'{USER.pw_uid}:{USER.pw_gid}', str(context)])
+    target = 'localhost/code-corpora-servers:'+tag
+    call([*PODMAN, 'build', '--network=none', '-t', target, str(context)])
+    result = json.loads(subprocess.check_output([*PODMAN, 'image', 'inspect', target]))
+    atomic_json(ROOT/'artifacts/servers-image.json', result)
+    atomic_json(ROOT/'artifacts'/('servers-append-'+tag+'.json'), {
+        'base_image':base, 'image':result[0]['Id'], 'added':sorted(additions), 'context':str(context)})
+
+
 def main():
     os.chdir(ROOT)
     p = argparse.ArgumentParser()
@@ -31,7 +105,13 @@ def main():
     p.add_argument('--tag', default='initial')
     p.add_argument('--builder', default='localhost/code-corpora-build:toolchains')
     p.add_argument('--grammar-image', default='localhost/code-corpora-grammars:initial')
+    p.add_argument('--add-to', help='Append new servers to this existing server image, preserving its layers')
     args = p.parse_args()
+    if not re.fullmatch(r'[A-Za-z0-9_][A-Za-z0-9_.-]{0,127}', args.tag): p.error('Invalid image tag')
+    if args.add_to:
+        if args.kind != 'servers': p.error('--add-to requires servers')
+        append_servers(args.add_to, args.tag)
+        return
     context = ROOT/'images'/args.kind
     context.mkdir(parents=True, exist_ok=True)
     os.chown(context, USER.pw_uid, USER.pw_gid)

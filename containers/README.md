@@ -159,7 +159,8 @@ The inherited builder must contain the target's SDKs. Grammar builds regenerate
 `parser.c` and compile native and WASM artifacts; use `--no-generate` to test edits
 to generated C directly. `--source PATH` selects an alternate checkout. Server
 recipes use the same format as the batch recipes. Builds default to 2 CPUs and
-4 GB RAM; use `--memory 8g` for targets that need more memory. Dependency preparation is
+4 GB RAM; use `--memory 8g` for targets that need more memory. `--timeout 600`
+limits each phase to ten minutes for inexpensive repair attempts. Dependency preparation is
 offline unless `--prepare-online` is explicit; compilation is always offline.
 Local online preparation does not have the VM's private-address firewall rules,
 so use public inputs only. Source snapshots must already contain required nested
@@ -172,6 +173,12 @@ directories to the VM and run `sudo python3 repo/containers/import_servers.py
 /path/to/servers` from `/srv/corpus`. `--check` validates without importing. Imports
 verify pins and hashes, respect build locks, retain previous failure records, and
 still require the aggregate's runtime checks.
+
+For additions to an already assembled image, run `assemble.py servers --add-to
+BASE_SERVER_IMAGE --tag TAG`. This preserves existing layers and copies only new
+distributions. It rejects changed source selections or replaced base artifacts;
+those require full assembly. Check the added servers in the resulting image before
+publishing it.
 
 Prepare exact registered extension versions from `zed-sources.toml`:
 
