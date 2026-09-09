@@ -91,9 +91,18 @@ for directory in [Path('/opt/corpus/servers')/sys.argv[1]]:
         name = entry['name'].replace('_', '-')
         return (0 if name in hints else 1 if re.search(r'(^|-)(lsp|ls)($|-)|server|analyzer', name) else 2, name)
     executables = sorted((b for b in meta['executables'] if not b['name'].startswith(('python', 'pip'))), key=rank)
+    # Match the selected Zed adapters' launch arguments before generic discovery.
+    preferred_arguments = {
+        'awsum': ['lsp', '--stdio'],
+        'buf': ['lsp', 'serve'],
+        'cargo-appraiser': ['--renderer', 'inlayHint'],
+        'cargotom': ['--storage', '/work/home'],
+    }
     for entry in executables[:3]:
         command = ([entry['interpreter']] if entry.get('interpreter') else [])+[str(directory/entry['path'])]
-        for arguments in ([], ['--stdio'], ['--lsp'], ['--lsp', '--stdio'], ['lsp'], ['server'], ['language-server'], ['move-analyzer'], ['serve'], ['lsp-proxy'], ['start', '--stdio']):
+        candidates = [[], ['--stdio'], ['--lsp'], ['--lsp', '--stdio'], ['lsp'], ['server'], ['language-server'], ['move-analyzer'], ['serve'], ['lsp-proxy'], ['start', '--stdio']]
+        if directory.name in preferred_arguments: candidates.insert(0, preferred_arguments[directory.name])
+        for arguments in candidates:
             record['attempts'].append([entry['name'], *arguments])
             diagnostic = {'command': [entry['name'], *arguments]}
             # Kotlin initializes its compiler and class path before replying.
