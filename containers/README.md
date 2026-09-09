@@ -167,6 +167,12 @@ checkouts. Successful builds atomically replace the target's override; failed
 builds retain the previous artifact. Artifact metadata records input hashes,
 source HEAD when available, and the resolved builder image ID.
 
+To include completed local outputs in the VM's next aggregate, copy their target
+directories to the VM and run `sudo python3 repo/containers/import_servers.py
+/path/to/servers` from `/srv/corpus`. `--check` validates without importing. Imports
+verify pins and hashes, respect build locks, retain previous failure records, and
+still require the aggregate's runtime checks.
+
 Prepare exact registered extension versions from `zed-sources.toml`:
 
 ```bash
