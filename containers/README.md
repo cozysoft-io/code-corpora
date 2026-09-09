@@ -261,8 +261,13 @@ The existing progress release uses private
 `ghcr.io/mgsloan/code-corpora-{build,grammars,servers}` packages. The intended
 namespace for the next release is `ghcr.io/cozysoft-io/`; existing lock records
 continue to identify the actual published digests.
-The private [publishing repository](https://github.com/mgsloan/corpus-containers)
-uses GitHub Actions' temporary package token. No additional personal access token
+Before publishing again, transfer the existing private
+[publishing repository](https://github.com/mgsloan/corpus-containers) to
+`cozysoft-io/corpus-containers`, or create that private repository from `publisher/`.
+`upload_release.py` targets this organization repository; the workflow publishes
+under its owner's GHCR namespace and checks organization package visibility.
+Associate the packages with `cozysoft-io/code-corpora` and grant the publisher
+Actions access. The publisher uses GitHub Actions' temporary package token. No additional personal access token
 is needed for upload. `publisher/` contains the reviewed workflow and transfer code.
 `prepare_upload.py` splits OCI archives into checksummed private release assets;
 the workflow verifies those hashes and image IDs before copying to GHCR without

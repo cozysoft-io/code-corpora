@@ -18,8 +18,10 @@ kind = os.environ['CORPUS_KIND']
 tag = os.environ['CORPUS_RELEASE']
 if kind not in ('build', 'grammars', 'servers'): raise ValueError('Unexpected image kind')
 if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.-]{0,100}', tag): raise ValueError('Unsafe release tag')
-if not api('repos/'+repo)['private']: raise ValueError('Publishing repository must remain private')
-package_api = f'users/{owner}/packages/container/code-corpora-{kind}'
+repository = api('repos/'+repo)
+if not repository['private']: raise ValueError('Publishing repository must remain private')
+account = 'orgs' if repository['owner']['type'] == 'Organization' else 'users'
+package_api = f'{account}/{owner}/packages/container/code-corpora-{kind}'
 before = subprocess.run(['gh', 'api', package_api], capture_output=True, text=True)
 if before.returncode == 0:
     if json.loads(before.stdout)['visibility'] != 'private': raise ValueError('Existing package is not private')
@@ -55,7 +57,7 @@ if image_manifest['config']['digest'] != spec['image_id']: raise ValueError('Ima
 auth = Path(os.environ['RUNNER_TEMP'])/'corpus-registry-auth.json'
 os.environ['REGISTRY_AUTH_FILE'] = str(auth)
 try:
-    subprocess.run(['skopeo', 'login', '--username', owner, '--password-stdin', 'ghcr.io'],
+    subprocess.run(['skopeo', 'login', '--username', os.environ['GITHUB_ACTOR'], '--password-stdin', 'ghcr.io'],
                    input=os.environ['GH_TOKEN'], text=True, check=True)
     parent = None
     if kind == 'servers':

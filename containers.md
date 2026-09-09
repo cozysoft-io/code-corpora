@@ -221,7 +221,7 @@ The VM is `corpus-builder` in `mgsloan-compute/us-central1-a`; connect through I
 It uses `e2-standard-16` (16 vCPUs/64 GB RAM), a 50 GiB boot disk, and a preserved
 450 GiB XFS data disk. N2 capacity was unavailable, and the 500 GiB SSD quota
 limited disk sizing. [cloud.json](containers/cloud.json) records this configuration.
-Use private GHCR packages under `mgsloan`; a separate private GitHub Actions
+Use private GHCR packages under `cozysoft-io`; a separate private GitHub Actions
 publisher supplies its own temporary package credential.
 The Linux x86-64 VM has cgroup v2 and expandable storage.
 Size parallelism from measured peak memory/disk use, starting with
@@ -317,7 +317,7 @@ kernel, filesystem, or scheduling behavior.
 ## Image storage: private GitHub Container Registry
 
 Use **GitHub Container Registry (`ghcr.io`)** for all three images, under the
-user's GitHub account or organization. Keep each package private:
+`cozysoft-io` organization. Keep each package private:
 
 ```text
 ghcr.io/cozysoft-io/code-corpora-build:RELEASE
@@ -349,9 +349,17 @@ the included allowance) and requires transferring archives out of Google Cloud,
 even though retaining the images in GHCR is currently free. See
 [Actions billing](https://docs.github.com/en/billing/concepts/product-billing/github-actions).
 
-The implemented publisher is the private
+The existing checkpoint was published through the private
 [`mgsloan/corpus-containers`](https://github.com/mgsloan/corpus-containers)
-repository. Transfer saved OCI archives through the trusted local machine into
+repository. Before the next publication, transfer that repository to
+`cozysoft-io/corpus-containers` or create a private organization publisher from
+`containers/publisher/`. Its owner determines the GHCR namespace; the upload
+script now targets the organization publisher. Check organization package-creation
+permissions and the publisher's Actions access before dispatch. Associate the
+packages with `cozysoft-io/code-corpora`, retaining publisher write access; see
+[GitHub's repository-linking instructions](https://docs.github.com/en/packages/learn-github-packages/connecting-a-repository-to-a-package).
+Keep existing `mgsloan` digest records until an organization release is actually
+published and verified. Transfer saved OCI archives through the trusted local machine into
 private release assets, split below GitHub's per-asset limit. A reviewed workflow
 checks archive/chunk hashes and expected image configuration digests, then uses
 `skopeo copy --preserve-digests` to upload without executing the images. It checks
@@ -369,8 +377,8 @@ containers. GitHub documents these scopes in the
 [registry authentication guide](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry#authenticating-to-the-container-registry).
 
 Uploading from the Google build VM to GHCR can still incur Google Cloud Internet
-egress; build compute and disks also cost money. Set `REGISTRY_PREFIX=ghcr.io/OWNER`
-in the trusted build/publish configuration. Do not provision Artifact Registry or
+egress; build compute and disks also cost money. The configured registry prefix
+is `ghcr.io/cozysoft-io`. Do not provision Artifact Registry or
 mirror images to a second registry as part of this plan.
 
 Share unchanged layers, put stable toolchains before changing dependencies, and

@@ -12,7 +12,7 @@ p.add_argument('--release', required=True)
 p.add_argument('--directory', type=Path, required=True)
 p.add_argument('--kind', choices=('build', 'grammars', 'servers'), action='append', required=True)
 args = p.parse_args()
-repo = 'mgsloan/corpus-containers'
+repo = 'cozysoft-io/corpus-containers'
 if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.-]{0,100}', args.release): p.error('Unsafe release tag')
 private = json.loads(subprocess.check_output(['gh', 'api', 'repos/'+repo]))['private']
 if not private: raise RuntimeError('Publisher repository is not private')

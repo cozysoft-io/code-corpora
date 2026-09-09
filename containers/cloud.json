@@ -13,7 +13,7 @@
   "ingress": "SSH from IAP only",
   "service_account": null,
   "automatic_stop_after": "12h",
-  "registry_prefix": "ghcr.io/mgsloan",
+  "registry_prefix": "ghcr.io/cozysoft-io",
   "registry_visibility": "private",
   "notes": "N2 capacity unavailable; SSD quota 500 GiB. Build disk preserved on VM deletion."
 }
