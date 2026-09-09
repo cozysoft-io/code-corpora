@@ -290,5 +290,63 @@
       ]
     ],
     "repair_note": "Generate real docstubs with the uv.lock-pinned docify; includes documentation for the builder Python version and OS."
+  },
+  "csskit": {
+    "name": "csskit",
+    "url": "https://github.com/csskit/csskit",
+    "sha": "ff15f9cd60ef38a703cc7f46785837024f2f8c52",
+    "references": [
+      {
+        "extension": "csskit-lsp",
+        "ids": [
+          "csskit"
+        ]
+      }
+    ],
+    "kind": "cargo",
+    "network_exception": "Public dependency preparation only; no credentials/private data; host egress rejects internal and metadata HTTP endpoints",
+    "repair_lock": true,
+    "repair_note": "Regenerate the stale upstream lockfile; native release linking needs --memory 12g locally.",
+    "memory": "12g"
+  },
+  "fsautocomplete": {
+    "name": "fsautocomplete",
+    "url": "https://github.com/fsharp/FsAutoComplete",
+    "sha": "3a4757d01e5d1beb58b6d44d62369b13bf3c28ea",
+    "references": [
+      {
+        "extension": "fsharp",
+        "ids": [
+          "fsautocomplete"
+        ]
+      }
+    ],
+    "kind": "dotnet",
+    "fetch_git": true,
+    "project": "src/FsAutoComplete/FsAutoComplete.fsproj",
+    "executable": "fsautocomplete",
+    "dotnet_properties": {
+      "TargetFramework": "net10.0"
+    },
+    "before_prepare": [
+      [
+        "dotnet",
+        "tool",
+        "restore"
+      ]
+    ],
+    "repair_note": "Restore Paket before project dependencies, then restore the net8.0 logging library separately from the net10.0 server.",
+    "prepare_commands": [
+      [
+        "dotnet",
+        "restore",
+        "src/FsAutoComplete.Logging/FsAutoComplete.Logging.fsproj",
+        "--runtime",
+        "linux-x64",
+        "-p:SelfContained=true",
+        "-p:Configuration=Release",
+        "--use-lock-file"
+      ]
+    ]
   }
 }
