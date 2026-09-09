@@ -12,7 +12,7 @@
 	shallow = true
 [submodule "lsp-data"]
 	path = lsp-data
-	url = https://github.com/cozysoft-io/code-analysis-lsp-data.git
+	url = https://github.com/cozysoft-io/code-corpora-lsp-data.git
 	active = false
 	update = none
 	shallow = true

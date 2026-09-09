@@ -1,4 +1,4 @@
-# Cozysoft code analysis corpus
+# Code corpora
 
 This corpus collects code examples from a variety of languages. It was created
 for two [Cozysoft](https://cozysoft.io) projects:
@@ -18,7 +18,7 @@ for two [Cozysoft](https://cozysoft.io) projects:
 
   - `selected-grammars.toml` and `selected-servers.toml` are computed from these, and pin the URLs and SHAs for those.
 
-* [`lsp-data/`](https://github.com/cozysoft-io/code-analysis-lsp-data) is an optional submodule containing LSP data computed for the repositories based on the `servers`.
+* [`lsp-data/`](https://github.com/cozysoft-io/code-corpora-lsp-data) is an optional submodule containing LSP data computed for the repositories based on the `servers`.
 
 
 # Fetching repositories
@@ -93,7 +93,7 @@ can embed the old absolute paths.
 
 # Recorded data and history
 
-[`lsp-data/`](https://github.com/cozysoft-io/code-analysis-lsp-data) stores the latest
+[`lsp-data/`](https://github.com/cozysoft-io/code-corpora-lsp-data) stores the latest
 position pools and their recorded observations under `training/NAME` and `test/NAME`.
 Its inventory records original paths, repository pins, file hashes, collection
 headers, and how each result set aligns with the current positions. Read its
@@ -108,7 +108,8 @@ upstream checkout history is stored in the new initial commit on `main`.
 The local `heuristic-jump-corpus` branch preserves the commit immediately before
 the submodule migration (`ab10f8c`). It is intentionally not published: publishing
 that historical branch would make ordinary clones fetch the old dataset history.
-The local `~/cozy/tree-sitter-corpus` compatibility symlink still points here,
+The local checkout is `~/cozy/code-corpora`; compatibility symlinks at
+`~/cozy/code-analysis-corpus` and `~/cozy/tree-sitter-corpus` still point here,
 but consumers must adopt the new paths. Heuristic-jump has not been updated for
 this layout yet.
 
