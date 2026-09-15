@@ -1,5 +1,5 @@
 {
-  "status": "RosettaCodeData fetched into training; other sources remain proposals",
+  "status": "RosettaCodeData, six canonical language sources, and four larger implementation sources fetched into training; other sources remain proposals",
   "baseline_coverage_sha256": "c2db1e44a8b993a2855334af375ee548f516e01045e31856fa183305a7aa5852",
   "threshold": {
     "files": 21,
@@ -15794,6 +15794,1161 @@
         "Simula"
       ],
       "filename_census_caveat": "Brainfuck also clears the raw filename threshold because .bf includes Befunge. The reviewed Brainfuck subset remains below 2,000 lines."
+    },
+    "inko-lang/inko": {
+      "selection_date": "2026-09-14",
+      "sha": "5a9a0cca46fb337cac11c8ec43ea1a59c0ebaf03",
+      "path": "train/inko-lang--inko",
+      "language": "Inko",
+      "baseline": {
+        "suffixes": [
+          "inko"
+        ],
+        "grammars": [
+          "inko"
+        ],
+        "sources": [
+          "inko"
+        ],
+        "training": {
+          "files": 1,
+          "lines": 3
+        },
+        "test": {
+          "files": 0,
+          "lines": 0
+        },
+        "below_threshold": true
+      },
+      "source_roots": [
+        "std/",
+        "docs/src/"
+      ],
+      "exclude_paths": [],
+      "license": {
+        "spdx_id": "MPL-2.0",
+        "name": "Mozilla Public License 2.0",
+        "url": "https://api.github.com/licenses/mpl-2.0"
+      },
+      "maintenance_snapshot": {
+        "pushed_at": "2026-09-05T21:04:28Z",
+        "archived": false,
+        "fork": false
+      },
+      "prior_candidate": "repo-selection.json: repositories.inko-lang/inko",
+      "reason": "Inko standard library and applications contain imports, types, and cross-file calls.",
+      "evaluation_ready": false,
+      "checkout_verified": true,
+      "measurement_method": "Pinned Git tracked UTF-8 files; raw LF lines including blanks and comments. Scoped counts apply source roots and exclusions; no claim that every retained line is handwritten or valid syntax.",
+      "checkout_measurements": {
+        "files": 463,
+        "lines": 99882
+      },
+      "scoped_measurements": {
+        "files": 462,
+        "lines": 99837
+      },
+      "source_groups": {
+        "docs": {
+          "files": 6,
+          "lines": 647,
+          "sample_paths": [
+            "docs/src/docs/config.inko",
+            "docs/src/docs/filters.inko",
+            "docs/src/docs/layouts.inko"
+          ]
+        },
+        "std": {
+          "files": 456,
+          "lines": 99190,
+          "sample_paths": [
+            "std/autobahn/src/client.inko",
+            "std/autobahn/src/server.inko",
+            "std/fixtures/compile_time_variables.inko"
+          ]
+        }
+      },
+      "held_out_exact_copy_check": {
+        "method": "SHA-256 of target-suffix files in test/; symlinks and .git skipped; exact copies excluded from scope. Near copies and differently named source are not detected.",
+        "excluded_matches": []
+      },
+      "selection_exceptions": [
+        "Allow one canonical training repository without an independent test pair.",
+        "Allow compiler tests and examples; syntax validity and generated content require review before evaluation."
+      ],
+      "coverage_contribution": {
+        "files": 756,
+        "lines": 212187,
+        "invalid_utf8": 0,
+        "unmatched_files": 12,
+        "symlinks_skipped": 0
+      }
+    },
+    "rhaiscript/rhai": {
+      "selection_date": "2026-09-14",
+      "sha": "4d9e4d80809fc2234564717c909db412effeaf52",
+      "path": "train/rhaiscript--rhai",
+      "language": "Rhai",
+      "baseline": {
+        "suffixes": [
+          "rhai"
+        ],
+        "grammars": [
+          "rhai"
+        ],
+        "sources": [
+          "rhai"
+        ],
+        "training": {
+          "files": 0,
+          "lines": 0
+        },
+        "test": {
+          "files": 0,
+          "lines": 0
+        },
+        "below_threshold": true
+      },
+      "source_roots": [
+        "scripts/",
+        "examples/",
+        "tests/"
+      ],
+      "exclude_paths": [
+        "*.d.rhai",
+        "**/*.d.rhai"
+      ],
+      "license": {
+        "spdx_id": "Apache-2.0",
+        "name": "Apache License 2.0",
+        "url": "https://api.github.com/licenses/apache-2.0"
+      },
+      "maintenance_snapshot": {
+        "pushed_at": "2026-09-09T01:27:33Z",
+        "archived": false,
+        "fork": false
+      },
+      "prior_candidate": "repo-selection.json: repositories.rhaiscript/rhai",
+      "reason": "Rhai programs exercise functions and embedded scripting. Exclude declaration files, including duplicated generated all_in_one definitions.",
+      "evaluation_ready": false,
+      "checkout_verified": true,
+      "measurement_method": "Pinned Git tracked UTF-8 files; raw LF lines including blanks and comments. Scoped counts apply source roots and exclusions; no claim that every retained line is handwritten or valid syntax.",
+      "checkout_measurements": {
+        "files": 45,
+        "lines": 23095
+      },
+      "scoped_measurements": {
+        "files": 35,
+        "lines": 3312
+      },
+      "source_groups": {
+        "examples": {
+          "files": 4,
+          "lines": 167,
+          "sample_paths": [
+            "examples/definitions/script.rhai",
+            "examples/event_handler_js/script.rhai",
+            "examples/event_handler_main/script.rhai"
+          ]
+        },
+        "scripts": {
+          "files": 29,
+          "lines": 2756,
+          "sample_paths": [
+            "scripts/array.rhai",
+            "scripts/assignment.rhai",
+            "scripts/comments.rhai"
+          ]
+        },
+        "tests": {
+          "files": 2,
+          "lines": 389,
+          "sample_paths": [
+            "tests/grain/fixtures/follow.rhai",
+            "tests/grain/fixtures/golden.rhai"
+          ]
+        }
+      },
+      "held_out_exact_copy_check": {
+        "method": "SHA-256 of target-suffix files in test/; symlinks and .git skipped; exact copies excluded from scope. Near copies and differently named source are not detected.",
+        "excluded_matches": []
+      },
+      "selection_exceptions": [
+        "Allow one canonical training repository without an independent test pair.",
+        "Allow compiler tests and examples; syntax validity and generated content require review before evaluation.",
+        "3,312 scoped raw lines; small correctness workload, not a latency workload."
+      ],
+      "coverage_contribution": {
+        "files": 392,
+        "lines": 129178,
+        "invalid_utf8": 0,
+        "unmatched_files": 68,
+        "symlinks_skipped": 0
+      }
+    },
+    "DanielXMoore/Civet": {
+      "selection_date": "2026-09-14",
+      "sha": "10a55dd4b311303a827984fbe15962e991af0abb",
+      "path": "train/DanielXMoore--Civet",
+      "language": "Civet",
+      "baseline": {
+        "suffixes": [
+          "civet"
+        ],
+        "grammars": [
+          "civet"
+        ],
+        "sources": [
+          "civet"
+        ],
+        "training": {
+          "files": 0,
+          "lines": 0
+        },
+        "test": {
+          "files": 0,
+          "lines": 0
+        },
+        "below_threshold": true
+      },
+      "source_roots": [
+        "source/",
+        "lsp/",
+        "integration/",
+        "scripts/",
+        "build/",
+        "test/"
+      ],
+      "exclude_paths": [],
+      "license": {
+        "spdx_id": "MIT",
+        "name": "MIT License",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "maintenance_snapshot": {
+        "pushed_at": "2026-09-08T19:22:01Z",
+        "archived": false,
+        "fork": false
+      },
+      "prior_candidate": "repo-selection.json: repositories.DanielXMoore/Civet",
+      "reason": "Civet implementation and language server provide cross-file source; test files also contain embedded inputs and expected outputs.",
+      "evaluation_ready": false,
+      "checkout_verified": true,
+      "measurement_method": "Pinned Git tracked UTF-8 files; raw LF lines including blanks and comments. Scoped counts apply source roots and exclusions; no claim that every retained line is handwritten or valid syntax.",
+      "checkout_measurements": {
+        "files": 327,
+        "lines": 87687
+      },
+      "scoped_measurements": {
+        "files": 327,
+        "lines": 87687
+      },
+      "source_groups": {
+        "build": {
+          "files": 2,
+          "lines": 642,
+          "sample_paths": [
+            "build/changelog.civet",
+            "build/esbuild.civet"
+          ]
+        },
+        "integration": {
+          "files": 39,
+          "lines": 955,
+          "sample_paths": [
+            "integration/eslint/esbuild.civet",
+            "integration/eslint/example/eslint.config.civet",
+            "integration/eslint/example/test.civet"
+          ]
+        },
+        "lsp": {
+          "files": 81,
+          "lines": 12607,
+          "sample_paths": [
+            "lsp/monaco/build/build.civet",
+            "lsp/monaco/source/monaco.civet",
+            "lsp/monaco/test/monaco.civet"
+          ]
+        },
+        "scripts": {
+          "files": 7,
+          "lines": 1454,
+          "sample_paths": [
+            "scripts/audit-node.civet",
+            "scripts/coverage-check.civet",
+            "scripts/coverage-merge.civet"
+          ]
+        },
+        "source": {
+          "files": 57,
+          "lines": 17903,
+          "sample_paths": [
+            "source/assert-shim.civet",
+            "source/babel-plugin.civet",
+            "source/browser-shim.civet"
+          ]
+        },
+        "test": {
+          "files": 141,
+          "lines": 54126,
+          "sample_paths": [
+            "test/array.civet",
+            "test/assignment.civet",
+            "test/at.civet"
+          ]
+        }
+      },
+      "held_out_exact_copy_check": {
+        "method": "SHA-256 of target-suffix files in test/; symlinks and .git skipped; exact copies excluded from scope. Near copies and differently named source are not detected.",
+        "excluded_matches": []
+      },
+      "selection_exceptions": [
+        "Allow one canonical training repository without an independent test pair.",
+        "Allow compiler tests and examples; syntax validity and generated content require review before evaluation."
+      ],
+      "coverage_contribution": {
+        "files": 586,
+        "lines": 183362,
+        "invalid_utf8": 0,
+        "unmatched_files": 30,
+        "symlinks_skipped": 0
+      }
+    },
+    "HigherOrderCO/Bend": {
+      "selection_date": "2026-09-14",
+      "sha": "814453670d0e0d6777c1313c972764dba0491b7f",
+      "path": "train/HigherOrderCO--Bend",
+      "language": "Bend",
+      "baseline": {
+        "suffixes": [
+          "bend"
+        ],
+        "grammars": [
+          "bend"
+        ],
+        "sources": [
+          "bend"
+        ],
+        "training": {
+          "files": 0,
+          "lines": 0
+        },
+        "test": {
+          "files": 0,
+          "lines": 0
+        },
+        "below_threshold": true
+      },
+      "source_roots": [
+        "src/fun/builtins.bend",
+        "examples/",
+        "tests/"
+      ],
+      "exclude_paths": [],
+      "license": {
+        "spdx_id": "Apache-2.0",
+        "name": "Apache License 2.0",
+        "url": "https://api.github.com/licenses/apache-2.0"
+      },
+      "maintenance_snapshot": {
+        "pushed_at": "2026-07-07T19:51:01Z",
+        "archived": false,
+        "fork": false
+      },
+      "prior_candidate": "repo-selection.json: repositories.HigherOrderCO/Bend",
+      "reason": "Bend builtins provide definitions and calls; compiler fixtures broaden syntax coverage and include expected failures.",
+      "evaluation_ready": false,
+      "checkout_verified": true,
+      "measurement_method": "Pinned Git tracked UTF-8 files; raw LF lines including blanks and comments. Scoped counts apply source roots and exclusions; no claim that every retained line is handwritten or valid syntax.",
+      "checkout_measurements": {
+        "files": 525,
+        "lines": 6374
+      },
+      "scoped_measurements": {
+        "files": 525,
+        "lines": 6374
+      },
+      "source_groups": {
+        "examples": {
+          "files": 16,
+          "lines": 844,
+          "sample_paths": [
+            "examples/bitonic_sort.bend",
+            "examples/bubble_sort.bend",
+            "examples/callcc.bend"
+          ]
+        },
+        "src": {
+          "files": 1,
+          "lines": 898,
+          "sample_paths": [
+            "src/fun/builtins.bend"
+          ]
+        },
+        "tests": {
+          "files": 508,
+          "lines": 4632,
+          "sample_paths": [
+            "tests/golden_tests/check_file/fail_type_bad_rec_fn_adt.bend",
+            "tests/golden_tests/check_file/non_exaustive_limit.bend",
+            "tests/golden_tests/check_file/type_err_match_arm.bend"
+          ]
+        }
+      },
+      "held_out_exact_copy_check": {
+        "method": "SHA-256 of target-suffix files in test/; symlinks and .git skipped; exact copies excluded from scope. Near copies and differently named source are not detected.",
+        "excluded_matches": []
+      },
+      "selection_exceptions": [
+        "Allow one canonical training repository without an independent test pair.",
+        "Allow compiler tests and examples; syntax validity and generated content require review before evaluation.",
+        "6,374 scoped raw lines; small correctness workload, not a latency workload."
+      ],
+      "coverage_contribution": {
+        "files": 621,
+        "lines": 31075,
+        "invalid_utf8": 0,
+        "unmatched_files": 478,
+        "symlinks_skipped": 0
+      }
+    },
+    "duso-org/duso": {
+      "selection_date": "2026-09-14",
+      "sha": "2fc8b28bd3032ffad67ee2e9e519bb9521644d9f",
+      "path": "train/duso-org--duso",
+      "language": "Duso",
+      "baseline": {
+        "suffixes": [
+          "du"
+        ],
+        "grammars": [
+          "duso"
+        ],
+        "sources": [
+          "duso"
+        ],
+        "training": {
+          "files": 0,
+          "lines": 0
+        },
+        "test": {
+          "files": 0,
+          "lines": 0
+        },
+        "below_threshold": true
+      },
+      "source_roots": [
+        "stdlib/",
+        "contrib/",
+        "examples/",
+        "test/"
+      ],
+      "exclude_paths": [],
+      "license": {
+        "spdx_id": "Apache-2.0",
+        "name": "Apache License 2.0",
+        "url": "https://api.github.com/licenses/apache-2.0"
+      },
+      "maintenance_snapshot": {
+        "pushed_at": "2026-09-08T05:39:15Z",
+        "archived": false,
+        "fork": false
+      },
+      "prior_candidate": "repo-selection.json: repositories.duso-org/duso",
+      "reason": "Duso modules use require and named functions; accept this small ecosystem without an independent application pair.",
+      "evaluation_ready": false,
+      "checkout_verified": true,
+      "measurement_method": "Pinned Git tracked UTF-8 files; raw LF lines including blanks and comments. Scoped counts apply source roots and exclusions; no claim that every retained line is handwritten or valid syntax.",
+      "checkout_measurements": {
+        "files": 186,
+        "lines": 13914
+      },
+      "scoped_measurements": {
+        "files": 158,
+        "lines": 13251
+      },
+      "source_groups": {
+        "contrib": {
+          "files": 34,
+          "lines": 5917,
+          "sample_paths": [
+            "contrib/azure-ai/azure-ai.du",
+            "contrib/claude/claude.du",
+            "contrib/claude/examples/conversation.du"
+          ]
+        },
+        "examples": {
+          "files": 45,
+          "lines": 1784,
+          "sample_paths": [
+            "examples/claude/caching.du",
+            "examples/claude/fun.du",
+            "examples/claude/panel.du"
+          ]
+        },
+        "stdlib": {
+          "files": 10,
+          "lines": 1130,
+          "sample_paths": [
+            "stdlib/ansi/ansi.du",
+            "stdlib/ansi/example.du",
+            "stdlib/doccli/doccli.du"
+          ]
+        },
+        "test": {
+          "files": 69,
+          "lines": 4420,
+          "sample_paths": [
+            "test/bench_datastore.du",
+            "test/combined_bench.du",
+            "test/create_datastore.du"
+          ]
+        }
+      },
+      "held_out_exact_copy_check": {
+        "method": "SHA-256 of target-suffix files in test/; symlinks and .git skipped; exact copies excluded from scope. Near copies and differently named source are not detected.",
+        "excluded_matches": []
+      },
+      "selection_exceptions": [
+        "Allow one canonical training repository without an independent test pair.",
+        "Allow compiler tests and examples; syntax validity and generated content require review before evaluation.",
+        "13,251 scoped raw lines; small correctness workload, not a latency workload."
+      ],
+      "coverage_contribution": {
+        "files": 648,
+        "lines": 102663,
+        "invalid_utf8": 0,
+        "unmatched_files": 13,
+        "symlinks_skipped": 0
+      }
+    },
+    "vectordotdev/vrl": {
+      "selection_date": "2026-09-14",
+      "sha": "6cab87fa8112ae42135ac865b862ec1cf0f9915e",
+      "path": "train/vectordotdev--vrl",
+      "language": "VRL",
+      "baseline": {
+        "suffixes": [
+          "vrl"
+        ],
+        "grammars": [
+          "vrl"
+        ],
+        "sources": [
+          "vrl"
+        ],
+        "training": {
+          "files": 0,
+          "lines": 0
+        },
+        "test": {
+          "files": 0,
+          "lines": 0
+        },
+        "below_threshold": true
+      },
+      "source_roots": [
+        "lib/tests/tests/"
+      ],
+      "exclude_paths": [],
+      "license": {
+        "spdx_id": "MPL-2.0",
+        "name": "Mozilla Public License 2.0",
+        "url": "https://api.github.com/licenses/mpl-2.0"
+      },
+      "maintenance_snapshot": {
+        "pushed_at": "2026-09-08T22:13:50Z",
+        "archived": false,
+        "fork": false
+      },
+      "prior_candidate": "repo-selection.json: repositories.vectordotdev/vrl",
+      "reason": "VRL fixtures cover transformations and diagnostics. Expected results and errors remain in upstream comments; these are syntax data, not an import-resolution workload.",
+      "evaluation_ready": false,
+      "checkout_verified": true,
+      "measurement_method": "Pinned Git tracked UTF-8 files; raw LF lines including blanks and comments. Scoped counts apply source roots and exclusions; no claim that every retained line is handwritten or valid syntax.",
+      "checkout_measurements": {
+        "files": 314,
+        "lines": 4766
+      },
+      "scoped_measurements": {
+        "files": 314,
+        "lines": 4766
+      },
+      "source_groups": {
+        "lib": {
+          "files": 314,
+          "lines": 4766,
+          "sample_paths": [
+            "lib/tests/tests/diagnostics/abort_with_fallible_message.vrl",
+            "lib/tests/tests/diagnostics/abort_with_non_string_message.vrl",
+            "lib/tests/tests/diagnostics/call_to_undefined_function.vrl"
+          ]
+        }
+      },
+      "held_out_exact_copy_check": {
+        "method": "SHA-256 of target-suffix files in test/; symlinks and .git skipped; exact copies excluded from scope. Near copies and differently named source are not detected.",
+        "excluded_matches": []
+      },
+      "selection_exceptions": [
+        "Allow one canonical training repository without an independent test pair.",
+        "Allow compiler tests and examples; syntax validity and generated content require review before evaluation.",
+        "4,766 scoped raw lines; small correctness workload, not a latency workload."
+      ],
+      "coverage_contribution": {
+        "files": 991,
+        "lines": 126542,
+        "invalid_utf8": 0,
+        "unmatched_files": 36,
+        "symlinks_skipped": 0
+      }
+    },
+    "nushell/nu_scripts": {
+      "selection_date": "2026-09-14",
+      "sha": "cee236cf46a597b43f36b56ccee5881fc0483c56",
+      "path": "train/nushell--nu_scripts",
+      "language": "Nu",
+      "baseline": {
+        "suffixes": [
+          "nu",
+          "nuon"
+        ],
+        "grammars": [
+          "nu"
+        ],
+        "sources": [
+          "nu"
+        ],
+        "training": {
+          "files": 281,
+          "lines": 15940
+        },
+        "test": {
+          "files": 3,
+          "lines": 747
+        },
+        "below_threshold": false
+      },
+      "source_roots": [
+        "modules/",
+        "sourced/",
+        "scripts/",
+        "games/",
+        "make_release/"
+      ],
+      "exclude_paths": [],
+      "license": {
+        "spdx_id": "MIT",
+        "path": "LICENSE",
+        "note": "Root license; retain individual source notices and additional licenses in the full checkout."
+      },
+      "commit_date": "2026-08-25T06:20:55-05:00",
+      "reason": "Modules with named commands, pipelines, and imports, including the yadm and Rust AST tools. Completion tables and generated themes are outside the source scope.",
+      "evaluation_ready": false,
+      "checkout_verified": true,
+      "measurement_method": "Pinned Git tracked strict UTF-8 files with selected source suffixes; raw LF lines including blanks and comments. Scoped counts apply source roots and exact-copy exclusions.",
+      "checkout_measurements": {
+        "files": 1538,
+        "lines": 174576
+      },
+      "scoped_measurements": {
+        "files": 213,
+        "lines": 26781
+      },
+      "source_groups": {
+        "games/": {
+          "files": 2,
+          "lines": 448
+        },
+        "make_release/": {
+          "files": 19,
+          "lines": 1414
+        },
+        "modules/": {
+          "files": 133,
+          "lines": 18872
+        },
+        "sourced/": {
+          "files": 59,
+          "lines": 6047
+        }
+      },
+      "largest_scoped_files": [
+        {
+          "path": "modules/yadm/mod.nu",
+          "lines": 4211,
+          "bytes": 108704
+        },
+        {
+          "path": "sourced/nu_rust_ast/rust_ast.nu",
+          "lines": 3363,
+          "bytes": 111271
+        },
+        {
+          "path": "modules/gitv2/mod.nu",
+          "lines": 689,
+          "bytes": 19114
+        },
+        {
+          "path": "modules/prompt/powerline/power.nu",
+          "lines": 618,
+          "bytes": 17084
+        },
+        {
+          "path": "modules/kubernetes/mod.nu",
+          "lines": 573,
+          "bytes": 16421
+        }
+      ],
+      "held_out_exact_copy_check": {
+        "method": "SHA-256 comparison against same-suffix files in test/. Exact copies excluded from scope; near copies and differently named source are not detected. All additions share the training split.",
+        "excluded_matches": []
+      },
+      "selection_exceptions": [
+        "Training-only source addition; no independent held-out workload is established.",
+        "Accept a shared script collection; sourced modules inherit upstream provenance and remain in training."
+      ],
+      "dependencies": "Unverified. Scripts require compatible Nushell versions and module-specific external commands. Preserve sourced/nu_rust_ast provenance; it mirrors graves/nu_rust_ast and must remain in the same split.",
+      "coverage_contribution": {
+        "files": 1670,
+        "lines": 196063,
+        "invalid_utf8": 0,
+        "unmatched_files": 457,
+        "symlinks_skipped": 0
+      }
+    },
+    "openhwgroup/cva6": {
+      "selection_date": "2026-09-14",
+      "sha": "07228a6ff285737045037c7278a67969206239e6",
+      "path": "train/openhwgroup--cva6",
+      "language": "SystemVerilog",
+      "baseline": {
+        "suffixes": [
+          "sv",
+          "svh",
+          "v",
+          "vh"
+        ],
+        "grammars": [
+          "systemverilog"
+        ],
+        "sources": [
+          "verilog"
+        ],
+        "training": {
+          "files": 1795,
+          "lines": 1941974
+        },
+        "test": {
+          "files": 57,
+          "lines": 14940
+        },
+        "below_threshold": false
+      },
+      "source_roots": [
+        "core/"
+      ],
+      "exclude_paths": [],
+      "license": {
+        "spdx_id": "SHL-0.51",
+        "path": "LICENSE",
+        "note": "Root license; retain individual source notices and additional licenses in the full checkout."
+      },
+      "commit_date": "2026-09-13T22:22:57+02:00",
+      "reason": "Core processor modules provide substantial SystemVerilog definitions, packages, and instances. Vendored IP and verification register models are outside the source scope.",
+      "evaluation_ready": false,
+      "checkout_verified": true,
+      "measurement_method": "Pinned Git tracked strict UTF-8 files with selected source suffixes; raw LF lines including blanks and comments. Scoped counts apply source roots and exact-copy exclusions.",
+      "checkout_measurements": {
+        "files": 473,
+        "lines": 123733
+      },
+      "scoped_measurements": {
+        "files": 118,
+        "lines": 44472
+      },
+      "source_groups": {
+        "core/": {
+          "files": 118,
+          "lines": 44472
+        }
+      },
+      "largest_scoped_files": [
+        {
+          "path": "core/csr_regfile.sv",
+          "lines": 3205,
+          "bytes": 134577
+        },
+        {
+          "path": "core/decoder.sv",
+          "lines": 2016,
+          "bytes": 96766
+        },
+        {
+          "path": "core/cva6.sv",
+          "lines": 1977,
+          "bytes": 81590
+        },
+        {
+          "path": "core/issue_read_operands.sv",
+          "lines": 1117,
+          "bytes": 42270
+        },
+        {
+          "path": "core/trigger_module.sv",
+          "lines": 1056,
+          "bytes": 53885
+        }
+      ],
+      "held_out_exact_copy_check": {
+        "method": "SHA-256 comparison against same-suffix files in test/. Exact copies excluded from scope; near copies and differently named source are not detected. All additions share the training split.",
+        "excluded_matches": []
+      },
+      "selection_exceptions": [
+        "Training-only source addition; no independent held-out workload is established."
+      ],
+      "dependencies": "Unverified. Follow the pinned core configuration and build instructions; package ordering, defines, include paths, and vendored IP must be configured before reference evaluation.",
+      "coverage_contribution": {
+        "files": 1490,
+        "lines": 631004,
+        "invalid_utf8": 0,
+        "unmatched_files": 280,
+        "symlinks_skipped": 10
+      }
+    },
+    "lowRISC/ibex": {
+      "selection_date": "2026-09-14",
+      "sha": "90331a69edd7151413c335a7f4b3e950baa07c19",
+      "path": "train/lowRISC--ibex",
+      "language": "SystemVerilog",
+      "baseline": {
+        "suffixes": [
+          "sv",
+          "svh",
+          "v",
+          "vh"
+        ],
+        "grammars": [
+          "systemverilog"
+        ],
+        "sources": [
+          "verilog"
+        ],
+        "training": {
+          "files": 1795,
+          "lines": 1941974
+        },
+        "test": {
+          "files": 57,
+          "lines": 14940
+        },
+        "below_threshold": false
+      },
+      "source_roots": [
+        "rtl/"
+      ],
+      "exclude_paths": [],
+      "license": {
+        "spdx_id": "Apache-2.0",
+        "path": "LICENSE",
+        "note": "Root license; retain individual source notices and additional licenses in the full checkout."
+      },
+      "commit_date": "2026-09-14T20:21:02Z",
+      "reason": "Processor RTL provides large modules and cross-file references. Keep vendor/ and verification infrastructure outside the source scope.",
+      "evaluation_ready": false,
+      "checkout_verified": true,
+      "measurement_method": "Pinned Git tracked strict UTF-8 files with selected source suffixes; raw LF lines including blanks and comments. Scoped counts apply source roots and exact-copy exclusions.",
+      "checkout_measurements": {
+        "files": 650,
+        "lines": 108895
+      },
+      "scoped_measurements": {
+        "files": 33,
+        "lines": 25836
+      },
+      "source_groups": {
+        "rtl/": {
+          "files": 33,
+          "lines": 25836
+        }
+      },
+      "largest_scoped_files": [
+        {
+          "path": "rtl/ibex_core.sv",
+          "lines": 2517,
+          "bytes": 108453
+        },
+        {
+          "path": "rtl/ibex_cs_registers.sv",
+          "lines": 2262,
+          "bytes": 83692
+        },
+        {
+          "path": "rtl/ibex_top.sv",
+          "lines": 1642,
+          "bytes": 66723
+        },
+        {
+          "path": "rtl/ibex_tracer.sv",
+          "lines": 1539,
+          "bytes": 60155
+        },
+        {
+          "path": "rtl/ibex_decoder.sv",
+          "lines": 1490,
+          "bytes": 59778
+        }
+      ],
+      "held_out_exact_copy_check": {
+        "method": "SHA-256 comparison against same-suffix files in test/. Exact copies excluded from scope; near copies and differently named source are not detected. All additions share the training split.",
+        "excluded_matches": []
+      },
+      "selection_exceptions": [
+        "Training-only source addition; no independent held-out workload is established."
+      ],
+      "dependencies": "Unverified. Follow the pinned FuseSoC setup; select the core target, resolve vendored IP, and verify package and module references before evaluation.",
+      "coverage_contribution": {
+        "files": 3129,
+        "lines": 983118,
+        "invalid_utf8": 1,
+        "unmatched_files": 564,
+        "symlinks_skipped": 0
+      }
+    },
+    "godotengine/godot": {
+      "selection_date": "2026-09-14",
+      "sha": "8898c2b3db32adf6f92c694ffb6dac19af672e5f",
+      "path": "train/godotengine--godot",
+      "language": "GLSL",
+      "baseline": {
+        "suffixes": [
+          "comp",
+          "frag",
+          "geom",
+          "glsl",
+          "mesh",
+          "rahit",
+          "rcall",
+          "rchit",
+          "rgen",
+          "rint",
+          "rmiss",
+          "task",
+          "tesc",
+          "tese",
+          "vert"
+        ],
+        "grammars": [
+          "glsl"
+        ],
+        "sources": [
+          "glsl",
+          "zed"
+        ],
+        "training": {
+          "files": 134,
+          "lines": 5998
+        },
+        "test": {
+          "files": 162,
+          "lines": 8186
+        },
+        "below_threshold": false
+      },
+      "source_roots": [
+        "drivers/gles3/shaders/",
+        "servers/rendering/renderer_rd/shaders/",
+        "modules/lightmapper_rd/"
+      ],
+      "exclude_paths": [],
+      "license": {
+        "spdx_id": "MIT",
+        "path": "LICENSE.txt",
+        "note": "Root license; retain individual source notices and additional licenses in the full checkout."
+      },
+      "commit_date": "2026-09-14T16:10:40-05:00",
+      "reason": "Production rendering and lightmapping shaders include substantial functions and shared includes. Exclude thirdparty/, build fixtures, and copied compression shaders.",
+      "evaluation_ready": false,
+      "checkout_verified": true,
+      "measurement_method": "Pinned Git tracked strict UTF-8 files with selected source suffixes; raw LF lines including blanks and comments. Scoped counts apply source roots and exact-copy exclusions.",
+      "checkout_measurements": {
+        "files": 154,
+        "lines": 40902
+      },
+      "scoped_measurements": {
+        "files": 133,
+        "lines": 38552
+      },
+      "source_groups": {
+        "drivers/gles3/shaders/": {
+          "files": 24,
+          "lines": 7755
+        },
+        "modules/lightmapper_rd/": {
+          "files": 5,
+          "lines": 2158
+        },
+        "servers/rendering/renderer_rd/shaders/": {
+          "files": 104,
+          "lines": 28639
+        }
+      },
+      "largest_scoped_files": [
+        {
+          "path": "drivers/gles3/shaders/scene.glsl",
+          "lines": 3272,
+          "bytes": 107616
+        },
+        {
+          "path": "servers/rendering/renderer_rd/shaders/forward_clustered/scene_forward_clustered.glsl",
+          "lines": 3226,
+          "bytes": 114832
+        },
+        {
+          "path": "servers/rendering/renderer_rd/shaders/forward_mobile/scene_forward_mobile.glsl",
+          "lines": 2467,
+          "bytes": 90052
+        },
+        {
+          "path": "servers/rendering/renderer_rd/shaders/scene_forward_lights_inc.glsl",
+          "lines": 1453,
+          "bytes": 57028
+        },
+        {
+          "path": "modules/lightmapper_rd/lm_compute.glsl",
+          "lines": 1348,
+          "bytes": 51181
+        }
+      ],
+      "held_out_exact_copy_check": {
+        "method": "SHA-256 comparison against same-suffix files in test/. Exact copies excluded from scope; near copies and differently named source are not detected. All additions share the training split.",
+        "excluded_matches": []
+      },
+      "selection_exceptions": [
+        "Training-only source addition; no independent held-out workload is established.",
+        "Engine shader templates require preprocessing; raw source is not standalone GLSL."
+      ],
+      "dependencies": "Unverified. Godot shader templates contain stage markers, injected code, and engine directives such as #VERSION_DEFINES. Apply the pinned engine preprocessing and include resolution before standalone GLSL parsing or reference evaluation.",
+      "coverage_contribution": {
+        "files": 12626,
+        "lines": 7849362,
+        "invalid_utf8": 1,
+        "unmatched_files": 1697,
+        "symlinks_skipped": 0
+      }
     }
+  },
+  "programming_source_expansion": {
+    "selection_date": "2026-09-14",
+    "baseline_coverage_sha256": "273cb1ce2d4a1cff0a768069880e4c6d28a52bcb2cb1ec4b7e0e844847a94c2e",
+    "repositories": [
+      "inko-lang/inko",
+      "rhaiscript/rhai",
+      "DanielXMoore/Civet",
+      "HigherOrderCO/Bend",
+      "duso-org/duso",
+      "vectordotdev/vrl"
+    ],
+    "baseline_remaining_languages": 298,
+    "remaining_after_filename_census": 292,
+    "languages_clearing_threshold": [
+      "Bend",
+      "Civet",
+      "Duso",
+      "Inko",
+      "Rhai",
+      "VRL"
+    ],
+    "coverage_contribution": {
+      "files": 3994,
+      "lines": 785007
+    },
+    "test_census_unchanged": true,
+    "registrations_unchanged": true
+  },
+  "large_file_followups": {
+    "status": "nu_scripts, CVA6, and Ibex admitted to training; nushell/nushell remains a candidate.",
+    "measurement_method": "Pinned GitHub archives; strict UTF-8, raw LF lines including blanks and comments. Individual files selected from the largest matches; full source and split qualification remains pending.",
+    "repositories": {
+      "nushell/nu_scripts": {
+        "sha": "cee236cf46a597b43f36b56ccee5881fc0483c56",
+        "files": [
+          {
+            "path": "modules/yadm/mod.nu",
+            "lines": 4211,
+            "bytes": 108704
+          },
+          {
+            "path": "sourced/nu_rust_ast/rust_ast.nu",
+            "lines": 3363,
+            "bytes": 111271
+          }
+        ]
+      },
+      "nushell/nushell": {
+        "sha": "6cf11a28f51193b0b56ca24562559a2a9bbe1fb7",
+        "files": [
+          {
+            "path": "crates/nu-std/std/help/mod.nu",
+            "lines": 823,
+            "bytes": 29909
+          }
+        ]
+      },
+      "openhwgroup/cva6": {
+        "sha": "07228a6ff285737045037c7278a67969206239e6",
+        "files": [
+          {
+            "path": "core/csr_regfile.sv",
+            "lines": 3205,
+            "bytes": 134577
+          },
+          {
+            "path": "core/decoder.sv",
+            "lines": 2016,
+            "bytes": 96766
+          }
+        ]
+      },
+      "lowRISC/ibex": {
+        "sha": "90331a69edd7151413c335a7f4b3e950baa07c19",
+        "files": [
+          {
+            "path": "rtl/ibex_core.sv",
+            "lines": 2517,
+            "bytes": 108453
+          },
+          {
+            "path": "rtl/ibex_cs_registers.sv",
+            "lines": 2262,
+            "bytes": 83692
+          }
+        ]
+      }
+    }
+  },
+  "large_source_expansion": {
+    "selection_date": "2026-09-14",
+    "repositories": [
+      "nushell/nu_scripts",
+      "openhwgroup/cva6",
+      "lowRISC/ibex",
+      "godotengine/godot"
+    ],
+    "baseline_coverage_sha256": "4c9c5888aafeb664575363964ed468ee46b5551e653731748210df82303e62b6",
+    "glsl_candidates": {
+      "godotengine/godot": "Selected after checkout inspection: substantial engine rendering source and large files; requires template preprocessing.",
+      "patriciogonzalezvivo/lygia": "Discovery only; granular multi-language shader library. Godot chosen for larger rendering implementations; no LYGIA checkout measured."
+    },
+    "coverage_contribution": {
+      "files": 18915,
+      "lines": 9659547,
+      "invalid_utf8": 2,
+      "unmatched_files": 2998,
+      "symlinks_skipped": 10
+    },
+    "test_census_unchanged": true,
+    "registrations_unchanged": true,
+    "remaining_after_filename_census": 292,
+    "languages_clearing_threshold": []
   }
 }

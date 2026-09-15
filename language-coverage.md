@@ -8,10 +8,10 @@ The scan includes hidden and ignored files, skips `.git` and symlinks, and scans
 
 | Split | UTF-8 files | Raw lines | Rejected non-UTF-8 files | Unmatched files |
 | --- | ---: | ---: | ---: | ---: |
-| training | 1,072,632 | 246,584,529 | 975 | 320,491 |
+| training | 1,095,541 | 257,029,083 | 977 | 324,126 |
 | test | 681,830 | 115,611,466 | 631 | 144,952 |
 
-596 registrations; 582 language names; 1022 unique suffixes/filenames; 298 languages below 21 files or 2,000 raw lines combined. 6 extension inventories unavailable.
+596 registrations; 582 language names; 1022 unique suffixes/filenames; 292 languages below 21 files or 2,000 raw lines combined. 6 extension inventories unavailable.
 
 Full registrations, pins, per-suffix counts, ambiguities, and failures are in [language-coverage.json](language-coverage.json).
 
@@ -36,12 +36,11 @@ Full registrations, pins, per-suffix counts, ambiguities, and failures are in [l
 | bazelrc | `bazelrc` | 7 | 472 | 3 | 27 |
 | Beancount | `bean`, `beancount` | 0 | 0 | 0 | 0 |
 | Beast | `btsx` | 0 | 0 | 0 | 0 |
-| Bend | `bend` | 0 | 0 | 0 | 0 |
 | Bicep | `bicep` | 1 | 4 | 0 | 0 |
 | Bicep Parameters | `bicepparam` | 0 | 0 | 0 | 0 |
 | Blueprint | `blp` | 1 | 11 | 0 | 0 |
 | Bruno | `bru` | 0 | 0 | 0 | 0 |
-| Build2 manifest | `manifest` | 35 | 717 | 7 | 153 |
+| Build2 manifest | `manifest` | 36 | 735 | 7 | 153 |
 | C# Solution File | `slnx` | 12 | 369 | 31 | 369 |
 | Caddyfile | `Caddyfile`, `caddyfile` | 5 | 347 | 0 | 0 |
 | Candid | `did` | 0 | 0 | 0 | 0 |
@@ -53,8 +52,7 @@ Full registrations, pins, per-suffix counts, ambiguities, and failures are in [l
 | CFEngine | `cf`, `cf.sub`, `cf3`, `cfengine`, `cfengine3` | 12 | 283 | 0 | 0 |
 | CFML (Script) | `cfs` | 0 | 0 | 0 | 0 |
 | Cherri | `cherri` | 0 | 0 | 0 | 0 |
-| Civet | `civet` | 0 | 0 | 0 | 0 |
-| CODEOWNERS | `CODEOWNERS`, `CODEOWNERS.txt` | 35 | 392 | 38 | 149 |
+| CODEOWNERS | `CODEOWNERS`, `CODEOWNERS.txt` | 39 | 735 | 38 | 149 |
 | Coi | `coi`, `d.coi` | 0 | 0 | 0 | 0 |
 | CONL | `conl` | 0 | 0 | 0 | 0 |
 | Cooklang | `cook` | 0 | 0 | 0 | 0 |
@@ -70,14 +68,13 @@ Full registrations, pins, per-suffix counts, ambiguities, and failures are in [l
 | DataZinc | `dzn` | 0 | 0 | 0 | 0 |
 | DBML | `dbml` | 1 | 19 | 0 | 0 |
 | Demo Tape | `tape` | 1 | 99 | 0 | 0 |
-| Desktop Entry | `desktop`, `directory` | 20 | 375 | 5 | 86 |
-| devicetree | `dts`, `dtsi`, `dtso`, `its` | 0 | 0 | 1 | 8 |
+| Desktop Entry | `desktop`, `directory` | 21 | 403 | 5 | 86 |
+| devicetree | `dts`, `dtsi`, `dtso`, `its` | 2 | 150 | 1 | 8 |
 | Dhall | `dhall` | 20 | 167 | 4 | 10 |
 | Django | `dj.html`, `dj.md`, `dj.txt` | 0 | 0 | 0 | 0 |
 | Djot | `dj`, `djot` | 9 | 1,953 | 1 | 149 |
 | DOT | `DOT`, `dot`, `gv` | 9 | 161 | 10 | 619 |
 | Duper | `duper` | 0 | 0 | 0 | 0 |
-| Duso | `du` | 0 | 0 | 0 | 0 |
 | Ebuild | `ebuild` | 0 | 0 | 0 | 0 |
 | ECR | `ecr` | 6 | 31 | 4 | 21 |
 | Edge | `edge` | 1 | 7 | 0 | 0 |
@@ -102,7 +99,7 @@ Full registrations, pins, per-suffix counts, ambiguities, and failures are in [l
 | Geno | `geno` | 0 | 0 | 0 | 0 |
 | Ghostty | `com.mitchellh.ghostty/config`, `config/ghostty/config`, `ghostty`, `ghostty/config` | 0 | 0 | 0 | 0 |
 | Git Commit | `COMMIT_EDITMSG`, `EDIT_DESCRIPTION`, `MERGE_MSG`, `NOTES_EDITMSG`, `TAG_EDITMSG` | 2 | 2 | 1 | 1 |
-| Git Config | `.gitconfig`, `.gitmodules`, `.lfsconfig`, `config.worktree` | 67 | 559 | 26 | 204 |
+| Git Config | `.gitconfig`, `.gitmodules`, `.lfsconfig`, `config.worktree` | 69 | 616 | 26 | 204 |
 | Git Rebase | `git-rebase-todo` | 3 | 180 | 0 | 0 |
 | Glimmer (JavaScript) | `gjs` | 5 | 429 | 32 | 557 |
 | Glimmer (TypeScript) | `gts` | 5 | 531 | 22 | 373 |
@@ -118,7 +115,7 @@ Full registrations, pins, per-suffix counts, ambiguities, and failures are in [l
 | GXL | `gxl` | 0 | 0 | 0 | 0 |
 | Haml | `haml`, `html.haml` | 25 | 140 | 0 | 0 |
 | Helm | `.helmignore` | 7 | 96 | 48 | 415 |
-| Hera | `hera` | 0 | 0 | 0 | 0 |
+| Hera | `hera` | 3 | 10,524 | 0 | 0 |
 | hl7_v2 | `hl7` | 1 | 1,584 | 0 | 0 |
 | hledger | `hledger`, `journal`, `ledger` | 33 | 1,577 | 0 | 0 |
 | hledger-rules | `rules` | 9 | 395 | 11 | 196 |
@@ -136,7 +133,6 @@ Full registrations, pins, per-suffix counts, ambiguities, and failures are in [l
 | IFC | `ifc` | 0 | 0 | 0 | 0 |
 | Immigrant | `schema` | 0 | 0 | 0 | 0 |
 | Ink | `ink` | 4 | 2,214 | 0 | 0 |
-| Inko | `inko` | 1 | 3 | 0 | 0 |
 | ion | `ion` | 1 | 20 | 0 | 0 |
 | ion_schema | `isl` | 2 | 764 | 0 | 0 |
 | ISLE | `isle` | 0 | 0 | 2 | 3,203 |
@@ -146,7 +142,7 @@ Full registrations, pins, per-suffix counts, ambiguities, and failures are in [l
 | JSON Lines | `jsonl`, `ndjson` | 2 | 7 | 15 | 678 |
 | Jsonnet | `jsonnet`, `libsonnet` | 3 | 139 | 0 | 0 |
 | JSP | `jsp`, `jspf`, `tag` | 0 | 0 | 7 | 7 |
-| Just | `JUSTFILE`, `Justfile`, `just`, `justfile` | 29 | 1,361 | 11 | 262 |
+| Just | `JUSTFILE`, `Justfile`, `just`, `justfile` | 30 | 1,392 | 11 | 262 |
 | KCL | `k` | 308 | 1,934 | 0 | 0 |
 | Kconfig | `Kconfig` | 0 | 0 | 1 | 258 |
 | Kdl | `kdl` | 20 | 729 | 0 | 0 |
@@ -163,7 +159,7 @@ Full registrations, pins, per-suffix counts, ambiguities, and failures are in [l
 | Literate Haskell | `lhs` | 3 | 69 | 0 | 0 |
 | Lox | `lox` | 0 | 0 | 0 | 0 |
 | Mach | `mach` | 0 | 0 | 0 | 0 |
-| Mako | `mako` | 0 | 0 | 0 | 0 |
+| Mako | `mako` | 1 | 53 | 0 | 0 |
 | Marko | `marko` | 0 | 0 | 0 | 0 |
 | mcfunction | `mcfunction` | 0 | 0 | 0 | 0 |
 | MetaScript | `cms`, `ems`, `jms`, `ms`, `rms`, `wms` | 5 | 1,636 | 1 | 123 |
@@ -198,7 +194,7 @@ Full registrations, pins, per-suffix counts, ambiguities, and failures are in [l
 | PDLL | `pdll` | 0 | 0 | 0 | 0 |
 | Pdxinfo | `pdxinfo` | 0 | 0 | 0 | 0 |
 | Perm | `perm` | 0 | 0 | 0 | 0 |
-| Pest | `pest` | 3 | 304 | 1 | 215 |
+| Pest | `pest` | 4 | 357 | 1 | 215 |
 | pica200 | `pica` | 0 | 0 | 0 | 0 |
 | Pine Script | `pine`, `ps` | 133 | 1,946 | 0 | 0 |
 | PIO Assembly | `pio` | 27 | 1,766 | 0 | 0 |
@@ -212,7 +208,7 @@ Full registrations, pins, per-suffix counts, ambiguities, and failures are in [l
 | Pug | `jade`, `pug` | 13 | 807 | 14 | 122 |
 | Puppet | `epp`, `pp` | 2 | 34 | 1 | 45 |
 | Python constraints | `constraints.txt` | 2 | 194 | 0 | 0 |
-| Python requirements | `requirements.txt` | 49 | 538 | 18 | 315 |
+| Python requirements | `requirements.txt` | 57 | 621 | 18 | 315 |
 | Qlik | `qvs` | 0 | 0 | 0 | 0 |
 | Quarkdown | `qd` | 0 | 0 | 0 | 0 |
 | Quarto | `qmd` | 0 | 0 | 0 | 0 |
@@ -222,7 +218,6 @@ Full registrations, pins, per-suffix counts, ambiguities, and failures are in [l
 | RCL | `rcl` | 0 | 0 | 0 | 0 |
 | Regedit | `reg` | 0 | 0 | 0 | 0 |
 | rego | `rego`, `rq` | 3 | 99 | 0 | 0 |
-| Rhai | `rhai` | 0 | 0 | 0 | 0 |
 | Risor | `risor` | 0 | 0 | 0 | 0 |
 | Robot | `robot` | 1 | 143 | 0 | 0 |
 | robots.txt | `robots.txt` | 33 | 231 | 21 | 184 |
@@ -290,7 +285,6 @@ Full registrations, pins, per-suffix counts, ambiguities, and failures are in [l
 | VHS | `tape` | 1 | 99 | 0 | 0 |
 | Vibescript | `vibe` | 0 | 0 | 0 | 0 |
 | ViewTree ($mol) | `view.tree` | 0 | 0 | 0 | 0 |
-| VRL | `vrl` | 0 | 0 | 0 | 0 |
 | WDL | `wdl` | 0 | 0 | 0 | 0 |
 | WebAssembly Text Format | `wat` | 8 | 183 | 2 | 103 |
 | WeiXin Markup Language | `wxml` | 0 | 0 | 0 | 0 |
@@ -332,88 +326,91 @@ Full registrations, pins, per-suffix counts, ambiguities, and failures are in [l
 | Arduino | `ino` | 690 | 110,620 | 869 | 355,455 |
 | ArkTS Language | `ets` | 175 | 22,716 | 63 | 15,374 |
 | Arturo | `art`, `arturo` | 829 | 13,554 | 0 | 0 |
-| AsciiDoc | `ad`, `adoc`, `asc`, `asciidoc` | 582 | 71,108 | 8 | 2,365 |
-| Assembly | `S`, `asm`, `s` | 523 | 111,414 | 199 | 25,127 |
-| Astro | `astro` | 256 | 5,799 | 0 | 0 |
+| AsciiDoc | `ad`, `adoc`, `asc`, `asciidoc` | 673 | 90,012 | 8 | 2,365 |
+| Assembly | `S`, `asm`, `s` | 1,441 | 822,862 | 199 | 25,127 |
+| Astro | `astro` | 257 | 5,816 | 0 | 0 |
 | AutoHotkey | `ahk` | 1,044 | 39,749 | 27 | 8,354 |
-| AWK | `awk` | 919 | 34,450 | 3 | 740 |
-| Batch | `bat`, `cmd` | 541 | 20,553 | 104 | 5,252 |
+| AWK | `awk` | 920 | 34,473 | 3 | 740 |
+| Batch | `bat`, `cmd` | 545 | 20,749 | 104 | 5,252 |
+| Bend | `bend` | 525 | 6,374 | 0 | 0 |
 | BibTeX | `bib`, `biblatex`, `bibtex` | 19 | 10,858 | 12 | 3,214 |
-| Bison | `y`, `yy` | 20 | 16,633 | 11 | 4,198 |
-| bitbake | `bb`, `bbappend`, `bbclass`, `conf`, `inc` | 780 | 116,053 | 495 | 36,824 |
+| Bison | `y`, `yy` | 21 | 21,216 | 11 | 4,198 |
+| bitbake | `bb`, `bbappend`, `bbclass`, `conf`, `inc` | 884 | 128,454 | 495 | 36,824 |
 | Blade | `blade.php` | 198 | 2,425 | 1 | 196 |
 | Bluespec SystemVerilog | `bsv` | 210 | 75,584 | 421 | 75,930 |
 | BQN | `bqn` | 513 | 9,582 | 8 | 2,461 |
 | Brainfuck | `bf` | 226 | 2,197 | 0 | 0 |
 | Bsl | `bsl` | 333 | 233,089 | 6 | 9,578 |
-| Build2 | `build`, `buildfile` | 56 | 4,438 | 34 | 1,654 |
-| C | `c` | 7,832 | 51,047,619 | 3,061 | 2,871,933 |
-| C# Project File | `csproj` | 166 | 29,177 | 68 | 2,004 |
-| C++ | `C`, `H`, `c++`, `c++m`, `cc`, `ccm`, `cpp`, `cppm`, `cu`, `cuh`, `cxx`, `cxxm`, `h`, `h++`, `hh`, `hip`, `hpp`, `hxx`, `inl`, `ino`, `ipp`, `ixx` | 45,325 | 19,787,553 | 10,971 | 3,369,858 |
+| Build2 | `build`, `buildfile` | 57 | 4,442 | 34 | 1,654 |
+| C | `c` | 9,659 | 52,145,207 | 3,061 | 2,871,933 |
+| C# Project File | `csproj` | 182 | 29,764 | 68 | 2,004 |
+| C++ | `C`, `H`, `c++`, `c++m`, `cc`, `ccm`, `cpp`, `cppm`, `cu`, `cuh`, `cxx`, `cxxm`, `h`, `h++`, `hh`, `hip`, `hpp`, `hxx`, `inl`, `ino`, `ipp`, `ixx` | 52,888 | 23,688,133 | 10,971 | 3,369,858 |
 | C3 | `c3`, `c3i` | 1,490 | 144,533 | 52 | 19,282 |
 | Cabal | `cabal` | 24 | 4,994 | 2 | 206 |
 | Cadence | `cdc` | 385 | 24,957 | 146 | 8,783 |
 | Cairo | `cairo` | 321 | 63,387 | 229 | 49,234 |
 | CFML (Tag) | `cfc`, `cfm`, `cfml` | 743 | 94,551 | 305 | 13,273 |
 | Circom | `circom` | 104 | 31,779 | 37 | 3,737 |
+| Civet | `civet` | 327 | 87,687 | 0 | 0 |
 | Clarity | `clar` | 6 | 1,150 | 364 | 98,558 |
 | Clojure | `bb`, `clj`, `cljc`, `cljd`, `cljs`, `edn` | 1,303 | 91,956 | 83 | 8,026 |
-| CMake | `CMakeLists.txt`, `cmake` | 1,199 | 100,409 | 289 | 24,411 |
+| CMake | `CMakeLists.txt`, `cmake` | 1,200 | 100,444 | 289 | 24,411 |
 | COBOL | `cbl`, `cob` | 736 | 66,059 | 5 | 4,056 |
-| CoffeeScript | `coffee` | 463 | 13,454 | 142 | 14,964 |
+| CoffeeScript | `coffee` | 468 | 13,597 | 142 | 14,964 |
 | Crystal | `cr` | 756 | 31,415 | 251 | 21,219 |
-| CSharp | `cs` | 7,623 | 916,389 | 2,181 | 274,579 |
+| CSharp | `cs` | 7,932 | 972,775 | 2,181 | 274,579 |
 | Csound | `csd`, `orc`, `sco`, `udo` | 170 | 12,793 | 155 | 29,276 |
-| CSS | `css`, `pcss`, `postcss` | 3,988 | 1,253,316 | 2,786 | 293,950 |
-| CSV | `csv` | 93 | 70,328 | 116 | 35,881 |
+| CSS | `css`, `pcss`, `postcss` | 4,007 | 1,256,114 | 2,786 | 293,950 |
+| CSV | `csv` | 102 | 71,231 | 116 | 35,881 |
 | Curry | `curry` | 95 | 9,521 | 151 | 13,906 |
 | Cython | `pxd`, `pxi`, `pyx` | 87 | 22,076 | 56 | 28,077 |
-| D | `d`, `dd`, `di` | 4,944 | 115,732 | 2,868 | 50,612 |
+| D | `d`, `dd`, `di` | 5,026 | 135,936 | 2,868 | 50,612 |
 | Dafny | `dfy` | 109 | 20,978 | 37 | 9,725 |
 | DAML | `daml` | 1,125 | 64,630 | 634 | 75,502 |
 | Dart | `dart` | 5,580 | 966,385 | 984 | 286,691 |
 | Defold | `gui_script`, `lua`, `render_script`, `script` | 4,602 | 757,791 | 4,054 | 323,146 |
-| Diff | `diff`, `patch` | 175 | 38,704 | 125 | 17,384 |
+| Diff | `diff`, `patch` | 291 | 53,998 | 125 | 17,384 |
 | Docker Compose | `compose.yaml`, `compose.yml`, `docker-compose.yaml`, `docker-compose.yml` | 33 | 2,137 | 33 | 1,894 |
-| Dockerfile | `Containerfile`, `Dockerfile`, `dockerfile` | 178 | 7,143 | 121 | 4,341 |
-| DuckyScript | `txt` | 14,712 | 4,303,917 | 4,308 | 746,804 |
+| Dockerfile | `Containerfile`, `Dockerfile`, `dockerfile` | 182 | 7,235 | 121 | 4,341 |
+| DuckyScript | `txt` | 14,986 | 4,319,001 | 4,308 | 746,804 |
 | Dune | `dune`, `dune-project`, `dune-workspace` | 2,169 | 20,306 | 64 | 1,074 |
+| Duso | `du` | 186 | 13,914 | 0 | 0 |
 | Dylan | `dylan`, `lid` | 104 | 12,829 | 14 | 4,185 |
 | Earthfile | `Earthfile` | 187 | 10,790 | 0 | 0 |
 | EBNF | `bnf`, `ebnf` | 118 | 2,045 | 100 | 3,757 |
-| Editorconfig | `editorconfig` | 1,241 | 27,221 | 653 | 12,531 |
+| Editorconfig | `editorconfig` | 1,249 | 27,412 | 653 | 12,531 |
 | EEx | `eex` | 175 | 9,812 | 79 | 1,142 |
 | EJS | `ejs`, `eta` | 53 | 3,142 | 42 | 888 |
-| Elisp | `el` | 366 | 50,369 | 32 | 24,354 |
+| Elisp | `el` | 367 | 50,372 | 32 | 24,354 |
 | Elixir | `ex`, `exs`, `mix.lock` | 3,628 | 703,507 | 2,754 | 334,529 |
 | Elm | `elm` | 178 | 29,727 | 481 | 87,416 |
 | EmmyLua | `lua`, `lua.txt` | 4,598 | 753,486 | 4,050 | 322,497 |
-| env | `conf`, `env`, `envrc`, `example`, `local`, `test` | 2,729 | 4,363,101 | 927 | 377,811 |
+| env | `conf`, `env`, `envrc`, `example`, `local`, `test` | 2,731 | 4,363,125 | 927 | 377,811 |
 | ERB | `erb` | 504 | 12,378 | 650 | 20,288 |
 | Erlang | `Emakefile`, `app.src`, `erl`, `erlang`, `escript`, `hrl`, `rebar.config`, `xrl`, `yrl` | 823 | 62,765 | 398 | 160,303 |
 | Fift | `fif` | 16 | 3,128 | 12 | 1,666 |
-| Fish | `fish` | 1,679 | 95,537 | 124 | 4,146 |
-| Fortran | `F`, `F03`, `F08`, `F90`, `F95`, `f`, `f03`, `f08`, `f90`, `f95` | 1,701 | 144,281 | 64 | 26,431 |
+| Fish | `fish` | 1,680 | 95,653 | 124 | 4,146 |
+| Fortran | `F`, `F03`, `F08`, `F90`, `F95`, `f`, `f03`, `f08`, `f90`, `f95` | 1,710 | 144,549 | 64 | 26,431 |
 | FSharp | `fs`, `fsi`, `fsscript`, `fsx` | 1,719 | 114,599 | 217 | 44,521 |
 | Func | `fc` | 53 | 7,123 | 3 | 1,265 |
-| G-code | `001`, `S`, `anc`, `apt`, `aptcl`, `bfb`, `cls`, `cnc`, `din`, `dnc`, `ecs`, `eia`, `fan`, `fgc`, `fnc`, `g`, `g00`, `gc`, `gcd`, `gco`, `gcode`, `gp`, `hnc`, `knc`, `lib`, `m`, `min`, `mmg`, `mpf`, `mpt`, `nc`, `ncd`, `ncf`, `ncg`, `nci`, `ncp`, `ngc`, `out`, `pim`, `pit`, `plt`, `ply`, `prg`, `pu1`, `rol`, `sbp`, `spf`, `ssb`, `sub`, `tap`, `tcn`, `xpi` | 4,107 | 273,922 | 421 | 102,203 |
-| GDScript | `gd` | 291 | 60,269 | 146 | 11,563 |
+| G-code | `001`, `S`, `anc`, `apt`, `aptcl`, `bfb`, `cls`, `cnc`, `din`, `dnc`, `ecs`, `eia`, `fan`, `fgc`, `fnc`, `g`, `g00`, `gc`, `gcd`, `gco`, `gcode`, `gp`, `hnc`, `knc`, `lib`, `m`, `min`, `mmg`, `mpf`, `mpt`, `nc`, `ncd`, `ncf`, `ncg`, `nci`, `ncp`, `ngc`, `out`, `pim`, `pit`, `plt`, `ply`, `prg`, `pu1`, `rol`, `sbp`, `spf`, `ssb`, `sub`, `tap`, `tcn`, `xpi` | 5,540 | 991,318 | 421 | 102,203 |
+| GDScript | `gd` | 999 | 74,141 | 146 | 11,563 |
 | GDShader | `gdshader`, `gdshaderinc` | 40 | 2,864 | 63 | 2,700 |
 | Gherkin | `feature`, `gherkin` | 237 | 40,343 | 0 | 0 |
-| Git Attributes | `.gitattributes`, `gitattributes` | 598 | 7,855 | 196 | 1,155 |
-| Git Ignore | `.containerignore`, `.cursorignore`, `.dockerignore`, `.eslintignore`, `.fdignore`, `.git-blame-ignore-revs`, `.gitignore`, `.gitignore_global`, `.ignore`, `.npmignore`, `.prettierignore`, `.rgignore`, `.vscodeignore` | 2,537 | 41,912 | 1,526 | 18,218 |
+| Git Attributes | `.gitattributes`, `gitattributes` | 605 | 7,893 | 196 | 1,155 |
+| Git Ignore | `.containerignore`, `.cursorignore`, `.dockerignore`, `.eslintignore`, `.fdignore`, `.git-blame-ignore-revs`, `.gitignore`, `.gitignore_global`, `.ignore`, `.npmignore`, `.prettierignore`, `.rgignore`, `.vscodeignore` | 2,615 | 43,519 | 1,526 | 18,218 |
 | Gleam | `gleam` | 140 | 21,319 | 80 | 22,537 |
-| GLSL | `comp`, `frag`, `geom`, `glsl`, `mesh`, `rahit`, `rcall`, `rchit`, `rgen`, `rint`, `rmiss`, `task`, `tesc`, `tese`, `vert` | 134 | 5,998 | 162 | 8,186 |
-| Go | `go` | 6,777 | 1,241,026 | 1,030 | 236,736 |
-| Go Mod | `mod` | 217 | 3,050 | 22 | 1,044 |
-| Go Sum | `go.sum` | 73 | 10,293 | 18 | 3,659 |
-| Godot Resource | `gdextension`, `godot`, `import`, `tres`, `tscn` | 354 | 28,671 | 436 | 23,774 |
+| GLSL | `comp`, `frag`, `geom`, `glsl`, `mesh`, `rahit`, `rcall`, `rchit`, `rgen`, `rint`, `rmiss`, `task`, `tesc`, `tese`, `vert` | 288 | 46,900 | 162 | 8,186 |
+| Go | `go` | 6,943 | 1,293,216 | 1,030 | 236,736 |
+| Go Mod | `mod` | 218 | 3,062 | 22 | 1,044 |
+| Go Sum | `go.sum` | 74 | 10,303 | 18 | 3,659 |
+| Godot Resource | `gdextension`, `godot`, `import`, `tres`, `tscn` | 362 | 28,852 | 436 | 23,774 |
 | GPR | `gpr` | 82 | 1,333 | 40 | 1,047 |
-| Gradle | `gradle` | 48 | 3,876 | 302 | 8,191 |
+| Gradle | `gradle` | 60 | 5,805 | 302 | 8,191 |
 | Gradle KTS | `gradle.kts` | 440 | 22,180 | 105 | 7,700 |
 | GraphQL | `gql`, `graphql`, `graphqls` | 111 | 6,957 | 12 | 70,575 |
 | Gren | `gren` | 53 | 21,586 | 27 | 7,468 |
-| Groovy | `JenkinsFile`, `Jenkinsfile`, `gradle`, `groovy` | 905 | 20,942 | 306 | 8,493 |
+| Groovy | `JenkinsFile`, `Jenkinsfile`, `gradle`, `groovy` | 917 | 22,871 | 306 | 8,493 |
 | Handlebars | `handlebars`, `hbs` | 284 | 6,313 | 116 | 5,458 |
 | Hare | `ha` | 856 | 136,813 | 34 | 5,389 |
 | Haskell | `hs` | 3,451 | 412,293 | 87 | 26,658 |
@@ -424,29 +421,30 @@ Full registrations, pins, per-suffix counts, ambiguities, and failures are in [l
 | HOCON | `conf`, `hocon` | 307 | 17,885 | 81 | 3,560 |
 | Hoon | `hoon` | 863 | 174,194 | 6 | 19,643 |
 | HQL | `hx` | 450 | 99,891 | 595 | 133,115 |
-| HTML | `htm`, `html`, `shtml` | 10,018 | 2,295,992 | 2,198 | 486,738 |
+| HTML | `htm`, `html`, `shtml` | 10,102 | 2,314,814 | 2,198 | 486,738 |
 | HTML+ERB | `html.erb` | 316 | 7,032 | 615 | 18,952 |
 | HTML-Jinja | `j2`, `jinja`, `jinja2` | 15 | 291 | 52 | 7,933 |
 | Hyprlang | `conf`, `hl` | 307 | 17,885 | 81 | 3,560 |
 | Idris 2 | `idr`, `idr2` | 1,935 | 181,145 | 45 | 10,506 |
-| Inform 6 | `h`, `inf` | 32,800 | 15,250,974 | 6,079 | 1,601,431 |
-| ini | `automount`, `build`, `cfg`, `conf`, `container`, `image`, `inf`, `ini`, `kube`, `mount`, `network`, `path`, `pod`, `scope`, `service`, `slice`, `socket`, `swap`, `target`, `timer`, `volume` | 826 | 63,606 | 375 | 28,224 |
+| Inform 6 | `h`, `inf` | 37,258 | 16,671,684 | 6,079 | 1,601,431 |
+| ini | `automount`, `build`, `cfg`, `conf`, `container`, `image`, `inf`, `ini`, `kube`, `mount`, `network`, `path`, `pod`, `scope`, `service`, `slice`, `socket`, `swap`, `target`, `timer`, `volume` | 992 | 65,730 | 375 | 28,224 |
+| Inko | `inko` | 464 | 99,885 | 0 | 0 |
 | Jai | `jai` | 210 | 128,032 | 47 | 49,905 |
 | Janet | `janet` | 34 | 425 | 99 | 13,508 |
-| Java | `java` | 10,212 | 1,229,248 | 4,759 | 598,616 |
-| JavaScript | `cjs`, `js`, `jsx`, `mjs` | 441,195 | 80,878,626 | 336,966 | 60,106,002 |
+| Java | `java` | 10,367 | 1,269,438 | 4,759 | 598,616 |
+| JavaScript | `cjs`, `js`, `jsx`, `mjs` | 441,267 | 80,891,698 | 336,966 | 60,106,002 |
 | Jinja2 | `jinja`, `jinja2` | 14 | 251 | 49 | 7,872 |
 | jq | `jq` | 2,344 | 53,222 | 2 | 3,206 |
-| JSON | `deno.lock`, `flake.lock`, `geojson`, `json`, `json.dist`, `prettierrc`, `topojson` | 63,328 | 19,373,499 | 42,301 | 8,753,602 |
+| JSON | `deno.lock`, `flake.lock`, `geojson`, `json`, `json.dist`, `prettierrc`, `topojson` | 63,676 | 19,440,376 | 42,301 | 8,753,602 |
 | JSON5 | `json5` | 196 | 13,443 | 53 | 1,493 |
-| JSONC | `babelrc`, `bun.lock`, `devcontainer.json`, `eslintrc`, `jshintrc`, `jsonc`, `luaurc`, `pyrightconfig.json`, `stylelintrc`, `swcrc`, `tsconfig.json` | 4,991 | 90,779 | 2,764 | 49,944 |
+| JSONC | `babelrc`, `bun.lock`, `devcontainer.json`, `eslintrc`, `jshintrc`, `jsonc`, `luaurc`, `pyrightconfig.json`, `stylelintrc`, `swcrc`, `tsconfig.json` | 5,009 | 91,125 | 2,764 | 49,944 |
 | Julia | `jl` | 2,322 | 102,555 | 96 | 17,138 |
 | Koka | `kk` | 1,104 | 115,196 | 89 | 9,597 |
-| Kotlin | `kt`, `kts` | 7,749 | 876,912 | 4,407 | 482,719 |
+| Kotlin | `kt`, `kts` | 7,812 | 889,957 | 4,407 | 482,719 |
 | LaTeX | `cls`, `latex`, `sty`, `tex` | 573 | 104,236 | 434 | 105,374 |
 | Lean 4 | `lean` | 479 | 93,139 | 250 | 24,242 |
 | LESS | `less` | 96 | 5,100 | 745 | 59,929 |
-| Linker Script | `ld` | 22 | 5,594 | 1 | 9 |
+| Linker Script | `ld` | 42 | 7,274 | 1 | 9 |
 | Liquidsoap | `liq` | 632 | 46,556 | 23 | 1,403 |
 | LLVM IR | `ll` | 19 | 11,099 | 5 | 105 |
 | LOG | `log` | 1,225 | 99,706 | 18 | 4,354 |
@@ -454,9 +452,9 @@ Full registrations, pins, per-suffix counts, ambiguities, and failures are in [l
 | Logstash Config | `conf` | 307 | 17,885 | 81 | 3,560 |
 | Lua | `lua` | 4,595 | 752,671 | 4,050 | 322,497 |
 | Luau | `luau` | 61 | 6,808 | 69 | 16,363 |
-| Make | `GNUmakefile`, `Makefile`, `OCamlMakefile`, `mak`, `makefile`, `mk` | 920 | 67,616 | 654 | 34,277 |
-| Markdown | `MD`, `markdown`, `md`, `mdc`, `mdwn`, `mdx` | 54,871 | 8,871,097 | 36,438 | 5,736,831 |
-| MATLAB | `m` | 1,496 | 108,343 | 118 | 17,204 |
+| Make | `GNUmakefile`, `Makefile`, `OCamlMakefile`, `mak`, `makefile`, `mk` | 1,018 | 74,229 | 654 | 34,277 |
+| Markdown | `MD`, `markdown`, `md`, `mdc`, `mdwn`, `mdx` | 55,568 | 8,999,275 | 36,438 | 5,736,831 |
+| MATLAB | `m` | 1,497 | 110,341 | 118 | 17,204 |
 | MDX | `mdx` | 618 | 145,760 | 1,048 | 182,432 |
 | Menhir | `mly` | 21 | 2,201 | 3 | 5,568 |
 | Mermaid | `mermaid`, `mmd` | 170 | 17,737 | 0 | 0 |
@@ -468,17 +466,17 @@ Full registrations, pins, per-suffix counts, ambiguities, and failures are in [l
 | Move | `move` | 4,886 | 459,616 | 4,558 | 231,542 |
 | move | `move` | 4,886 | 459,616 | 4,558 | 231,542 |
 | Move.toml | `Move.toml` | 480 | 4,462 | 1,046 | 8,093 |
-| MSBuild File | `proj`, `props`, `targets` | 130 | 5,595 | 82 | 2,435 |
-| Mustache | `mustache` | 14 | 396 | 31 | 3,590 |
+| MSBuild File | `proj`, `props`, `targets` | 140 | 5,953 | 82 | 2,435 |
+| Mustache | `mustache` | 15 | 448 | 31 | 3,590 |
 | NetLinx | `axb`, `axi`, `axs`, `lib` | 24 | 7,952 | 84 | 18,126 |
 | Nim | `nim`, `nims` | 2,174 | 130,490 | 73 | 9,081 |
-| Nix | `nix` | 141 | 9,805 | 40 | 5,368 |
+| Nix | `nix` | 147 | 10,353 | 40 | 5,368 |
 | Noir | `nr` | 50 | 9,481 | 248 | 36,180 |
-| Nu | `nu`, `nuon` | 281 | 15,940 | 3 | 747 |
-| Oberon | `Mod`, `mod` | 217 | 3,050 | 22 | 1,044 |
-| Objective-C | `h`, `hh`, `m`, `mm` | 34,309 | 15,374,593 | 6,501 | 1,685,137 |
-| ObjectScript XML | `xml` | 2,479 | 290,990 | 3,764 | 565,728 |
-| objectscript_routine | `inc`, `int`, `mac`, `rtn` | 429 | 97,917 | 414 | 33,313 |
+| Nu | `nu`, `nuon` | 1,823 | 190,548 | 3 | 747 |
+| Oberon | `Mod`, `mod` | 218 | 3,062 | 22 | 1,044 |
+| Objective-C | `h`, `hh`, `m`, `mm` | 39,099 | 16,930,112 | 6,501 | 1,685,137 |
+| ObjectScript XML | `xml` | 3,731 | 480,213 | 3,764 | 565,728 |
+| objectscript_routine | `inc`, `int`, `mac`, `rtn` | 533 | 110,318 | 414 | 33,313 |
 | ObjectscriptUdl | `cls` | 428 | 67,810 | 262 | 60,598 |
 | OCaml | `ml` | 4,216 | 390,921 | 234 | 43,336 |
 | OCaml Interface | `mli` | 1,151 | 62,352 | 111 | 6,178 |
@@ -491,88 +489,90 @@ Full registrations, pins, per-suffix counts, ambiguities, and failures are in [l
 | P4 Language | `p4` | 153 | 51,114 | 71 | 9,810 |
 | Pact | `pact`, `repl` | 214 | 27,900 | 58 | 12,955 |
 | Papyrus | `psc` | 110 | 7,967 | 25 | 16,899 |
-| Pascal | `dpr`, `inc`, `lpr`, `p`, `pas`, `pp` | 3,055 | 254,786 | 414 | 33,239 |
-| Perl | `pl`, `pm`, `t` | 5,358 | 510,419 | 140 | 30,112 |
+| Pascal | `dpr`, `inc`, `lpr`, `p`, `pas`, `pp` | 3,160 | 267,406 | 414 | 33,239 |
+| Perl | `pl`, `pm`, `t` | 5,364 | 511,316 | 140 | 30,112 |
 | PHP | `php`, `phpt`, `phtml` | 6,703 | 948,825 | 2,841 | 310,714 |
-| Plain Text | `txt` | 14,712 | 4,303,917 | 4,308 | 746,804 |
+| Plain Text | `txt` | 14,986 | 4,319,001 | 4,308 | 746,804 |
 | PlatformIO | `platformio.ini` | 37 | 1,014 | 34 | 1,197 |
-| PO | `po`, `pot` | 301 | 1,951,174 | 511 | 918,280 |
+| PO | `po`, `pot` | 409 | 4,655,585 | 511 | 918,280 |
 | Pony | `pony` | 1,062 | 156,283 | 299 | 70,876 |
-| PowerShell | `ps1`, `psm1` | 1,200 | 32,814 | 93 | 6,642 |
+| PowerShell | `ps1`, `psm1` | 1,201 | 32,854 | 93 | 6,642 |
 | Processing | `pde` | 10 | 466 | 25 | 3,625 |
-| Prolog | `P`, `pl`, `pro` | 3,174 | 107,456 | 36 | 5,852 |
-| Properties | `properties` | 459 | 118,853 | 208 | 1,745 |
-| Proto | `proto` | 354 | 55,767 | 47 | 10,576 |
+| Prolog | `P`, `pl`, `pro` | 3,180 | 108,353 | 36 | 5,852 |
+| Properties | `properties` | 462 | 118,918 | 208 | 1,745 |
+| Proto | `proto` | 358 | 55,902 | 47 | 10,576 |
 | PureScript | `purs` | 67 | 6,300 | 215 | 21,372 |
-| Python | `mpy`, `py`, `pyi` | 12,085 | 2,935,703 | 4,018 | 981,977 |
+| Python | `mpy`, `py`, `pyi` | 12,492 | 3,018,872 | 4,018 | 981,977 |
 | QML | `qml` | 229 | 29,866 | 26 | 3,723 |
-| Quadlet | `artifact`, `build`, `container`, `image`, `kube`, `network`, `pod`, `volume` | 60 | 10,220 | 36 | 2,448 |
+| Quadlet | `artifact`, `build`, `container`, `image`, `kube`, `network`, `pod`, `volume` | 61 | 10,224 | 36 | 2,448 |
 | QuakeC | `qc` | 704 | 188,902 | 198 | 83,251 |
 | Quint | `qnt` | 60 | 10,996 | 0 | 0 |
 | R | `R`, `r` | 1,595 | 134,061 | 138 | 61,872 |
 | Racket | `rkt` | 3,268 | 166,018 | 43 | 6,293 |
-| Rainbow CSV (,) | `csv` | 93 | 70,328 | 116 | 35,881 |
+| Rainbow CSV (,) | `csv` | 102 | 71,231 | 116 | 35,881 |
 | Reason | `re` | 205 | 74,472 | 246 | 52,598 |
 | Reason Interface | `rei` | 92 | 5,723 | 129 | 4,567 |
 | Red | `red`, `reds` | 1,217 | 350,152 | 7,518 | 141,767 |
 | REDscript | `reds` | 706 | 263,352 | 7,461 | 132,796 |
 | ReScript | `res`, `resi` | 90 | 13,921 | 6 | 1,213 |
-| reST | `rst` | 3,574 | 660,419 | 1,412 | 164,648 |
+| reST | `rst` | 3,714 | 696,376 | 1,412 | 164,648 |
+| Rhai | `rhai` | 45 | 23,095 | 0 | 0 |
 | Roc | `roc` | 77 | 15,428 | 19 | 5,525 |
 | RPM Spec | `spec` | 42 | 7,041 | 8 | 735 |
-| Ruby | `Appfile`, `Appraisals`, `Berksfile`, `Berksfile.lock`, `Brewfile`, `Capfile`, `Cheffile`, `Dangerfile`, `Deliverfile`, `Fastfile`, `Gemfile`, `Guardfile`, `Gymfile`, `Hobofile`, `Matchfile`, `Podfile`, `Puppetfile`, `Rakefile`, `Rantfile`, `Scanfile`, `Snapfile`, `Steepfile`, `Thorfile`, `Vagrantfile`, `builder`, `cap`, `capfile`, `gemspec`, `irbrc`, `jbuilder`, `pryrc`, `rabl`, `rake`, `rb`, `rdoc`, `ru`, `rxml`, `simplecov`, `thor` | 7,709 | 775,866 | 4,138 | 508,312 |
-| Rust | `rs` | 11,256 | 3,108,138 | 4,822 | 1,884,966 |
+| Ruby | `Appfile`, `Appraisals`, `Berksfile`, `Berksfile.lock`, `Brewfile`, `Capfile`, `Cheffile`, `Dangerfile`, `Deliverfile`, `Fastfile`, `Gemfile`, `Guardfile`, `Gymfile`, `Hobofile`, `Matchfile`, `Podfile`, `Puppetfile`, `Rakefile`, `Rantfile`, `Scanfile`, `Snapfile`, `Steepfile`, `Thorfile`, `Vagrantfile`, `builder`, `cap`, `capfile`, `gemspec`, `irbrc`, `jbuilder`, `pryrc`, `rabl`, `rake`, `rb`, `rdoc`, `ru`, `rxml`, `simplecov`, `thor` | 7,717 | 776,055 | 4,138 | 508,312 |
+| Rust | `rs` | 12,143 | 3,412,825 | 4,822 | 1,884,966 |
 | Salesforce Log | `log`, `sflog` | 1,225 | 99,706 | 18 | 4,354 |
-| Scala | `mill`, `sbt`, `sc`, `scala` | 2,380 | 169,107 | 1,553 | 170,847 |
-| Scheme | `scm`, `ss` | 2,734 | 149,787 | 23 | 4,641 |
+| Scala | `mill`, `sbt`, `sc`, `scala` | 2,382 | 169,236 | 1,553 | 170,847 |
+| Scheme | `scm`, `ss` | 2,744 | 150,117 | 23 | 4,641 |
 | SCSS | `scss` | 2,039 | 200,286 | 862 | 97,330 |
-| Shell Script | `.env`, `APKBUILD`, `PKGBUILD`, `bash`, `bash_aliases`, `bash_login`, `bash_logout`, `bash_profile`, `bashrc`, `bats`, `brushrc`, `ebuild`, `envrc`, `profile`, `sh`, `zlogin`, `zprofile`, `zsh`, `zsh_aliases`, `zsh_histfile`, `zsh_profile`, `zshenv`, `zshrc` | 2,821 | 191,677 | 1,132 | 57,873 |
+| Shell Script | `.env`, `APKBUILD`, `PKGBUILD`, `bash`, `bash_aliases`, `bash_login`, `bash_logout`, `bash_profile`, `bashrc`, `bats`, `brushrc`, `ebuild`, `envrc`, `profile`, `sh`, `zlogin`, `zprofile`, `zsh`, `zsh_aliases`, `zsh_histfile`, `zsh_profile`, `zshenv`, `zshrc` | 2,969 | 199,717 | 1,132 | 57,873 |
 | Simula | `SIM`, `SIm`, `SiM`, `Sim`, `sIM`, `sIm`, `siM`, `sim`, `simula` | 107 | 6,990 | 0 | 0 |
-| Slint | `Cargo.lock`, `slint` | 134 | 125,935 | 16 | 93,178 |
+| Slint | `Cargo.lock`, `slint` | 139 | 134,794 | 16 | 93,178 |
 | Smali | `smali` | 221 | 14,909 | 0 | 0 |
 | Solidity | `sol` | 424 | 51,075 | 219 | 30,641 |
 | Sourcepawn | `sp` | 94 | 25,115 | 22 | 37,736 |
 | Spicy | `evt`, `hlt`, `spicy` | 59 | 8,979 | 0 | 0 |
 | SQL | `sql` | 541 | 21,540 | 461 | 16,396 |
 | Squirrel | `nut` | 74 | 52,345 | 146 | 67,535 |
-| SSH Config | `config`, `ssh_config` | 231 | 9,942 | 96 | 2,574 |
+| SSH Config | `config`, `ssh_config` | 233 | 10,046 | 96 | 2,574 |
 | Stan | `stan` | 59 | 4,834 | 69 | 2,933 |
 | Standard ML | `fun`, `sig`, `sml` | 1,509 | 305,082 | 32 | 2,227 |
-| Starlark | `.tilt`, `.tiltfile`, `BUCK`, `BUILD`, `BUILD.bazel`, `MODULE.bazel`, `PACKAGE`, `REPO.bazel`, `Tiltfile`, `WORKSPACE`, `WORKSPACE.bzlmod`, `bxl`, `bzl`, `star` | 429 | 45,885 | 99 | 14,722 |
-| Strings | `strings` | 1,884 | 201,155 | 54 | 203 |
+| Starlark | `.tilt`, `.tiltfile`, `BUCK`, `BUILD`, `BUILD.bazel`, `MODULE.bazel`, `PACKAGE`, `REPO.bazel`, `Tiltfile`, `WORKSPACE`, `WORKSPACE.bzlmod`, `bxl`, `bzl`, `star` | 436 | 46,267 | 99 | 14,722 |
+| Strings | `strings` | 1,953 | 201,156 | 54 | 203 |
 | Structured Text | `st`, `stx` | 678 | 12,726 | 944 | 93,718 |
 | Styx | `styx` | 121 | 2,405 | 0 | 0 |
 | Svelte | `svelte` | 138 | 11,518 | 85 | 11,058 |
 | Sway | `sw` | 2,052 | 168,474 | 92 | 16,825 |
-| Swift | `swift`, `swiftinterface` | 5,328 | 606,543 | 1,906 | 270,536 |
-| SystemVerilog | `sv`, `svh`, `v`, `vh` | 1,795 | 1,941,974 | 57 | 14,940 |
+| Swift | `swift`, `swiftinterface` | 5,332 | 606,935 | 1,906 | 270,536 |
+| SystemVerilog | `sv`, `svh`, `v`, `vh` | 2,923 | 2,176,426 | 57 | 14,940 |
 | Tact | `tact` | 1,016 | 35,376 | 19 | 2,144 |
-| TCL | `tcl`, `tm` | 2,000 | 217,552 | 1,267 | 585,323 |
+| TCL | `tcl`, `tm` | 2,064 | 227,135 | 1,267 | 585,323 |
 | Terraform | `tf`, `tofu` | 1,817 | 104,921 | 9 | 637 |
 | Thrift | `thrift` | 42 | 8,946 | 0 | 0 |
-| TLA+ Cfg | `cfg` | 212 | 26,139 | 129 | 16,248 |
-| Todotxt | `todo.txt`, `txt` | 14,712 | 4,303,917 | 4,308 | 746,804 |
+| TLA+ Cfg | `cfg` | 376 | 28,248 | 129 | 16,248 |
+| Todotxt | `todo.txt`, `txt` | 14,986 | 4,319,001 | 4,308 | 746,804 |
 | Tolk | `tolk` | 101 | 24,660 | 0 | 0 |
-| TOML | `Cargo.lock`, `Pipfile`, `toml`, `uv.lock` | 4,792 | 261,198 | 2,184 | 136,457 |
+| TOML | `Cargo.lock`, `Pipfile`, `toml`, `uv.lock` | 4,843 | 274,488 | 2,184 | 136,457 |
 | Tonel Smalltalk | `st` | 678 | 12,726 | 944 | 93,718 |
-| Tree-sitter Query | `scm` | 2,730 | 139,731 | 22 | 2,457 |
-| TSX | `tsx` | 2,064 | 227,317 | 3,167 | 218,564 |
+| Tree-sitter Query | `scm` | 2,740 | 140,061 | 22 | 2,457 |
+| TSX | `tsx` | 2,070 | 227,482 | 3,167 | 218,564 |
 | Twig | `html.twig`, `twig`, `twig.html` | 24 | 84 | 74 | 4,753 |
-| TypeScript | `cts`, `mts`, `ts` | 171,017 | 19,989,203 | 137,774 | 17,803,284 |
+| TypeScript | `cts`, `mts`, `ts` | 171,041 | 19,989,823 | 137,774 | 17,803,284 |
 | Typst | `typ`, `typst` | 314 | 48,230 | 0 | 0 |
 | ucode | `uc` | 17 | 5,077 | 27 | 5,980 |
 | Uiua | `ua`, `uiua` | 566 | 3,852 | 0 | 0 |
-| V | `mod`, `v`, `vsh`, `vv` | 2,054 | 1,954,274 | 47 | 13,217 |
+| V | `mod`, `v`, `vsh`, `vv` | 2,060 | 1,956,110 | 47 | 13,217 |
 | Vala | `vala`, `vapi` | 1,492 | 341,154 | 123 | 38,853 |
-| VHDL | `vhd`, `vhdl` | 103 | 33,107 | 331 | 71,797 |
-| Vue.js | `vue` | 986 | 73,174 | 603 | 18,240 |
+| VHDL | `vhd`, `vhdl` | 104 | 33,506 | 331 | 71,797 |
+| VRL | `vrl` | 314 | 4,766 | 0 | 0 |
+| Vue.js | `vue` | 991 | 74,606 | 603 | 18,240 |
 | WebIDL | `webidl` | 229 | 3,781 | 0 | 0 |
 | Wgsl | `wgsl` | 42 | 1,735 | 50 | 3,073 |
 | WGSL/WESL | `wesl`, `wgsl` | 43 | 1,742 | 50 | 3,073 |
 | Wren | `wren` | 2,066 | 106,690 | 1 | 3,158 |
-| Xcode Project | `pbxproj` | 188 | 96,960 | 34 | 32,611 |
-| XML | `xml` | 2,479 | 290,990 | 3,764 | 565,728 |
-| YAML | `bst`, `clang-format`, `clangd`, `pixi.lock`, `yaml`, `yml` | 14,028 | 1,108,691 | 8,142 | 1,483,123 |
+| Xcode Project | `pbxproj` | 189 | 97,378 | 34 | 32,611 |
+| XML | `xml` | 3,731 | 480,213 | 3,764 | 565,728 |
+| YAML | `bst`, `clang-format`, `clangd`, `pixi.lock`, `yaml`, `yml` | 14,374 | 1,252,635 | 8,142 | 1,483,123 |
 | Zeek | `zeek` | 2,593 | 148,354 | 11 | 4,546 |
 | Zig | `zig`, `zon` | 3,690 | 849,966 | 473 | 178,418 |
 

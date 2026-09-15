@@ -2,9 +2,107 @@
 
 The proposal baseline has **302 language names** below 21 files or 2,000 raw lines combined. Archive measurements and a per-language route are in [`data-proposals.json`](data-proposals.json).
 
-RosettaCodeData has since been pinned and fetched into `train/acmeism--RosettaCodeData` at the commit below. Its filenames are preserved, and the census skips the alternate `Lang/` links. The remaining sources below are proposals.
+RosettaCodeData has since been pinned and fetched into `train/acmeism--RosettaCodeData` at the commit below. Its filenames are preserved, and the census skips the alternate `Lang/` links. Six canonical programming-language sources and the four larger sources below have also been fetched; other sources remain proposals.
 
-The checkout adds **75,148 matching UTF-8 files and 2,681,031 raw lines**. The filename census now reports **298 remaining names**. Arturo, Uiua and Simula clear both thresholds; Brainfuck also appears to clear them because `.bf` includes Befunge. The reviewed Brainfuck subset remains below the line target. Test counts are unchanged.
+The Rosetta checkout added **75,148 matching UTF-8 files and 2,681,031 raw lines**, reducing the filename census to **298 remaining names** before the programming-language batch below. Arturo, Uiua and Simula clear both thresholds; Brainfuck also appears to clear them because `.bf` includes Befunge. The reviewed Brainfuck subset remains below the line target. Test counts are unchanged.
+
+## Programming-language sources added
+
+Six repositories from the earlier candidate audit are now pinned in training.
+This pass accepts a single canonical source, including standard libraries,
+examples, and compiler tests. It preserves the historical pair-selection audit
+and every existing repository pin and split.
+
+| Language | Repository | Scoped UTF-8 files | Scoped raw lines |
+| --- | --- | ---: | ---: |
+| Inko | [inko-lang/inko](https://github.com/inko-lang/inko/tree/5a9a0cca46fb337cac11c8ec43ea1a59c0ebaf03) | 462 | 99,837 |
+| Rhai | [rhaiscript/rhai](https://github.com/rhaiscript/rhai/tree/4d9e4d80809fc2234564717c909db412effeaf52) | 35 | 3,312 |
+| Civet | [DanielXMoore/Civet](https://github.com/DanielXMoore/Civet/tree/10a55dd4b311303a827984fbe15962e991af0abb) | 327 | 87,687 |
+| Bend | [HigherOrderCO/Bend](https://github.com/HigherOrderCO/Bend/tree/814453670d0e0d6777c1313c972764dba0491b7f) | 525 | 6,374 |
+| Duso | [duso-org/duso](https://github.com/duso-org/duso/tree/2fc8b28bd3032ffad67ee2e9e519bb9521644d9f) | 158 | 13,251 |
+| VRL | [vectordotdev/vrl](https://github.com/vectordotdev/vrl/tree/6cab87fa8112ae42135ac865b862ec1cf0f9915e) | 314 | 4,766 |
+
+The batch adds **3,994 matching UTF-8 files and 785,007 raw lines** across all
+languages. The refreshed census drops from **298 to 292 names below threshold**;
+test counts and all 596 language registrations are unchanged.
+
+All six scoped sources meet the current 21-file and 2,000-line threshold.
+These are checkout measurements, including blanks and comments, rather than
+updates to the earlier archive screening. Civet and Duso checkout counts differ
+from that screening; the selected commits have not changed.
+
+The JSON audit records source roots, exclusions, per-directory measurements,
+representative paths, licenses, and the previously recorded maintenance evidence.
+Rhai's scope excludes `.d.rhai` declaration files, including generated copies.
+Bend and VRL include expected-error cases; preserve their paths and annotations.
+Civet tests also embed source snippets and expected output. Counts do not establish
+that every retained file is a valid standalone program or handwritten source.
+
+No scoped target-suffix file exactly matched a held-out target-suffix file in the
+SHA-256 check. This does not detect near copies or differently named source.
+All six checkouts are clean at their selected pins. The corpus tool's 19 tests
+pass. `corpus verify` still rejects evaluation readiness for these sources, as
+intended: builds, language support, and reference oracles remain unverified.
+
+## Larger Nushell and SystemVerilog files
+
+The inspected `nushell/nu_scripts`, CVA6, and Ibex pins are now fetched in
+training. `nushell/nushell` remains a candidate. The original archive screen is
+preserved under `large_file_followups`; checkout measurements and source scopes
+are in `implemented` in `data-proposals.json`.
+
+| Repository | File | Raw lines |
+| --- | --- | ---: |
+| nushell/nu_scripts | [modules/yadm/mod.nu](https://github.com/nushell/nu_scripts/blob/cee236cf46a597b43f36b56ccee5881fc0483c56/modules/yadm/mod.nu) | 4,211 |
+| nushell/nu_scripts | [sourced/nu_rust_ast/rust_ast.nu](https://github.com/nushell/nu_scripts/blob/cee236cf46a597b43f36b56ccee5881fc0483c56/sourced/nu_rust_ast/rust_ast.nu) | 3,363 |
+| nushell/nushell | [crates/nu-std/std/help/mod.nu](https://github.com/nushell/nushell/blob/6cf11a28f51193b0b56ca24562559a2a9bbe1fb7/crates/nu-std/std/help/mod.nu) | 823 |
+| openhwgroup/cva6 | [core/csr_regfile.sv](https://github.com/openhwgroup/cva6/blob/07228a6ff285737045037c7278a67969206239e6/core/csr_regfile.sv) | 3,205 |
+| openhwgroup/cva6 | [core/decoder.sv](https://github.com/openhwgroup/cva6/blob/07228a6ff285737045037c7278a67969206239e6/core/decoder.sv) | 2,016 |
+| lowRISC/ibex | [rtl/ibex_core.sv](https://github.com/lowRISC/ibex/blob/90331a69edd7151413c335a7f4b3e950baa07c19/rtl/ibex_core.sv) | 2,517 |
+| lowRISC/ibex | [rtl/ibex_cs_registers.sv](https://github.com/lowRISC/ibex/blob/90331a69edd7151413c335a7f4b3e950baa07c19/rtl/ibex_cs_registers.sv) | 2,262 |
+
+Prefer the Nushell modules to generated completion tables when selecting
+reference workloads. `nu_scripts` also includes a 21,854-line generated Maven
+completion file. Its `sourced/nu_rust_ast` module identifies `graves/nu_rust_ast`
+as its origin; do not split those copies independently. For SystemVerilog,
+CVA6's `core/` and Ibex's `rtl/` contain processor implementations. Keep their
+vendored code and generated register models separate when qualifying sources.
+
+## Larger implementation sources added
+
+The requested Nushell and SystemVerilog sources, plus Godot for GLSL, are now
+pinned in training. Existing pins and splits are preserved. Each source scope
+exceeds 20,000 raw lines; the census still counts complete checkouts.
+
+| Language | Repository | Scoped files | Scoped raw lines |
+| --- | --- | ---: | ---: |
+| Nushell (Nu) | [nushell/nu_scripts](https://github.com/nushell/nu_scripts/tree/cee236cf46a597b43f36b56ccee5881fc0483c56) | 213 | 26,781 |
+| SystemVerilog | [openhwgroup/cva6](https://github.com/openhwgroup/cva6/tree/07228a6ff285737045037c7278a67969206239e6) | 118 | 44,472 |
+| SystemVerilog | [lowRISC/ibex](https://github.com/lowRISC/ibex/tree/90331a69edd7151413c335a7f4b3e950baa07c19) | 33 | 25,836 |
+| GLSL | [godotengine/godot](https://github.com/godotengine/godot/tree/8898c2b3db32adf6f92c694ffb6dac19af672e5f) | 133 | 38,552 |
+
+The Nushell scope covers modules, sourced scripts, games, and release automation;
+completion tables and generated themes are excluded. CVA6 uses `core/`, and Ibex
+uses `rtl/`, excluding vendored IP and verification register models. Exact-content
+checks found no scoped files matching same-suffix held-out files. Near copies
+and differently named source remain unverified.
+
+Godot supplies rendering and lightmapping implementations under
+`drivers/gles3/shaders/`, `servers/rendering/renderer_rd/shaders/`, and
+`modules/lightmapper_rd/`. Its largest scoped GLSL files are `scene.glsl`
+(3,272 raw lines) and `scene_forward_clustered.glsl` (3,226). Third-party and
+compression shaders and build fixtures are outside the scope. Engine stage
+markers, injected code, and `#VERSION_DEFINES` require Godot preprocessing before
+standalone GLSL evaluation. LYGIA was considered as a library alternative;
+Godot was selected for its larger rendering implementations.
+
+All four checkouts are clean at their pins. Dependency resolution and language
+oracles remain unverified, with `evaluation_ready = false` on every addition.
+
+The full census adds 18,915 matching UTF-8 files and 9,659,547 raw lines,
+including implementation languages and vendored files outside the source scopes.
+Test counts and language registrations are unchanged. The 19 corpus-tool tests
+pass; all 449 pre-existing manifest and lock entries are unchanged.
 
 ## Recommended first batch
 
@@ -84,7 +182,7 @@ Drop the requirement for two independent production repositories before admittin
 | [rhaiscript/rhai](https://github.com/rhaiscript/rhai/tree/4d9e4d80809fc2234564717c909db412effeaf52) | Rhai: 45 / 23,095 | Allow compiler fixtures, examples and small ecosystems; classify generated output separately. |
 | [Zokrates/ZoKrates](https://github.com/Zokrates/ZoKrates/tree/8699128ad0034f2f60d7de60d397ae7986bb23fe) | ZoKrates: 592 / 10,824 | Allow compiler fixtures, examples and small ecosystems; classify generated output separately. |
 
-These are earlier screening measurements, not fresh checkout counts. In particular, the 3 Hera files and 1,761 Aleo lines are useful contributions but do not individually satisfy both current thresholds.
+These are earlier screening measurements, not fresh checkout counts. Six of these candidates are now fetched; the scoped checkout measurements above supersede their screening counts for the new admission decisions. In particular, the 3 Hera files and 1,761 Aleo lines are useful contributions but do not individually satisfy both current thresholds.
 
 ## Change what qualifies, without losing what the data means
 

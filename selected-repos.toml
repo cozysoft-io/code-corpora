@@ -71,7 +71,7 @@ corpus_root = "."
 # `.tsx` files live inside the typescript repositories.
 # Expansion identifiers are selection filters until their language handlers
 # exist; path_suffixes records the actual registered filename matching.
-languages = ["c", "cpp", "csharp", "dart", "elixir", "go", "java", "javascript", "kotlin", "lua", "php", "python", "ruby", "rust", "swift", "typescript", "zig", "actionscript", "ada", "agda", "aiken", "al", "applescript", "arduino", "autohotkey", "awk", "bluespec-systemverilog", "bqn", "bsl", "c3", "cadence", "cairo", "cfml-tag", "circom", "clarity", "clojure", "cobol", "crystal", "curry", "cython", "dafny", "daml", "dylan", "elisp", "elm", "erlang", "fish", "fortran", "fsharp", "func", "gdscript", "gdshader", "gleam", "gren", "hare", "haskell", "haxe", "hlsl", "hoon", "idris-2", "jai", "jq", "julia", "koka", "lean-4", "liquidsoap", "luau", "metal", "moonbit", "motoko", "move", "netlinx", "nim", "noir", "objectscriptudl", "ocaml", "ocaml-interface", "ocamllex", "odin", "openscad", "p4-language", "pact", "papyrus", "pony", "purescript", "qml", "quakec", "racket", "reason", "reason-interface", "red", "redscript", "roc", "scala", "solidity", "sourcepawn", "squirrel", "stan", "standard-ml", "svelte", "sway", "tact", "tcl", "tonel-smalltalk", "ucode", "vala", "vhdl", "wren", "apex", "arkts-language", "zeek", "mojo", "csound", "polyglot", "arturo", "uiua", "simula", "minizinc", "brainfuck", "cfengine", "lilypond", "inko", "nsis", "sagemath", "unison", "xquery"]
+languages = ["c", "cpp", "csharp", "dart", "elixir", "go", "java", "javascript", "kotlin", "lua", "php", "python", "ruby", "rust", "swift", "typescript", "zig", "actionscript", "ada", "agda", "aiken", "al", "applescript", "arduino", "autohotkey", "awk", "bluespec-systemverilog", "bqn", "bsl", "c3", "cadence", "cairo", "cfml-tag", "circom", "clarity", "clojure", "cobol", "crystal", "curry", "cython", "dafny", "daml", "dylan", "elisp", "elm", "erlang", "fish", "fortran", "fsharp", "func", "gdscript", "gdshader", "gleam", "gren", "hare", "haskell", "haxe", "hlsl", "hoon", "idris-2", "jai", "jq", "julia", "koka", "lean-4", "liquidsoap", "luau", "metal", "moonbit", "motoko", "move", "netlinx", "nim", "noir", "objectscriptudl", "ocaml", "ocaml-interface", "ocamllex", "odin", "openscad", "p4-language", "pact", "papyrus", "pony", "purescript", "qml", "quakec", "racket", "reason", "reason-interface", "red", "redscript", "roc", "scala", "solidity", "sourcepawn", "squirrel", "stan", "standard-ml", "svelte", "sway", "tact", "tcl", "tonel-smalltalk", "ucode", "vala", "vhdl", "wren", "apex", "arkts-language", "zeek", "mojo", "csound", "polyglot", "arturo", "uiua", "simula", "minizinc", "brainfuck", "cfengine", "lilypond", "inko", "nsis", "sagemath", "unison", "xquery", "rhai", "civet", "bend", "duso", "vrl", "nushell", "systemverilog", "glsl"]
 
 # Selection criteria, recorded so the manifest states what the repositories
 # were chosen *for* rather than only what was chosen.
@@ -7440,3 +7440,181 @@ evaluation_source_roots = ["Task/"]
 evaluation_exclude_paths = ["Lang/"]
 selection_exceptions = ["Allow an aggregated example collection and one training source without an independent test repository.", "Samples may include transcripts or output; inspect task language labels and source contents before evaluation."]
 band_exception = "Polyglot collection of small examples; aggregate size is not a whole-project latency workload."
+
+# Canonical language implementations and fixtures; training-only coverage expansion.
+
+[[repo]]
+name = "inko-lang--inko"
+url = "https://github.com/inko-lang/inko"
+sha = "5a9a0cca46fb337cac11c8ec43ea1a59c0ebaf03"
+language = "inko"
+split = "train"
+languages = ["inko"]
+coverage_languages = ["Inko"]
+path_suffixes = ["inko"]
+domain = "Standard library, HTTP tools, documentation application, and tests"
+reason = "Inko standard library and applications contain imports, types, and cross-file calls."
+evaluation_ready = false
+dependencies = "Unverified. Follow pinned upstream build instructions and establish a language-specific oracle before reference evaluation. Source scope and fixture limitations are recorded in data-proposals.json."
+evaluation_source_roots = ["std/", "docs/src/"]
+evaluation_exclude_paths = []
+selection_exceptions = ["Allow one canonical training repository without an independent test pair.", "Allow compiler tests and examples; syntax validity and generated content require review before evaluation."]
+
+[[repo]]
+name = "rhaiscript--rhai"
+url = "https://github.com/rhaiscript/rhai"
+sha = "4d9e4d80809fc2234564717c909db412effeaf52"
+language = "rhai"
+split = "train"
+languages = ["rhai"]
+coverage_languages = ["Rhai"]
+path_suffixes = ["rhai"]
+domain = "Embedded scripting examples and regression tests"
+reason = "Rhai programs exercise functions and embedded scripting. Exclude declaration files, including duplicated generated all_in_one definitions."
+evaluation_ready = false
+dependencies = "Unverified. Follow pinned upstream build instructions and establish a language-specific oracle before reference evaluation. Source scope and fixture limitations are recorded in data-proposals.json."
+evaluation_source_roots = ["scripts/", "examples/", "tests/"]
+evaluation_exclude_paths = ["*.d.rhai", "**/*.d.rhai"]
+selection_exceptions = ["Allow one canonical training repository without an independent test pair.", "Allow compiler tests and examples; syntax validity and generated content require review before evaluation.", "3,312 scoped raw lines; small correctness workload, not a latency workload."]
+band_exception = "Small language examples and tests; no whole-project latency claim."
+
+[[repo]]
+name = "DanielXMoore--Civet"
+url = "https://github.com/DanielXMoore/Civet"
+sha = "10a55dd4b311303a827984fbe15962e991af0abb"
+language = "civet"
+split = "train"
+languages = ["civet"]
+coverage_languages = ["Civet"]
+path_suffixes = ["civet"]
+domain = "Self-hosted compiler, language server, integrations, and tests"
+reason = "Civet implementation and language server provide cross-file source; test files also contain embedded inputs and expected outputs."
+evaluation_ready = false
+dependencies = "Unverified. Follow pinned upstream build instructions and establish a language-specific oracle before reference evaluation. Source scope and fixture limitations are recorded in data-proposals.json."
+evaluation_source_roots = ["source/", "lsp/", "integration/", "scripts/", "build/", "test/"]
+evaluation_exclude_paths = []
+selection_exceptions = ["Allow one canonical training repository without an independent test pair.", "Allow compiler tests and examples; syntax validity and generated content require review before evaluation."]
+
+[[repo]]
+name = "HigherOrderCO--Bend"
+url = "https://github.com/HigherOrderCO/Bend"
+sha = "814453670d0e0d6777c1313c972764dba0491b7f"
+language = "bend"
+split = "train"
+languages = ["bend"]
+coverage_languages = ["Bend"]
+path_suffixes = ["bend"]
+domain = "Language builtins, examples, and compiler tests"
+reason = "Bend builtins provide definitions and calls; compiler fixtures broaden syntax coverage and include expected failures."
+evaluation_ready = false
+dependencies = "Unverified. Follow pinned upstream build instructions and establish a language-specific oracle before reference evaluation. Source scope and fixture limitations are recorded in data-proposals.json."
+evaluation_source_roots = ["src/fun/builtins.bend", "examples/", "tests/"]
+evaluation_exclude_paths = []
+selection_exceptions = ["Allow one canonical training repository without an independent test pair.", "Allow compiler tests and examples; syntax validity and generated content require review before evaluation.", "6,374 scoped raw lines; small correctness workload, not a latency workload."]
+band_exception = "Small language examples and tests; no whole-project latency claim."
+
+[[repo]]
+name = "duso-org--duso"
+url = "https://github.com/duso-org/duso"
+sha = "2fc8b28bd3032ffad67ee2e9e519bb9521644d9f"
+language = "duso"
+split = "train"
+languages = ["duso"]
+coverage_languages = ["Duso"]
+path_suffixes = ["du"]
+domain = "Standard library, service clients, examples, and tests"
+reason = "Duso modules use require and named functions; accept this small ecosystem without an independent application pair."
+evaluation_ready = false
+dependencies = "Unverified. Follow pinned upstream build instructions and establish a language-specific oracle before reference evaluation. Source scope and fixture limitations are recorded in data-proposals.json."
+evaluation_source_roots = ["stdlib/", "contrib/", "examples/", "test/"]
+evaluation_exclude_paths = []
+selection_exceptions = ["Allow one canonical training repository without an independent test pair.", "Allow compiler tests and examples; syntax validity and generated content require review before evaluation.", "13,251 scoped raw lines; small correctness workload, not a latency workload."]
+band_exception = "Small language examples and tests; no whole-project latency claim."
+
+[[repo]]
+name = "vectordotdev--vrl"
+url = "https://github.com/vectordotdev/vrl"
+sha = "6cab87fa8112ae42135ac865b862ec1cf0f9915e"
+language = "vrl"
+split = "train"
+languages = ["vrl"]
+coverage_languages = ["VRL"]
+path_suffixes = ["vrl"]
+domain = "Vector Remap Language conformance tests"
+reason = "VRL fixtures cover transformations and diagnostics. Expected results and errors remain in upstream comments; these are syntax data, not an import-resolution workload."
+evaluation_ready = false
+dependencies = "Unverified. Follow pinned upstream build instructions and establish a language-specific oracle before reference evaluation. Source scope and fixture limitations are recorded in data-proposals.json."
+evaluation_source_roots = ["lib/tests/tests/"]
+evaluation_exclude_paths = []
+selection_exceptions = ["Allow one canonical training repository without an independent test pair.", "Allow compiler tests and examples; syntax validity and generated content require review before evaluation.", "4,766 scoped raw lines; small correctness workload, not a latency workload."]
+band_exception = "Small language examples and tests; no whole-project latency claim."
+
+# Larger Nushell, SystemVerilog, and GLSL implementation sources.
+
+[[repo]]
+name = "nushell--nu_scripts"
+url = "https://github.com/nushell/nu_scripts"
+sha = "cee236cf46a597b43f36b56ccee5881fc0483c56"
+language = "nushell"
+split = "train"
+languages = ["nushell"]
+coverage_languages = ["Nu"]
+path_suffixes = ["nu"]
+domain = "Nushell modules and automation scripts"
+reason = "Modules with named commands, pipelines, and imports, including the yadm and Rust AST tools. Completion tables and generated themes are outside the source scope."
+evaluation_ready = false
+dependencies = "Unverified. Scripts require compatible Nushell versions and module-specific external commands. Preserve sourced/nu_rust_ast provenance; it mirrors graves/nu_rust_ast and must remain in the same split."
+evaluation_source_roots = ["modules/", "sourced/", "scripts/", "games/", "make_release/"]
+evaluation_exclude_paths = []
+selection_exceptions = ["Training-only source addition; no independent held-out workload is established.", "Accept a shared script collection; sourced modules inherit upstream provenance and remain in training."]
+
+[[repo]]
+name = "openhwgroup--cva6"
+url = "https://github.com/openhwgroup/cva6"
+sha = "07228a6ff285737045037c7278a67969206239e6"
+language = "systemverilog"
+split = "train"
+languages = ["systemverilog"]
+coverage_languages = ["SystemVerilog"]
+path_suffixes = ["sv", "svh"]
+domain = "RISC-V processor implementation"
+reason = "Core processor modules provide substantial SystemVerilog definitions, packages, and instances. Vendored IP and verification register models are outside the source scope."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned core configuration and build instructions; package ordering, defines, include paths, and vendored IP must be configured before reference evaluation."
+evaluation_source_roots = ["core/"]
+evaluation_exclude_paths = []
+selection_exceptions = ["Training-only source addition; no independent held-out workload is established."]
+
+[[repo]]
+name = "lowRISC--ibex"
+url = "https://github.com/lowRISC/ibex"
+sha = "90331a69edd7151413c335a7f4b3e950baa07c19"
+language = "systemverilog"
+split = "train"
+languages = ["systemverilog"]
+coverage_languages = ["SystemVerilog"]
+path_suffixes = ["sv", "svh"]
+domain = "Embedded RISC-V processor implementation"
+reason = "Processor RTL provides large modules and cross-file references. Keep vendor/ and verification infrastructure outside the source scope."
+evaluation_ready = false
+dependencies = "Unverified. Follow the pinned FuseSoC setup; select the core target, resolve vendored IP, and verify package and module references before evaluation."
+evaluation_source_roots = ["rtl/"]
+evaluation_exclude_paths = []
+selection_exceptions = ["Training-only source addition; no independent held-out workload is established."]
+
+[[repo]]
+name = "godotengine--godot"
+url = "https://github.com/godotengine/godot"
+sha = "8898c2b3db32adf6f92c694ffb6dac19af672e5f"
+language = "glsl"
+split = "train"
+languages = ["glsl"]
+coverage_languages = ["GLSL"]
+path_suffixes = ["glsl"]
+domain = "Game engine rendering shaders"
+reason = "Production rendering and lightmapping shaders include substantial functions and shared includes. Exclude thirdparty/, build fixtures, and copied compression shaders."
+evaluation_ready = false
+dependencies = "Unverified. Godot shader templates contain stage markers, injected code, and engine directives such as #VERSION_DEFINES. Apply the pinned engine preprocessing and include resolution before standalone GLSL parsing or reference evaluation."
+evaluation_source_roots = ["drivers/gles3/shaders/", "servers/rendering/renderer_rd/shaders/", "modules/lightmapper_rd/"]
+evaluation_exclude_paths = []
+selection_exceptions = ["Training-only source addition; no independent held-out workload is established.", "Engine shader templates require preprocessing; raw source is not standalone GLSL."]

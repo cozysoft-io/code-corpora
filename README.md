@@ -48,6 +48,10 @@ suffixes and UTF-8 file/raw-line counts in `training/` and `test/`.
 The census also accepts RosettaCodeData's `.arturo`, `.uiua`, and `.simula` aliases.
 RosettaCodeData is pinned in `train/acmeism--RosettaCodeData`; its `Task/` tree
 provides programming examples, with evaluation readiness still unverified.
+Six additional canonical sources supply Inko, Rhai, Civet, Bend, Duso, and VRL
+in training. A further four repositories add larger Nushell scripts, CVA6 and
+Ibex SystemVerilog, and Godot GLSL shaders. Source scopes, limitations, and measurements are in
+[`DATA-PROPOSALS.md`](DATA-PROPOSALS.md); builds and reference oracles remain unverified.
 [`language-coverage.json`](language-coverage.json) retains registration pins,
 per-suffix measurements, ambiguous suffixes, and unavailable extensions.
 
@@ -110,7 +114,8 @@ by default; `--jobs` changes that limit. No grammar or server is fetched implici
 SHAs, splits, language metadata, rationale, and dependency notes. Its original
 256 entries span 17 languages: 171 training and 85 test, including one retired
 training entry. The language expansion adds 186 repositories, followed by the
-Rosetta Code training collection.
+Rosetta Code training collection, six canonical programming-language sources,
+and four larger Nushell, SystemVerilog, and GLSL sources.
 Retired entries remain documented but are skipped by the tool.
 [`corpus-lock.toml`](corpus-lock.toml) caches measurements of those selected commits.
 Pins are used even without this cache; conflicting cached SHAs or URLs are errors.

@@ -112,6 +112,16 @@ in training. Its canonical source tree is `Task/`; `Lang/` is an alternate view.
 Language directory labels guide source review because some export suffixes are
 guessed. Selection evidence is in [`DATA-PROPOSALS.md`](DATA-PROPOSALS.md).
 
+The subsequent programming-language coverage pass also admits canonical language
+implementations, standard libraries, examples, and compiler tests without an
+independent test repository. These additions stay in training. This is an
+explicit exception to the production-source and paired-repository criteria;
+it does not complete the historical pair-selection audit. Record source scopes,
+license evidence, measurements, and exceptions in `data-proposals.json`.
+Keep generated declarations outside the intended evaluation scope and preserve
+upstream fixture paths and expected-error annotations. Fixture counts do not
+establish valid programs or whole-project reference workloads.
+
 Selecting and pinning source does not establish an LSP oracle. Before collecting
 ground truth, the language needs a grammar, a supported heuristic-jump handler,
 and a usable language server or a separately specified reference oracle.

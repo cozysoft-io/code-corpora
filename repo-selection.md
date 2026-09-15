@@ -4,6 +4,11 @@ Baseline: 425 language names below 50 UTF-8 files **or** 2,000 raw lines across 
 
 Selections and immutable pins are in [`selected-repos.toml`](selected-repos.toml). The [process](SELECTION.md) explains the criteria; [`repo-selection.json`](repo-selection.json) preserves the baseline, candidate snapshots, source paths, measurements, exceptions, and discovery queries. Existing repository pins and splits are preserved.
 
+Subsequent training-only additions are recorded in [DATA-PROPOSALS.md](DATA-PROPOSALS.md)
+and its JSON audit: RosettaCodeData, then six canonical programming-language
+sources, then four larger Nushell, SystemVerilog, and GLSL repositories.
+The pair-selection decisions and totals below remain historical.
+
 **Fetched, evaluation unverified:** all 186 new repositories have been fetched and checked against their selected commits. Original pins, splits, and 256 lock entries are unchanged. Builds and LSP oracles remain unverified; every addition has `evaluation_ready = false`. Counts in the selected-pairs table remain the scoped archive measurements used for selection. The updated [coverage census](language-coverage.md) counts all matching UTF-8 files in the fetched checkouts, including comments, blanks, and incidental formats.
 
 The source scope excludes known fixtures, copied libraries and stubs. Exact Git-blob comparisons found no matching scoped files over 300 bytes between the GitHub candidates or with the existing corpus checkouts. This does not detect near copies. Apply the recorded source scopes and audit dependencies before evaluating; the fetch tool clones whole repositories.
